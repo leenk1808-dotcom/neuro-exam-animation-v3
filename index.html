@@ -26,7 +26,7 @@ html,body{margin:0;height:100%;background:#04070d;color:#eef3fb;font-family:"Pre
 #title{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(6,10,19,.72);z-index:8}
 #title .ep{font-size:26px;color:#8fc4ff;letter-spacing:.12em}
 #title .nm{font-size:64px;font-weight:800;margin-top:14px}
-#sub{position:absolute;left:40px;right:40px;bottom:30px;text-align:center;font-size:27px;line-height:1.45;font-weight:600;pointer-events:none;white-space:nowrap;
+#sub{position:absolute;left:40px;right:40px;bottom:30px;text-align:center;font-size:27px;line-height:1.45;font-weight:600;pointer-events:none;white-space:nowrap;transition:bottom .25s;
  text-shadow:0 2px 6px #000,0 0 2px #000;z-index:6}
 #sub span{background:rgba(4,8,16,.66);padding:6px 16px;border-radius:10px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 #chip{left:50%;top:70px;transform:translateX(-50%);font-size:26px;font-weight:700;padding:10px 26px;border-radius:40px;
@@ -62,25 +62,34 @@ svg text{font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sa
 .quiz .ex{margin-top:16px;font-size:25px;line-height:1.5;color:#ffe08a;padding:12px 18px;border-radius:12px;background:rgba(60,48,10,.55)}
 .quiz .fig{position:absolute;right:40px;top:120px;width:420px;height:370px}
 /* menu */
-#menu{position:absolute;right:20px;bottom:16px;width:420px;max-height:560px;overflow:auto;border-radius:16px;background:rgba(8,14,26,.97);border:1px solid #34507a;padding:10px;display:none;z-index:20;cursor:default}
-#menu div{font-size:21px;padding:10px 14px;border-radius:10px;cursor:pointer}
-#menu div:hover{background:#1c2f52}
+#menu{position:absolute;right:16px;bottom:96px;width:400px;max-height:70vh;overflow:auto;border-radius:14px;background:rgba(20,22,28,.96);border:1px solid #3a4150;padding:8px;display:none;z-index:40;cursor:default;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+#menu div{font-size:16px;padding:10px 14px;border-radius:10px;cursor:pointer;color:#eef3fb}
+#menu div:hover{background:#2c3342}
 #menu div b{color:#8fc4ff;margin-right:8px}
 #bigplay{inset:0;display:flex;align-items:center;justify-content:center;opacity:1;z-index:9}
 #bigplay div{width:120px;height:120px;border-radius:50%;background:rgba(10,20,40,.7);border:3px solid #9cc7ff;display:flex;align-items:center;justify-content:center}
-#bar{height:58px;flex:none;display:flex;align-items:center;gap:10px;padding:0 16px;background:#0a101c;border-top:1px solid #1d2a40}
-#bar button{height:40px;min-width:48px;border-radius:9px;border:1px solid #2e4363;background:#13203a;color:#eaf2ff;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;padding:0 10px;font-family:inherit}
-#bar button:hover{background:#1c2f52}
-#prog{flex:1;height:30px;position:relative;cursor:pointer;touch-action:none}
-#track{position:absolute;left:0;right:0;top:12px;height:6px;border-radius:3px;background:#24344f}
-#fill{position:absolute;left:0;top:12px;height:6px;border-radius:3px;background:#5aa9ff}
-#knob{position:absolute;top:6px;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:#fff}
-.tick{position:absolute;top:8px;width:2px;height:14px;background:#6a7d9c}
-.tick.pg{background:#c9d8ee;width:3px;top:5px;height:20px}
-#time{font-size:15px;color:#b8c6dc;min-width:96px;text-align:right;font-variant-numeric:tabular-nums}
-#scn{font-size:15px;color:#8ea3c4;min-width:150px;text-align:right}
+#ctl{position:absolute;left:0;right:0;bottom:0;z-index:30;padding:40px 16px 12px;background:linear-gradient(to bottom,rgba(0,0,0,0),rgba(0,0,0,.72));transition:opacity .25s;font-family:inherit}
+#ctl.hide{opacity:0;pointer-events:none}
+#vp.nocur{cursor:none}
+#prog{height:18px;position:relative;cursor:pointer;touch-action:none;margin:0 6px 6px}
+#track{position:absolute;left:0;right:0;top:7px;height:4px;border-radius:2px;background:rgba(255,255,255,.28);transition:height .12s,top .12s}
+#fill{position:absolute;left:0;top:7px;height:4px;border-radius:2px;background:#5aa9ff;transition:height .12s,top .12s}
+#prog:hover #track,#prog:hover #fill{top:6px;height:6px}
+#knob{position:absolute;top:2px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#5aa9ff;transform:scale(0);transition:transform .12s}
+#prog:hover #knob,#ctl.drag #knob{transform:scale(1)}
+.tick{position:absolute;top:7px;width:2px;height:4px;background:rgba(0,0,0,.55)}
+.tick.pg{background:rgba(255,255,255,.85);width:3px;top:4px;height:10px;border-radius:1px}
+.crow{display:flex;align-items:center;gap:10px}
+.crow .sp{flex:1}
+.grp{display:flex;align-items:center;background:rgba(30,32,38,.72);border-radius:26px;padding:3px;gap:2px}
+.pill{background:rgba(30,32,38,.72);border-radius:22px;padding:0 16px;height:42px;display:flex;align-items:center;font-size:15px;font-weight:600;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums}
+#scn{color:#d6e2f2;font-weight:500;max-width:340px;overflow:hidden;text-overflow:ellipsis}
+#ctl button{border:0;background:transparent;color:#fff;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;border-radius:22px}
+#ctl button:hover{background:rgba(255,255,255,.14)}
+#ctl button.ic{width:44px;height:40px}
+#ctl button.tx{height:40px;padding:0 13px;gap:6px;font-size:15px;font-weight:700}
 #flash{top:50%;transform:translateY(-50%);font-size:34px;font-weight:800;padding:14px 22px;border-radius:40px;background:rgba(0,0,0,.55);z-index:10}
-#home{position:fixed;inset:0;overflow:auto;z-index:100}#home .card{position:relative;inset:auto}#home .card h2{font-size:19px}#home .card p{font-size:13.5px;color:#c2cfe2}#home *{box-sizing:border-box}#home{margin:0;min-height:100vh;background:radial-gradient(ellipse at 70% 0%,#1b2a48 0%,#0b1222 55%,#05080f 100%);color:#eef3fb;font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif}#home .wrap{max-width:1360px;margin:0 auto;padding:26px 18px 30px}#home h1{margin:0;font-size:34px;font-weight:800;display:flex;align-items:center;gap:14px;flex-wrap:wrap}#home .badge{font-size:17px;font-weight:800;background:#e0705f;color:#fff;padding:4px 12px;border-radius:8px}#home .sub{color:#aab9d0;font-size:15px;margin:8px 0 18px}#home .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}#home .card{display:block;text-decoration:none;color:inherit;border-radius:14px;padding:14px 16px;background:rgba(40,52,76,.55);border:1px solid #2f4061;min-height:118px;transition:transform .12s,background .12s}#home a.card:hover{transform:translateY(-2px);background:rgba(58,76,112,.65)}#home .card .ep{font-size:12.5px;font-weight:800;color:#9fb3cf;letter-spacing:.05em}#home .card h2{margin:6px 0 6px;font-size:19px;font-weight:800}#home .card p{margin:0;font-size:13.5px;line-height:1.45;color:#c2cfe2}#home .card.main{background:linear-gradient(135deg,#4a6ae0,#6b4fd8);border-color:#7c8cf0}#home .card.soon{opacity:.55}#home .card.soon .ep::after{content:" · 준비 중";color:#ffcf7a}#home .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}#home .chips a{font-size:12.5px;text-decoration:none;color:#dfe8f7;background:rgba(10,18,34,.55);border:1px solid #3d5683;padding:3px 9px;border-radius:12px}#home .chips a:hover{background:#2a4374}#home .foot{margin-top:18px;font-size:13px;line-height:1.7;color:#8ea3c4}</style>
+#home{position:fixed;inset:0;overflow:auto;z-index:100}#home *{box-sizing:border-box}#home{margin:0;min-height:100vh;background:radial-gradient(ellipse at 70% 0%,#1b2a48 0%,#0b1222 55%,#05080f 100%);color:#eef3fb;font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif}#home .wrap{max-width:1360px;margin:0 auto;padding:26px 18px 30px}#home h1{margin:0;font-size:34px;font-weight:800;display:flex;align-items:center;gap:14px;flex-wrap:wrap}#home .badge{font-size:17px;font-weight:800;background:#e0705f;color:#fff;padding:4px 12px;border-radius:8px}#home .sub{color:#aab9d0;font-size:15px;margin:8px 0 18px}#home .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}#home .card{display:block;text-decoration:none;color:inherit;border-radius:14px;padding:14px 16px;background:rgba(40,52,76,.55);border:1px solid #2f4061;min-height:118px;transition:transform .12s,background .12s}#home a.card:hover{transform:translateY(-2px);background:rgba(58,76,112,.65)}#home .card .ep{font-size:12.5px;font-weight:800;color:#9fb3cf;letter-spacing:.05em}#home .card h2{margin:6px 0 6px;font-size:19px;font-weight:800}#home .card p{margin:0;font-size:13.5px;line-height:1.45;color:#c2cfe2}#home .card.main{background:linear-gradient(135deg,#4a6ae0,#6b4fd8);border-color:#7c8cf0}#home .card.soon{opacity:.55}#home .card.soon .ep::after{content:" · 준비 중";color:#ffcf7a}#home .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}#home .chips a{font-size:12.5px;text-decoration:none;color:#dfe8f7;background:rgba(10,18,34,.55);border:1px solid #3d5683;padding:3px 9px;border-radius:12px}#home .chips a:hover{background:#2a4374}#home .foot{margin-top:18px;font-size:13px;line-height:1.7;color:#8ea3c4}#home .card{position:relative;inset:auto}#home .card h2{font-size:19px}#home .card p{font-size:13.5px;color:#c2cfe2}</style>
 </head>
 <body>
 <div id="home"><div class="wrap">
@@ -105,7 +114,7 @@ svg text{font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sa
   <div class="card soon"><div class="ep">치매 · 인지</div><h2>치매 · 인지 기초</h2><p>지남력 · 주의 4종 · 기억 체계 · MCI · 치매 유형 · K-MMSE · CDR · 치료</p></div>
   <div class="card soon"><div class="ep">삼킴장애</div><h2>삼킴장애</h2><p>삼킴 단계 · 침습과 흡인 · 평가 · 보상·재활 전략</p></div>
  </div>
- <div class="foot">조작: Space·K 재생/일시정지 · 화면 클릭 일시정지 · J/L 또는 Shift+←/→ 10초 이동 · ←/→ 이전/다음 대사 · 0~9 위치 이동 · &lt; / &gt; 배속 · R 처음부터 · Esc 목록 · F 전체화면 · 아래 막대를 끌면 화면이 함께 넘어가고 놓은 지점부터 재생 · 휴대폰: 화면 좌우 두 번 탭으로 10초 이동 · 3D 장면은 마우스로 드래그해 돌려 볼 수 있어요<br>
+ <div class="foot">조작: 마우스를 움직이면 아래 조작바가 나타나요 · Space·K 재생/일시정지 · 화면 클릭 일시정지 · J/L 또는 Shift+←/→ 10초 이동 · ←/→ 이전/다음 대사 · 0~9 위치 이동 · &lt; / &gt; 배속 · R 처음부터 · Esc 목록 · F 전체화면 · 아래 막대를 끌면 화면이 함께 넘어가고 놓은 지점부터 재생 · 휴대폰: 화면 좌우 두 번 탭으로 10초 이동 · 3D 장면은 마우스로 드래그해 돌려 볼 수 있어요<br>
  음성: ElevenLabs Yong Gyu · 확인 문제는 음성 없이 화면으로 풀어요 · 비상업적 개인 학습용</div>
 </div>
 </div>
@@ -121,20 +130,20 @@ svg text{font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sa
    <div id="title" class="ov"><div class="ep">해부 1편 · 뇌의 구조</div><div class="nm" id="titleNm"></div></div>
    <div id="bigplay" class="ov"><div><svg width="54" height="54" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#cfe4ff"/></svg></div></div>
    <div id="flash" class="ov"></div>
-   <div id="menu"></div>
   </div>
  </div>
- <div id="bar">
-  <button id="bplay" title="재생/일시정지 (스페이스)"></button>
-  <button id="bback" title="10초 뒤로 (←)">-10초</button>
-  <button id="bfwd" title="10초 앞으로 (→)">+10초</button>
-  <button id="bmenu" title="목차">목차</button>
-  <button id="bspd" title="재생 속도 (&lt; &gt;)">1.0×</button>
-  <button id="bhome" title="목록 (Esc)">목록</button>
+ <div id="ctl">
   <div id="prog"><div id="track"></div><div id="ticks"></div><div id="fill"></div><div id="knob"></div></div>
-  <span id="scn"></span>
-  <span id="time">0:00 / 0:00</span>
+  <div class="crow">
+   <div class="grp"><button id="bplay" class="ic" title="재생/일시정지 (Space·K)"></button><button id="bback" class="ic" title="10초 뒤로 (J)"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 5V2L7 6l5 4V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z" fill="#fff"/><text x="12" y="16.2" text-anchor="middle" font-size="7" font-weight="700" fill="#fff" font-family="sans-serif">10</text></svg></button><button id="bfwd" class="ic" title="10초 앞으로 (L)"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 5V2l5 4-5 4V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z" fill="#fff"/><text x="12" y="16.2" text-anchor="middle" font-size="7" font-weight="700" fill="#fff" font-family="sans-serif">10</text></svg></button></div>
+   <div class="pill" id="time">0:00 / 0:00</div>
+   <div class="pill" id="scn"></div>
+   <div class="sp"></div>
+   <div class="grp"><button id="bspd" class="tx" title="재생 속도 (&lt; &gt;)">1.0×</button><button id="bmenu" class="tx" title="목차"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 6h2v2H4zm4 0h12v2H8zM4 11h2v2H4zm4 0h12v2H8zM4 16h2v2H4zm4 0h12v2H8z" fill="#fff"/></svg><span>목차</span></button><button id="bhome" class="tx" title="목록 (Esc)"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4zm9 0h7v7h-7z" fill="#fff"/></svg><span>목록</span></button><button id="bfull" class="ic" title="전체화면 (F)"><svg id="icoFull" viewBox="0 0 24 24" width="24" height="24"><path d="M4 9V4h5v2H6v3zm11-5h5v5h-2V6h-3zM4 15h2v3h3v2H4zm14 0h2v5h-5v-2h3z" fill="#fff"/></svg></button></div>
+  </div>
  </div>
+ <div id="menu"></div>
+</div>
 </div>
 <svg id="measure" width="0" height="0" style="position:absolute;left:-9999px"></svg>
 <script>/**
@@ -1176,7 +1185,12 @@ for(const l of ALL){if(l.has){l.a=new Audio(AUD[l.src]||l.src);l.a.preload='auto
 
 let rate=1,t=0,playing=false,last=performance.now(),dragging=false,wasPlaying=false,curA=null;
 const fmt=s=>{s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
-const icoPlay='<svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#eaf2ff"/></svg>',icoPause='<svg width="18" height="18" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="#eaf2ff"/><rect x="14" y="4" width="4" height="16" fill="#eaf2ff"/></svg>';
+const icoPlay='<svg width="24" height="24" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#fff"/></svg>',icoPause='<svg width="24" height="24" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1" fill="#fff"/><rect x="14" y="4" width="4" height="16" rx="1" fill="#fff"/></svg>';
+const icoFull='<path d="M4 9V4h5v2H6v3zm11-5h5v5h-2V6h-3zM4 15h2v3h3v2H4zm14 0h2v5h-5v-2h3z" fill="#fff"/>',icoExit='<path d="M9 4v5H4V7h3V4zm6 0h2v3h3v2h-5zM4 15h5v5H7v-3H4zm11 0h5v2h-3v3h-2z" fill="#fff"/>';
+let SCALE=1,hideT=null;const CTL=$('ctl'),VP=$('vp');
+function subShift(){const vis=!CTL.classList.contains('hide');$('sub').style.bottom=(vis?30+Math.max(0,CTL.offsetHeight-34)/SCALE:30)+'px';}
+function showCtl(){CTL.classList.remove('hide');VP.classList.remove('nocur');clearTimeout(hideT);if(playing&&!dragging&&$('menu').style.display!=='block')hideT=setTimeout(()=>{CTL.classList.add('hide');VP.classList.add('nocur');subShift();},2600);subShift();}
+VP.addEventListener('pointermove',showCtl);VP.addEventListener('pointerdown',showCtl);
 function stopAudio(){for(const l of ALL)if(l.a&&!l.a.paused)l.a.pause();curA=null;}
 function syncAudio(){if(!playing||dragging){stopAudio();return;}
  const l=ALL.find(l=>l.a&&t>=l.t0&&t<l.t1);
@@ -1185,7 +1199,7 @@ function syncAudio(){if(!playing||dragging){stopAudio();return;}
  else if(!l.a.paused&&Math.abs(l.a.currentTime-(t-l.t0))>0.3)l.a.currentTime=Math.max(0,t-l.t0);}
 function ui(){$('fill').style.width=(t/TOTAL*100)+'%';$('knob').style.left=(t/TOTAL*100)+'%';$('time').textContent=fmt(t)+' / '+fmt(TOTAL);
  $('bplay').innerHTML=playing?icoPause:icoPlay;op($('bigplay'),playing||t>0.01?0:1);}
-function setPlay(v){if(v&&t>=TOTAL-0.05)t=0;playing=v;last=performance.now();if(!v)stopAudio();else syncAudio();ui();}
+function setPlay(v){if(v&&t>=TOTAL-0.05)t=0;playing=v;last=performance.now();if(!v)stopAudio();else syncAudio();ui();showCtl();}
 function seek(x){t=cl(x,0,TOTAL);stopAudio();frame(t);ui();if(playing)syncAudio();}
 function flash(txt,left){const f=$('flash');f.textContent=txt;f.style.left=left?'80px':'';f.style.right=left?'':'80px';f.style.opacity=1;clearTimeout(flash.h);flash.h=setTimeout(()=>f.style.opacity=0,500);}
 function loop(now){const dt=Math.min(0.5,(now-last)/1000);last=now;
@@ -1197,14 +1211,17 @@ function loop(now){const dt=Math.min(0.5,(now-last)/1000);last=now;
 for(const p of PAGES){for(const s of p.scenes){if(s.t0<=0)continue;const k=hdiv('tick'+(s===p.scenes[0]?' pg':''),'',$('ticks'));k.style.left=(s.t0/TOTAL*100)+'%';k.title=p.id+' '+s.name;}}
 $('menu').innerHTML=PAGES.map((p,i)=>`<div data-i="${i}"><b>${p.id}</b>${p.title} <span style="color:#7d90ad;font-size:17px">${fmt(p.t0)}</span></div>`).join('');
 $('menu').addEventListener('pointerup',e=>{e.stopPropagation();const d=e.target.closest('[data-i]');if(!d)return;seek(PAGES[+d.dataset.i].t0+0.01);$('menu').style.display='none';});
-$('bmenu').onclick=()=>{const m=$('menu');m.style.display=m.style.display==='block'?'none':'block';};
+$('bmenu').onclick=()=>{const m=$('menu');m.style.display=m.style.display==='block'?'none':'block';showCtl();};
+function toggleFull(){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen().catch(()=>{});}
+$('bfull').onclick=toggleFull;
+document.addEventListener('fullscreenchange',()=>{const ic=document.getElementById('icoFull');if(ic)ic.innerHTML=document.fullscreenElement?icoExit:icoFull;setTimeout(fit,100);});
 $('bplay').onclick=()=>setPlay(!playing);
 $('bback').onclick=()=>{seek(t-10);flash('◀◀ 10초',true);};
 $('bfwd').onclick=()=>{seek(t+10);flash('10초 ▶▶',false);};
 const prog=$('prog');const px=e=>{const r=prog.getBoundingClientRect();return cl((e.clientX-r.left)/r.width)*TOTAL;};
-prog.addEventListener('pointerdown',e=>{dragging=true;wasPlaying=playing;playing=false;prog.setPointerCapture(e.pointerId);seek(px(e));});
+prog.addEventListener('pointerdown',e=>{dragging=true;CTL.classList.add('drag');wasPlaying=playing;playing=false;prog.setPointerCapture(e.pointerId);seek(px(e));});
 prog.addEventListener('pointermove',e=>{if(dragging)seek(px(e));});
-prog.addEventListener('pointerup',e=>{if(!dragging)return;dragging=false;seek(px(e));setPlay(wasPlaying);});
+prog.addEventListener('pointerup',e=>{if(!dragging)return;dragging=false;CTL.classList.remove('drag');seek(px(e));setPlay(wasPlaying);});
 const stage=$('stage');let tapT=0,tapH=null,pd=null,lastPage=null;
 stage.addEventListener('pointerdown',e=>{pd={x:e.clientX,y:e.clientY,yaw:W.ORB.yaw,pitch:W.ORB.pitch,drag:false};});
 stage.addEventListener('pointermove',e=>{if(!pd||+W.cv.style.opacity<0.3)return;const dx=e.clientX-pd.x,dy=e.clientY-pd.y;if(!pd.drag&&Math.hypot(dx,dy)>8)pd.drag=true;
@@ -1229,11 +1246,12 @@ addEventListener('keydown',e=>{const k=e.key,c=e.code;if(e.ctrlKey||e.metaKey||e
  else if(k==='>'||k==='.'){setRate(RATES[Math.min(RATES.length-1,RATES.findIndex(r=>r>rate))]||2);}
  else if(k==='r'||k==='R'){seek(0);setPlay(true);}
  else if(k==='Escape'){if($('menu').style.display==='block')$('menu').style.display='none';else showHome(true);}
- else if(k==='f'||k==='F'){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen().catch(()=>{});}});
+ else if(k==='f'||k==='F'){toggleFull();}
+ showCtl();});
 $('bspd').onclick=()=>{const i=RATES.indexOf(rate);setRate(RATES[(i+1)%RATES.length]);};
 $('bhome').onclick=()=>showHome(true);
-function fit(){const vp=$('vp');const s=Math.min(vp.clientWidth/1280,vp.clientHeight/720);stage.style.transform=`translate(-50%,-50%) scale(${s})`;W.R.setPixelRatio(Math.min(2,(window.devicePixelRatio||1)*s));W.R.setSize(1280,720,false);frame(t);}
-addEventListener('resize',fit);fit();ui();requestAnimationFrame(loop);
+function fit(){const vp=$('vp');const s=Math.min(vp.clientWidth/1280,vp.clientHeight/720);SCALE=s;stage.style.transform=`translate(-50%,-50%) scale(${s})`;W.R.setPixelRatio(Math.min(2,(window.devicePixelRatio||1)*s));W.R.setSize(1280,720,false);frame(t);}
+addEventListener('resize',fit);fit();ui();showCtl();requestAnimationFrame(loop);
 {const h=decodeURIComponent(location.hash.slice(1));const pg=PAGES.find(p=>p.id===h);if(pg)seek(pg.t0+0.01);}
 const _frame=frame;frame=function(tt){const cur=PAGES.find(p=>tt>=p.t0&&tt<p.t1);if(cur!==lastPage){lastPage=cur;W.ORB.yaw=0;W.ORB.pitch=0;}_frame(tt);};
 window.DBG={seek,get TOTAL(){return TOTAL},PAGES,get t(){return t},ALL};
