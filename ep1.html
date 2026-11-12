@@ -720,7 +720,8 @@ page({id:'1-2',title:'뉴런과 신호 전달',scenes:[
  draw(t,p){const [a,b,c,d,e]=p.scenes;
   /* A */
   const vA=win(t,a.t0,a.t1+0.2,0.5);op(this.A,vA);
-  this.lA.forEach((g,i)=>op(g,i<6?ramp(t,a.L[i+1].t0,a.L[i+1].t0+0.5):0));
+  const axT=a.L[2].t0+(a.L[2].t1-a.L[2].t0)*0.45;const lt=[a.L[1].t0,a.L[2].t0,axT,a.L[3].t0,a.L[4].t0,a.L[5].t0];
+  this.lA.forEach((g,i)=>op(g,i<6?ramp(t,lt[i],lt[i]+0.5):0));
   op(this.lA[6],ramp(t,a.L[6].t0,a.L[6].t0+0.5));op(this.glia,ramp(t,a.L[6].t0,a.L[6].t0+0.5));
   this.dend.classList.toggle('hl',t>=a.L[1].t0&&t<a.L[2].t0);this.soma.classList.toggle('hl',t>=a.L[2].t0&&t<a.L[2].t0+(a.L[2].t1-a.L[2].t0)*0.45);
   op(this.axon,t>=a.L[2].t0+(a.L[2].t1-a.L[2].t0)*0.45&&t<a.L[3].t0?0.35:0);
