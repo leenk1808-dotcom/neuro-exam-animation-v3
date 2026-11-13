@@ -89,6 +89,8 @@ svg text{font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sa
 #ctl button.ic{width:44px;height:40px}
 #ctl button.tx{height:40px;padding:0 13px;gap:6px;font-size:15px;font-weight:700}
 #flash{top:50%;transform:translateY(-50%);font-size:34px;font-weight:800;padding:14px 22px;border-radius:40px;background:rgba(0,0,0,.55);z-index:10}
+
+#ctl button svg,#ctl button span{pointer-events:none}
 </style>
 </head>
 <body>
@@ -833,8 +835,9 @@ const icoPlay='<svg width="24" height="24" viewBox="0 0 24 24"><path d="M7 4l13 
 const icoFull='<path d="M4 9V4h5v2H6v3zm11-5h5v5h-2V6h-3zM4 15h2v3h3v2H4zm14 0h2v5h-5v-2h3z" fill="#fff"/>',icoExit='<path d="M9 4v5H4V7h3V4zm6 0h2v3h3v2h-5zM4 15h5v5H7v-3H4zm11 0h5v2h-3v3h-2z" fill="#fff"/>';
 let SCALE=1,hideT=null;const CTL=$('ctl'),VP=$('vp');
 function subShift(){const vis=!CTL.classList.contains('hide');$('sub').style.bottom=(vis?30+Math.max(0,CTL.offsetHeight-34)/SCALE:30)+'px';}
-function showCtl(){CTL.classList.remove('hide');VP.classList.remove('nocur');clearTimeout(hideT);if(playing&&!dragging&&$('menu').style.display!=='block')hideT=setTimeout(()=>{CTL.classList.add('hide');VP.classList.add('nocur');subShift();},2600);subShift();}
+function showCtl(){CTL.classList.remove('hide');VP.classList.remove('nocur');clearTimeout(hideT);if(playing&&!dragging&&!overCtl&&$('menu').style.display!=='block')hideT=setTimeout(()=>{CTL.classList.add('hide');VP.classList.add('nocur');subShift();},2600);subShift();}
 VP.addEventListener('pointermove',showCtl);VP.addEventListener('pointerdown',showCtl);
+let overCtl=false;CTL.addEventListener('pointerenter',()=>{overCtl=true;clearTimeout(hideT);CTL.classList.remove('hide');VP.classList.remove('nocur');});CTL.addEventListener('pointerleave',()=>{overCtl=false;showCtl();});
 function stopAudio(){for(const l of ALL)if(l.a&&!l.a.paused)l.a.pause();curA=null;}
 function syncAudio(){if(!playing||dragging){stopAudio();return;}
  const l=ALL.find(l=>l.a&&t>=l.t0&&t<l.t1);
@@ -842,7 +845,7 @@ function syncAudio(){if(!playing||dragging){stopAudio();return;}
  if(curA!==l){stopAudio();curA=l;l.a.playbackRate=rate;l.a.currentTime=Math.max(0,t-l.t0);l.a.play().catch(()=>{});}
  else if(!l.a.paused&&Math.abs(l.a.currentTime-(t-l.t0))>0.3)l.a.currentTime=Math.max(0,t-l.t0);}
 function ui(){$('fill').style.width=(t/TOTAL*100)+'%';$('knob').style.left=(t/TOTAL*100)+'%';$('time').textContent=fmt(t)+' / '+fmt(TOTAL);
- $('bplay').innerHTML=playing?icoPause:icoPlay;op($('bigplay'),playing||t>0.01?0:1);}
+ const bp=$('bplay'),st=playing?'pause':'play';if(bp.dataset.st!==st){bp.dataset.st=st;bp.innerHTML=playing?icoPause:icoPlay;}op($('bigplay'),playing||t>0.01?0:1);}
 function setPlay(v){if(v&&t>=TOTAL-0.05)t=0;playing=v;last=performance.now();if(!v)stopAudio();else syncAudio();ui();showCtl();}
 function seek(x){t=cl(x,0,TOTAL);stopAudio();frame(t);ui();if(playing)syncAudio();}
 function flash(txt,left){const f=$('flash');f.textContent=txt;f.style.left=left?'80px':'';f.style.right=left?'':'80px';f.style.opacity=1;clearTimeout(flash.h);flash.h=setTimeout(()=>f.style.opacity=0,500);}
