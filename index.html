@@ -31,7 +31,7 @@ a.card:hover{transform:translateY(-2px);background:rgba(58,76,112,.65)}
  <h1>신경언어장애 3D 애니메이션 강의 <span class="badge">v3 새 버전</span></h1>
  <div class="sub">언어재활사 2급 국가시험 대비 · 주제별 정리본(00~11)을 바탕으로 새로 만든 강의 · 흐름은 3D, 구조는 단면 그림</div>
  <div class="grid">
-  <a class="card main" href="ep1.html"><div class="ep">전체 재생</div><h2>완성된 편 이어서 재생</h2><p>해부 1편 → 2편 → 3편 · 약 34분 · 음성 포함</p></a>
+  <a class="card main" href="ep1.html"><div class="ep">전체 재생</div><h2>완성된 편 이어서 재생</h2><p>해부 1~3편 → 실어증 1~2편 · 약 55분 · 음성 포함<br>각 편이 끝나면 다음 편 버튼이 나와요</p></a>
   <div class="card" style="grid-column:span 2">
    <a href="ep1.html" style="text-decoration:none;color:inherit"><div class="ep">해부 1편 · 약 13분</div><h2>신경해부생리 ① 뇌의 구조</h2>
    <p>신경계 구분 · 뉴런과 활동전위 · 뇌막 · 뇌실(관상·시상·횡단면) · 4엽 · 편재화 · 브로드만 · 기저핵 · 간뇌 · 변연계 · 섬유다발 · 뇌간 · 소뇌 · 확인 문제 5개</p></a>
@@ -47,7 +47,16 @@ a.card:hover{transform:translateY(-2px);background:rgba(58,76,112,.65)}
    <p>손잡이 · GCS · 근력 8단계 · 근긴장도 · 진전 · 경동맥계/추골뇌저동맥계 · 윌리스환 · ACA/MCA/PCA · MCA 분절 · 혈전증 vs 색전증 · 출혈 · TIA · 구조/기능 영상 · 확인 문제 8개</p></a>
    <div class="chips" id="chips3"></div>
   </div>
-  <div class="card soon"><div class="ep">실어증</div><h2>실어증 유형 · 평가 · 치료</h2><p>분류 흐름도 · 9유형 · 착어 · PPA · STAND/K-WAB · 예후 · 치료 모델과 기법</p></div>
+  <div class="card" style="grid-column:span 2">
+   <a href="ep4.html" style="text-decoration:none;color:inherit"><div class="ep">실어증 1편 · 약 11분</div><h2>실어증 ① 유형과 증상</h2>
+   <p>정의 · 교차실어증 · 학파 · 언어 지도 · 유형 판별 흐름도 · 브로카 · 전반 · 베르니케 · 전도 · 명칭 · 피질하 · 연결피질 3종 · 착어 4종 · PPA · 확인 문제 8개</p></a>
+   <div class="chips" id="chips4"></div>
+  </div>
+  <div class="card" style="grid-column:span 2">
+   <a href="ep5.html" style="text-decoration:none;color:inherit"><div class="ep">실어증 2편 · 약 10분</div><h2>실어증 ② 평가 · 예후 · 치료</h2>
+   <p>평가 영역 · 검사 도구 · STAND · K-WAB 지수 · 예후와 유형 변화 · 치료 모델 · MIT · VAT · PACE · SFA · LOT · 통사 치료 · rTMS · 확인 문제</p></a>
+   <div class="chips" id="chips5"></div>
+  </div>
   <div class="card soon"><div class="ep">실독증 · 실서증</div><h2>읽기 · 쓰기 장애</h2><p>이중경로 모형 · 중추성/말초성 실독증 · 실서증 유형</p></div>
   <div class="card soon"><div class="ep">마비말장애</div><h2>마비말장애 7유형 · 평가 · 치료</h2><p>UMN/LMN · 유형별 특징 · 하위체계 평가(MPT·AMR/SMR) · 하위체계별 치료</p></div>
   <div class="card soon"><div class="ep">뇌성마비 · 기타</div><h2>뇌성마비 · 기타 신경말장애</h2><p>뇌성마비 3유형 · 신경학적 말더듬 · 동어반복 · 무동무언증 · 감금증후군 · 심인성 말장애</p></div>
@@ -66,6 +75,10 @@ document.getElementById('chips').innerHTML=P.map(p=>`<a href="ep1.html#${p[0]}">
 const P2=[['2-1','뇌신경 12쌍'],['2-2','말·삼킴 뇌신경'],['2-3','시각·청각 경로'],['2-4','운동 경로'],['2-5','UMN vs LMN'],['2-6','안면마비 중추성 vs 말초성'],['2-7','안면 vs 삼차'],['2-8','연구개 편위'],['2-9','혀 편위'],['2-10','손상 쪽 판별 문제']];
 const P3=[['3-1','신경학적 검사'],['3-2','뇌의 혈액 공급'],['3-3','혈관별 영역'],['3-4','뇌졸중'],['3-5','영상검사'],['3-6','확인 문제']];
 document.getElementById('chips3').innerHTML=P3.map(p=>`<a href="ep3.html#${p[0]}">${p[0]} ${p[1]}</a>`).join('');
+const P4=[['a1-1','1-1 실어증이란'],['a1-2','1-2 언어 지도 · 유형 판별'],['a1-3','1-3 브로카 · 전반'],['a1-4','1-4 베르니케 · 전도 · 명칭 · 피질하'],['a1-5','1-5 연결피질'],['a1-6','1-6 착어 · 관련 증상'],['a1-7','1-7 PPA'],['a1-8','1-8 확인 문제']];
+document.getElementById('chips4').innerHTML=P4.map(p=>`<a href="ep4.html#${p[0]}">${p[1]}</a>`).join('');
+const P5=[['a2-1','2-1 평가 목적 · 영역'],['a2-2','2-2 검사 도구'],['a2-3','2-3 K-WAB 지수'],['a2-4','2-4 예후 · 유형 변화'],['a2-5','2-5 치료 원칙 · 모델'],['a2-6','2-6 MIT · CIT'],['a2-7','2-7 VAT · PACE'],['a2-8','2-8 SFA · LOT'],['a2-9','2-9 통사 · rTMS · 단서'],['a2-10','2-10 확인 문제']];
+document.getElementById('chips5').innerHTML=P5.map(p=>`<a href="ep5.html#${p[0]}">${p[1]}</a>`).join('');
 document.getElementById('chips2').innerHTML=P2.map(p=>`<a href="ep2.html#${p[0]}">${p[0]} ${p[1]}</a>`).join('');
 </script>
 </body>
