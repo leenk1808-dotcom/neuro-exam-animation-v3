@@ -31,7 +31,7 @@ a.card:hover{transform:translateY(-2px);background:rgba(58,76,112,.65)}
  <h1>신경언어장애 3D 애니메이션 강의 <span class="badge">v3 새 버전</span></h1>
  <div class="sub">언어재활사 2급 국가시험 대비 · 주제별 정리본(00~11)을 바탕으로 새로 만든 강의 · 흐름은 3D, 구조는 단면 그림</div>
  <div class="grid">
-  <a class="card main" href="ep1.html"><div class="ep">전체 재생</div><h2>완성된 편 이어서 재생</h2><p>해부 1~3편 → 실어증 1~2편 · 약 55분 · 음성 포함<br>각 편이 끝나면 다음 편 버튼이 나와요</p></a>
+  <a class="card main" href="ep1.html"><div class="ep">전체 재생</div><h2>완성된 편 이어서 재생</h2><p>해부 1~3편 → 실어증 1~2편 → 실독증 · 실서증 → 마비말장애 1~2편 · 약 83분 · 음성 포함<br>각 편이 끝나면 다음 편 버튼이 나와요</p></a>
   <div class="card" style="grid-column:span 2">
    <a href="ep1.html" style="text-decoration:none;color:inherit"><div class="ep">해부 1편 · 약 13분</div><h2>신경해부생리 ① 뇌의 구조</h2>
    <p>신경계 구분 · 뉴런과 활동전위 · 뇌막 · 뇌실(관상·시상·횡단면) · 4엽 · 편재화 · 브로드만 · 기저핵 · 간뇌 · 변연계 · 섬유다발 · 뇌간 · 소뇌 · 확인 문제 5개</p></a>
@@ -57,6 +57,21 @@ a.card:hover{transform:translateY(-2px);background:rgba(58,76,112,.65)}
    <p>평가 영역 · 검사 도구 · STAND · K-WAB 지수 · 예후와 유형 변화 · 치료 모델 · MIT · VAT · PACE · SFA · LOT · 통사 치료 · rTMS · 확인 문제</p></a>
    <div class="chips" id="chips5"></div>
   </div>
+  <div class="card" style="grid-column:span 2">
+   <a href="ep6.html" style="text-decoration:none;color:inherit"><div class="ep">실독증 · 실서증 · 약 10분</div><h2>실독증 · 실서증</h2>
+   <p>읽기 두 갈래 길 · 음운 · 표층 · 심층 실독증 · 구별법 · 순수 · 무시 · 주의력 실독증 · 중추형 · 말초형 실서증 · 확인 문제 9개</p></a>
+   <div class="chips" id="chips6"></div>
+  </div>
+  <div class="card" style="grid-column:span 2">
+   <a href="ep7.html" style="text-decoration:none;color:inherit"><div class="ep">마비말장애 1편 · 약 8분 40초</div><h2>마비말장애 ① 정의와 유형</h2>
+   <p>정의 · 운동 경로와 유형 지도 · UMN vs LMN · 양측 지배 · 이완형 · 경직형 · 일측 UMN형 · 실조형 · 기저핵 경로 · 과소 · 과다운동형 · 혼합형 · 확인 문제 8개</p></a>
+   <div class="chips" id="chips7"></div>
+  </div>
+  <div class="card" style="grid-column:span 2">
+   <a href="ep8.html" style="text-decoration:none;color:inherit"><div class="ep">마비말장애 2편 · 약 8분 50초</div><h2>마비말장애 ② 평가와 치료</h2>
+   <p>MPT · 물 불기 · 공명 · AMR · SMR · 피로 검사 · 호흡 · 발성(LSVT · 하품–한숨) · 구개거상기 · 운율(보조 맞춤판 · 대조 강세) · 유형별 치료 정리 · 확인 문제 8개</p></a>
+   <div class="chips" id="chips8"></div>
+  </div>
   <div class="card soon"><div class="ep">실독증 · 실서증</div><h2>읽기 · 쓰기 장애</h2><p>이중경로 모형 · 중추성/말초성 실독증 · 실서증 유형</p></div>
   <div class="card soon"><div class="ep">마비말장애</div><h2>마비말장애 7유형 · 평가 · 치료</h2><p>UMN/LMN · 유형별 특징 · 하위체계 평가(MPT·AMR/SMR) · 하위체계별 치료</p></div>
   <div class="card soon"><div class="ep">뇌성마비 · 기타</div><h2>뇌성마비 · 기타 신경말장애</h2><p>뇌성마비 3유형 · 신경학적 말더듬 · 동어반복 · 무동무언증 · 감금증후군 · 심인성 말장애</p></div>
@@ -79,6 +94,12 @@ const P4=[['a1-1','1-1 실어증이란'],['a1-2','1-2 언어 지도 · 유형 �
 document.getElementById('chips4').innerHTML=P4.map(p=>`<a href="ep4.html#${p[0]}">${p[1]}</a>`).join('');
 const P5=[['a2-1','2-1 평가 목적 · 영역'],['a2-2','2-2 검사 도구'],['a2-3','2-3 K-WAB 지수'],['a2-4','2-4 예후 · 유형 변화'],['a2-5','2-5 치료 원칙 · 모델'],['a2-6','2-6 MIT · CIT'],['a2-7','2-7 VAT · PACE'],['a2-8','2-8 SFA · LOT'],['a2-9','2-9 통사 · rTMS · 단서'],['a2-10','2-10 확인 문제']];
 document.getElementById('chips5').innerHTML=P5.map(p=>`<a href="ep5.html#${p[0]}">${p[1]}</a>`).join('');
+const P6=[['r-1','1-1 읽기 두 갈래 길'],['r-2','1-2 음운 · 표층'],['r-3','1-3 심층 · 구별법'],['r-4','1-4 말초형 실독증'],['r-5','1-5 실서증 · 중추형'],['r-6','1-6 말초형 실서증'],['r-7','1-7 확인 문제']];
+document.getElementById('chips6').innerHTML=P6.map(p=>`<a href="ep6.html#${p[0]}">${p[1]}</a>`).join('');
+const P7=[['d1-1','1-1 마비말장애란'],['d1-2','1-2 유형 지도'],['d1-3','1-3 UMN vs LMN'],['d1-4','1-4 이완형'],['d1-5','1-5 경직형 · 일측 UMN'],['d1-6','1-6 실조형'],['d1-7','1-7 과소운동형'],['d1-8','1-8 과다 · 혼합형'],['d1-9','1-9 확인 문제']];
+document.getElementById('chips7').innerHTML=P7.map(p=>`<a href="ep7.html#${p[0]}">${p[1]}</a>`).join('');
+const P8=[['d2-1','2-1 호흡 · 발성 평가'],['d2-2','2-2 공명 · 조음 · 운율 평가'],['d2-3','2-3 유형별 AMR · 피로 검사'],['d2-4','2-4 치료 원칙 · 호흡'],['d2-5','2-5 발성 치료'],['d2-6','2-6 공명 · 조음 치료'],['d2-7','2-7 운율 치료'],['d2-8','2-8 유형 → 치료'],['d2-9','2-9 확인 문제']];
+document.getElementById('chips8').innerHTML=P8.map(p=>`<a href="ep8.html#${p[0]}">${p[1]}</a>`).join('');
 document.getElementById('chips2').innerHTML=P2.map(p=>`<a href="ep2.html#${p[0]}">${p[0]} ${p[1]}</a>`).join('');
 </script>
 </body>
