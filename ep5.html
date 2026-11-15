@@ -234,7 +234,7 @@ const sub_=(p,i,j,k,n)=>{const a=LS(p,i,j),b=LE(p,i,j);return a+(b-a)*k/n;};
 </script>
 <script>"use strict";
 /* 실제 음성 길이(초): audio/<id>.mp3 */
-Object.assign(DUR,{"a2-1_01":6.24,"a2-1_02":7.2,"a2-1_03":7.76,"a2-1_04":9.92,"a2-1_05":10.56,"a2-1_06":6.64,"a2-2_01":5.2,"a2-2_02":8.4,"a2-2_03":7.6,"a2-2_04":10.08,"a2-2_05":7.44,"a2-2_06":10.56,"a2-2_07":6.64,"a2-2_08":9.28,"a2-3_01":2.96,"a2-3_02":6.08,"a2-3_03":10.64,"a2-3_04":4.4,"a2-3_05":6.16,"a2-3_06":9.44,"a2-4_01":8,"a2-4_02":8.64,"a2-4_03":6.32,"a2-4_04":10.4,"a2-4_05":5.84,"a2-4_06":4.96,"a2-4_07":8.4,"a2-4_08":4,"a2-5_01":6.24,"a2-5_02":7.76,"a2-5_03":8.48,"a2-5_04":9.44,"a2-5_05":8.32,"a2-5_06":8,"a2-5_07":5.68,"a2-5_08":10.8,"a2-6_01":10.8,"a2-6_02":4.8,"a2-6_03":6.96,"a2-6_04":6.8,"a2-6_05":10.24,"a2-7_01":8.4,"a2-7_02":8.08,"a2-7_03":6.4,"a2-7_04":9.6,"a2-8_01":5.36,"a2-8_02":8.8,"a2-8_03":8.56,"a2-8_04":6.88,"a2-8_05":7.76,"a2-9_01":6.72,"a2-9_02":10.72,"a2-9_03":9.2,"a2-9_04":9.04,"a2-9_05":9.04});
+Object.assign(DUR,{"a2-1_01":6.24,"a2-1_02":7.2,"a2-1_03":7.76,"a2-1_04":9.92,"a2-1_05":10.56,"a2-1_06":6.64,"a2-2_01":5.2,"a2-2_02":8.4,"a2-2_03":7.6,"a2-2_04":10.08,"a2-2_05":7.44,"a2-2_06":10.56,"a2-2_07":6.64,"a2-2_08":9.28,"a2-3_01":2.96,"a2-3_02":6.08,"a2-3_03":10.64,"a2-3_04":4.4,"a2-3_05":6.16,"a2-3_06":9.44,"a2-4_01":8,"a2-4_02":8.64,"a2-4_03":6.32,"a2-4_04":10.4,"a2-4_05":5.84,"a2-4_06":4.96,"a2-4_07":8.4,"a2-4_08":4,"a2-5_01":6.24,"a2-5_02":7.76,"a2-5_03":8.48,"a2-5_04":9.44,"a2-5_05":8.32,"a2-5_06":8,"a2-5_07":5.68,"a2-5_08":10.8,"a2-6_01":10.8,"a2-6_02":4.8,"a2-6_03":6.96,"a2-6_04":6.8,"a2-6_05":10.24,"a2-7_01":8.4,"a2-7_02":8.08,"a2-7_03":6.4,"a2-7_04":9.6,"a2-8_01":5.36,"a2-8_02":8.8,"a2-8_03":8.56,"a2-8_04":6.88,"a2-8_05":7.76,"a2-9_01":6.72,"a2-9_02":10.72,"a2-9_03":9.2,"a2-9_04":9.04,"a2-9_05":9.04,"a2-6_06":5.60});
 </script>
 <script>"use strict";
 /* ───────── 3D 공용 세계 ───────── */
@@ -687,7 +687,8 @@ page({id:'a2-6',label:'2-6',title:'MIT · CIT',scenes:[
   '필요한 단어나 짧은 구부터, 음절마다 환자의 왼손을 두드리면서 단순한 멜로디로 읊조립니다.',
   '점차 치료사의 모델을 줄여 가며 말로 바꾸고, 조음 오류는 신경 쓰지 않고 충분히 기다려 줍니다.']},
  {name:'CIT 통제 유발 치료',pre:0.4,post:1.8,lines:[
-  'CIT, 통제 유발 치료는 제스처나 쓰기 같은 보상 수단을 막고, 말로만 표현하게 집중 훈련하는 방법으로, 만성 실어증의 표현을 높입니다.']}],
+  'CIT, 통제 유발 치료는 제스처나 쓰기 같은 보상 수단을 막고, 말로만 표현하게 집중 훈련하는 방법으로, 만성 실어증의 표현을 높입니다.',
+  '또한 짧은 기간 동안 고강도로, 즉 집중적으로 치료하는 것이 특징입니다.']}],
  init(L){const s=SVGROOT(L);
   this.tgt=hdiv('card ov','<p style="font-size:23px;line-height:1.5"><b style="color:#ffe08a">★ 대상</b> &nbsp;비유창 · 따라말하기↓ · 이해 비교적 양호<br>→ <b>중증 브로카 실어증</b> <span style="color:#aab9d0">(말실행증에도)</span></p>',L,'left:180px;top:64px;width:920px;padding:14px 26px');
   const H=this.H=sv('g',{opacity:0},s);
@@ -708,7 +709,8 @@ page({id:'a2-6',label:'2-6',title:'MIT · CIT',scenes:[
    <div style="padding:20px 30px;border-radius:18px;background:rgba(50,15,15,.85);border:2px solid #d9574a;color:#ff9a8a">✋ 제스처 ✕</div>
    <div style="padding:20px 30px;border-radius:18px;background:rgba(50,15,15,.85);border:2px solid #d9574a;color:#ff9a8a">✎ 쓰기 ✕</div>
    <div style="padding:20px 30px;border-radius:18px;background:rgba(10,40,30,.85);border:2px solid #34b08a;color:#7fe8c4">💬 말로만 ✓</div></div>
-   <p style="font-size:23px">보상 수단을 막고 말로만 집중 훈련 → <b>만성 실어증</b>의 표현 향상</p></div>`,L,'left:190px;top:170px');
+   <p style="font-size:23px">보상 수단을 막고 말로만 집중 훈련 → <b>만성 실어증</b>의 표현 향상</p>
+   <p class="cit2" style="opacity:0;font-size:25px;margin-top:14px;padding:10px 18px;border-radius:14px;background:rgba(60,45,10,.85);border:2px solid #ffe08a">★ <b style="color:#ffe08a">짧은 기간</b> 동안 <b style="color:#ffe08a">고강도(집중적)</b>로 치료</p></div>`,L,'left:190px;top:170px');
  },
  draw(t,p){const [a,b]=p.scenes;const vA=win(t,a.t0,a.t1+0.2,0.4);
   op(this.tgt,win(t,a.L[0].t0,a.L[2].t0,0.4));op(this.H,vA*ramp(t,a.L[1].t0,a.L[1].t0+0.5));this.rh.classList.toggle('hl',t>=a.L[1].t0&&t<a.L[2].t0);
@@ -719,7 +721,7 @@ page({id:'a2-6',label:'2-6',title:'MIT · CIT',scenes:[
   const fade=t>=a.L[3].t0?ramp(t,a.L[3].t0,a.L[3].t0+3):0;this.sy.forEach(g=>op(g,1));
   op(this.steps,vA*ramp(t,a.L[3].t0,a.L[3].t0+0.5));[...this.steps.querySelectorAll('.st')].forEach((e,i)=>e.style.borderColor=fade*3>=i&&fade*3<i+1.01?'#ffe08a':'#3d5683');
   if(t>=a.L[2].t0&&t<a.L[3].t0)chip('음절마다 <b style="color:#ffc27a">왼손</b>을 두드리며 단순한 멜로디로 읊조리기',win(t,a.L[2].t0,a.L[3].t0));
-  op(this.cit,win(t,b.t0,b.t1+0.2,0.4));
+  op(this.cit,win(t,b.t0,b.t1+0.2,0.4));op(this.cit.querySelector('.cit2'),ramp(t,b.L[1].t0,b.L[1].t0+0.4));
  }});
 
 /* ═════════ 2-7 VAT · PACE ═════════ */
