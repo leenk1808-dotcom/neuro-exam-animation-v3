@@ -234,7 +234,7 @@ const sub_=(p,i,j,k,n)=>{const a=LS(p,i,j),b=LE(p,i,j);return a+(b-a)*k/n;};
 </script>
 <script>"use strict";
 /* 실제 음성 길이(초) */
-Object.assign(DUR,{"c3-1_01":6.56,"c3-1_02":10,"c3-1_03":3.36,"c3-2_01":4.56,"c3-2_02":12.24,"c3-2_03":8.08,"c3-3_01":4,"c3-3_02":12.8,"c3-3_03":12.32,"c3-3_04":8,"c3-4_01":8.64,"c3-4_02":9.04,"c3-4_03":5.12,"c3-5_01":8.24,"c3-5_02":9.68,"c3-5_03":8.16,"c3-6_01":12,"c3-6_02":5.44,"c3-6_03":6,"c3-7_01":10.48,"c3-7_02":11.84,"c3-7_03":9.44,"c3-7_04":11.92,"c3-8_01":11.6,"c3-8_02":9.36,"c3-9_01":11.36,"c3-9_02":8.32,"c3-9_03":7.84,"c3-9_04":5.2,"c3-9_05":7.12});
+Object.assign(DUR,{"c3-1_01":6.56,"c3-1_02":10,"c3-1_03":3.36,"c3-2_01":4.56,"c3-2_02":12.24,"c3-2_03":8.08,"c3-3_01":4,"c3-3_02":12.8,"c3-3_04":12.32,"c3-4_01":8.64,"c3-4_02":9.04,"c3-4_03":5.12,"c3-5_01":8.24,"c3-5_02":9.68,"c3-5_03":8.16,"c3-6_02":12,"c3-6_03":5.44,"c3-7_01":10.48,"c3-7_03":11.84,"c3-8_01":11.6,"c3-8_02":9.36,"c3-9_02":11.36,"c3-9_03":8.32,"c3-9_04":7.84,"c3-3_05":8,"c3-6_04":6,"c3-7_06":11.92,"c3-7_05":9.44,"c3-3_03":17.68,"c3-6_01":5.28,"c3-7_02":13.28,"c3-7_04":12.96,"c3-9_01":11.6,"c3-9_05":18.08,"c3-9_06":13.52});
 </script>
 <script>"use strict";
 /* ───────── 3D 공용 세계 ───────── */
@@ -609,6 +609,7 @@ page({id:'c3-2',label:'3-2',title:'K-MMSE',scenes:[{name:'30점 선별검사',pr
 page({id:'c3-3',label:'3-3',title:'그 밖의 검사 · 단어 유창성',scenes:[{name:'검사 도구 · 단어 유창성',pre:0.4,post:1.2,lines:[
  'K-MoCA(한국판 몬트리올 인지평가)는 경도인지장애를 일찍 선별하는 데 씁니다.',
  'SNSB(서울신경심리검사)는 기억, 언어, 주의, 시공간, 전두엽 실행기능을 종합적으로 봅니다. 정류장을 지나치거나 장보기에 실패하는 것처럼 집행기능 문제가 일상에서 보일 때 씁니다.',
+ '집행기능은 목표를 세워 계획하고, 행동을 시작해 순서대로 해 나가며, 상황이 바뀌면 그에 맞게 조절하는 능력입니다. SNSB는 주먹, 손날, 손바닥을 차례로 바꾸는 운동 순서 과제나, 스트룹 같은 억제 과제로 이를 살펴봅니다.',
  'CERAD-K(한국판 알츠하이머병 등록 협회 평가집)는 범주 유창성, 단축형 보스턴 이름대기, 단어목록 기억과 재인 등 9개 소검사로 이루어지고, 언어 검사로는 ABCD(애리조나 치매 의사소통 검사)와 K-BNT(한국판 보스턴 이름대기 검사)가 있습니다.',
  '초기 치매의 단어 유창성 활동은 제한 시간 안에 동물이나 과일 같은 범주의 단어를 모두 말하게 하는 것입니다.']}],
  init(L){const T=[['K-MoCA','한국판 몬트리올 인지평가','경도인지장애<br>조기 선별','#7fe8c4'],['SNSB','서울신경심리검사','기억 · 언어 · 주의<br>시공간 · 전두엽','#8fc4ff'],['CERAD-K','한국판 알츠하이머병<br>등록 협회 평가집','9개 소검사','#ffc27a'],['ABCD','애리조나 치매<br>의사소통 검사','언어','#d6b0ff'],['K-BNT','한국판 보스턴<br>이름대기 검사','단어 인출','#ff9a8a']];
@@ -630,6 +631,9 @@ page({id:'c3-3',label:'3-3',title:'그 밖의 검사 · 단어 유창성',scenes
   this.path3=sv('path',{d:'M880,500 C900,430 960,410 1000,400 C1040,392 1080,420 1110,470 C1130,500 1140,510 1150,515',fill:'none',stroke:'#ffe08a','stroke-width':5,'stroke-linecap':'round'},sn);
   sv('path',{d:'M1150,515 l-16,-2 M1150,515 l-6,-15',stroke:'#ffe08a','stroke-width':5,'stroke-linecap':'round'},sn);tx_(sn,1170,505,'?',{'font-size':30,fill:'#ff9a8a'});
   tx_(sn,1030,535,'목적이 바뀜',{'font-size':21,fill:'#ffc27a'});
+  /* 집행기능 흐름 */
+  const EX=[['① 계획','목표를 세움','#8fc4ff'],['② 시작','행동을 시작','#7fe8c4'],['③ 순서대로 수행','차례로 해 나감','#ffe08a'],['④ 상황에 맞게 조절','바뀌면 대처','#ff9a8a']];
+  this.exf=hdiv('ov','<div style="font-size:25px;font-weight:800;color:#8fc4ff;text-align:center;margin-bottom:14px">집행기능 = 목표를 향해 행동을 계획 · 조절하는 능력</div><div style="display:flex;align-items:center;justify-content:center;gap:10px">'+EX.map((x,i)=>'<div class="exs" style="opacity:.25;width:258px;padding:14px 6px;border-radius:16px;background:rgba(12,22,40,.96);border:3px solid '+x[2]+';text-align:center"><div style="font-size:23px;font-weight:800;white-space:nowrap;color:'+x[2]+'">'+x[0]+'</div><div style="font-size:19px;color:#dbe5f3;margin-top:4px">'+x[1]+'</div></div>'+(i<3?'<div style="font-size:26px;color:#9cc7ff">→</div>':'')).join('')+'</div><div class="exc" style="opacity:0;text-align:center;margin-top:20px"><span style="font-size:20px;color:#c9d6ea;margin-right:8px">SNSB 과제:</span>'+e14Chip('Fist-edge-palm (주먹 · 손날 · 손바닥)','#8fc4ff')+e14Chip('스트룹 (억제)','#ff9a8a')+'</div>',L,'left:40px;top:300px;width:1200px');
   /* CERAD-K 소검사 */
   const cs=['범주 유창성','단축형 보스턴 이름대기','간이정신상태검사','단어목록 기억','단어목록 회상','단어목록 재인','구성'];
   this.ce=hdiv('ov',`<div style="font-size:24px;font-weight:800;color:#ffc27a;margin-bottom:10px">CERAD-K · 9개 소검사 (일부)</div>`+cs.map(x=>e14Chip(x,'#c98a3a')).join('')+`<div style="margin-top:16px;font-size:22px"><b style="color:#d6b0ff">ABCD</b> · <b style="color:#ff9a8a">K-BNT</b> = 언어 · 단어 인출 검사</div>`,L,'left:90px;top:320px;width:1100px;text-align:center');
@@ -645,14 +649,15 @@ page({id:'c3-3',label:'3-3',title:'그 밖의 검사 · 단어 유창성',scenes
    sv('rect',{x:x-70,y:y-30,width:140,height:56,rx:14,fill:'#1d3a5e',stroke:'#7fe8c4','stroke-width':2},g);tx_(g,x,y+8,w,{'font-size':24});return g;});
   this.cnt=tx_(fl,865,500,'',{'font-size':26,fill:'#ffe08a'});
  },
- draw(t,p){const a=p.scenes[0];const vT=1-e14In(t,a,3);
-  const on=[0,1,2,2,2];const cur=[0,1,2,2,2];
-  this.tc.forEach((c,i)=>{const st=on[i]===0?a.L[0].t0:on[i]===1?a.L[1].t0:e14At(a,2,0.05+(i-2)*0.28);op(c,vT*(t>=st?(e14Now(t,a,cur[i])?1:0.5):0)*ramp(t,st,st+0.4)+(t<st?0:0));e14Glow(c,e14Now(t,a,cur[i]));});
+ draw(t,p){const a=p.scenes[0];const vT=1-e14In(t,a,4);
+  const on=[0,1,3,3,3];const cur=[0,1,3,3,3];const nw=i=>e14Now(t,a,cur[i])||(i===1&&e14Now(t,a,2));
+  this.tc.forEach((c,i)=>{const st=on[i]===0?a.L[0].t0:on[i]===1?a.L[1].t0:e14At(a,3,0.05+(i-2)*0.28);op(c,vT*(t>=st?(nw(i)?1:0.5):0)*ramp(t,st,st+0.4));e14Glow(c,nw(i));});
+  op(this.exf,win(t,a.L[2].t0,a.L[3].t0,0.4));{const L2=a.L[2];[...this.exf.querySelectorAll('.exs')].forEach((e,i)=>{const s0=e14At(a,2,[0.02,0.14,0.27,0.4][i]);e.style.opacity=(0.25+0.75*ramp(t,s0,s0+0.4)).toFixed(2);e.style.boxShadow=(t>=s0&&t<e14At(a,2,[0.14,0.27,0.4,0.55][i]))?'0 0 0 4px rgba(255,224,138,.5)':'';});op(this.exf.querySelector('.exc'),ramp(t,e14At(a,2,0.56),e14At(a,2,0.56)+0.4));}
   op(this.sn,win(t,a.L[1].t0+0.6,a.L[2].t0,0.4));const f1=e14Fr(t,a,1);
   this.walker.setAttribute('transform',`translate(${lerp(190,380,ramp(f1,0.1,0.55))},486)`);op(this.cartX,ramp(f1,0.55,0.65));
   const pl=this.path3.getTotalLength();this.path3.style.strokeDasharray=pl;this.path3.style.strokeDashoffset=pl*(1-ramp(f1,0.65,0.95));
-  op(this.ce,win(t,a.L[2].t0+0.3,a.L[3].t0,0.4));
-  op(this.fl,e14In(t,a,3));const f3=e14Fr(t,a,3);const ang=f3*2*Math.PI;
+  op(this.ce,win(t,a.L[3].t0+0.3,a.L[4].t0,0.4));
+  op(this.fl,e14In(t,a,4));const f3=e14Fr(t,a,4);const ang=f3*2*Math.PI;
   const ex=300+130*Math.sin(ang),ey=330-130*Math.cos(ang);
   this.arc.setAttribute('d',f3<=0?'':f3>=0.999?'M300,330 m-130,0 a130,130 0 1,0 260,0 a130,130 0 1,0 -260,0':`M300,330 L300,200 A130,130 0 ${ang>Math.PI?1:0},1 ${ex.toFixed(1)},${ey.toFixed(1)} Z`);
   this.hand.setAttribute('x2',(300+115*Math.sin(ang)).toFixed(1));this.hand.setAttribute('y2',(330-115*Math.cos(ang)).toFixed(1));
@@ -716,6 +721,7 @@ page({id:'c3-5',label:'3-5',title:'치료의 틀 · ICF',scenes:[{name:'ICF 세 
 <script>"use strict";
 /* ═════════ 3-6 기억 수첩 · 간격 회상 훈련 ═════════ */
 page({id:'c3-6',label:'3-6',title:'기억 수첩 · 간격 회상 훈련',scenes:[{name:'기억을 돕는 직접 치료',pre:0.4,post:1.0,lines:[
+ '이제부터 언어치료사가 환자에게 직접 하는 직접 치료를 살펴보겠습니다.',
  '기억 수첩이나 기억 공책은 익숙한 사진, 그림, 글자 카드를 모아 대화에 활용하는 보완 장치입니다. 중증에도 효과가 있지만, 수첩 밖으로 일반화되기는 어렵습니다.',
  'SRT(간격 회상 훈련)는 정보를 알려 준 뒤 다시 묻는 간격을 점점 늘려 가는 방법입니다.',
  '아파트 동과 호수, 간병인 이름처럼 생활에 필요한 기능적 정보를 익히는 데 씁니다.']}],
@@ -733,6 +739,7 @@ page({id:'c3-6',label:'3-6',title:'기억 수첩 · 간격 회상 훈련',scenes
   cd.forEach((c,i)=>{const y=184+i*130;sv('rect',{x:340,y,width:200,height:104,rx:10,fill:'#fff8e0',stroke:'#c9a85a','stroke-width':2},this.pg);tx_(this.pg,440,y+40,c[0],{'font-size':20,fill:'#5a5040',stroke:'none'});tx_(this.pg,440,y+78,c[1],{'font-size':24,fill:'#2b2b3a',stroke:'none'});});
   this.cover=sv('g',{},nb);sv('rect',{x:320,y:145,width:250,height:320,rx:12,fill:'#8a5a3c',stroke:'#5a3a24','stroke-width':3},this.cover);tx_(this.cover,445,312,'나의 수첩',{'font-size':26,fill:'#f7e7c8',stroke:'none'});
   this.note=hdiv('ov','<div style="font-size:20px;line-height:1.5;padding:8px 16px;border-radius:12px;background:rgba(12,22,40,.92);border:2px solid #355a8c">✓ <b style="color:#7fe8c4">중증에도 효과</b> &nbsp; ✕ <b style="color:#ff9a8a">수첩 밖 일반화 어려움</b></div>',L,'left:70px;top:486px;width:500px;text-align:center');
+  this.dban=hdiv('ov','<div style="text-align:center;padding:26px 30px;border-radius:22px;background:rgba(12,22,40,.97);border:3px solid #7fe8c4"><div style="font-size:44px;font-weight:900;color:#7fe8c4">직접 치료</div><div style="display:flex;align-items:center;justify-content:center;gap:22px;margin-top:16px;font-size:28px;font-weight:800"><span style="padding:10px 22px;border-radius:16px;background:#1d3a5e">🧑‍⚕️ 언어치료사</span><span style="color:#7fe8c4;font-size:36px">→</span><span style="padding:10px 22px;border-radius:16px;background:#3a2a4a">🧓 환자</span></div><div style="font-size:21px;color:#c9d6ea;margin-top:14px">기억 수첩 · 간격 회상 · 현실 지남 · 인정 요법 · 몬테소리 · 그룹 치료</div></div>',L,'left:240px;top:200px;width:800px');
   /* SRT */
   const sr=this.sr=sv('g',{opacity:0},s);
   tx_(sr,920,122,'SRT (간격 회상 훈련)',{'font-size':26,fill:'#8fc4ff'});
@@ -746,19 +753,21 @@ page({id:'c3-6',label:'3-6',title:'기억 수첩 · 간격 회상 훈련',scenes
   tx_(sr,925,392,'맞히면 묻는 간격을 늘림 →',{'font-size':20,fill:'#9fb3cf'});
   this.fn=hdiv('ov',`<div style="font-size:22px;font-weight:800;color:#ffe08a;margin-bottom:8px">기능적 정보</div>`+e14Chip('🏢 아파트 동 · 호수','#c9a85a')+e14Chip('👤 간병인 이름','#c9a85a'),L,'left:650px;top:432px;width:550px;text-align:center');
  },
- draw(t,p){const a=p.scenes[0];op(this.nb,e14In(t,a,0));const o=ramp(t,e14At(a,0,0.08),e14At(a,0,0.28));
+ draw(t,p){const a=p.scenes[0];op(this.dban,win(t,a.L[0].t0-0.2,a.L[1].t0,0.4));op(this.nb,e14In(t,a,1));const o=ramp(t,e14At(a,1,0.08),e14At(a,1,0.28));
   this.cover.setAttribute('transform',`translate(320,0) scale(${(1-2*o).toFixed(3)},1) translate(-320,0)`);op(this.cover,o>0.5?0:1);op(this.pg,o>0.5?1:0.001);
-  op(this.note,ramp(t,e14At(a,0,0.6),e14At(a,0,0.6)+0.4));
-  op(this.sr,e14In(t,a,1));const f=ramp(t,e14At(a,1,0.1),a.L[2].t0+0.2);const v=f*450;
-  op(this.dot,t>=a.L[1].t0&&f<1?1:0);this.dot.setAttribute('cx',this.sx(v));this.dot.setAttribute('cy',330);
-  this.ev.forEach((g,i)=>op(g,t>=a.L[1].t0&&v>=this.CUM[i]-0.5?1:0));this.seg.forEach((g,i)=>op(g,ramp(v,this.CUM[i],this.CUM[i]+15)));
-  op(this.q,t>=a.L[1].t0?1:0);op(this.fn,e14In(t,a,2));
+  op(this.note,ramp(t,e14At(a,1,0.6),e14At(a,1,0.6)+0.4));
+  op(this.sr,e14In(t,a,2));const f=ramp(t,e14At(a,2,0.1),a.L[3].t0+0.2);const v=f*450;
+  op(this.dot,t>=a.L[2].t0&&f<1?1:0);this.dot.setAttribute('cx',this.sx(v));this.dot.setAttribute('cy',330);
+  this.ev.forEach((g,i)=>op(g,t>=a.L[2].t0&&v>=this.CUM[i]-0.5?1:0));this.seg.forEach((g,i)=>op(g,ramp(v,this.CUM[i],this.CUM[i]+15)));
+  op(this.q,t>=a.L[2].t0?1:0);op(this.fn,e14In(t,a,3));
  }});
 
 /* ═════════ 3-7 현실 지남 · 인정 요법 · 그 밖의 중재 ═════════ */
 page({id:'c3-7',label:'3-7',title:'현실 지남 · 인정 요법',scenes:[{name:'직접 치료 기법',pre:0.4,post:1.0,lines:[
  'ROT(현실 지남 요법)는 날짜와 장소 같은 지남력 정보를 반복해 알려 주어 환경에 적응하게 합니다. 경도에서 중등도에 효과가 있고 우울과 불안도 줄여 줍니다.',
+ '지금이 언제이고 여기가 어디인지 모르면 혼란스럽고 불안해집니다. 현실 정보를 반복해 알려 주면 상황을 이해하고 예측할 수 있게 되어, 혼란이 줄고 불안과 우울도 덜해집니다.',
  'VT(인정 요법)는 환자의 말을 고치거나 다시 말하게 하지 않고, 말과 감정을 그대로 인정합니다. 공감하며 듣고, 신체 접촉과 눈맞춤, 익숙한 음악을 씁니다.',
+ '틀린 말을 바로잡으면 환자는 좌절하거나 불안해하고 대화를 피하기 쉽습니다. 말 뒤에 있는 감정과 욕구를 인정해 주면 존중받는다고 느껴, 정서가 안정되고 의사소통이 이어집니다.',
  '기법으로는 육하원칙의 사실적 질문, 반복하기, 극단적이거나 반대인 상황 생각해 보기, 동작 따라 하기가 있습니다.',
  '몬테소리 기반 중재는 인지 수준에 맞게 구조화된 활동을 하게 하고, 그룹 치료는 초기에는 자기표현과 인지 자극을, 후기에는 지남력과 의사소통 유지를 목표로 합니다.']}],
  init(L){const s=SVGROOT(L);
@@ -767,7 +776,9 @@ page({id:'c3-7',label:'3-7',title:'현실 지남 · 인정 요법',scenes:[{name
   tx_(bd,370,172,'오늘은',{'font-size':30,fill:'#f7f3ea',stroke:'none'});
   this.rows=[['날짜','11월 16일'],['요일','월요일'],['날씨','맑음 ☀'],['장소','행복 요양원']].map((r,i)=>{const g=sv('g',{opacity:0},bd);const y=230+i*66;
    tx_(g,200,y,r[0],{'font-size':24,fill:'#cfe3c0',stroke:'none','text-anchor':'start'});sv('rect',{x:300,y:y-34,width:280,height:48,rx:8,fill:'#f7f3ea'},g);tx_(g,440,y,r[1],{'font-size':26,fill:'#2b2b3a',stroke:'none'});return g;});
-  this.rot=e14Card(L,690,150,520,250,'ROT · 현실 지남 요법','#7fe8c4','날짜 · 장소 등 <b>지남력 정보를 반복</b><br>→ 환경에 적응<br><br>✓ 경도 ~ 중등도에 효과<br>✓ 우울 · 불안 감소',22);
+  this.rot=e14Card(L,690,140,520,232,'ROT · 현실 지남 요법','#7fe8c4','날짜 · 장소 등 <b>지남력 정보를 반복</b><br>→ 환경에 적응<br><br>✓ 경도 ~ 중등도에 효과<br>✓ 우울 · 불안 감소',22);
+  this.rwhy=hdiv('ov','<div class="rw1" style="opacity:0;display:flex;align-items:center;gap:10px;font-size:21px;font-weight:700;padding:10px 14px;border-radius:14px;background:rgba(50,15,15,.9);border:2px solid #d9574a"><span>❓ 언제? 어디?</span><span style="color:#ff9a8a">→</span><span style="color:#ff9a8a">모름 → 혼란 · 불안</span></div><div class="rw2" style="opacity:0;margin-top:10px;font-size:21px;font-weight:700;padding:10px 14px;border-radius:14px;background:rgba(10,40,30,.9);border:2px solid #34b08a;line-height:1.5">📅 현실 정보 반복 → <span style="color:#7fe8c4">이해 · 예측</span><br>→ <span style="color:#ffe08a">혼란 · 불안 · 우울 ↓</span></div>',L,'left:690px;top:390px;width:520px');
+  this.vwhy=hdiv('ov','<div style="display:flex;gap:20px;justify-content:center"><div class="vw1" style="opacity:0;font-size:21px;font-weight:700;padding:10px 18px;border-radius:14px;background:rgba(50,15,15,.92);border:2px solid #d9574a;color:#ffb2a6">✕ 바로잡기 → 좌절 · 불안 · 대화 회피</div><div class="vw2" style="opacity:0;font-size:21px;font-weight:700;padding:10px 18px;border-radius:14px;background:rgba(10,40,30,.92);border:2px solid #34b08a;color:#9ff0d6">✓ 감정 인정 → 존중 · 정서 안정 · 대화 지속</div></div>',L,'left:40px;width:1200px;top:494px');
   /* 인정 요법 대화 */
   const dl=this.dl=sv('g',{opacity:0},s);
   this.pf=e14Face(dl,320,322,0.62,{old:true,hair:'#d9d6d0',brow:'#b8b2a8',skin:'#ecc9ae',shade:'#c49a80',cloth:'#7a6a8a',long:false});
@@ -791,11 +802,14 @@ page({id:'c3-7',label:'3-7',title:'현실 지남 · 인정 요법',scenes:[{name
   tx_(mb,930,420,'초기 · 자기표현 · 사회적 상호작용 · 인지 자극',{'font-size':19});tx_(mb,930,460,'후기 · 지남력 · 의사소통 보존',{'font-size':19,fill:'#ffe08a'});
  },
  draw(t,p){const a=p.scenes[0];
-  op(this.bd,win(t,a.L[0].t0,a.L[1].t0,0.4));this.rows.forEach((r,i)=>op(r,ramp(t,e14At(a,0,0.1+i*0.15),e14At(a,0,0.1+i*0.15)+0.3)));op(this.rot,win(t,e14At(a,0,0.55),a.L[1].t0,0.4));
-  const dv=win(t,a.L[1].t0,a.L[3].t0,0.4);op(this.dl,dv);op(this.b1,ramp(t,e14At(a,1,0.02),e14At(a,1,0.02)+0.3));op(this.b2,ramp(t,e14At(a,1,0.3),e14At(a,1,0.3)+0.3));
-  this.pf.mouth(t>=e14At(a,1,0.3)?0.6:-0.4);this.tf.mouth(0.8);
-  op(this.vt,win(t,e14At(a,1,0.45),a.L[3].t0,0.4));op(this.tech,win(t,a.L[2].t0,a.L[3].t0,0.4));
-  op(this.mb,e14In(t,a,3));const f=e14Fr(t,a,3);this.shp.forEach((e,i)=>{const k=ramp(f,0.1+i*0.12,0.2+i*0.12);const x=lerp(180+i*20,e.tx,k),y=lerp(230,315,k);if(e.tagName==='circle'){e.setAttribute('cx',x);e.setAttribute('cy',y);}else e.setAttribute('transform',`translate(${x},${y})`);});
+  op(this.bd,win(t,a.L[0].t0,a.L[2].t0,0.4));this.rows.forEach((r,i)=>op(r,ramp(t,e14At(a,0,0.1+i*0.15),e14At(a,0,0.1+i*0.15)+0.3)));op(this.rot,win(t,e14At(a,0,0.55),a.L[2].t0,0.4));
+  op(this.rwhy,win(t,a.L[1].t0,a.L[2].t0,0.4));op(this.rwhy.querySelector('.rw1'),ramp(t,e14At(a,1,0.02),e14At(a,1,0.02)+0.4));op(this.rwhy.querySelector('.rw2'),ramp(t,e14At(a,1,0.4),e14At(a,1,0.4)+0.4));
+  const dv=win(t,a.L[2].t0,a.L[5].t0,0.4);op(this.dl,dv);op(this.b1,ramp(t,e14At(a,2,0.02),e14At(a,2,0.02)+0.3));op(this.b2,ramp(t,e14At(a,2,0.3),e14At(a,2,0.3)+0.3));
+  this.pf.mouth(t>=e14At(a,2,0.3)?0.6:-0.4);this.tf.mouth(0.8);
+  op(this.vt,win(t,e14At(a,2,0.45),a.L[5].t0,0.4));
+  op(this.vwhy,win(t,a.L[3].t0,a.L[4].t0,0.4));op(this.vwhy.querySelector('.vw1'),ramp(t,e14At(a,3,0.02),e14At(a,3,0.02)+0.4));op(this.vwhy.querySelector('.vw2'),ramp(t,e14At(a,3,0.45),e14At(a,3,0.45)+0.4));
+  op(this.tech,win(t,a.L[4].t0,a.L[5].t0,0.4));
+  op(this.mb,e14In(t,a,5));const f=e14Fr(t,a,5);this.shp.forEach((e,i)=>{const k=ramp(f,0.1+i*0.12,0.2+i*0.12);const x=lerp(180+i*20,e.tx,k),y=lerp(230,315,k);if(e.tagName==='circle'){e.setAttribute('cx',x);e.setAttribute('cy',y);}else e.setAttribute('transform',`translate(${x},${y})`);});
  }});
 
 /* ═════════ 3-8 단계에 맞는 목표 ═════════ */
@@ -824,21 +838,23 @@ page({id:'c3-8',label:'3-8',title:'단계에 맞는 목표',scenes:[{name:'경�
 
 /* ═════════ 3-9 보호자 교육: FOCUSED · SimPres ═════════ */
 page({id:'c3-9',label:'3-9',title:'보호자 교육 · FOCUSED · SimPres',scenes:[{name:'간접 치료',pre:0.4,post:1.0,lines:[
+ '이제 보호자를 통해 돕는 간접 치료를 살펴보겠습니다. 언어치료사가 가족이나 간병인에게 의사소통 방법을 가르쳐, 환자와 매일 나누는 대화를 바꾸는 방식입니다.',
  '보호자 교육 프로그램인 FOCUSED는 일곱 글자로 기억합니다. 마주 보고 눈을 맞추고, 핵심 단어를 반복해 이해할 시간을 주며, 같은 주제를 길게 이어 갑니다.',
  '단어가 막히면 원하는 단어를 알려 주고, 선택형 질문으로 구조화하며, 쉬운 질문과 대답 단서로 대화를 주고받습니다.',
  '마지막으로 짧고 간단한 문장을 쓰고, 대명사 대신 명사를 쓰며, 손짓과 그림, 표정을 함께 씁니다.',
- '그룹으로 교육할 수 있어 비용 효율적이고, 직접 치료와 함께 하는 것이 좋습니다.',
- 'SimPres(모의 현존 치료)는 가족이 행복했던 과거 이야기를 녹음해 헤드폰으로 들려주어 긍정적인 감정을 이끌어 냅니다.']}],
+ '여기서 보호자는 배우자나 자녀, 간병인처럼 환자를 돌보는 사람입니다. 여러 보호자를 한데 모아 그룹으로 교육할 수 있어 한 번에 여러 가정을 도울 수 있으므로 비용 면에서 효율적입니다. 다만 간접 치료만으로는 부족해 직접 치료와 함께 하는 것이 좋습니다.',
+ 'SimPres(모의 현존 치료)는 가족이 행복했던 과거의 이야기를 녹음해 두고, 치매 환자가 헤드폰으로 듣게 하는 방법입니다. 가족이 곁에 있는 듯한 느낌 속에서 즐거웠던 때를 떠올리며, 긍정적인 감정을 이끌어 냅니다.']}],
  init(L){const F=[['F','Face-to-face','마주 보기','눈맞춤으로<br>집중 유도'],['O','Orientation','지남력','핵심 단어 반복<br>이해할 시간'],['C','Continuity','연속성','같은 주제를<br>길게 유지'],['U','Unsticking','막힘 풀기','막힌 단어를<br>알려 주기'],['S','Structure','구조화','선택형 질문'],['E','Exchange','주고받기','쉬운 질문 ·<br>대답 단서'],['D','Direct','직접적','짧은 문장 ·<br>대명사 대신 명사 ·<br>손짓 · 그림 · 표정']];
   this.cd=F.map((f,i)=>{const e=hdiv('ov','',L,`left:${50+i*170}px;top:110px;width:160px;height:250px`);
    e.innerHTML=`<div class="fr" style="position:absolute;inset:0;border-radius:16px;background:linear-gradient(160deg,#2d4a7a,#1a2c4c);border:2px solid #5a7ab0;display:flex;align-items:center;justify-content:center;font-size:96px;font-weight:900;color:#cfe0ff">${f[0]}</div>
     <div class="bk" style="position:absolute;inset:0;border-radius:16px;background:rgba(12,22,40,.97);border:2px solid #ffe08a;text-align:center;padding:12px 8px;box-sizing:border-box;display:none"><div style="font-size:42px;font-weight:900;color:#ffe08a;line-height:1">${f[0]}</div><div style="font-size:14px;color:#9fb3cf;margin:4px 0 6px">${f[1]}</div><div style="font-size:22px;font-weight:800;margin-bottom:8px">${f[2]}</div><div style="font-size:16px;line-height:1.4;color:#dbe5f3">${f[3]}</div></div>`;
    e.fr=e.querySelector('.fr');e.bk=e.querySelector('.bk');return e;});
-  this.FT=[[0,0.12],[0,0.45],[0,0.75],[1,0.05],[1,0.4],[1,0.7],[2,0.03]];
+  this.FT=[[1,0.12],[1,0.45],[1,0.75],[2,0.05],[2,0.4],[2,0.7],[3,0.03]];
+  this.iban=hdiv('ov','<div style="text-align:center;padding:26px 30px;border-radius:22px;background:rgba(12,22,40,.97);border:3px solid #ffc27a"><div style="font-size:44px;font-weight:900;color:#ffc27a">간접 치료</div><div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;font-size:26px;font-weight:800"><span class="ic" style="padding:10px 20px;border-radius:16px;background:#1d3a5e">🧑‍⚕️ 언어치료사</span><span style="color:#ffc27a;font-size:32px">→</span><span class="ic" style="padding:10px 20px;border-radius:16px;background:#3a3020">👪 보호자</span><span style="color:#ffc27a;font-size:32px">→</span><span class="ic" style="padding:10px 20px;border-radius:16px;background:#3a2a4a">🧓 환자</span></div><div style="font-size:21px;color:#c9d6ea;margin-top:14px">의사소통 방법을 가르쳐 → 매일의 대화를 바꿈</div></div>',L,'left:200px;top:190px;width:880px');
   this.ex=hdiv('ov',`<div style="display:flex;gap:26px;align-items:center;justify-content:center;font-size:26px;font-weight:700">
    <div style="padding:10px 22px;border-radius:14px;background:rgba(50,15,15,.88);border:2px solid #d9574a;color:#ff9a8a">"그거 가져와" ✕</div><div style="font-size:30px;color:#9cc7ff">→</div>
    <div style="padding:10px 22px;border-radius:14px;background:rgba(10,40,30,.88);border:2px solid #34b08a;color:#7fe8c4">"컵 가져와" ✓ 🥛</div></div>`,L,'left:100px;width:1080px;top:384px');
-  this.grp=hdiv('ov','<div style="font-size:23px;font-weight:700;padding:10px 22px;border-radius:14px;background:rgba(60,48,10,.85);border:2px solid #ffe08a;text-align:center">👥 그룹 교육 → <b style="color:#ffe08a">비용 효율적</b> · 직접 치료와 <b style="color:#ffe08a">병행</b></div>',L,'left:240px;width:800px;top:480px');
+  this.grp=hdiv('ov','<div style="display:flex;gap:16px;align-items:stretch"><div class="g1" style="opacity:0;flex:1;padding:12px 16px;border-radius:16px;background:rgba(12,22,40,.96);border:2px solid #8fc4ff;text-align:center"><div style="font-size:21px;font-weight:800;color:#8fc4ff">보호자란?</div><div style="font-size:30px;margin:6px 0">👫 👩‍👦 🧑‍⚕️</div><div style="font-size:19px">배우자 · 자녀 · 간병인</div></div><div class="g2" style="opacity:0;flex:1.4;padding:12px 16px;border-radius:16px;background:rgba(60,48,10,.9);border:2px solid #ffe08a;text-align:center"><div style="font-size:21px;font-weight:800;color:#ffe08a">그룹 교육</div><div style="font-size:26px;margin:6px 0">👪 👪 🧑‍🏫 👪 👪</div><div style="font-size:19px">여러 가정을 한 번에 → <b style="color:#ffe08a">비용 절감</b></div></div><div class="g3" style="opacity:0;flex:1;padding:12px 16px;border-radius:16px;background:rgba(10,40,30,.9);border:2px solid #34b08a;text-align:center"><div style="font-size:21px;font-weight:800;color:#7fe8c4">+ 직접 치료 병행</div><div style="font-size:19px;margin-top:10px">간접 치료만으로는<br>부족</div></div></div>',L,'left:60px;width:1160px;top:384px');
   const s=SVGROOT(L);const sp=this.sp=sv('g',{opacity:0},s);
   this.fc=e14Face(sp,400,340,0.66,{old:true,hair:'#dedbd4',brow:'#bdb6aa',cloth:'#6a8a7a'});
   sv('path',{d:'M348,328 Q400,180 452,328',fill:'none',stroke:'#3a3a48','stroke-width':12,'stroke-linecap':'round'},sp);
@@ -848,15 +864,16 @@ page({id:'c3-9',label:'3-9',title:'보호자 교육 · FOCUSED · SimPres',scene
   sv('circle',{cx:910,cy:258,r:7,fill:'#ff6f61'},sp);tx_(sp,845,410,'가족이 녹음한 이야기',{'font-size':21});
   this.sb=e14Bubble(sp,690,110,470,70,820,236,'"그때 바닷가에서 참 즐거웠지요"','#c9b98f',22);
   sv('path',{d:'M735,305 C660,300 600,320 470,340',fill:'none',stroke:'#7fe8c4','stroke-width':3,'stroke-dasharray':'8 8'},sp);
-  this.spl=hdiv('ov','<div style="font-size:23px;font-weight:700;text-align:center"><span style="color:#d6b0ff">SimPres</span> (모의 현존 치료) · 행복했던 과거 이야기 → <b style="color:#ffe08a">긍정적 감정</b></div>',L,'left:60px;width:1160px;top:494px');
+  this.spl=hdiv('ov','<div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:20px;font-weight:700">'+[['👪 가족이 녹음','#c9b98f'],['🎧 환자가 헤드폰으로 들음','#d6b0ff'],['💭 행복했던 때 회상','#8fc4ff'],['😊 긍정적 감정','#ffe08a']].map((x,i)=>'<span class="sps" style="opacity:0;padding:8px 14px;border-radius:14px;background:rgba(12,22,40,.96);border:2px solid '+x[1]+'">'+x[0]+'</span>'+(i<3?'<span style="color:#9cc7ff">→</span>':'')).join('')+'</div>',L,'left:40px;width:1200px;top:500px');
  },
- draw(t,p){const a=p.scenes[0];const vC=1-e14In(t,a,4);
+ draw(t,p){const a=p.scenes[0];const vC=1-e14In(t,a,5);
+  op(this.iban,win(t,a.L[0].t0-0.2,a.L[1].t0,0.4));[...this.iban.querySelectorAll('.ic')].forEach((e,i)=>{e.style.opacity=ramp(t,e14At(a,0,0.3+i*0.12),e14At(a,0,0.3+i*0.12)+0.3).toFixed(2);});
   this.cd.forEach((c,i)=>{const ft=e14At(a,this.FT[i][0],this.FT[i][1]);const k=ramp(t,ft,ft+0.5);const sx=Math.abs(Math.cos(k*Math.PI));
    c.fr.style.display=k<0.5?'flex':'none';c.bk.style.display=k<0.5?'none':'block';c.fr.style.transform=c.bk.style.transform=`scaleX(${Math.max(0.02,sx).toFixed(3)})`;
-   op(c,ramp(t,a.L[0].t0+i*0.08,a.L[0].t0+i*0.08+0.35)*vC);c.style.filter=(t>=ft&&t<ft+(i===6?99:3.2)&&t<a.L[3].t0)?'drop-shadow(0 0 10px rgba(255,224,138,.6))':'';});
-  op(this.ex,win(t,e14At(a,2,0.4),a.L[4].t0,0.4));op(this.grp,win(t,a.L[3].t0,a.L[4].t0,0.4));
-  op(this.sp,e14In(t,a,4));op(this.sb,ramp(t,e14At(a,4,0.25),e14At(a,4,0.25)+0.4));op(this.spl,ramp(t,e14At(a,4,0.6),e14At(a,4,0.6)+0.4));
-  this.notes.forEach((n,i)=>op(n,t>=a.L[4].t0?0.5+0.5*Math.sin(t*3+i):0));this.fc.mouth(t>=e14At(a,4,0.6)?1:0.2);
+   op(c,ramp(t,a.L[1].t0+i*0.08,a.L[1].t0+i*0.08+0.35)*vC);c.style.filter=(t>=ft&&t<ft+(i===6?99:3.2)&&t<a.L[4].t0)?'drop-shadow(0 0 10px rgba(255,224,138,.6))':'';});
+  op(this.ex,win(t,e14At(a,3,0.4),a.L[4].t0,0.4));op(this.grp,win(t,a.L[4].t0,a.L[5].t0,0.4));['.g1','.g2','.g3'].forEach((c,i)=>op(this.grp.querySelector(c),ramp(t,e14At(a,4,[0.02,0.3,0.78][i]),e14At(a,4,[0.02,0.3,0.78][i])+0.4)));
+  op(this.sp,e14In(t,a,5));op(this.sb,ramp(t,e14At(a,5,0.15),e14At(a,5,0.15)+0.4));op(this.spl,e14In(t,a,5));[...this.spl.querySelectorAll('.sps')].forEach((e,i)=>op(e,ramp(t,e14At(a,5,[0.03,0.3,0.6,0.85][i]),e14At(a,5,[0.03,0.3,0.6,0.85][i])+0.4)));
+  this.notes.forEach((n,i)=>op(n,t>=a.L[5].t0?0.5+0.5*Math.sin(t*3+i):0));this.fc.mouth(t>=e14At(a,5,0.6)?1:0.2);
  }});
 
 /* ═════════ 3-10 확인 문제 ═════════ */
