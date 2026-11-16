@@ -31,7 +31,7 @@ a.card:hover{transform:translateY(-2px);background:rgba(58,76,112,.65)}
  <h1>신경언어장애 3D 애니메이션 강의 <span class="badge">v3 새 버전</span></h1>
  <div class="sub">언어재활사 2급 국가시험 대비 · 주제별 정리본(00~11)을 바탕으로 새로 만든 강의 · 흐름은 3D, 구조는 단면 그림</div>
  <div class="grid">
-  <a class="card main" href="ep1.html"><div class="ep">전체 재생</div><h2>완성된 편 이어서 재생</h2><p>해부 1~3편 → 실어증 1~2편 → 실독증 · 실서증 → 마비말장애 1~2편 → 삼킴장애 1~3편 → 치매 1~3편 → 뇌성마비 · 약 137분 · 음성 포함<br>각 편이 끝나면 다음 편 버튼이 나와요</p></a>
+  <a class="card main" href="ep1.html"><div class="ep">전체 재생</div><h2>완성된 편 이어서 재생</h2><p>해부 1~3편 → 실어증 1~2편 → 실독증 · 실서증 → 마비말장애 1~2편 → 삼킴장애 1~3편 → 치매 1~3편 → 뇌성마비 → 기타 신경말장애 · 약 142분 · 음성 포함<br>각 편이 끝나면 다음 편 버튼이 나와요</p></a>
   <div class="card" style="grid-column:span 2">
    <a href="ep1.html" style="text-decoration:none;color:inherit"><div class="ep">해부 1편 · 약 13분</div><h2>신경해부생리 ① 뇌의 구조</h2>
    <p>신경계 구분 · 뉴런과 활동전위 · 뇌막 · 뇌실(관상·시상·횡단면) · 4엽 · 편재화 · 브로드만 · 기저핵 · 간뇌 · 변연계 · 섬유다발 · 뇌간 · 소뇌 · 확인 문제 5개</p></a>
@@ -75,7 +75,7 @@ a.card:hover{transform:translateY(-2px);background:rgba(58,76,112,.65)}
   
   
   <div class="card" style="grid-column:span 2"><a href="ep15.html" style="text-decoration:none;color:inherit"><div class="ep">뇌성마비 · 약 5분 30초</div><h2>뇌성마비</h2><p>정의 5요소 · 원인 세 시기 · 경직형 · 불수의운동형 · 실조형 · 손상 부위와 비율 · 마비 부위 5종 · 자세 · 호흡 · AAC · 확인 문제 5개</p></a><div class="chips" id="chips15"></div></div>
-  <div class="card soon"><div class="ep">기타 신경말장애</div><h2>기타 신경말장애</h2><p>신경학적 말더듬 · 동어반복 · 반향어 · 무동무언증 · 감금증후군 · 심인성 말장애</p></div>
+  <div class="card" style="grid-column:span 2"><a href="ep16.html" style="text-decoration:none;color:inherit"><div class="ep">기타 신경말장애 · 약 5분 20초</div><h2>기타 신경말장애</h2><p>신경말더듬 · 동어반복증 · 반향어증 · 세 반복 구별 · 무동성 함구증 vs 감금증후군 · 실구어증 · 전환 말장애 · 우울증성 · 심인성 말더듬 · 확인 문제 5개</p></a><div class="chips" id="chips16"></div></div>
   <div class="card soon"><div class="ep">말실행증</div><h2>말실행증</h2><p>말 특징 7가지 · 감별 · 운동학습 원리 · Rosenbek 8단계 · 중증도별 치료 · 아동기 말실행증</p></div>
   <div class="card soon"><div class="ep">우반구 손상</div><h2>우반구 손상</h2><p>무시 · 주의 · 질병인식불능 · 화용 · 평가와 치료</p></div>
   <div class="card soon"><div class="ep">외상성 뇌손상</div><h2>외상성 뇌손상</h2><p>손상 기전 · GCS · PTA · Rancho 10단계 · 기억 유형별 치료 · 보상 전략</p></div>
@@ -116,6 +116,8 @@ const P14=[['c3-1','3-1 평가 원칙'],['c3-2','3-2 K-MMSE'],['c3-3','3-3 그 �
 document.getElementById('chips14').innerHTML=P14.map(p=>'<a href="ep14.html#'+p[0]+'">'+p[1]+'</a>').join('');
 const P15=[['cp-1','1-1 정의 5요소'],['cp-2','1-2 원인 세 시기'],['cp-3','1-3 경직형'],['cp-4','1-4 불수의운동형'],['cp-5','1-5 실조형'],['cp-6','1-6 세 유형 비교'],['cp-7','1-7 마비 부위'],['cp-8','1-8 말 · 의사소통 중재'],['cp-9','1-9 확인 문제']];
 document.getElementById('chips15').innerHTML=P15.map(p=>'<a href="ep15.html#'+p[0]+'">'+p[1]+'</a>').join('');
+const P16=[['os-1','1-1 세 갈래'],['os-2','1-2 신경말더듬'],['os-3','1-3 동어반복증'],['os-4','1-4 반향어증 · 구별'],['os-5','1-5 함구증'],['os-6','1-6 심인성 말장애'],['os-7','1-7 확인 문제']];
+document.getElementById('chips16').innerHTML=P16.map(p=>'<a href="ep16.html#'+p[0]+'">'+p[1]+'</a>').join('');
 </script>
 </body>
 </html>
