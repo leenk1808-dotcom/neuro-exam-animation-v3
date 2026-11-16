@@ -895,6 +895,9 @@ page({id:'d2-9',label:'2-9',title:'확인 문제',mute:true,scenes:QD2.map((q,i)
 <script>"use strict";
 /* ───────── 시작 ───────── */
 for(const p of PAGES){p.layer=hdiv('page','',$('layers'));p.layer.style.display='none';}
+/* 자막과 겹치지 않도록 일부 페이지만 살짝 축소 (페이지 id는 편마다 고유) */
+const FITMAP={'1-1':0.85,'2-5':0.86,'a2-1':0.95,'r-3':0.9,'s2-2':0.84,'s2-3':0.79,'s2-4':0.84,'s2-5':0.955,'s2-6':0.95};
+for(const p of PAGES){const k=FITMAP[p.id];if(k){p.layer.style.transformOrigin='640px 96px';p.layer.style.transform='scale('+k+')';}}
 let initN=0;function ensureInit(p){const k=Math.max(0,PAGES.indexOf(p));while(initN<=k&&initN<PAGES.length){const q=PAGES[initN++];q.init(q.layer);}}
 ensureInit(PAGES[0]);
 function bgInit(){if(initN>=PAGES.length)return;ensureInit(PAGES[initN]);setTimeout(bgInit,30);}

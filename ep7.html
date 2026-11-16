@@ -234,7 +234,7 @@ const sub_=(p,i,j,k,n)=>{const a=LS(p,i,j),b=LE(p,i,j);return a+(b-a)*k/n;};
 </script>
 <script>"use strict";
 /* 실제 음성 길이(초) */
-Object.assign(DUR,{"d1-1_01":10.32,"d1-1_02":13.12,"d1-1_03":8.24,"d1-2_01":4.32,"d1-2_02":9.76,"d1-2_03":8.56,"d1-2_04":5.2,"d1-2_05":8.16,"d1-3_01":11.52,"d1-3_02":6.8,"d1-3_03":11.12,"d1-3_04":11.12,"d1-3_05":9.84,"d1-4_01":11.76,"d1-4_02":7.84,"d1-4_03":9.68,"d1-4_04":9.44,"d1-5_01":8.56,"d1-5_02":13.92,"d1-5_03":11.2,"d1-5_04":9.12,"d1-5_05":8.72,"d1-6_01":14.32,"d1-6_02":5.04,"d1-6_03":9.36,"d1-6_04":10.72,"d1-7_01":8.96,"d1-7_02":9.6,"d1-7_03":6.56,"d1-7_04":7.6,"d1-7_05":11.52,"d1-8_01":13.6,"d1-8_02":11.76,"d1-8_03":7.92,"d1-8_04":15.68});
+Object.assign(DUR,{"d1-1_01":10.32,"d1-1_02":13.12,"d1-1_03":8.24,"d1-2_01":4.32,"d1-2_02":9.76,"d1-2_03":8.56,"d1-2_04":5.2,"d1-2_05":8.16,"d1-3_01":11.52,"d1-3_02":6.8,"d1-3_03":11.12,"d1-3_04":11.12,"d1-3_05":9.84,"d1-4_01":11.76,"d1-4_02":7.84,"d1-4_03":9.68,"d1-4_04":9.44,"d1-5_01":8.56,"d1-5_02":13.92,"d1-5_03":11.2,"d1-5_04":9.12,"d1-5_06":8.72,"d1-6_01":14.32,"d1-6_02":5.04,"d1-6_03":9.36,"d1-6_04":10.72,"d1-7_01":11.60,"d1-7_02":9.6,"d1-7_03":6.56,"d1-7_04":7.6,"d1-7_05":11.52,"d1-8_01":13.6,"d1-8_02":11.76,"d1-8_03":7.92,"d1-8_04":15.68,"d1-5_05":13.76});
 </script>
 <script>"use strict";
 /* ───────── 3D 공용 세계 ───────── */
@@ -684,12 +684,14 @@ function e7BG(par){const g=sv('g',{},par);const P={g};
  tx_(g,215,140,'도파민',{'font-size':19,fill:'#ffe08a'});
  P.acc=sv('path',{d:'M310,198 C280,280 290,360 320,420',fill:'none',stroke:'#7fe8a0','stroke-width':12,'stroke-linecap':'round'},g);
  P.brk=sv('path',{d:'M430,198 C460,280 450,360 420,420',fill:'none',stroke:'#ff8a7a','stroke-width':12,'stroke-linecap':'round'},g);
- P.accT=tx_(g,270,300,'직접경로 = 액셀',{'font-size':20,fill:'#7fe8a0','text-anchor':'end'});P.brkT=tx_(g,470,300,'간접경로 = 브레이크',{'font-size':20,fill:'#ff8a7a','text-anchor':'start'});
- P.out=e7Box(g,370,450,240,56,'운동','#eef3fb');P.bx=e7X(g,447,320,16);
+ P.accT=sv('g',{},g);tx_(P.accT,282,292,'직접경로',{'font-size':21,fill:'#7fe8a0','text-anchor':'end'});tx_(P.accT,282,320,'= 액셀',{'font-size':23,fill:'#7fe8a0','text-anchor':'end'});
+ P.brkT=sv('g',{},g);tx_(P.brkT,462,292,'간접경로',{'font-size':21,fill:'#ff8a7a','text-anchor':'start'});tx_(P.brkT,462,320,'= 브레이크',{'font-size':23,fill:'#ff8a7a','text-anchor':'start'});
+ P.note=tx_(g,370,116,'※ 액셀 · 브레이크는 자동차에 빗댄 비유',{'font-size':17,fill:'#9fb3cf'});
+ P.out=e7Box(g,370,450,240,56,'운동','#eef3fb');P.bx=e7X(g,444,378,16);
  P.meter=sv('rect',{x:250,y:500,width:240,height:18,rx:9,fill:'#24324d'},g);P.mf=sv('rect',{x:250,y:500,width:120,height:18,rx:9,fill:'#7fe8c4'},g);
  P.mt=tx_(g,370,548,'',{'font-size':21,fill:'#c9d6ea'});
  P.set=(t,dopa,acc,brk,mv,txt,col)=>{P.drops.forEach((d,i)=>{const on=i<Math.round(dopa*5);const q=ptOn(P.dpath,((t*0.5+i/5)%1));d.setAttribute('cx',q.x);d.setAttribute('cy',q.y);op(d,on?1:0);});
-  P.acc.setAttribute('stroke-width',4+acc*12);P.brk.setAttribute('stroke-width',4+brk*12);P.mf.setAttribute('width',Math.max(10,240*Math.min(1.25,mv)));P.mf.setAttribute('fill',col||'#7fe8c4');
+  P.acc.setAttribute('stroke-width',4+acc*12);P.brk.setAttribute('stroke-width',4+brk*12);const sA=0.75+0.25*acc,sB=0.85+0.25*brk;P.accT.setAttribute('transform',`translate(282 306) scale(${sA.toFixed(3)}) translate(-282 -306)`);P.brkT.setAttribute('transform',`translate(462 306) scale(${sB.toFixed(3)}) translate(-462 -306)`);P.mf.setAttribute('width',Math.max(10,240*Math.min(1.25,mv)));P.mf.setAttribute('fill',col||'#7fe8c4');
   if(P.mt.textContent!==txt)P.mt.textContent=txt;};
  return P;}
 
@@ -701,16 +703,23 @@ page({id:'d1-5',label:'1-5',title:'경직형 · 일측 UMN형',scenes:[
   '양측 피질연수로가 손상된 가성구마비에서는 삼킴장애와 침 흘림, 그리고 상황과 맞지 않게 웃음이나 울음이 터져 멈추지 못하는 가성구감정이 나타납니다.']},
  {name:'일측 UMN형',pre:0.4,post:1.4,lines:[
   '일측 UMN형은 주로 한쪽 뇌졸중으로 생기며, 반대쪽 아래 얼굴과 혀가 약해집니다. 혀를 내밀면 약한 쪽으로 휩니다.',
+  '혀를 내밀 때는 양쪽 턱끝혀근이 각각 혀를 앞으로, 그리고 반대쪽으로 비스듬히 밀어 균형을 맞춥니다. 한쪽이 약하면 건강한 쪽 근육만 밀어내기 때문에, 혀끝이 약한 쪽으로 휩니다.',
   '대부분 경도에서 중등도이고, 부정확한 자음과 느린 AMR(교대운동속도)이 주된 특징입니다. 호흡과 운율은 거의 정상입니다.']}],
  init(L){const s=SVGROOT(L);this.card=e7Card(L);
   this.F=e7Folds(s,330,330);this.Ft=tx_(s,330,528,'성대 과내전 → 쥐어짜는 음질',{'font-size':22,fill:'#ffb2a6'});
   this.emo=hdiv('ov','<div style="font-size:42px;font-weight:800;color:#ffe08a;line-height:1.5">"하하하하하…"<br><span style="color:#8fc4ff">"흑흑흑…"</span></div><div style="font-size:22px;color:#c9d6ea;margin-top:12px">상황과 안 맞게 터지고 멈추지 못함</div><div style="font-size:22px;color:#c9d6ea;margin-top:8px">+ 삼킴장애 · 침 흘림</div>',L,'left:100px;top:200px;width:480px;text-align:center');
   this.face=e7Face(s,320,320);this.faceT=tx_(s,320,128,'예: 좌측 대뇌 손상 → 환자의 오른쪽',{'font-size':21,fill:'#ffe08a'});
-  this.fa=svLab(s,{x:268,y:418,lx:480,ly:400,tx:'아래 얼굴 처짐',col:'#ff9a8a',size:21});this.ta=svLab(s,{x:280,y:470,lx:480,ly:500,tx:'혀가 약한 쪽으로',col:'#ff9a8a',size:21});
+  this.fa=svLab(s,{x:268,y:418,lx:480,ly:400,tx:'아래 얼굴 처짐',col:'#ff9a8a',size:21});
+  /* 위에서 본 혀: 양쪽 턱끝혀근 */const T=this.tq=sv('g',{opacity:0,transform:'translate(0 -24)'},s);sv('rect',{x:700,y:352,width:500,height:218,rx:18,fill:'rgba(12,22,40,.94)',stroke:'#5d7aa6','stroke-width':2},T);
+  tx_(T,950,382,'혀를 내밀 때 (위에서 본 모습)',{'font-size':20,fill:'#c9d6ea'});
+  this.tqP=sv('path',{d:'',fill:'#e27a7a',stroke:'#a84a4a','stroke-width':2.5},T);sv('line',{x1:950,y1:556,x2:950,y2:404,stroke:'#ffffff','stroke-width':1.5,'stroke-dasharray':'5 6',opacity:.5},T);
+  const ar=(x1,y1,x2,y2,c)=>{const g=sv('g',{},T);sv('line',{x1,y1,x2,y2,stroke:c,'stroke-width':7,'stroke-linecap':'round'},g);const a=Math.atan2(y2-y1,x2-x1);sv('path',{d:`M${x2+Math.cos(a)*10},${y2+Math.sin(a)*10} L${x2+Math.cos(a+2.5)*14},${y2+Math.sin(a+2.5)*14} L${x2+Math.cos(a-2.5)*14},${y2+Math.sin(a-2.5)*14}Z`,fill:c},g);return g;};
+  this.aW=ar(905,540,935,478,'#ff8a7a');this.aH=ar(995,540,965,478,'#71e6ac');
+  this.lW=tx_(T,800,470,'약한 쪽',{'font-size':20,fill:'#ff8a7a'});tx_(T,800,494,'(환자의 오른쪽)',{'font-size':15,fill:'#c9d6ea'});this.lH=tx_(T,1110,470,'건강한 쪽',{'font-size':20,fill:'#71e6ac'});tx_(T,1110,494,'턱끝혀근이 밀어냄',{'font-size':15,fill:'#c9d6ea'});this.ta=svLab(s,{x:280,y:470,lx:480,ly:500,tx:'혀가 약한 쪽으로',col:'#ff9a8a',size:21});
  },
  draw(t,p){const [a,b]=p.scenes;
   if(t<b.t0){this.card.set('경직형 · 양측 UMN',E7C.pyr,e7It(t,a,[[0,'원인: 양측 뇌졸중 · TBI · MS · 뇌성마비'],[1,'★ <b style="color:#ffe08a">쥐어짜는 · 거친 음질</b> · <b>낮은 음도</b>'],[1,'느린 말 · 단조로움 · 짧은 구'],[1,'과대비성은 이완형보다 가벼움 · 비누출 대개 X'],[2,'★ <b>가성구마비 · 가성구감정</b>']]));}
-  else this.card.set('일측 UMN형 · 한쪽 UMN',E7C.pyr,e7It(t,b,[[0,'원인: 주로 <b>한쪽 뇌졸중</b>'],[0,'★ <b>반대쪽 아래 얼굴 · 혀</b> 약화 · 혀는 <b>약한 쪽</b>으로'],[1,'경도~중등도 · <b>부정확한 자음</b> · <b>느린 AMR</b>'],[1,'호흡 · 운율은 거의 정상']]));
+  else this.card.set('일측 UMN형 · 한쪽 UMN',E7C.pyr,e7It(t,b,[[0,'원인: 주로 <b>한쪽 뇌졸중</b>'],[0,'★ <b>반대쪽 아래 얼굴 · 혀</b> 약화 · 혀는 <b>약한 쪽</b>으로'],[1,'이유: <b>건강한 쪽 턱끝혀근</b>만 밀어냄'],[2,'경도~중등도 · <b>부정확한 자음</b> · <b>느린 AMR</b>'],[2,'호흡 · 운율은 거의 정상']]));
   op(this.card,win(t,a.t0,b.t1+0.2,0.4));
   const fv=win(t,a.L[1].t0,a.L[2].t0+0.2,0.4);op(this.F,fv);op(this.Ft,fv);
   /* 경직형: 지나치게 닫힌 채 힘주어 조이고, 거칠게 짧게 떨림 */const sqz=0.55+0.45*Math.sin(t*3.2);const jit=0.05*Math.sin(t*41)*Math.sin(t*17);this.F.set(Math.max(-0.12,0.02-0.14*sqz+jit));
@@ -720,7 +729,10 @@ page({id:'d1-5',label:'1-5',title:'경직형 · 일측 UMN형',scenes:[
   op(this.st,fv*sqz);
   op(this.emo,win(t,a.L[2].t0,a.t1+0.2,0.4));
   const fc=win(t,b.t0,b.t1+0.3,0.4);op(this.face,fc);op(this.faceT,fc);this.face.set(ramp(t,b.L[0].t0+1,b.L[0].t0+2),ramp(t,sub_(p,1,0,0.6,1),sub_(p,1,0,0.6,1)+0.8));
-  op(this.fa,fc*ramp(t,b.L[0].t0+1.5,b.L[0].t0+2));op(this.ta,fc*ramp(t,sub_(p,1,0,0.7,1),sub_(p,1,0,0.7,1)+0.4));
+  op(this.fa,fc*ramp(t,b.L[0].t0+1.5,b.L[0].t0+2));
+  {const L1=b.L[1];const vT=win(t,L1.t0,b.L[2].t0+0.3,0.4);op(this.tq,vT);const k=ramp(t,sub_(p,1,1,0.45,1),sub_(p,1,1,0.75,1));const tip=950-48*k;
+   this.tqP.setAttribute('d',`M895,556 C${885-10*k},490 ${905-20*k},${430+6*k} ${tip},${412+8*k} C${995-20*k},${430} ${1012-6*k},490 1005,556Z`);
+   op(this.aW,1-0.8*k);op(this.aH,1);this.aH.setAttribute('transform',`translate(${(-6*k).toFixed(1)} ${(-4*Math.abs(Math.sin(t*4))*k).toFixed(1)})`);}op(this.ta,fc*ramp(t,sub_(p,1,0,0.7,1),sub_(p,1,0,0.7,1)+0.4));
  }});
 
 /* ═════════ d1-6 실조형 ═════════ */
@@ -754,7 +766,7 @@ page({id:'d1-6',label:'1-6',title:'실조형',scenes:[
 /* ═════════ d1-7 기저핵 경로와 과소운동형 ═════════ */
 page({id:'d1-7',label:'1-7',title:'기저핵 경로와 과소운동형',scenes:[
  {name:'과소운동형 (파킨슨)',pre:0.6,post:1.6,lines:[
-  '기저핵에는 운동을 촉진하는 직접경로, 즉 액셀과, 불필요한 운동을 억제하는 간접경로, 즉 브레이크가 있습니다.',
+  '기저핵에는 운동을 촉진하는 직접경로와, 불필요한 운동을 억제하는 간접경로가 있습니다. 자동차에 빗대면 직접경로는 액셀, 간접경로는 브레이크입니다.',
   '파킨슨병에서는 흑질의 도파민 세포가 줄어 액셀은 약해지고 브레이크는 강해집니다. 그래서 운동이 줄어드는 과소운동형이 됩니다.',
   '파킨슨병의 4대 증상은 안정 시 떨림, 운동완만, 강직, 자세 불안정입니다.',
   '말은 작은 목소리에 음도와 크기가 단조롭고, 위치는 맞지만 움직임 범위가 작은 조음 미달이 나타납니다.',
@@ -766,7 +778,7 @@ page({id:'d1-7',label:'1-7',title:'기저핵 경로와 과소운동형',scenes:[
   this.card.set('과소운동형 · 파킨슨병',E7C.bg,e7It(t,a,[[1,'흑질 <b>도파민</b>↓ → 액셀↓ 브레이크↑ → 운동↓'],[2,'4대 증상: <b>안정 시 떨림</b> · 운동완만 · 강직 · 자세 불안정'],[3,'★ <b>작은 목소리</b> · 단조로운 음도 · 크기 · <b>조음 미달</b>'],[4,'★ <b style="color:#ffe08a">말속도 빨라짐 (유일)</b> · 말 뭉침 · 부적절한 쉼'],[4,'<b>동어반복증</b> · AMR 빠르지만 작고 부정확']]));op(this.card,ramp(t,l(1),l(1)+0.4));
   op(P.g,ramp(t,a.t0,a.t0+0.4));const k=ramp(t,sub_(p,0,1,0.2,1),sub_(p,0,1,0.6,1));
   P.set(t,1-k*0.8,1-k*0.7,0.6+k*0.4,0.5-k*0.32,t<l(1)?'정상: 균형':'운동 감소 → 과소운동형','#7fe8c4');op(P.bx,0);
-  op(P.accT,ramp(t,l(0)+0.5,l(0)+1));op(P.brkT,ramp(t,sub_(p,0,0,0.6,1),sub_(p,0,0,0.6,1)+0.4));
+  op(P.accT,ramp(t,sub_(p,0,0,0.25,1),sub_(p,0,0,0.25,1)+0.4));op(P.brkT,ramp(t,sub_(p,0,0,0.45,1),sub_(p,0,0,0.45,1)+0.4));op(P.note,ramp(t,sub_(p,0,0,0.6,1),sub_(p,0,0,0.6,1)+0.4));
   op(this.pal,ramp(t,sub_(p,0,4,0.55,1),sub_(p,0,4,0.55,1)+0.3));[...this.pal.querySelectorAll('.e7y')].forEach((x,i)=>op(x,ramp(t,sub_(p,0,4,0.58,1)+i*0.2,sub_(p,0,4,0.58,1)+i*0.2+0.1)));
  }});
 
@@ -809,6 +821,9 @@ page({id:'d1-9',label:'1-9',title:'확인 문제',mute:true,scenes:QD1.map((q,i)
 <script>"use strict";
 /* ───────── 시작 ───────── */
 for(const p of PAGES){p.layer=hdiv('page','',$('layers'));p.layer.style.display='none';}
+/* 자막과 겹치지 않도록 일부 페이지만 살짝 축소 (페이지 id는 편마다 고유) */
+const FITMAP={'1-1':0.85,'2-5':0.86,'a2-1':0.95,'r-3':0.9,'s2-2':0.84,'s2-3':0.79,'s2-4':0.84,'s2-5':0.955,'s2-6':0.95};
+for(const p of PAGES){const k=FITMAP[p.id];if(k){p.layer.style.transformOrigin='640px 96px';p.layer.style.transform='scale('+k+')';}}
 let initN=0;function ensureInit(p){const k=Math.max(0,PAGES.indexOf(p));while(initN<=k&&initN<PAGES.length){const q=PAGES[initN++];q.init(q.layer);}}
 ensureInit(PAGES[0]);
 function bgInit(){if(initN>=PAGES.length)return;ensureInit(PAGES[initN]);setTimeout(bgInit,30);}
