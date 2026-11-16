@@ -234,7 +234,7 @@ const sub_=(p,i,j,k,n)=>{const a=LS(p,i,j),b=LE(p,i,j);return a+(b-a)*k/n;};
 </script>
 <script>"use strict";
 /* 실제 음성 길이(초) */
-Object.assign(DUR,{"d1-1_01":10.32,"d1-1_02":13.12,"d1-1_03":8.24,"d1-2_01":4.32,"d1-2_02":9.76,"d1-2_03":8.56,"d1-2_04":5.2,"d1-2_05":8.16,"d1-3_01":11.52,"d1-3_02":6.8,"d1-3_03":11.12,"d1-3_04":11.12,"d1-3_05":9.84,"d1-4_01":11.76,"d1-4_02":7.84,"d1-4_03":9.68,"d1-4_04":9.44,"d1-5_01":8.56,"d1-5_02":13.92,"d1-5_03":11.2,"d1-5_04":9.12,"d1-5_06":8.72,"d1-6_01":14.32,"d1-6_02":5.04,"d1-6_03":9.36,"d1-6_04":10.72,"d1-7_01":11.60,"d1-7_02":9.6,"d1-7_03":6.56,"d1-7_04":7.6,"d1-7_05":11.52,"d1-8_01":13.6,"d1-8_02":11.76,"d1-8_03":7.92,"d1-8_04":15.68,"d1-5_05":13.76});
+Object.assign(DUR,{"d1-1_01":10.32,"d1-1_02":13.12,"d1-1_03":8.24,"d1-2_01":4.32,"d1-2_02":9.76,"d1-2_03":8.56,"d1-2_04":5.2,"d1-2_05":8.16,"d1-3_01":11.52,"d1-3_02":6.8,"d1-3_03":11.12,"d1-3_04":11.12,"d1-3_05":9.84,"d1-4_01":11.76,"d1-4_02":7.84,"d1-4_03":9.68,"d1-4_04":9.44,"d1-5_01":8.56,"d1-5_02":13.92,"d1-5_03":11.2,"d1-5_04":9.12,"d1-5_06":8.72,"d1-6_01":14.32,"d1-6_02":5.04,"d1-6_03":9.36,"d1-6_04":10.72,"d1-7_01":11.60,"d1-7_02":9.6,"d1-7_03":6.56,"d1-7_04":7.6,"d1-7_05":11.52,"d1-8_01":13.6,"d1-8_02":11.76,"d1-8_03":7.92,"d1-8_04":7.84,"d1-5_05":13.76,"d1-8_05":16.16,"d1-8_06":10.96,"d1-8_07":7.84,"d1-8_08":5.12});
 </script>
 <script>"use strict";
 /* ───────── 3D 공용 세계 ───────── */
@@ -789,19 +789,38 @@ page({id:'d1-8',label:'1-8',title:'과다운동형 · 혼합형',scenes:[
   '헌팅턴병은 상염색체 우성 유전으로 중년에 발병하며, 선조체가 퇴화해 무도증이 나타납니다. 말속도가 들쭉날쭉하고, 음도와 강도가 갑자기 변합니다.',
   '말하는 도중 음성 틱이 나오는 투렛 증후군, 그리고 연축성 발성장애와 본태 떨림도 과다운동형 범주입니다.']},
  {name:'혼합형',pre:0.4,post:1.6,lines:[
-  '두 곳 이상이 손상되면 혼합형입니다. 루게릭병이라 불리는 ALS(근위축성 측삭경화증)는 경직형과 이완형이, MS(다발성 경화증)는 경직형과 실조형이 섞입니다. 윌슨병은 과소운동형, 경직형, 실조형이 함께 나타납니다.']}],
+  '두 곳 이상이 동시에 손상되면 혼합형입니다. 손상된 곳의 조합대로, 각 유형의 특징이 섞여 나타납니다.',
+  '루게릭병이라 불리는 ALS(근위축성 측삭경화증)는 운동신경원 자체가 퇴행해, UMN(상위운동신경원)과 LMN(하위운동신경원)이 함께 손상됩니다. 그래서 쥐어짜는 경직형 음질과 함께, 과대비성, 혀의 위축과 속상수축 같은 이완형 특징이 나타납니다.',
+  'MS(다발성 경화증)는 뇌의 백질 여러 곳에서 신경을 감싸는 수초가 손상되는 병으로, UMN과 소뇌가 함께 영향을 받아 경직형과 실조형이 섞입니다.',
+  '윌슨병은 과소운동형, 경직형, 실조형이 함께 나타나고, 외상성 뇌손상도 혼합형의 원인이 됩니다.',
+  '혼합형의 교대운동은 매우 느리고, 여러 움직임을 조정하기가 어렵습니다.']}],
  init(L){const s=SVGROOT(L);this.card=e7Card(L);this.P=e7BG(s);
   const G=this.pit=sv('g',{opacity:0},s);sv('rect',{x:660,y:420,width:560,height:140,rx:14,fill:'rgba(12,22,40,.9)',stroke:'#355a8c','stroke-width':2},G);
   let d='M680,500';for(let i=1;i<=52;i++){const x=680+i*10;const y=500+(Math.sin(i*0.9)*14+(i%9===0?-40:0)+(i%13===0?36:0));d+=` L${x},${y}`;}sv('path',{d,fill:'none',stroke:'#ffb36b','stroke-width':4},G);
   tx_(G,940,446,'음도 · 강도가 갑자기 변함',{'font-size':20,fill:'#ffd2a6'});
-  this.mix=hdiv('ov','<div style="display:flex;gap:20px">'+[['ALS (루게릭병)','근위축성 측삭경화증','경직형 + 이완형','UMN + LMN'],['MS','다발성 경화증','경직형 + 실조형','UMN + 소뇌'],['윌슨병','','과소 + 경직 + 실조','']].map(q=>`<div class="card e7m" style="position:static;flex:1;opacity:0;border-color:#ffe08a"><h3 style="color:#ffe08a">${q[0]}</h3><p style="font-size:20px">${q[1]}</p><div style="font-size:27px;font-weight:800;margin-top:12px">${q[2]}</div><p style="font-size:20px;margin-top:6px;color:#9fb3cf">${q[3]}</p></div>`).join('')+'</div>',L,'left:70px;top:160px;width:1140px');
+  /* 혼합형: 운동계 지도 + 질환 카드 */
+  const M=this.mm=sv('g',{opacity:0},s);const nb=(x,y,t,c,w=200)=>{const g=sv('g',{},M);g.r=sv('rect',{x:x-w/2,y:y-30,width:w,height:60,rx:14,fill:'rgba(12,22,40,.96)',stroke:c,'stroke-width':3},g);g.t=tx_(g,x,y+8,t,{'font-size':22,fill:c});g.tag=tx_(g,x,y-40,'',{'font-size':21,fill:'#ffe08a'});g.c=c;return g;};
+  for(const [x1,y1,x2,y2] of [[315,175,315,345],[315,175,175,270],[315,175,455,270],[175,270,315,345],[455,270,315,345]])sv('line',{x1,y1,x2,y2,stroke:'#33507a','stroke-width':3,'stroke-dasharray':'6 6'},M);
+  this.mn={U:nb(315,160,'대뇌 (UMN)',E7C.pyr),B:nb(175,270,'기저핵',E7C.bg),C:nb(455,270,'소뇌',E7C.cb),L:nb(315,370,'뇌간 · 뇌신경 (LMN)',E7C.lmn,280)};
+  tx_(M,315,440,'손상된 곳의 조합 = 섞이는 유형',{'font-size':20,fill:'#c9d6ea'});
+  const cd=(y,col,h,b)=>hdiv('card ov','<h3 style="color:'+col+';font-size:25px;margin:0 0 4px">'+h+'</h3><div style="font-size:19px;line-height:1.45">'+b+'</div>',L,'left:640px;top:'+y+'px;width:580px;padding:10px 18px;box-sizing:border-box;border-color:'+col);
+  this.mc=[cd(100,'#ffe08a','ALS (루게릭병) · 경직 + 이완','UMN + LMN · <b>운동신경원 자체 퇴행</b><br>쥐어짜는 음질 + 과대비성 · 혀 위축 · 속상수축'),
+   cd(232,'#7fe8a0','MS (다발성 경화증) · 경직 + 실조','UMN + 소뇌 · <b>백질 곳곳의 수초 손상</b>'),
+   cd(330,'#c58cff','윌슨병 · 과소 + 경직 + 실조','<span style="color:#ffe08a">★ 2025 기출: 초기 윌슨병 치료 효과 → Real-Time Pitch</span>'),
+   cd(430,'#9fdcff','외상성 뇌손상','손상 부위에 따라 여러 유형이 섞임')];
+  const A=this.ma=sv('g',{opacity:0},s);sv('rect',{x:70,y:470,width:500,height:96,rx:14,fill:'rgba(12,22,40,.92)',stroke:'#ffe08a','stroke-width':2},A);tx_(A,90,498,'혼합형 AMR: 매우 느림 · 협응 어려움',{'font-size':19,fill:'#ffe08a','text-anchor':'start'});
+  this.maW=sv('path',{d:'',fill:'none',stroke:'#ffe08a','stroke-width':3.5,'stroke-linejoin':'round'},A);sv('line',{x1:90,y1:546,x2:550,y2:546,stroke:'#3d5a85','stroke-width':1.5},A);
  },
  draw(t,p){const [a,b]=p.scenes;const P=this.P;
   this.card.set('과다운동형 · 선조체',E7C.bg,e7It(t,a,[[0,'간접경로(브레이크) 손상 → <b>운동이 넘침</b>'],[0,'★ <b style="color:#ffe08a">움직임만 보고 진단 가능한 유일한 유형</b>'],[1,'헌팅턴병: 상염색체 우성 · <b>무도증</b> · 가변적 말속도'],[2,'★ <b>투렛</b>(음성 틱) · 연축성 발성장애 · 본태 떨림']]));op(this.card,win(t,a.t0,a.t1+0.2,0.4));
   const v=win(t,a.t0,a.t1+0.2,0.4);op(P.g,v);const k=ramp(t,sub_(p,0,0,0.2,1),sub_(p,0,0,0.45,1));
   P.set(t,1,1,1-k*0.8,0.5+k*0.75,k<0.5?'정상: 균형':'운동이 넘침 → 과다운동형',k>0.5?'#ff8a7a':'#7fe8c4');op(P.bx,k*v);op(P.accT,v);op(P.brkT,v);
   op(this.pit,win(t,a.L[1].t0+2,a.t1+0.2,0.4));
-  op(this.mix,win(t,b.t0,b.t1+0.3,0.4));[...this.mix.querySelectorAll('.e7m')].forEach((x,i)=>op(x,ramp(t,sub_(p,1,0,[0.12,0.5,0.78][i],1),sub_(p,1,0,[0.12,0.5,0.78][i],1)+0.4)));
+  {const vb=win(t,b.t0,b.t1+0.3,0.4);op(this.mm,vb);const li=b.L.findIndex((l,i)=>t>=l.t0&&t<(b.L[i+1]?b.L[i+1].t0:b.t1+1));
+   const ON={0:[['U',''],['C','']],1:[['U','경직'],['L','이완']],2:[['U','경직'],['C','실조']],3:[['B','과소'],['U','경직'],['C','실조']],4:[['U',''],['B',''],['C',''],['L','']]}[li<0?0:li]||[];
+   const pul=0.6+0.4*Math.abs(Math.sin(t*3));for(const k in this.mn){const g=this.mn[k];const on=ON.find(q=>q[0]===k);g.r.setAttribute('fill',on?'rgba(70,30,30,.95)':'rgba(12,22,40,.96)');g.r.setAttribute('stroke-width',on?5:2);g.r.setAttribute('stroke',on?'#ff5a5a':g.c);op(g.r,on?pul*0.4+0.6:0.55);op(g.t,on?1:0.5);const tg=on?on[1]:'';if(g.tag.textContent!==tg)g.tag.textContent=tg;}
+   this.mc.forEach((c,i)=>{const s0=b.L[Math.min(i+1,3)].t0+(i===3?sub_(p,1,3,0.55,1)-b.L[3].t0:0);op(c,vb*ramp(t,s0,s0+0.4)*(li===4?0.75:1));c.style.boxShadow=(li===i+1&&i<3)||(i===3&&t>=s0&&li===3)?'0 0 0 3px rgba(255,224,138,.4)':'';});
+   const va=vb*ramp(t,b.L[4].t0,b.L[4].t0+0.4);op(this.ma,va);if(va>0){let d='',x=90;const ys=[[0,14],[1,8],[0,20],[1,12],[0,16]];for(let i=0;i<5;i++){const w=24+(i%3)*8,h=ys[i][1]+4*Math.sin(t*0.5+i);d+=(i?' L':'M')+x+',546 Q'+(x+w/2)+','+(546-h*2)+' '+(x+w)+',546';x+=w+60+(i%2)*28;}this.maW.setAttribute('d',d);}}
  }});
 
 /* ═════════ d1-9 확인 문제 ═════════ */
