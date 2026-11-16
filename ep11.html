@@ -524,7 +524,8 @@ const E11TK=[
  [292,230, 300,212,380,210,470,214, 545,216,600,238,616,292, 622,324,606,354,590,374, 558,382, 500,352,420,334,340,322, 308,316,292,292]];
 function e11Tongue(P,v){v=Math.max(0,Math.min(4,v));const i=Math.min(3,Math.floor(v)),q=v-i,A=E11TK[i],B=E11TK[i+1],n=A.map((a,j)=>(a+(B[j]-a)*q).toFixed(1));
  P.tongue.setAttribute('d','M'+n[0]+' '+n[1]+' C'+n.slice(2,8).join(' ')+' C'+n.slice(8,14).join(' ')+' C'+n.slice(14,20).join(' ')+' L'+n[20]+' '+n[21]+' C'+n.slice(22,28).join(' ')+' C'+n.slice(28,32).join(' ')+' '+n[0]+' '+n[1]+'Z');}
-function e11Velum(P,k){k=Math.max(0,Math.min(1,k));const tx=lerp(548,664,k),ty=lerp(262,212,k);
+function e11VAuto(P){if(!(P._fv>.3))return 0;const x=P._fx,y=P._fy;if(x<545||y>470)return 0;return Math.min(1,(x-545)/35);}
+function e11Velum(P,k){P._vk=k;k=Math.max(0,Math.min(1,Math.max(k,e11VAuto(P))));const tx=lerp(548,664,k),ty=lerp(262,212,k);
  P.velum.setAttribute('d','M466 201 Q'+lerp(522,580,k)+' '+lerp(200,194,k)+' '+tx+' '+ty+' Q'+lerp(506,572,k)+' '+lerp(250,232,k)+' 466 215Z');}
 function e11Sag(par,tf,C){const s=par,g=sv('g',{transform:tf},s),P={};const AIR=C.air,TIS=C.tis,WALL=C.wall,BONE=C.bone;
  sv('path',{d:'M318 98 C300 110 296 125 300 142 L248 182 Q244 193 262 197 Q270 210 261 223 Q256 236 270 244 Q257 254 263 268 Q273 284 281 300 C281 332 302 350 340 360 Q402 374 470 398 L486 578 L770 578 L768 360 C792 300 800 220 780 160 C760 112 700 96 640 96 Z',fill:TIS,stroke:WALL,'stroke-width':4},g);
@@ -556,7 +557,7 @@ function e11Sag(par,tf,C){const s=par,g=sv('g',{transform:tf},s),P={};const AIR=
  P.food=sv('g',{opacity:0},g);sv('ellipse',{cx:0,cy:0,rx:17,ry:11,fill:C.food,stroke:C.food2,'stroke-width':3},P.food);sv('circle',{cx:-4,cy:-2,r:3,fill:C.food3},P.food);
  P.pt={oral:[420,236],oralBack:[510,234],fauc:[575,252],oroph:[628,290],vall:[589,378],epiTop:[630,360],hypo:[638,430],pyr:[640,446],vest:[598,426],trach:[584,520],ues:[637,486],eso:[637,548],fold:458};
  P.g=g;P.s=s;e11Air(P,.1,0,0);return P;}
-function e11Food(P,x,y,v=1){P.food.setAttribute('transform','translate('+x+' '+y+')');P.food.setAttribute('opacity',v);}
+function e11Food(P,x,y,v=1){P.food.setAttribute('transform','translate('+x+' '+y+')');P.food.setAttribute('opacity',v);P._fx=x;P._fy=y;P._fv=+v;if(P.velum)e11Velum(P,P._vk||0);}
 function e11Path(P,pts,k,v=1){k=Math.max(0,Math.min(1,k));const n=pts.length-1,i=Math.min(n-1,Math.floor(k*n)),q=k*n-i;e11Food(P,lerp(pts[i][0],pts[i+1][0],q),lerp(pts[i][1],pts[i+1][1],q),v);}
 function e11Air(P,closure,lift=0,flip=0){P.larynx.setAttribute('transform','translate('+(-6*lift)+' '+(-14*lift)+')');P.epi.setAttribute('transform','rotate('+(50*flip)+' 593 404)');
  const gap=20*(1-closure);P.vf1.setAttribute('d','M561 456 L'+(586-gap/2)+' 461');P.vf2.setAttribute('d','M611 456 L'+(588+gap/2)+' 461');
@@ -681,7 +682,7 @@ page({id:'s3-2',label:'3-2',title:'자세 기법',scenes:[{name:'자세 네 가�
  this.C=sv('g',{},s);this.ap=e11AAP(this.C,true);
  tx_(this.C,205,290,'환자 오른쪽',{'font-size':20,fill:'#ff9a8a','text-anchor':'end'});tx_(this.C,205,316,'(마비 · 약한 쪽)',{'font-size':16,fill:'#ff9a8a','text-anchor':'end'});
  tx_(this.C,562,290,'환자 왼쪽',{'font-size':20,fill:'#76e8be','text-anchor':'start'});tx_(this.C,562,316,'(강한 쪽)',{'font-size':16,fill:'#76e8be','text-anchor':'start'});
- tx_(this.C,380,540,'앞에서 본 인두',{'font-size':16,fill:'#9fb0c8'});this.gC=e11AGrav(this.C,600,380,70);
+ tx_(this.C,380,540,'관상면(이마면) · 마주 본 방향',{'font-size':16,fill:'#9fb0c8'});this.gC=e11AGrav(this.C,600,380,70);
  this.c1=e11ACard(L,700,118,520,'고개 돌리기 → 약한 쪽 (오른쪽)','그쪽 인두 통로가 눌려 닫힘 → 강한 쪽으로 지나감<br>한쪽 성대가 약할 때도 사용','#76c7ff');
  this.c2=e11ACard(L,700,262,520,'고개 기울이기 → 강한 쪽 (왼쪽)','중력으로 음식이 강한 쪽에 모임','#76e8be');
  this.ex=e11AChip(L,700,375,520,'<span style="font-size:17px">예: 오른쪽 마비 → 오른쪽으로 돌리기 · 왼쪽으로 기울이기</span>','#eef3fb');this.ban=e11AChip(L,700,450,520,'둘 다 결국 <b>강한 쪽</b>으로 음식을 보냄','#ffe08a');},
@@ -836,7 +837,7 @@ function e11BGlotSet(P,u,o){const s=e11BGlot(u);e11Air(P,0,s.lift,s.lift);e11BFo
  else if(u>=.58&&u<.72){const q=ramp(u,.58,.7);px=lerp(592,628,q);py=lerp(447,300,q);pv=1;pr=lerp(1,.8,q);}
  else if(u>=.72&&u<.88){const q=ramp(u,.76,.86);const pts=[[628,300],[640,420],[637,486],[637,552]];const n=3,i=Math.min(2,Math.floor(q*n)),r=q*n-i;px=lerp(pts[i][0],pts[i+1][0],r);py=lerp(pts[i][1],pts[i+1][1],r);pv=q<.98?1:0;pr=.8;}
  o.pool.setAttribute('transform','translate('+px.toFixed(1)+' '+py.toFixed(1)+') scale('+pr+')');e11BV(o.pool,pv);
- e11BV(o.dn,u<.15?Math.min(1,u/.03):0);e11BV(o.up,u>=.56&&u<.68?1:0);if(o.lock)e11BV(o.lock,s.vc>.9&&u<.56?1:0);return s;}
+ e11BV(o.dn,u<.15?Math.min(1,u/.03):0);e11BV(o.up,u>=.56&&u<.68?1:0);if(o.lock)e11BV(o.lock,s.vc>.9&&u<.56?1:0);if(u>=.7&&u<.9)e11Velum(P,Math.max(s.lift,Math.min(ramp(u,.7,.74),1-ramp(u,.86,.9))));return s;}
 function e11BGlotParts(P,aw){const o={};o.pool=sv('g',{opacity:0},P.g);sv('ellipse',{cx:0,cy:0,rx:9,ry:6,fill:'#ffcf70',stroke:'#fff1bd','stroke-width':1.5},o.pool);
  o.dn=e11BArrow(P.g,584,494,584,548,'#9fd9ff',aw);o.up=e11BArrow(P.g,584,548,584,494,'#ff9a8a',aw);e11BV(o.dn,0);e11BV(o.up,0);return o;}
 page({id:'s3-5',label:'3-5',title:'성문위 삼킴',scenes:[{name:'삼킴 전 기도 보호',pre:1,post:1,lines:[
