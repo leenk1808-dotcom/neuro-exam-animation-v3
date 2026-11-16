@@ -112,7 +112,7 @@ svg text{font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sa
  <div id="ctl">
   <div id="prog"><div id="track"></div><div id="ticks"></div><div id="fill"></div><div id="knob"></div></div>
   <div class="crow">
-   <div class="grp"><button id="bplay" class="ic" title="재생/일시정지 (Space·K)"></button><button id="bback" class="ic" title="10초 뒤로 (J)"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 5V2L7 6l5 4V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z" fill="#fff"/><text x="12" y="16.2" text-anchor="middle" font-size="7" font-weight="700" fill="#fff" font-family="sans-serif">10</text></svg></button><button id="bfwd" class="ic" title="10초 앞으로 (L)"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 5V2l5 4-5 4V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z" fill="#fff"/><text x="12" y="16.2" text-anchor="middle" font-size="7" font-weight="700" fill="#fff" font-family="sans-serif">10</text></svg></button></div>
+   <div class="grp"><button id="bplay" class="ic" title="재생/일시정지 (Space·K)"></button><button id="bback" class="ic" title="10초 뒤로 (← · J)"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 5V2L7 6l5 4V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z" fill="#fff"/><text x="12" y="16.2" text-anchor="middle" font-size="7" font-weight="700" fill="#fff" font-family="sans-serif">10</text></svg></button><button id="bfwd" class="ic" title="10초 앞으로 (→ · L)"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 5V2l5 4-5 4V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z" fill="#fff"/><text x="12" y="16.2" text-anchor="middle" font-size="7" font-weight="700" fill="#fff" font-family="sans-serif">10</text></svg></button></div>
    <div class="pill" id="time">0:00 / 0:00</div>
    <div class="pill" id="scn"></div>
    <div class="sp"></div>
@@ -847,10 +847,10 @@ function setRate(r){rate=Math.round(cl(r,0.5,2)*100)/100;for(const l of ALL)if(l
 const RATES=[0.5,0.75,0.9,1,1.1,1.25,1.5,1.75,2];
 addEventListener('keydown',e=>{const k=e.key,c=e.code;if(e.ctrlKey||e.metaKey||e.altKey)return;
  if(c==='Space'||k==='k'||k==='K'){e.preventDefault();setPlay(!playing);}
- else if(k==='j'||k==='J'||(e.shiftKey&&c==='ArrowLeft')){seek(t-10);flash('◀◀ 10초',true);}
- else if(k==='l'||k==='L'||(e.shiftKey&&c==='ArrowRight')){seek(t+10);flash('10초 ▶▶',false);}
- else if(c==='ArrowLeft'){nextLine(-1);flash('◀ 이전 대사',true);}
- else if(c==='ArrowRight'){nextLine(1);flash('다음 대사 ▶',false);}
+ else if(e.shiftKey&&c==='ArrowLeft'){nextLine(-1);flash('◀ 이전 대사',true);}
+ else if(e.shiftKey&&c==='ArrowRight'){nextLine(1);flash('다음 대사 ▶',false);}
+ else if(k==='j'||k==='J'||c==='ArrowLeft'){seek(t-10);flash('◀◀ 10초',true);}
+ else if(k==='l'||k==='L'||c==='ArrowRight'){seek(t+10);flash('10초 ▶▶',false);}
  else if(/^[0-9]$/.test(k)){seek(TOTAL*(+k)/10);}
  else if(k==='<'||k===','){setRate(RATES[Math.max(0,RATES.findIndex(r=>r>=rate)-1)]);}
  else if(k==='>'||k==='.'){setRate(RATES[Math.min(RATES.length-1,RATES.findIndex(r=>r>rate))]||2);}
