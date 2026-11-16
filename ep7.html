@@ -234,7 +234,7 @@ const sub_=(p,i,j,k,n)=>{const a=LS(p,i,j),b=LE(p,i,j);return a+(b-a)*k/n;};
 </script>
 <script>"use strict";
 /* 실제 음성 길이(초) */
-Object.assign(DUR,{"d1-1_01":10.32,"d1-1_02":13.12,"d1-1_03":8.24,"d1-2_01":4.32,"d1-2_02":9.76,"d1-2_03":8.56,"d1-2_04":5.2,"d1-2_05":8.16,"d1-3_01":11.52,"d1-3_02":6.8,"d1-3_03":11.12,"d1-3_04":11.12,"d1-3_05":9.84,"d1-4_01":11.76,"d1-4_02":7.84,"d1-4_03":8.32,"d1-4_04":9.44,"d1-5_01":8.56,"d1-5_02":13.92,"d1-5_03":11.2,"d1-5_04":9.12,"d1-5_05":8.72,"d1-6_01":14.32,"d1-6_02":5.04,"d1-6_03":9.36,"d1-6_04":10.72,"d1-7_01":8.96,"d1-7_02":9.6,"d1-7_03":6.56,"d1-7_04":7.6,"d1-7_05":11.52,"d1-8_01":13.6,"d1-8_02":11.76,"d1-8_03":7.92,"d1-8_04":15.68});
+Object.assign(DUR,{"d1-1_01":10.32,"d1-1_02":13.12,"d1-1_03":8.24,"d1-2_01":4.32,"d1-2_02":9.76,"d1-2_03":8.56,"d1-2_04":5.2,"d1-2_05":8.16,"d1-3_01":11.52,"d1-3_02":6.8,"d1-3_03":11.12,"d1-3_04":11.12,"d1-3_05":9.84,"d1-4_01":11.76,"d1-4_02":7.84,"d1-4_03":9.68,"d1-4_04":9.44,"d1-5_01":8.56,"d1-5_02":13.92,"d1-5_03":11.2,"d1-5_04":9.12,"d1-5_05":8.72,"d1-6_01":14.32,"d1-6_02":5.04,"d1-6_03":9.36,"d1-6_04":10.72,"d1-7_01":8.96,"d1-7_02":9.6,"d1-7_03":6.56,"d1-7_04":7.6,"d1-7_05":11.52,"d1-8_01":13.6,"d1-8_02":11.76,"d1-8_03":7.92,"d1-8_04":15.68});
 </script>
 <script>"use strict";
 /* ───────── 3D 공용 세계 ───────── */
@@ -629,7 +629,7 @@ page({id:'d1-4',label:'1-4',title:'이완형',scenes:[
  {name:'이완형 (LMN)',pre:0.6,post:1.4,lines:[
   '이완형은 LMN(하위운동신경원) 손상으로, 연수 뇌졸중, 길랭 바레 증후군, 중증 근무력증 등이 원인입니다. 근육이 약하고 늘어진, 힘이 없는 말이 특징입니다.',
   '가장 두드러진 것은 과대비성과 비누출입니다. 연구개 근육 대부분이 미주신경의 지배를 받기 때문입니다.',
-  '성대가 잘 닫히지 않아 기식성 음성이 나고, 외전 마비가 있으면 숨을 들이쉴 때 소리가 나는 가청 흡기가 나타납니다.',
+  '미주신경이 손상되면 성대도 잘 닫히지 않아 기식성 음성이 나고, 외전 마비가 있으면 숨을 들이쉴 때 소리가 나는 가청 흡기가 나타납니다.',
   '중증 근무력증은 근육을 쓸수록 약해지고 쉬면 회복됩니다. 그래서 긴 문단 읽기나 수 세기 같은 피로 검사로 감별합니다.']}],
  init(L){const s=SVGROOT(L);this.card=e7Card(L);
   /* 연인두 옆모습 */
@@ -643,16 +643,25 @@ page({id:'d1-4',label:'1-4',title:'이완형',scenes:[
   this.airT=tx_(V,310,130,'공기가 코로 샘 → 과대비성 · 비누출',{'font-size':21,fill:'#ffe08a'});
   /* 성대 */
   this.F=e7Folds(s,330,350);this.Ft=tx_(s,330,528,'',{'font-size':22,fill:'#ffe08a'});
+  this.vagT=tx_(V,270,438,'미주신경(Ⅹ번) 손상 → 연구개가 처짐',{'font-size':21,fill:'#ff9a8a'});
+  this.vagF=tx_(s,330,168,'미주신경(Ⅹ번) 손상',{'font-size':22,fill:'#ff9a8a'});
+  this.puf=sv('g',{},s);this.pp=Array.from({length:10},(_,i)=>sv('circle',{r:5,fill:'#bfe6ff',opacity:0},this.puf));
+  this.nz=sv('g',{opacity:0},s);for(const d of [-1,1])sv('path',{d:`M${330+d*20},430 l${d*14},-8 l${d*-4},14 l${d*14},-8 l${d*-4},14 l${d*14},-8`,fill:'none',stroke:'#ffe08a','stroke-width':3,'stroke-linejoin':'round'},this.nz);
   /* 피로 */
   this.fat=hdiv('ov','<div style="font-size:24px;font-weight:700;margin-bottom:12px">1부터 100까지 세기</div><div style="display:flex;gap:6px;align-items:flex-end">'+Array.from({length:12},(_,i)=>`<div class="e7f" style="width:34px;height:${150-i*9}px;border-radius:6px;background:#7fe8c4;opacity:0"></div>`).join('')+'</div><div style="display:flex;justify-content:space-between;font-size:20px;color:#c9d6ea;margin-top:8px"><span>처음</span><span>뒤로 갈수록 약해짐</span></div><div class="e7g" style="opacity:0;margin-top:14px;font-size:22px;color:#9ff0d6">쉬면 다시 회복</div>',L,'left:110px;top:200px;width:460px');
  },
  draw(t,p){const [a]=p.scenes;const l=i=>a.L[i].t0;
-  this.card.set('이완형 · LMN 손상',E7C.lmn,e7It(t,a,[[0,'원인: 연수 뇌졸중 · 길랭–바레 · <b>중증 근무력증</b>'],[0,'<b>힘이 없는 말</b> · 저긴장 · 반사 감소 · 위축'],[1,'★ <b style="color:#ffe08a">과대비성 + 비누출</b> (연구개 = X 미주신경)'],[2,'★ <b>기식성 음성</b> · 외전 마비 → <b>가청 흡기</b>'],[3,'★ 중증 근무력증: 쓸수록 약해짐 → <b>피로 검사</b>']]));
+  this.card.set('이완형 · LMN 손상',E7C.lmn,e7It(t,a,[[0,'원인: 연수 뇌졸중 · 길랭–바레 · <b>중증 근무력증</b>'],[0,'<b>힘이 없는 말</b> · 저긴장 · 반사 감소 · 위축'],[1,'★ <b style="color:#ffe08a">과대비성 + 비누출</b> ← <b>미주신경(Ⅹ번)</b> 손상'],[2,'★ <b>기식성 음성</b> ← 미주신경 손상 · 성대 덜 닫힘'],[2,'외전 마비 → <b>가청 흡기</b>'],[3,'★ 중증 근무력증: 쓸수록 약해짐 → <b>피로 검사</b>']]));
   op(this.card,ramp(t,a.t0,a.t0+0.4));
   op(this.V,win(t,a.t0,l(2)+0.2,0.4));const dr=ramp(t,l(1),l(1)+1.2);
   this.vel.setAttribute('d',`M395,263 Q${440+dr*0},${255+dr*30} ${lerp(520,470,dr)},${lerp(232,330,dr)}`);this.velT.setAttribute('y',lerp(300,350,dr));
   op(this.air,t>=l(1)+0.8?1:0);this.air.style.strokeDashoffset=-(t*40%20);op(this.airT,ramp(t,l(1)+0.8,l(1)+1.2));
-  op(this.F,win(t,l(2),l(3)+0.2,0.4));this.F.set(t>=sub_(p,0,2,0.55,1)?1:0.75);const ft=t>=sub_(p,0,2,0.55,1)?'외전 마비 → 숨 들이쉴 때 소리 (가청 흡기)':'덜 닫힘 → 숨이 새는 기식성 음성';if(this.Ft.textContent!==ft)this.Ft.textContent=ft;op(this.Ft,win(t,l(2),l(3)+0.2,0.4));
+  const fvA=win(t,l(2),l(3)+0.2,0.4);op(this.F,fvA);const abd=t>=sub_(p,0,2,0.55,1);op(this.vagF,fvA);op(this.vagT,ramp(t,l(1)+1,l(1)+1.5));
+  if(!abd){/* 이완형: 힘없이 떨리지만 끝까지 안 닫힘 + 숨이 샘 */const g=0.62+0.13*Math.sin(t*9)+0.04*Math.sin(t*23);this.F.set(g);
+   this.pp.forEach((c,i)=>{const u=((t*0.9)+i/10)%1;c.setAttribute('cx',(330+Math.sin(u*9+i)*10).toFixed(1));c.setAttribute('cy',(480-u*330).toFixed(1));c.setAttribute('fill','#bfe6ff');c.setAttribute('opacity',(fvA*Math.sin(u*Math.PI)*0.9).toFixed(2));});op(this.nz,0);}
+  else{/* 외전 마비: 들이쉴 때도 잘 안 열림 → 좁은 틈으로 공기가 들어오며 소리 */const br=0.5+0.5*Math.sin(t*2.4);this.F.set(0.12+0.12*br);
+   this.pp.forEach((c,i)=>{const u=((t*1.1)+i/10)%1;c.setAttribute('cx',(330+Math.sin(u*14+i)*4).toFixed(1));c.setAttribute('cy',(180+u*330).toFixed(1));c.setAttribute('fill','#ffe08a');c.setAttribute('opacity',(fvA*Math.sin(u*Math.PI)*0.9).toFixed(2));});op(this.nz,fvA*(0.4+0.6*Math.abs(Math.sin(t*11))));}
+  const ft=abd?'외전 마비 → 잘 안 열림 → 들이쉴 때 소리 (가청 흡기)':'성대가 덜 닫힘 → 숨이 새는 기식성 음성';if(this.Ft.textContent!==ft)this.Ft.textContent=ft;op(this.Ft,win(t,l(2),l(3)+0.2,0.4));
   op(this.fat,ramp(t,l(3),l(3)+0.4));[...this.fat.querySelectorAll('.e7f')].forEach((x,i)=>op(x,ramp(t,l(3)+0.5+i*0.25,l(3)+0.7+i*0.25)*(1-i*0.06)));op(this.fat.querySelector('.e7g'),ramp(t,sub_(p,0,3,0.4,1),sub_(p,0,3,0.4,1)+0.4));
  }});
 </script>
@@ -703,7 +712,12 @@ page({id:'d1-5',label:'1-5',title:'경직형 · 일측 UMN형',scenes:[
   if(t<b.t0){this.card.set('경직형 · 양측 UMN',E7C.pyr,e7It(t,a,[[0,'원인: 양측 뇌졸중 · TBI · MS · 뇌성마비'],[1,'★ <b style="color:#ffe08a">쥐어짜는 · 거친 음질</b> · <b>낮은 음도</b>'],[1,'느린 말 · 단조로움 · 짧은 구'],[1,'과대비성은 이완형보다 가벼움 · 비누출 대개 X'],[2,'★ <b>가성구마비 · 가성구감정</b>']]));}
   else this.card.set('일측 UMN형 · 한쪽 UMN',E7C.pyr,e7It(t,b,[[0,'원인: 주로 <b>한쪽 뇌졸중</b>'],[0,'★ <b>반대쪽 아래 얼굴 · 혀</b> 약화 · 혀는 <b>약한 쪽</b>으로'],[1,'경도~중등도 · <b>부정확한 자음</b> · <b>느린 AMR</b>'],[1,'호흡 · 운율은 거의 정상']]));
   op(this.card,win(t,a.t0,b.t1+0.2,0.4));
-  const fv=win(t,a.L[1].t0,a.L[2].t0+0.2,0.4);op(this.F,fv);op(this.Ft,fv);this.F.set(0);op(this.F.sq,fv);
+  const fv=win(t,a.L[1].t0,a.L[2].t0+0.2,0.4);op(this.F,fv);op(this.Ft,fv);
+  /* 경직형: 지나치게 닫힌 채 힘주어 조이고, 거칠게 짧게 떨림 */const sqz=0.55+0.45*Math.sin(t*3.2);const jit=0.05*Math.sin(t*41)*Math.sin(t*17);this.F.set(Math.max(-0.12,0.02-0.14*sqz+jit));
+  {const kids=[...this.F.children];const Lf=kids[1],Rf=kids[2];const push=7*sqz+1.5*Math.sin(t*47);Lf.setAttribute('transform',`translate(${push.toFixed(1)} 0)`);Rf.setAttribute('transform',`translate(${(-push).toFixed(1)} 0)`);}
+  op(this.F.sq,fv);[...this.F.sq.children].forEach((c,i)=>{const d=i<2?-1:1;c.setAttribute('transform',`translate(${(-d*16*sqz).toFixed(1)} 0)`);});
+  if(!this.st){this.st=sv('g',{},this.F);for(const d of [-1,1])for(let k=0;k<3;k++)sv('path',{d:`M${330+d*(40+k*10)},${300+k*24} l${d*8},-6 l${d*-3},10 l${d*8},-6`,fill:'none',stroke:'#ff8a7a','stroke-width':2.5},this.st);}
+  op(this.st,fv*sqz);
   op(this.emo,win(t,a.L[2].t0,a.t1+0.2,0.4));
   const fc=win(t,b.t0,b.t1+0.3,0.4);op(this.face,fc);op(this.faceT,fc);this.face.set(ramp(t,b.L[0].t0+1,b.L[0].t0+2),ramp(t,sub_(p,1,0,0.6,1),sub_(p,1,0,0.6,1)+0.8));
   op(this.fa,fc*ramp(t,b.L[0].t0+1.5,b.L[0].t0+2));op(this.ta,fc*ramp(t,sub_(p,1,0,0.7,1),sub_(p,1,0,0.7,1)+0.4));
