@@ -234,7 +234,7 @@ const sub_=(p,i,j,k,n)=>{const a=LS(p,i,j),b=LE(p,i,j);return a+(b-a)*k/n;};
 </script>
 <script>"use strict";
 /* 실제 음성 길이(초) */
-Object.assign(DUR,{"c2-1_01":10.56,"c2-1_02":10.64,"c2-1_03":12.08,"c2-1_04":7.6,"c2-2_01":5.76,"c2-2_02":14.24,"c2-2_03":8.4,"c2-2_04":7.2,"c2-3_01":10.88,"c2-3_02":9.84,"c2-3_03":8.96,"c2-4_01":10.8,"c2-4_02":9.84,"c2-4_03":11.76,"c2-4_04":8.32,"c2-4_05":10.96,"c2-5_01":8.72,"c2-5_02":10.48,"c2-5_03":5.76,"c2-5_04":8,"c2-6_01":14.88,"c2-6_02":10.64,"c2-6_03":8.8,"c2-6_04":7.12,"c2-7_01":8.24,"c2-7_02":10.32,"c2-7_03":13.36,"c2-7_04":9.28,"c2-7_05":5.84,"c2-8_01":4.88,"c2-8_02":7.68,"c2-8_03":7.2,"c2-8_04":6.4});
+Object.assign(DUR,{"c2-1_01":10.56,"c2-1_02":10.64,"c2-1_03":12.08,"c2-1_04":7.6,"c2-2_01":5.76,"c2-2_02":14.24,"c2-2_03":8.4,"c2-2_04":7.2,"c2-3_01":10.88,"c2-3_02":9.84,"c2-3_03":8.96,"c2-4_01":10.8,"c2-4_02":9.84,"c2-4_03":11.76,"c2-4_04":8.32,"c2-4_05":10.96,"c2-5_01":8.72,"c2-5_02":10.48,"c2-5_03":5.76,"c2-5_04":8,"c2-6_01":14.88,"c2-6_02":10.64,"c2-6_03":8.8,"c2-8_01":4.88,"c2-8_02":7.68,"c2-8_03":7.2,"c2-8_04":6.4,"c2-7_02":8.24,"c2-7_03":10.32,"c2-7_04":13.36,"c2-7_06":5.84,"c2-6_04":3.44,"c2-ppa_01":10.24,"c2-ppa_02":9.68,"c2-ppa_03":10.08,"c2-ppa_04":12.08,"c2-ppa_05":6.88,"c2-7_01":14,"c2-7_05":10.8,"c2-7_07":9.2,"c2-lbd_01":10.16,"c2-lbd_02":10.08,"c2-lbd_03":8.96,"c2-lbd_04":8.08,"c2-lbd_05":4.8,"c2-lbd_06":17.68});
 </script>
 <script>"use strict";
 /* ───────── 3D 공용 세계 ───────── */
@@ -801,35 +801,34 @@ page({id:'c2-5',label:'2-5',title:'알츠하이머 vs 혈관성',scenes:[
   this.T.rows.forEach((r,i)=>{op(r,ramp(t,rs[i],rs[i]+0.4));const cur=t>=rs[i]&&t<(rs[i+1]||a.t1);r.style.background=cur?'rgba(255,224,138,.12)':'';});
  }});
 
-/* ═════════ c2-6 전두측두엽 치매 · PPA ═════════ */
-page({id:'c2-6',label:'2-6',title:'전두측두엽 치매 · PPA',scenes:[
+/* ═════════ c2-6 전두측두엽 치매 ═════════ */
+page({id:'c2-6',label:'2-6',title:'전두측두엽 치매',scenes:[
  {name:'전두측두엽 치매',pre:0.5,post:0.6,lines:[
   '전두측두엽 치매, 즉 픽병은 전두엽과 측두엽이 퇴행해 행동과 성격 변화가 두드러집니다. 탈억제, 강박적이고 반복적인 행동, 무관심, 과잉구강증, 배회가 나타납니다.',
   '65세 이전에 많이 생기고 알츠하이머보다 빨리 진행하며, 언어장애가 초기부터 보입니다. 생성 이름대기가 대면 이름대기보다 더 어렵습니다.']},
- {name:'의미 치매 · PPA',pre:0.4,post:1.4,lines:[
+ {name:'의미 치매',pre:0.4,post:1.4,lines:[
   '하위 유형인 의미 치매는 좌측 측두엽 손상으로, 말은 유창하고 문법도 맞지만 단어의 뜻과 사물 지식을 잃습니다.',
-  '원발성 진행성 실어증은 기억, 시공간, 행동은 비교적 유지되고 언어만 먼저 나빠집니다.']}],
+  '발병 후 생존 기간은 약 6에서 8년입니다.']}],
  init(L){const s=SVGROOT(L);const W=this.W=sv('g',{transform:'translate(22,72) scale(0.56)'},s);const LB=lateralBrain(W);
   const cid='c13f'+Math.random().toString(36).slice(2,6);const cp=sv('clipPath',{id:cid},sv('defs',{},W));sv('path',{d:LB.P.od},cp);
-  const ov=sv('g',{'clip-path':`url(#${cid})`},W);
+  const ov=sv('g',{'clip-path':'url(#'+cid+')'},W);
   this.fr=sv('ellipse',{cx:250,cy:205,rx:215,ry:175,fill:'#8a1f3a',opacity:0},ov);this.tp=sv('ellipse',{cx:430,cy:420,rx:190,ry:75,fill:'#8a1f3a',opacity:0},ov);
   this.lf=svLab(s,{x:22+0.56*200,y:72+0.56*170,lx:110,ly:112,tx:'전두엽',col:'#ff9a8a',size:22});
   this.lt=svLab(s,{x:22+0.56*430,y:72+0.56*420,lx:340,ly:430,tx:'측두엽',col:'#ff9a8a',size:22});
   this.side=tx_(s,265,470,'좌반구 · 옆에서 본 모습',{'font-size':17,fill:'#9fb3cf'});
   const BH=[['🗯️','탈억제'],['🔁','강박 · 반복 행동'],['😶','무관심'],['✊','고집'],['👄','과잉구강증'],['🚶','배회']];
-  this.bh=BH.map((q,i)=>hdiv('ov',`<div style="font-size:34px;line-height:1">${q[0]}</div><div style="font-size:19px;font-weight:800;margin-top:6px">${q[1]}</div>`,L,`left:${520+(i%3)*240}px;top:${96+Math.floor(i/3)*118}px;width:226px;height:106px;box-sizing:border-box;padding:12px;border-radius:14px;background:rgba(40,16,26,.92);border:2px solid #ff9a8a;text-align:center`));
+  this.bh=BH.map((q,i)=>hdiv('ov','<div style="font-size:34px;line-height:1">'+q[0]+'</div><div style="font-size:19px;font-weight:800;margin-top:6px">'+q[1]+'</div>',L,'left:'+(520+(i%3)*240)+'px;top:'+(96+Math.floor(i/3)*118)+'px;width:226px;height:106px;box-sizing:border-box;padding:12px;border-radius:14px;background:rgba(40,16,26,.92);border:2px solid #ff9a8a;text-align:center'));
   this.f1=e13Card(L,520,342,710,150,'','#ffc27a','<div style="margin-bottom:8px">'+e13Chip('65세 이전 발병 많음','#ffc27a',17)+e13Chip('알츠하이머보다 빠른 진행','#ffc27a',17)+e13Chip('발병 후 약 6~8년','#ffc27a',17)+'</div><div style="font-size:20px;line-height:1.5"><b style="color:#ffe08a">언어장애가 초기부터</b> · 담화 문제 · 말기 함구증<br>생성 이름대기가 대면 이름대기보다 <b>더 어려움</b></div>',20);
-  /* 의미 치매 장면 */
   const sd=this.sd=sv('g',{opacity:0},s);
   sv('rect',{x:520,y:96,width:710,height:270,rx:16,fill:'rgba(12,22,40,.94)',stroke:'#c58cff','stroke-width':2.5},sd);
   tx_(sd,545,130,'의미 치매',{'font-size':26,fill:'#d6b0ff','text-anchor':'start'});
-  const ax=640,ay=250;sv('path',{d:`M${ax},${ay-40} C${ax+46},${ay-62} ${ax+70},${ay-10} ${ax+56},${ay+30} C${ax+44},${ay+62} ${ax+12},${ay+64} ${ax},${ay+52} C${ax-12},${ay+64} ${ax-44},${ay+62} ${ax-56},${ay+30} C${ax-70},${ay-10} ${ax-46},${ay-62} ${ax},${ay-40}Z`,fill:'#d9443c',stroke:'#8a1f1a','stroke-width':3},sd);
-  sv('path',{d:`M${ax},${ay-40} Q${ax+4},${ay-62} ${ax+14},${ay-72}`,fill:'none',stroke:'#6b4a2a','stroke-width':5,'stroke-linecap':'round'},sd);sv('path',{d:`M${ax+8},${ay-58} Q${ax+34},${ay-74} ${ax+44},${ay-56} Q${ax+24},${ay-48} ${ax+8},${ay-58}Z`,fill:'#5fae4a'},sd);
+  const ax=640,ay=250;sv('path',{d:'M'+ax+','+(ay-40)+' C'+(ax+46)+','+(ay-62)+' '+(ax+70)+','+(ay-10)+' '+(ax+56)+','+(ay+30)+' C'+(ax+44)+','+(ay+62)+' '+(ax+12)+','+(ay+64)+' '+ax+','+(ay+52)+' C'+(ax-12)+','+(ay+64)+' '+(ax-44)+','+(ay+62)+' '+(ax-56)+','+(ay+30)+' C'+(ax-70)+','+(ay-10)+' '+(ax-46)+','+(ay-62)+' '+ax+','+(ay-40)+'Z',fill:'#d9443c',stroke:'#8a1f1a','stroke-width':3},sd);
+  sv('path',{d:'M'+ax+','+(ay-40)+' Q'+(ax+4)+','+(ay-62)+' '+(ax+14)+','+(ay-72),fill:'none',stroke:'#6b4a2a','stroke-width':5,'stroke-linecap':'round'},sd);sv('path',{d:'M'+(ax+8)+','+(ay-58)+' Q'+(ax+34)+','+(ay-74)+' '+(ax+44)+','+(ay-56)+' Q'+(ax+24)+','+(ay-48)+' '+(ax+8)+','+(ay-58)+'Z',fill:'#5fae4a'},sd);
   sv('ellipse',{cx:ax-22,cy:ay-12,rx:10,ry:16,fill:'rgba(255,255,255,.35)'},sd);
   this.qm=tx_(sd,ax+70,ay-40,'?',{'font-size':54,fill:'#ffe08a'});
   this.bub=e13Bub(sd,760,150,300,62,'"사과"가 뭐예요?','#c58cff',740,240,24);
   this.sdt=hdiv('ov','<div style="font-size:20px;line-height:1.5"><span style="color:#7fe8c4">✓ 말은 유창 · 문법도 맞음</span><br><span style="color:#ff9a8a">✕ 단어 뜻 · 사물 지식 손상</span> → 단어 정의 못 함</div>',L,'left:760px;top:240px;width:450px');
-  this.ppa=e13Card(L,520,382,710,168,'PPA(원발성 진행성 실어증)','#7fb8ff','<div style="font-size:20px">기억 · 시공간 · 행동은 비교적 유지 → <b style="color:#ffe08a">언어만 먼저</b> 나빠짐</div><div style="margin-top:8px">'+e13Chip('비유창형','#7fb8ff')+e13Chip('의미형','#7fb8ff')+e13Chip('발화부족형','#7fb8ff')+'</div>',20);
+  this.surv=e13Card(L,520,382,710,110,'','#ffc27a','<div style="display:flex;align-items:center;gap:22px"><div style="font-size:40px">⏳</div><div><div style="font-size:30px;font-weight:800;color:#ffe08a">생존 약 6~8년</div><div style="font-size:19px;color:#c9d6ea">발병 후 · 알츠하이머보다 빠르게 진행</div></div></div>',20);
  },
  draw(t,p){const [a,b]=p.scenes;const inA=t<b.t0;
   op(this.W,ramp(t,a.t0,a.t0+0.4));op(this.side,ramp(t,a.t0,a.t0+0.4));
@@ -839,20 +838,68 @@ page({id:'c2-6',label:'2-6',title:'전두측두엽 치매 · PPA',scenes:[
   const d0=a.L[0].t1-a.L[0].t0;this.bh.forEach((e,i)=>{const s0=a.L[0].t0+d0*(0.45+i*0.085);op(e,win(t,s0,a.t1+0.1,0.35));});
   op(this.f1,win(t,a.L[1].t0,a.t1+0.1,0.35));
   op(this.sd,win(t,b.L[0].t0,b.t1+0.3,0.35));op(this.bub,ramp(t,b.L[0].t0+1.2,b.L[0].t0+1.6));op(this.qm,0.5+0.5*Math.sin(t*4));
-  op(this.sdt,win(t,b.L[0].t0+2.5,b.t1+0.3,0.35));op(this.ppa,ramp(t,b.L[1].t0,b.L[1].t0+0.4));
+  op(this.sdt,win(t,b.L[0].t0+2.5,b.t1+0.3,0.35));e13On(this.surv,ramp(t,b.L[1].t0,b.L[1].t0+0.4),t>=b.L[1].t0);
  }});
 
-/* ═════════ c2-7 파킨슨병 치매 · 루이소체 · 진행핵상마비 ═════════ */
-page({id:'c2-7',label:'2-7',title:'파킨슨병 치매 · 루이소체 · 진행핵상마비',scenes:[
- {name:'피질하 · 혼합 치매',pre:0.5,post:1.4,lines:[
+/* ═════════ c2-ppa 원발성 진행성 실어증 ═════════ */
+page({id:'c2-ppa',label:'2-7',title:'원발성 진행성 실어증 (PPA)',scenes:[
+ {name:'PPA 3유형',pre:0.5,post:1.4,lines:[
+  'PPA(원발성 진행성 실어증)는 뇌혈관 질환이 아니라 신경퇴행으로 생깁니다. 기억, 시공간, 행동은 비교적 유지되고, 언어만 먼저 두드러지게 나빠집니다.',
+  '비유창형은 단어 이해는 보존되지만, 말이 비유창하고 전보식이며, 음소착어와 이름대기 장애가 있고 말실행증이 동반될 수 있습니다.',
+  '의미형은 말의 유창성과 문법 구조는 보존되지만, 단어의 뜻을 잃어 단어 이해와 이름대기가 어렵고, 의미착어와 화용 문제가 나타납니다.',
+  '발화부족형은 단단어 이해와 문법은 비교적 보존되지만, 단어를 찾느라 말이 느리고 끊기며, 음소착어와 긴 문장 따라말하기 장애가 있고 말실행증은 없습니다.',
+  '알츠하이머는 기억장애가, PPA는 언어장애가 먼저 두드러진다는 점이 둘을 가르는 기준입니다.']}],
+ init(L){const s=SVGROOT(L);
+  this.badge=hdiv('ov','<span style="display:inline-block;padding:7px 16px;border-radius:20px;background:rgba(60,20,20,.92);border:2px solid #ffe08a;font-size:20px;font-weight:800;color:#ffe08a">★ 신경퇴행 (뇌혈관 질환 ✕)</span><span style="font-size:19px;margin-left:14px;color:#dbe5f3">기억 · 시공간 · 행동 <b style="color:#7fe8c4">비교적 유지</b> → <b style="color:#ffe08a">언어만 먼저</b> 나빠짐</span>',L,'left:60px;top:96px;width:1170px');
+  const W=this.W=sv('g',{transform:'translate(22,182) scale(0.37)',opacity:0},s);const LB=lateralBrain(W,{});
+  const cid='c13p'+Math.random().toString(36).slice(2,6);const cp=sv('clipPath',{id:cid},sv('defs',{},W));sv('path',{d:LB.P.od},cp);
+  const ov=sv('g',{'clip-path':'url(#'+cid+')'},W);
+  const COL=['#ff9a8a','#d6b0ff','#7fe8c4'];
+  this.ar=[[360,290,80,55],[330,412,90,45],[610,320,95,65]].map((q,i)=>sv('ellipse',{cx:q[0],cy:q[1],rx:q[2],ry:q[3],fill:COL[i],opacity:0},ov));
+  this.side=tx_(s,170,412,'좌반구 · 옆에서 본 모습',{'font-size':15,fill:'#9fb3cf'});op(this.side,0);
+  this.bl=[['① 비유창형',100,436],['② 의미형',100,462],['③ 발화부족형',100,488]].map((q,i)=>tx_(s,q[1],q[2],q[0],{'font-size':17,fill:COL[i],'text-anchor':'start'}));this.bl.forEach(e=>op(e,0));
+  const C=[['① 비유창형','#ff9a8a','좌측 후방 전두엽 · 뇌섬','단어 이해','비유창 · 전보식 발화<br>음소착어 · 이름대기','<b style="color:#ffb2a6">동반 가능</b>'],
+   ['② 의미형','#d6b0ff','좌측 전측 측두엽','유창성 · 문법 구조','<b>단어 이해</b> · 이름대기<br>의미착어 · 화용','없음'],
+   ['③ 발화부족형','#7fe8c4','좌측 후방 측두엽 · 하두정소엽','단단어 이해 · 문법','단어 찾기로 느리고 끊김<br>음소착어 · <b>긴 문장 따라말하기</b>','없음']];
+  const row=(lab,txt,col)=>'<div style="margin-top:6px"><div style="font-size:14px;color:#9fb3cf">'+lab+'</div><div style="font-size:17px;line-height:1.38;color:'+(col||'#eef3fb')+'">'+txt+'</div></div>';
+  this.cols=C.map((c,i)=>{const d=hdiv('card ov','<h3 style="color:'+c[1]+';font-size:23px;margin:0 0 2px">'+c[0]+'</h3>'+row('위축 부위',c[2],'#c9d6ea')+row('✓ 보존',c[3],'#7fe8c4')+row('✕ 손상',c[4],'#ffb2a6')+row('말실행증',c[5]),L,'left:'+(340+i*300)+'px;top:154px;width:285px;height:318px;box-sizing:border-box;padding:12px 16px;border-color:'+c[1]);return d;});
+  this.cmp=hdiv('ov','<span style="display:inline-block;padding:8px 18px;border-radius:20px;background:rgba(14,26,46,.96);border:2px solid #ffe08a;font-size:22px;font-weight:800"><span style="color:#7fb8ff">AD = 기억 먼저</span> · <span style="color:#ffe08a">PPA = 언어 먼저</span></span><span style="font-size:17px;color:#9fb3cf;margin-left:14px">자세히: 실어증 1편 1-7</span>',L,'left:340px;top:488px;width:890px');
+ },
+ draw(t,p){const [a]=p.scenes;const k=e13Cur(t,a);
+  op(this.badge,ramp(t,a.L[0].t0,a.L[0].t0+0.4));op(this.W,ramp(t,a.L[0].t0+0.4,a.L[0].t0+0.9));op(this.side,ramp(t,a.L[0].t0+0.4,a.L[0].t0+0.9));
+  const pul=0.55+0.25*Math.sin(t*4);
+  this.cols.forEach((c,i)=>{const on=ramp(t,a.L[i+1].t0,a.L[i+1].t0+0.4);const cur=k===i+1;e13On(c,on*(cur||k>=4?1:0.6),cur);
+   this.ar[i].setAttribute('opacity',(on*(cur?pul:(k>=4?0.45:0.2))).toFixed(2));op(this.bl[i],on*(cur||k>=4?1:0.55));});
+  op(this.cmp,ramp(t,a.L[4].t0,a.L[4].t0+0.4));
+ }});
+
+/* ═════════ c2-7 피질하 치매 ═════════ */
+page({id:'c2-7',label:'2-8',title:'피질하 치매',scenes:[
+ {name:'피질 vs 피질하',pre:0.5,post:0.6,lines:[
+  '피질하 치매는 기저핵 같은 피질 아래 구조, 즉 추체외로가 손상되어 생깁니다. 기억과 언어보다 처리속도와 집행기능이 먼저 떨어지고, 운동 문제와 말장애가 두드러지는 것이 공통점입니다.']},
+ {name:'파킨슨병 치매',pre:0.4,post:0.6,lines:[
   '파킨슨병 치매는 파킨슨병이 자리 잡은 뒤 인지가 떨어지는 것으로, 환자의 약 4분의 1에서 3분의 1에서 나타납니다.',
   '알츠하이머와 달리 말장애가 두드러지는 피질하성 치매입니다. 과소운동형 마비말장애, 발성 부전, 말더듬, 운율 문제가 보입니다.',
   '집행기능과 주의 전환이 떨어져 음소와 의미 유창성이 모두 낮고, 쓰기에서는 글씨가 점점 작아지는 소자증이 나타납니다. 운동 때문에 느린 것과 인지 저하는 구분해서 봐야 합니다.',
-  '루이소체 치매는 빠르게 진행하며, 날마다 달라지는 인지 기능, 생생한 환시, 파킨슨 증상, 렘수면 행동장애가 특징입니다.',
-  '진행핵상마비는 파킨슨병과 비슷하지만 떨림이 없고 경직이 두드러집니다.']}],
+  '파킨슨병 자체에서 나타나는 과소운동형 마비말장애에 더해, 파킨슨병 치매에서는 주의와 집행기능 저하로 담화, 추론, 화용 문제가 생깁니다.']},
+ {name:'진행핵상마비 · 헌팅턴병 · 에이즈',pre:0.4,post:1.4,lines:[
+  '진행핵상마비는 파킨슨병과 비슷하지만 떨림이 없고 경직이 두드러집니다.',
+  '선조체가 퇴화해 무도증과 과다운동형 마비말장애를 보이는 헌팅턴병, 그리고 에이즈에 의한 치매도 피질하 치매에 속합니다.']}],
  init(L){const s=SVGROOT(L);
+  /* 장면 a: 피질 vs 피질하 */
+  const GA=this.GA=sv('g',{opacity:0},s);this.B=e13Cor(GA,280,330,0.66);
+  this.lc=svLab(GA,{x:280+0.66*-268,y:330+0.66*-40,lx:70,ly:120,tx:'피질 (겉)',col:'#7fb8ff',size:20});
+  this.ld=svLab(GA,{x:280+0.66*-92,y:330+0.66*-18,lx:330,ly:528,tx:'피질하 (속) · 기저핵',col:'#ffb36b',size:20});
+  const row2=(a,b)=>'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px"><div style="font-size:18px;line-height:1.4">'+a+'</div><div style="font-size:18px;line-height:1.4">'+b+'</div></div>';
+  this.cmp=hdiv('ov','<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div style="padding:8px 12px;border-radius:12px;border:2px solid #7fb8ff;background:rgba(14,26,46,.96);font-size:23px;font-weight:800;color:#7fb8ff;text-align:center">피질 치매</div><div style="padding:8px 12px;border-radius:12px;border:2px solid #ffb36b;background:rgba(40,24,10,.96);font-size:23px;font-weight:800;color:#ffb36b;text-align:center">피질하 치매</div></div>'
+   +'<div class="r2">'+row2('<b>기억 · 언어</b> 중심','<b style="color:#ffe08a">처리속도 · 집행기능</b> 먼저')+'</div>'
+   +'<div class="r2">'+row2('말(운동) <b style="color:#7fe8c4">초기 보존</b>','<b style="color:#ff9a8a">운동 문제 · 말장애</b> 두드러짐')+'</div>'
+   +'<div class="r2">'+row2('손상: 대뇌 겉질','손상: 기저핵 등 · <b>추체외로</b>')+'</div>'
+   +'<div class="r2">'+row2('알츠하이머 · 전두측두엽 · PPA','파킨슨병 치매 · 진행핵상마비 · 헌팅턴병 · 에이즈')+'</div>',L,'left:570px;top:120px;width:660px;padding:16px 18px;box-sizing:border-box;border-radius:16px;background:rgba(12,22,40,.94);border:2px solid #34507a');
+  this.r2=[...this.cmp.querySelectorAll('.r2')];
+  /* 장면 b: 파킨슨병 치매 */
   const a1=-Math.PI/2,a2=a1+Math.PI*2*0.3;
-  const pieSvg=`<svg width="84" height="84" viewBox="0 0 84 84" style="position:absolute;right:20px;top:18px"><circle cx="42" cy="42" r="38" fill="#3a4560" stroke="#7f93b3" stroke-width="2"/><path d="M42,42 L${(42+38*Math.cos(a1)).toFixed(1)},${(42+38*Math.sin(a1)).toFixed(1)} A38,38 0 0 1 ${(42+38*Math.cos(a2)).toFixed(1)},${(42+38*Math.sin(a2)).toFixed(1)}Z" fill="#ffb36b"/></svg>`;
+  const pieSvg='<svg width="84" height="84" viewBox="0 0 84 84" style="position:absolute;right:20px;top:18px"><circle cx="42" cy="42" r="38" fill="#3a4560" stroke="#7f93b3" stroke-width="2"/><path d="M42,42 L'+(42+38*Math.cos(a1)).toFixed(1)+','+(42+38*Math.sin(a1)).toFixed(1)+' A38,38 0 0 1 '+(42+38*Math.cos(a2)).toFixed(1)+','+(42+38*Math.sin(a2)).toFixed(1)+'Z" fill="#ffb36b"/></svg>';
   this.p0=e13Card(L,60,94,700,120,'파킨슨병 치매','#ffb36b','파킨슨병 확립 → <b>진행성 인지 저하</b><br>파킨슨병 환자의 <b style="color:#ffe08a">약 1/4 ~ 1/3</b>'+pieSvg,20);
   this.pie=this.p0.querySelector('svg');op(this.pie,0);
   this.p1=hdiv('ov','<div style="font-size:19px;color:#9fb3cf;margin-bottom:2px">★ 말장애가 두드러지는 <b style="color:#ffb36b">피질하성</b> 치매 (알츠하이머와 구별)</div>'+['과소운동형 마비말장애','발성 부전','말더듬','운율 문제'].map(x=>e13Chip(x,'#ffb36b',19)).join(''),L,'left:60px;top:222px;width:700px');
@@ -862,40 +909,89 @@ page({id:'c2-7',label:'2-7',title:'파킨슨병 치매 · 루이소체 · 진행
   const TX='오늘은 날씨가 좋아요'.split('');let x=88;this.ch=TX.map((c,i)=>{const fs=Math.round(46-i*2.9);const e=sv('text',{x,y:430,'font-size':fs,'font-weight':600,fill:'#2b2b3a','font-family':'"Malgun Gothic",sans-serif'},this.paper);e.textContent=c;x+=c===' '?fs*0.45:fs*1.02;return e;});
   this.pen=sv('path',{d:'M0,0 L-8,-26 L4,-30 Z M-8,-26 L-30,-90 L-18,-94 L4,-30',fill:'#4a6ae0',stroke:'#2a3a80','stroke-width':2,opacity:0},s);
   this.p2=hdiv('ov',e13Chip('집행기능 · 주의 전환↓','#ffe08a',18)+e13Chip('음소 · 의미 유창성 모두↓','#ffe08a',18)+'<div style="font-size:18px;margin-top:2px;color:#c9d6ea">⚠ 운동 때문에 느린 것 ≠ 인지 저하 → 구분해서 해석</div>',L,'left:60px;top:470px;width:700px');
-  /* 루이소체 */
-  const lb=this.lb=sv('g',{opacity:0},s);sv('rect',{x:790,y:94,width:440,height:316,rx:16,fill:'rgba(12,22,40,.94)',stroke:'#c58cff','stroke-width':2.5},lb);
-  tx_(lb,1010,126,'루이소체 치매 · 빠른 진행',{'font-size':22,fill:'#d6b0ff'});
-  const cell=(i)=>[800+(i%2)*215,140+Math.floor(i/2)*134];
-  this.ic=[0,1,2,3].map(i=>{const [x0,y0]=cell(i);const g=sv('g',{opacity:0},lb);sv('rect',{x:x0,y:y0,width:205,height:124,rx:12,fill:'rgba(30,22,50,.9)',stroke:'#6b5a90','stroke-width':1.5},g);return {g,x0,y0};});
-  {const {g,x0,y0}=this.ic[0];sv('path',{d:`M${x0+20},${y0+60} L${x0+45},${y0+30} L${x0+70},${y0+72} L${x0+95},${y0+26} L${x0+120},${y0+66} L${x0+145},${y0+34} L${x0+185},${y0+58}`,fill:'none',stroke:'#ffe08a','stroke-width':4,'stroke-linejoin':'round'},g);tx_(g,x0+102,y0+108,'인지 기능 변동',{'font-size':18,fill:'#eef3fb'});}
-  {const {g,x0,y0}=this.ic[1];const ex=x0+60,ey=y0+56;sv('path',{d:`M${ex-38},${ey} Q${ex},${ey-30} ${ex+38},${ey} Q${ex},${ey+30} ${ex-38},${ey}Z`,fill:'#fff',stroke:'#6b5a90','stroke-width':2},g);sv('circle',{cx:ex,cy:ey,r:12,fill:'#4a3a70'},g);
-   this.ghost=sv('g',{},g);sv('path',{d:`M${x0+140},${y0+86} V${y0+50} a22,22 0 0 1 44,0 V${y0+86} l-7,-8 l-7,8 l-8,-8 l-7,8 l-8,-8Z`,fill:'rgba(220,210,255,.75)',stroke:'#b9a6ff','stroke-width':2,'stroke-dasharray':'4 3'},this.ghost);
-   tx_(g,x0+102,y0+108,'생생한 환시 (약 80%)',{'font-size':18,fill:'#eef3fb'});}
-  {const {g,x0,y0}=this.ic[2];this.hand=sv('g',{},g);const hx=x0+100,hy=y0+40;sv('path',{d:`M${hx-26},${hy+30} V${hy-6} M${hx-12},${hy+30} V${hy-22} M${hx+2},${hy+30} V${hy-24} M${hx+16},${hy+30} V${hy-16} M${hx+30},${hy+34} L${hx+40},${hy+8}`,fill:'none',stroke:'#efc9a8','stroke-width':11,'stroke-linecap':'round'},this.hand);sv('rect',{x:hx-34,y:hy+22,width:70,height:28,rx:13,fill:'#efc9a8'},this.hand);
-   for(const s2 of [-1,1])sv('path',{d:`M${hx+s2*52},${hy-10} q${s2*8},10 0,20 q${s2*-8},10 0,20`,fill:'none',stroke:'#ffe08a','stroke-width':2.5},g);
-   tx_(g,x0+102,y0+108,'파킨슨 증상',{'font-size':18,fill:'#eef3fb'});}
-  {const {g,x0,y0}=this.ic[3];sv('rect',{x:x0+22,y:y0+60,width:160,height:16,rx:4,fill:'#8a7a60'},g);sv('rect',{x:x0+22,y:y0+44,width:12,height:40,fill:'#8a7a60'},g);sv('rect',{x:x0+30,y:y0+46,width:30,height:14,rx:6,fill:'#e8e2d6'},g);
-   sv('circle',{cx:x0+64,cy:y0+46,r:10,fill:'#efc9a8'},g);sv('path',{d:`M${x0+74},${y0+52} H${x0+160}`,stroke:'#5b6f8f','stroke-width':14,'stroke-linecap':'round'},g);
-   this.arm=sv('path',{d:'',fill:'none',stroke:'#efc9a8','stroke-width':7,'stroke-linecap':'round'},g);tx_(g,x0+170,y0+34,'Zz',{'font-size':20,fill:'#9cc7ff'});
-   this.armP=[x0+92,y0+50];tx_(g,x0+102,y0+108,'렘수면 행동장애',{'font-size':18,fill:'#eef3fb'});}
-  this.psp=e13Card(L,790,420,440,136,'진행핵상마비','#7fe8c4','파킨슨병과 비슷하지만<div style="margin-top:6px;font-size:24px;font-weight:800"><span style="color:#ff9a8a">떨림 ✕</span> · <span style="color:#7fe8c4">경직 ✓</span></div>',20);
+  this.pd=e13Card(L,790,94,440,0,'파킨슨병 vs 파킨슨병 치매','#ffe08a','<div style="padding:8px 10px;border-radius:10px;background:rgba(40,24,10,.9);border:1px solid #ffb36b"><div style="font-size:15px;color:#9fb3cf">파킨슨병 자체</div><b style="color:#ffb36b">과소운동형 마비말장애</b> (운동말장애)</div><div style="text-align:center;font-size:24px;color:#ffe08a;margin:4px 0">+</div><div style="padding:8px 10px;border-radius:10px;background:rgba(14,26,46,.96);border:1px solid #7fb8ff"><div style="font-size:15px;color:#9fb3cf">파킨슨병 치매에서 추가</div>주의 · 집행기능↓ → <b style="color:#ffe08a">담화 · 추론 · 화용</b> 문제<div style="font-size:16px;margin-top:6px;line-height:1.45;color:#c9d6ea">· 주의 전환↓ → 화제 전환 어려움<br>· 집행기능↓ → 이야기 순서화 · 요약 · 주제 유지↓</div></div>',19);
+  /* 장면 c: 그 밖의 피질하 치매 */
+  const card3=(i,h,col,body)=>e13Card(L,70+i*390,150,360,230,h,col,body,20);
+  this.c3=[card3(0,'진행핵상마비','#7fe8c4','파킨슨병과 비슷하지만<div style="margin:10px 0;font-size:28px;font-weight:800"><span style="color:#ff9a8a">떨림 ✕</span> · <span style="color:#7fe8c4">경직 ✓</span></div><span style="font-size:17px;color:#c9d6ea">의사소통 능력은 비교적 유지</span>'),
+   card3(1,'헌팅턴병','#d6b0ff','<b style="color:#ffe08a">선조체</b> 퇴화<div style="margin:8px 0">'+e13Chip('무도증','#d6b0ff',18)+e13Chip('과다운동형 마비말장애','#d6b0ff',18)+'</div><span style="font-size:17px;color:#c9d6ea">상염색체 우성 유전 · 중년 발병</span>'),
+   card3(2,'에이즈 치매','#9fdcff','<b>AIDS</b>(후천성 면역결핍증)<br>에 의한 치매<div style="margin-top:10px;font-size:17px;color:#c9d6ea">감염성 원인 · 피질하 치매로 분류</div>')];
+  this.c3h=hdiv('ov',e13Chip('피질하 치매 = 처리속도 · 집행기능↓ + 운동 · 말장애','#ffb36b',20),L,'left:70px;top:96px;width:1160px;text-align:center');
  },
- draw(t,p){const [a]=p.scenes;
-  op(this.p0,ramp(t,a.L[0].t0,a.L[0].t0+0.4));op(this.pie,ramp(t,a.L[0].t0+1,a.L[0].t0+1.4));
-  op(this.p1,ramp(t,a.L[1].t0,a.L[1].t0+0.4));
-  op(this.paper,ramp(t,a.L[2].t0+0.3,a.L[2].t0+0.7));const d2=a.L[2].t1-a.L[2].t0;const w0=a.L[2].t0+d2*0.35,w1=a.L[2].t0+d2*0.7;
-  let lastX=0,lastY=0,shown=0;this.ch.forEach((c,i)=>{const u=ramp(t,w0+(w1-w0)*i/this.ch.length,w0+(w1-w0)*(i+1)/this.ch.length);op(c,u);if(u>0){shown++;lastX=+c.getAttribute('x')+(+c.getAttribute('font-size'))*0.9;lastY=430;}});
-  this.pen.setAttribute('transform',`translate(${lastX||88},${lastY||430})`);op(this.pen,t>=w0&&t<w1+0.4?1:0);
-  op(this.p2,ramp(t,a.L[2].t0+0.5,a.L[2].t0+0.9));
-  op(this.lb,ramp(t,a.L[3].t0,a.L[3].t0+0.4));const d3=a.L[3].t1-a.L[3].t0;
-  this.ic.forEach((c,i)=>{const s0=a.L[3].t0+d3*(0.3+i*0.16);op(c.g,ramp(t,s0,s0+0.4));c.g.firstChild.setAttribute('stroke',t>=s0&&t<s0+d3*0.16?'#ffe08a':'#6b5a90');});
-  op(this.ghost,0.45+0.45*Math.sin(t*2.5));this.hand.setAttribute('transform',`translate(${(Math.sin(t*28)*2.2).toFixed(2)},0)`);
-  const [ax,ay]=this.armP,an=-0.6+0.6*Math.sin(t*3);this.arm.setAttribute('d',`M${ax},${ay} l${(Math.cos(an)*34).toFixed(1)},${(Math.sin(an)*34-10).toFixed(1)}`);
-  e13On(this.psp,ramp(t,a.L[4].t0,a.L[4].t0+0.4),t>=a.L[4].t0);
+ draw(t,p){const [a,b,c]=p.scenes;
+  const vA=win(t,a.t0,a.t1+0.2,0.4);op(this.GA,vA);op(this.cmp,vA*ramp(t,a.L[0].t0+0.4,a.L[0].t0+0.8));const B=this.B;const pul=0.6+0.4*Math.sin(t*4);
+  B.ctx.setAttribute('stroke','#b49cb2');[...B.deep.children].forEach(e=>e.setAttribute('fill','#ffb36b'));B.deep.setAttribute('opacity',(0.65+0.35*pul).toFixed(2));
+  op(this.lc,ramp(t,a.L[0].t0,a.L[0].t0+0.4));op(this.ld,ramp(t,a.L[0].t0+0.3,a.L[0].t0+0.7));
+  const dA=a.L[0].t1-a.L[0].t0;this.r2.forEach((r,i)=>op(r,ramp(t,a.L[0].t0+dA*(0.15+i*0.18),a.L[0].t0+dA*(0.15+i*0.18)+0.4)));
+  const vB=win(t,b.t0,b.t1+0.2,0.4);
+  op(this.p0,vB*ramp(t,b.L[0].t0,b.L[0].t0+0.4));op(this.pie,ramp(t,b.L[0].t0+1,b.L[0].t0+1.4));
+  op(this.p1,vB*ramp(t,b.L[1].t0,b.L[1].t0+0.4));
+  op(this.paper,vB*ramp(t,b.L[2].t0+0.3,b.L[2].t0+0.7));const d2=b.L[2].t1-b.L[2].t0;const w0=b.L[2].t0+d2*0.35,w1=b.L[2].t0+d2*0.7;
+  let lastX=0;this.ch.forEach((ch,i)=>{const u=ramp(t,w0+(w1-w0)*i/this.ch.length,w0+(w1-w0)*(i+1)/this.ch.length);op(ch,u);if(u>0)lastX=+ch.getAttribute('x')+(+ch.getAttribute('font-size'))*0.9;});
+  this.pen.setAttribute('transform','translate('+(lastX||88)+',430)');op(this.pen,vB*(t>=w0&&t<w1+0.4?1:0));
+  op(this.p2,vB*ramp(t,b.L[2].t0+0.5,b.L[2].t0+0.9));
+  e13On(this.pd,vB*ramp(t,b.L[3].t0,b.L[3].t0+0.4),t>=b.L[3].t0&&t<b.t1);
+  const vC=win(t,c.t0,c.t1+0.3,0.4);op(this.c3h,vC);
+  const st=[c.L[0].t0,c.L[1].t0,c.L[1].t0+(c.L[1].t1-c.L[1].t0)*0.62];
+  this.c3.forEach((e,i)=>e13On(e,vC*ramp(t,st[i],st[i]+0.4),t>=st[i]&&t<(st[i+1]||c.t1)));
+ }});
+
+/* ═════════ c2-lbd 루이소체 치매 ═════════ */
+page({id:'c2-lbd',label:'2-9',title:'루이소체 치매',scenes:[
+ {name:'루이소체 치매',pre:0.5,post:1.4,lines:[
+  '루이소체 치매는 알파 시뉴클레인이라는 단백질 덩어리, 즉 루이소체가 뇌세포에 쌓여 생기는 퇴행성 치매로, 알츠하이머보다 빠르게 진행합니다.',
+  '첫째, 인지 기능이 들쭉날쭉합니다. 어떤 날은 또렷하다가 다른 날은 심하게 혼란스러울 정도로, 하루 중에도 시간대에 따라 달라집니다.',
+  '둘째, 환자의 약 80퍼센트가 사람이나 동물이 보이는 생생하고 자세한 환시를 경험하며, 진단의 중요한 단서가 됩니다.',
+  '셋째, 떨림, 경직, 운동완만, 자세 불안정 같은 파킨슨병과 비슷한 운동 증상이 나타납니다.',
+  '넷째, 꿈속 행동을 실제로 하는 렘수면 행동장애가 있습니다.',
+  '이 환시는 섬망이 아니라 병 자체의 증상입니다. 섬망은 감염이나 약물 같은 원인으로 갑자기 생기는 의식과 주의의 혼란이라, 원인을 치료하면 좋아질 수 있습니다. 다만 루이소체 치매의 인지 변동은 섬망처럼 보일 수 있어 구별해야 합니다.']}],
+ init(L){const s=SVGROOT(L);
+  this.cause=e13Card(L,60,94,1170,84,'','#c58cff','<div style="display:flex;align-items:center;gap:18px"><span style="font-size:25px;font-weight:800;color:#d6b0ff">루이소체 치매</span>'+e13Chip('빠른 진행','#ffe08a',17)+'<span style="font-size:18px;color:#dbe5f3">원인: <b>알파-시뉴클레인</b> 축적 · 유전(GBA · SNCA) · 환경(농약 · 독소)</span></div>',18);
+  const PX=[60,355,650,945],PY=196,PW=280,PH=290;
+  const lab=['① 인지 기능 변동','② 생생한 환시 (약 80%)','③ 파킨슨 증상','④ 렘수면 행동장애'];const sub=['날마다 · 시간대마다 다름','사람 · 동물이 보임','떨림 · 경직 · 운동완만 · 자세 불안정','꿈속 행동을 실제로'];
+  this.pn=PX.map((x,i)=>{const g=sv('g',{opacity:0},s);g.r=sv('rect',{x,y:PY,width:PW,height:PH,rx:14,fill:'rgba(26,20,44,.94)',stroke:'#6b5a90','stroke-width':2},g);tx_(g,x+PW/2,PY+32,lab[i],{'font-size':20,fill:'#e2c9ff'});tx_(g,x+PW/2,PY+PH-16,sub[i],{'font-size':15,fill:'#c9d6ea'});g.x=x;return g;});
+  /* ① 변동 그래프 */
+  {const g=this.pn[0],x=g.x;const D=['월','화','수','목','금','토','일'],V=[0.85,0.3,0.75,0.2,0.9,0.4,0.7];
+   sv('line',{x1:x+24,y1:PY+218,x2:x+PW-16,y2:PY+218,stroke:'#5d7aa6','stroke-width':2},g);tx_(g,x+30,PY+70,'또렷',{'font-size':14,fill:'#7fe8c4','text-anchor':'start'});tx_(g,x+30,PY+212,'혼란',{'font-size':14,fill:'#ff9a8a','text-anchor':'start'});
+   const pts=V.map((v,i)=>[x+70+i*30,PY+205-v*125]);this.zz=sv('path',{d:'M'+pts.map(q=>q.map(n=>n.toFixed(1)).join(',')).join(' L'),fill:'none',stroke:'#ffe08a','stroke-width':4,'stroke-linejoin':'round'},g);
+   this.zd=pts.map((q,i)=>{const c=sv('circle',{cx:q[0],cy:q[1],r:6,fill:V[i]>0.5?'#7fe8c4':'#ff9a8a'},g);tx_(g,q[0],PY+238,D[i],{'font-size':14,fill:'#9fb3cf'});return c;});
+   tx_(g,x+PW-30,PY+70,'☀',{'font-size':20,fill:'#ffe08a'});tx_(g,x+PW-30,PY+100,'☾',{'font-size':20,fill:'#9cc7ff'});}
+  /* ② 환시 */
+  {const g=this.pn[1],x=g.x;const pp=e13Person(g,'#cfe0f5');pp.setAttribute('transform','translate('+(x+70)+','+(PY+215)+') scale(1.5)');
+   this.gh1=e13Person(g,'rgba(210,190,255,.8)');this.gh1.setAttribute('transform','translate('+(x+190)+','+(PY+200)+') scale(1.25)');
+   this.gh2=sv('g',{},g);const cx=x+215,cy=PY+232;sv('ellipse',{cx,cy,rx:24,ry:13,fill:'rgba(210,190,255,.8)'},this.gh2);sv('circle',{cx:cx+24,cy:cy-14,r:10,fill:'rgba(210,190,255,.8)'},this.gh2);sv('path',{d:'M'+(cx+18)+','+(cy-22)+' l4,-10 l4,9 M'+(cx+26)+','+(cy-23)+' l5,-9 l2,10',fill:'rgba(210,190,255,.8)',stroke:'rgba(210,190,255,.8)','stroke-width':2},this.gh2);sv('path',{d:'M'+(cx-24)+','+cy+' q-16,-6 -12,-22',fill:'none',stroke:'rgba(210,190,255,.8)','stroke-width':4},this.gh2);
+   const ex=x+86,ey=PY+122;sv('path',{d:'M'+ex+','+ey+' L'+(x+170)+','+(PY+150)+' L'+(x+170)+','+(PY+230)+'Z',fill:'rgba(255,224,138,.12)'},g);}
+  /* ③ 떨리는 손 */
+  {const g=this.pn[2],x=g.x;this.hand=sv('g',{},g);const hx=x+140,hy=PY+120;sv('path',{d:'M'+(hx-26)+','+(hy+30)+' V'+(hy-6)+' M'+(hx-12)+','+(hy+30)+' V'+(hy-22)+' M'+(hx+2)+','+(hy+30)+' V'+(hy-24)+' M'+(hx+16)+','+(hy+30)+' V'+(hy-16)+' M'+(hx+30)+','+(hy+34)+' L'+(hx+40)+','+(hy+8),fill:'none',stroke:'#efc9a8','stroke-width':12,'stroke-linecap':'round'},this.hand);sv('rect',{x:hx-34,y:hy+22,width:70,height:44,rx:14,fill:'#efc9a8'},this.hand);
+   for(const s2 of [-1,1])sv('path',{d:'M'+(hx+s2*62)+','+(hy-10)+' q'+(s2*8)+',10 0,20 q'+(s2*-8)+',10 0,20',fill:'none',stroke:'#ffe08a','stroke-width':2.5},g);
+   tx_(g,x+PW/2,PY+225,'파킨슨병과 비슷한 운동 증상',{'font-size':16,fill:'#ffd2a6'});}
+  /* ④ 렘수면 */
+  {const g=this.pn[3],x=g.x,by=PY+170;sv('rect',{x:x+24,y:by,width:232,height:18,rx:4,fill:'#8a7a60'},g);sv('rect',{x:x+24,y:by-30,width:14,height:66,fill:'#8a7a60'},g);sv('rect',{x:x+242,y:by-14,width:14,height:50,fill:'#8a7a60'},g);
+   sv('rect',{x:x+40,y:by-18,width:44,height:18,rx:8,fill:'#e8e2d6'},g);sv('circle',{cx:x+66,cy:by-20,r:14,fill:'#efc9a8'},g);sv('path',{d:'M'+(x+84)+','+(by-10)+' H'+(x+200),stroke:'#5b6f8f','stroke-width':20,'stroke-linecap':'round'},g);
+   sv('path',{d:'M'+(x+90)+','+(by-6)+' H'+(x+236),stroke:'#8fa3c4','stroke-width':10,opacity:.6},g);
+   this.arm=sv('path',{d:'',fill:'none',stroke:'#efc9a8','stroke-width':8,'stroke-linecap':'round'},g);this.leg=sv('path',{d:'',fill:'none',stroke:'#5b6f8f','stroke-width':12,'stroke-linecap':'round'},g);
+   this.zz2=tx_(g,x+90,by-60,'Zz',{'font-size':22,fill:'#9cc7ff'});this.dream=tx_(g,x+190,by-80,'💭',{'font-size':30});this.armP=[x+110,by-14];this.legP=[x+196,by-10];}
+  /* 섬망 비교 */
+  this.dh=hdiv('ov','<span style="display:inline-block;padding:8px 18px;border-radius:20px;background:rgba(14,26,46,.96);border:2px solid #ffe08a;font-size:22px;font-weight:800;color:#ffe08a">환시 = 섬망 ✕ → 루이소체 치매 자체의 증상</span>',L,'left:60px;top:192px;width:1170px;text-align:center');
+  this.T=e13Table(L,120,250,1050,[150,420,480],['','섬망','루이소체 치매'],[
+   ['시작','<b style="color:#ffb2a6">갑자기</b> (수 시간 ~ 수일)','서서히 진행'],
+   ['원인','감염 · 약물 · 대사 문제 등','루이소체 축적 (퇴행성)'],
+   ['의식','<b style="color:#ffb2a6">흐려지고</b> 주의가 떨어짐','기본적으로 의식 명료 · 다만 <b style="color:#ffe08a">인지 변동</b>이 있어 헷갈림'],
+   ['경과','<b style="color:#7fe8c4">원인 치료로 회복 가능</b>','점진적 진행']],19);
+ },
+ draw(t,p){const [a]=p.scenes;const k=e13Cur(t,a);const inCmp=k>=5;
+  op(this.cause,ramp(t,a.L[0].t0,a.L[0].t0+0.4));
+  this.pn.forEach((g,i)=>{const on=ramp(t,a.L[i+1].t0,a.L[i+1].t0+0.4);op(g,on*(inCmp?1-ramp(t,a.L[5].t0,a.L[5].t0+0.4):(k===i+1?1:0.55)));g.r.setAttribute('stroke',k===i+1?'#ffe08a':'#6b5a90');g.r.setAttribute('stroke-width',k===i+1?4:2);});
+  const L1=a.L[1];const kz=ramp(t,L1.t0+0.3,L1.t1-0.5);grow(this.zz,t<L1.t0?0:kz);this.zd.forEach((c,i)=>op(c,kz*7>i+0.3?1:0));
+  op(this.gh1,0.25+0.6*Math.max(0,Math.sin(t*1.6)));op(this.gh2,0.25+0.6*Math.max(0,Math.sin(t*1.6+2.2)));
+  this.hand.setAttribute('transform','translate('+(Math.sin(t*28)*2.4).toFixed(2)+',0)');
+  const [ax,ay]=this.armP,an=-1.2+0.7*Math.sin(t*3.4);this.arm.setAttribute('d','M'+ax+','+ay+' l'+(Math.cos(an)*40).toFixed(1)+','+(Math.sin(an)*40).toFixed(1));
+  const [lx,ly]=this.legP,ln=-0.4+0.5*Math.sin(t*2.6+1);this.leg.setAttribute('d','M'+lx+','+ly+' l'+(Math.cos(ln)*46).toFixed(1)+','+(Math.sin(ln)*46).toFixed(1));op(this.dream,0.5+0.5*Math.sin(t*2));
+  const vC=ramp(t,a.L[5].t0+0.3,a.L[5].t0+0.7);op(this.dh,vC);op(this.T,vC);const d5=a.L[5].t1-a.L[5].t0;
+  this.T.rows.forEach((r,i)=>{const s0=a.L[5].t0+d5*(0.08+i*0.16);op(r,ramp(t,s0,s0+0.4));});
  }});
 
 /* ═════════ c2-8 가성치매 vs 치매 ═════════ */
-page({id:'c2-8',label:'2-8',title:'가성치매 vs 치매',scenes:[
+page({id:'c2-8',label:'2-10',title:'가성치매 vs 치매',scenes:[
  {name:'우울증 · 가성치매',pre:0.5,post:1.4,lines:[
   '우울증으로 인한 가성치매는 치매처럼 보이지만 뇌 병변이 없습니다.',
   '비교적 갑자기 시작하고, 원인 사건과 우울 증상이 먼저 있으며, 기억이 실제보다 더 나쁘다고 호소합니다.',
@@ -935,8 +1031,10 @@ const QC2=[
  {q:'60세에 탈억제, 반복 행동, 과잉구강증이 두드러지고 언어장애도 초기부터 나타났다. 유형은?',o:['알츠하이머병','혈관성 치매','전두측두엽 치매','루이소체 치매','파킨슨병 치매'],a:2,x:'전두측두엽 치매(픽병) = 행동 · 성격 변화 · 65세 이전 발병이 많음'},
  {q:'인지 기능이 날마다 달라지고 생생한 환시와 렘수면 행동장애가 있다. 유형은?',o:['알츠하이머병','혈관성 치매','전두측두엽 치매','루이소체 치매','의미 치매'],a:3,x:'루이소체 치매 = 인지 변동 · 환시 · 파킨슨 증상 · 렘수면 행동장애'},
  {q:'말장애가 두드러지는 피질하성 치매로, 글씨가 점점 작아지는 소자증이 보인다. 유형은?',o:['알츠하이머병','파킨슨병 치매','의미 치매','혈관성 치매','가성치매'],a:1,x:'파킨슨병 치매 = 과소운동형 마비말장애 · 소자증 · 음소 · 의미 유창성 모두 저하'},
- {q:'원인 사건 뒤 비교적 갑자기 기억 저하를 호소하고, 검사에서 "모르겠어요"라며 쉽게 포기한다. 항우울 치료 뒤 인지가 회복되었다. 무엇인가?',o:['알츠하이머병','혈관성 치매','가성치매','루이소체 치매','경도인지장애'],a:2,x:'가성치매(우울증) = 기억을 더 심하게 호소 · 쉽게 포기 · 항우울 치료로 회복'}];
-page({id:'c2-9',label:'2-9',title:'확인 문제',mute:true,scenes:QC2.map((q,i)=>({name:'문제 '+(i+1),pre:i===0?0.6:0.4,post:0.6,lines:[{tx:q.q,d:10,nosub:true},{tx:'정답',d:6,nosub:true}]})),
+ {q:'원인 사건 뒤 비교적 갑자기 기억 저하를 호소하고, 검사에서 "모르겠어요"라며 쉽게 포기한다. 항우울 치료 뒤 인지가 회복되었다. 무엇인가?',o:['알츠하이머병','혈관성 치매','가성치매','루이소체 치매','경도인지장애'],a:2,x:'가성치매(우울증) = 기억을 더 심하게 호소 · 쉽게 포기 · 항우울 치료로 회복'},
+ {q:'인지의사소통장애 유형과 특징이 적절하게 연결된 것은?',o:['파킨슨병 치매 - 말장애가 두드러지는 피질하성 치매','알츠하이머 치매 - 발병 초기부터 비유창한 발화','혈관성 치매 - 베타 아밀로이드 축적에 따른 피질성 치매','전두측두엽 치매 - 발병 후기까지 독립적 일상활동 유지','원발성 진행성 실어증 - 뇌혈관 질환에 의한 피질하성 치매'],a:0,x:'2025 기출 · 파킨슨병 치매 = 말장애가 두드러지는 피질하성 치매 · 베타 아밀로이드는 알츠하이머 · PPA는 신경퇴행 질환'},
+ {q:'사람이나 동물이 보이는 생생한 환시, 날마다 달라지는 인지, 렘수면 행동장애를 보이는 치매는?',o:['섬망','알츠하이머병','루이소체 치매','진행핵상마비','가성치매'],a:2,x:'루이소체 치매 · 환시는 섬망이 아니라 병 자체의 증상 (섬망은 원인으로 갑자기 생기고 원인 치료로 회복 가능)'}];
+page({id:'c2-9',label:'2-11',title:'확인 문제',mute:true,scenes:QC2.map((q,i)=>({name:'문제 '+(i+1),pre:i===0?0.6:0.4,post:0.6,lines:[{tx:q.q,d:10,nosub:true},{tx:'정답',d:6,nosub:true}]})),
  init(L){const N='①②③④⑤';this.cards=QC2.map((q,i)=>hdiv('quiz ov','<div class="qn">문제 '+(i+1)+' / '+QC2.length+' · 잠깐 멈추고 풀어 보세요</div><div class="qt">'+q.q+'</div>'+q.o.map((o,j)=>'<div class="op">'+N[j]+' '+o+'</div>').join('')+'<div class="ex ov" style="position:relative">정답 '+N[q.a]+' · '+q.x+'</div>',L));},
  draw(t,p){this.cards.forEach((c,i)=>{const s=p.scenes[i];op(c,win(t,s.t0+(i===0?0.3:0),s.t1+0.1,0.35));const rv=t>=s.L[1].t0;c.querySelectorAll('.op').forEach((o,j)=>o.classList.toggle('ok',rv&&j===QC2[i].a));op(c.querySelector('.ex'),ramp(t,s.L[1].t0,s.L[1].t0+0.4));});}});
 </script>
