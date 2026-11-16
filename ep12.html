@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>치매 1편 · 인지의 기초</title>
+<style>*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#04070d;color:#eef3fb;font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif;overflow:hidden}
+#wrap{position:fixed;inset:0;display:flex;flex-direction:column}
+#vp{flex:1;position:relative;overflow:hidden}
+#stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center;overflow:hidden;
+ background:radial-gradient(ellipse at 50% 38%,#17263f 0%,#0b1324 58%,#060a13 100%);cursor:pointer;user-select:none}
+#gl{position:absolute;left:0;top:0;width:1280px;height:720px}
+#layers{position:absolute;inset:0}
+.page{position:absolute;inset:0;pointer-events:none}
+.ov{position:absolute;opacity:0;pointer-events:none}
+.abs{position:absolute}
+#tags{position:absolute;inset:0;pointer-events:none}
+#lead{position:absolute;inset:0;width:1280px;height:720px}
+.t3{position:absolute;font-size:23px;font-weight:700;white-space:nowrap;padding:4px 12px;border-radius:8px;background:rgba(6,12,24,.82);border:1px solid #4a6a96;transform:translate(0,-50%)}
+.t3.l{transform:translate(-100%,-50%)}
+.t3.blue{color:#7cc3ff;border-color:#3d8fe0}.t3.red{color:#ff8a7a;border-color:#e0574a}.t3.yel{color:#ffd54a;border-color:#c79f2c}
+.t3.grn{color:#7fe8c4;border-color:#34b08a}.t3.org{color:#ffc27a;border-color:#d8892e}.t3.pur{color:#d8b4ff;border-color:#9a6ad6}
+#tag{left:28px;top:22px;font-size:20px;color:#a9bcd6;letter-spacing:.02em;z-index:5}
+#tag b{color:#fff;font-weight:700}
+#title{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(6,10,19,.72);z-index:8}
+#title .ep{font-size:26px;color:#8fc4ff;letter-spacing:.12em}
+#title .nm{font-size:64px;font-weight:800;margin-top:14px}
+#sub{position:absolute;left:40px;right:40px;bottom:30px;text-align:center;font-size:27px;line-height:1.45;font-weight:600;pointer-events:none;white-space:nowrap;transition:bottom .25s;
+ text-shadow:0 2px 6px #000,0 0 2px #000;z-index:6}
+#sub span{background:rgba(4,8,16,.66);padding:6px 16px;border-radius:10px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#chip{left:50%;top:70px;transform:translateX(-50%);font-size:26px;font-weight:700;padding:10px 26px;border-radius:40px;
+ background:rgba(20,34,58,.9);border:1px solid #34507a;white-space:nowrap;z-index:4}
+.card{position:absolute;padding:24px 28px;border-radius:18px;background:rgba(12,22,40,.9);border:2px solid #355a8c}
+.card h3{margin:0 0 10px;font-size:32px}
+.card .big{font-size:27px;font-weight:700;margin-bottom:8px}
+.card p{margin:0;font-size:23px;line-height:1.5;color:#c9d6ea}
+.card ul{margin:6px 0 0;padding-left:24px;font-size:23px;line-height:1.55;color:#dbe5f3}
+.lbl{font-family:inherit}
+svg text{font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+.hl{filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 10px rgba(255,255,255,.6))}
+/* 1-1 */
+.node{position:absolute;transform:translate(-50%,-50%);text-align:center;border-radius:16px;padding:16px 20px;background:rgba(12,22,40,.92);border:2px solid #3b5679}
+.node h4{margin:0;font-size:30px}
+.node .d{font-size:22px;color:#c9d6ea;line-height:1.5;margin-top:8px}
+.node.on{box-shadow:0 0 0 3px rgba(255,255,255,.18),0 0 28px rgba(110,180,255,.35)}
+.pill{display:inline-block;margin:4px 4px 0;padding:3px 12px;border-radius:20px;font-size:21px;font-weight:700}
+.pill.s{background:#4a1d1d;color:#ffb2a6}.pill.p{background:#123a33;color:#9ff0d6}
+.col{position:absolute;top:56px;width:540px;height:456px;border-radius:20px;padding:22px 26px;background:rgba(12,20,36,.93)}
+.col h3{margin:0;font-size:34px}.col .k{font-size:22px;color:#c9d6ea;margin-top:4px}
+.row{display:flex;align-items:center;height:82px;border-top:1px solid #24344f;opacity:0}
+.row:first-of-type{margin-top:14px}
+.row svg{width:96px;height:80px;flex:none}
+.row .lab{width:110px;font-size:24px;color:#aab9d0;margin-left:12px}
+.row .val{font-size:28px;font-weight:800}
+/* quiz */
+.quiz{position:absolute;left:110px;right:110px;top:70px;bottom:40px;border-radius:22px;background:rgba(10,18,34,.94);border:2px solid #34507a;padding:30px 40px}
+.quiz .qn{font-size:24px;color:#8fc4ff;font-weight:700}
+.quiz .qt{font-size:28px;font-weight:700;line-height:1.45;margin:10px 0 18px}
+.quiz .op{font-size:25px;line-height:1.3;padding:7px 14px;border-radius:12px;margin:6px 0;border:2px solid transparent}
+.quiz .op.ok{background:rgba(40,140,100,.28);border-color:#3fcf98;color:#c9ffe9;font-weight:800}
+.quiz .ex{margin-top:12px;font-size:22px;line-height:1.5;color:#ffe08a;padding:12px 18px;border-radius:12px;background:rgba(60,48,10,.55)}
+.quiz .fig{position:absolute;right:40px;top:110px;width:400px;height:330px}
+/* menu */
+#menu{position:absolute;right:16px;bottom:96px;width:400px;max-height:70vh;overflow:auto;border-radius:14px;background:rgba(20,22,28,.96);border:1px solid #3a4150;padding:8px;display:none;z-index:40;cursor:default;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+#menu div{font-size:16px;padding:10px 14px;border-radius:10px;cursor:pointer;color:#eef3fb}
+#menu div:hover{background:#2c3342}
+#menu div b{color:#8fc4ff;margin-right:8px}
+#bigplay{inset:0;display:flex;align-items:center;justify-content:center;opacity:1;z-index:9}
+#bigplay div{width:120px;height:120px;border-radius:50%;background:rgba(10,20,40,.7);border:3px solid #9cc7ff;display:flex;align-items:center;justify-content:center}
+#ctl{position:absolute;left:0;right:0;bottom:0;z-index:30;padding:40px 16px 12px;background:linear-gradient(to bottom,rgba(0,0,0,0),rgba(0,0,0,.72));transition:opacity .25s;font-family:inherit}
+#ctl.hide{opacity:0;pointer-events:none}
+#vp.nocur{cursor:none}
+#prog{height:18px;position:relative;cursor:pointer;touch-action:none;margin:0 6px 6px}
+#track{position:absolute;left:0;right:0;top:7px;height:4px;border-radius:2px;background:rgba(255,255,255,.28);transition:height .12s,top .12s}
+#fill{position:absolute;left:0;top:7px;height:4px;border-radius:2px;background:#5aa9ff;transition:height .12s,top .12s}
+#prog:hover #track,#prog:hover #fill{top:6px;height:6px}
+#knob{position:absolute;top:2px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#5aa9ff;transform:scale(0);transition:transform .12s}
+#prog:hover #knob,#ctl.drag #knob{transform:scale(1)}
+.tick{position:absolute;top:7px;width:2px;height:4px;background:rgba(0,0,0,.55)}
+.tick.pg{background:rgba(255,255,255,.85);width:3px;top:4px;height:10px;border-radius:1px}
+.crow{display:flex;align-items:center;gap:10px}
+.crow .sp{flex:1}
+.grp{display:flex;align-items:center;background:rgba(30,32,38,.72);border-radius:26px;padding:3px;gap:2px}
+.pill{background:rgba(30,32,38,.72);border-radius:22px;padding:0 16px;height:42px;display:flex;align-items:center;font-size:15px;font-weight:600;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums}
+#scn{color:#d6e2f2;font-weight:500;max-width:340px;overflow:hidden;text-overflow:ellipsis}
+#ctl button{border:0;background:transparent;color:#fff;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;border-radius:22px}
+#ctl button:hover{background:rgba(255,255,255,.14)}
+#ctl button.ic{width:44px;height:40px}
+#ctl button.tx{height:40px;padding:0 13px;gap:6px;font-size:15px;font-weight:700}
+#flash{top:50%;transform:translateY(-50%);font-size:34px;font-weight:800;padding:14px 22px;border-radius:40px;background:rgba(0,0,0,.55);z-index:10}
+
+#ctl button svg,#ctl button span{pointer-events:none}
+</style>
+</head>
+<body>
+<div id="wrap">
+ <div id="vp">
+  <div id="stage">
+   <canvas id="gl" width="1280" height="720"></canvas>
+   <div id="layers"></div>
+   <div id="tags"><svg id="lead" viewBox="0 0 1280 720"></svg></div>
+   <div id="tag" class="ov"></div>
+   <div id="chip" class="ov"></div>
+   <div id="sub"></div>
+   <div id="title" class="ov"><div class="ep">치매 1편 · 인지의 기초</div><div class="nm" id="titleNm"></div></div>
+   <div id="bigplay" class="ov"><div><svg width="54" height="54" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#cfe4ff"/></svg></div></div>
+   <div id="nextEp" style="position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;gap:18px;background:rgba(6,10,19,.8);z-index:12"><div style="font-size:30px;font-weight:800">치매 1편 끝</div><a href="ep13.html" style="font-size:26px;font-weight:800;color:#fff;background:#4a6ae0;padding:14px 30px;border-radius:30px;text-decoration:none">다음 편 · 치매 2편 치매의 단계와 유형 ▶</a><a href="index.html" style="font-size:20px;color:#9fb3cf">목록으로</a></div>
+   <div id="flash" class="ov"></div>
+  </div>
+ </div>
+ <div id="ctl">
+  <div id="prog"><div id="track"></div><div id="ticks"></div><div id="fill"></div><div id="knob"></div></div>
+  <div class="crow">
+   <div class="grp"><button id="bplay" class="ic" title="재생/일시정지 (Space·K)"></button><button id="bback" class="ic" title="10초 뒤로 (J)"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 5V2L7 6l5 4V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z" fill="#fff"/><text x="12" y="16.2" text-anchor="middle" font-size="7" font-weight="700" fill="#fff" font-family="sans-serif">10</text></svg></button><button id="bfwd" class="ic" title="10초 앞으로 (L)"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 5V2l5 4-5 4V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z" fill="#fff"/><text x="12" y="16.2" text-anchor="middle" font-size="7" font-weight="700" fill="#fff" font-family="sans-serif">10</text></svg></button></div>
+   <div class="pill" id="time">0:00 / 0:00</div>
+   <div class="pill" id="scn"></div>
+   <div class="sp"></div>
+   <div class="grp"><button id="bspd" class="tx" title="재생 속도 (&lt; &gt;)">1.0×</button><button id="bmenu" class="tx" title="목차"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 6h2v2H4zm4 0h12v2H8zM4 11h2v2H4zm4 0h12v2H8zM4 16h2v2H4zm4 0h12v2H8z" fill="#fff"/></svg><span>목차</span></button><button id="bhome" class="tx" title="목록 (Esc)"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4zm9 0h7v7h-7z" fill="#fff"/></svg><span>목록</span></button><button id="bfull" class="ic" title="전체화면 (F)"><svg id="icoFull" viewBox="0 0 24 24" width="24" height="24"><path d="M4 9V4h5v2H6v3zm11-5h5v5h-2V6h-3zM4 15h2v3h3v2H4zm14 0h2v5h-5v-2h3z" fill="#fff"/></svg></button></div>
+  </div>
+ </div>
+ <div id="menu"></div>
+</div>
+</div>
+<svg id="measure" width="0" height="0" style="position:absolute;left:-9999px"></svg>
+<script src="lib/three.min.js"></script>
+<script>window.EP={name:'치매 1편',sub:'인지의 기초',next:'ep13.html'};</script>
+<script>"use strict";
+window.EP=window.EP||{name:'해부 1편',sub:'뇌의 구조'};
+/* ───────── 공용 도구 ───────── */
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const sm=x=>{x=cl(x);return x*x*(3-2*x)};
+const ramp=(t,a,b)=>sm((t-a)/(b-a));
+const win=(t,a,b,f=0.5)=>Math.min(ramp(t,a,a+f),1-ramp(t,b-f,b));
+const lerp=(a,b,k)=>a+(b-a)*k;
+const op=(e,v)=>{if(e)e.style.opacity=(+v).toFixed(3);};
+const NS='http://www.w3.org/2000/svg';
+function sv(tag,attrs,parent){const e=document.createElementNS(NS,tag);if(attrs)for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function hdiv(cls,html,parent,style){const e=document.createElement('div');if(cls)e.className=cls;if(html!=null)e.innerHTML=html;if(style)e.style.cssText=style;if(parent)parent.appendChild(e);return e;}
+function smoothPath(pts,closed){const n=pts.length;let d=`M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`;const P=i=>closed?pts[(i+n)%n]:pts[cl(i,0,n-1)];
+ const m=closed?n:n-1;for(let i=0;i<m;i++){const p0=P(i-1),p1=P(i),p2=P(i+1),p3=P(i+2);
+  d+=` C${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)},${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)} ${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)},${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;}
+ return d+(closed?'Z':'');}
+/* 매끈한 윤곽선을 이랑처럼 물결치게 */
+const WAVYC={};
+function wavy(d,amp,waves,N=520){const _k=d+'|'+amp+'|'+waves+'|'+N;if(WAVYC[_k])return WAVYC[_k];return WAVYC[_k]=_wavy(d,amp,waves,N);}
+function _wavy(d,amp,waves,N){const p=sv('path',{d},$('measure'));const L=p.getTotalLength();const P=[];for(let i=0;i<N;i++)P.push(p.getPointAtLength(L*i/N));
+ let s='';for(let i=0;i<N;i++){const a=P[(i-1+N)%N],b=P[(i+1)%N];let nx=b.y-a.y,ny=-(b.x-a.x);const m=Math.hypot(nx,ny)||1;nx/=m;ny/=m;
+  const w=amp*(Math.sin(i/N*2*Math.PI*waves)+0.25*Math.sin(i/N*2*Math.PI*waves*1.7+1.7));s+=(i?'L':'M')+(P[i].x+nx*w).toFixed(1)+','+(P[i].y+ny*w).toFixed(1);}
+ p.remove();return s+'Z';}
+/* 경로를 따라 자라는 선 */
+function grow(path,p){const L=path.__L||(path.__L=path.getTotalLength());path.style.strokeDasharray=L;path.style.strokeDashoffset=L*(1-cl(p));path.style.opacity=p>0?1:0;}
+function ptOn(path,u){const L=path.__L||(path.__L=path.getTotalLength());return path.getPointAtLength(L*cl(u));}
+
+/* ───────── 페이지·타임라인 ───────── */
+const PAGES=[];const ALL=[];let TOTAL=0;
+const DUR={};   // 실제 음성 길이(초). 음성이 있는 줄만 기록
+const est=tx=>{const n=tx.replace(/[\s,.?!·~()]/g,'').length;return Math.max(1.6,n*0.172+0.3);};
+function page(def){PAGES.push(def);return def;}
+function buildTimeline(){let T=0;
+ for(const p of PAGES){p.t0=T;let n=0;const first=p===PAGES[0];
+  for(const s of p.scenes){s.t0=T;T+=(s===p.scenes[0]&&!first)?Math.min(s.pre||0,0.9):(s.pre||0);s.L=[];
+   for(const raw of s.lines||[]){const o=typeof raw==='string'?{tx:raw}:raw;n++;
+    const id=p.id+'_'+String(n).padStart(2,'0');const mute=!!(o.mute||p.mute);
+    const d=o.d||(DUR[id]!=null?DUR[id]:est(o.tx));
+    const l={id,tx:o.tx,t0:T,t1:T+d,mute,nosub:!!o.nosub,has:!mute&&DUR[id]!=null,src:'audio/'+id+'.mp3'};
+    s.L.push(l);ALL.push(l);T+=d+(o.gap!=null?o.gap:0.4);}
+   T+=(s===p.scenes[p.scenes.length-1]&&p!==PAGES[PAGES.length-1])?Math.min(s.post||0,1.2):(s.post||0);s.t1=T;}
+  p.t1=T;}
+ TOTAL=T;}
+
+/* ───────── 화면 공용: 3D 이름표, 칩 ───────── */
+const tagPool={};let tagFrame=0;
+function tag3(key,obj,lp,text,off,cls,v){if(v<=0)return;let d=tagPool[key];
+ if(!d){d=tagPool[key]={el:hdiv('t3',''),ln:sv('line',{stroke:'#cfe0f5','stroke-width':2}),dot:sv('circle',{r:5,fill:'#fff'})};$('tags').appendChild(d.el);$('lead').appendChild(d.ln);$('lead').appendChild(d.dot);}
+ d.used=tagFrame;d.el.className='t3 '+(cls||'')+(off[0]<0?' l':'');if(d.el.textContent!==text)d.el.textContent=text;
+ if(!lp)return;const w=W.tmp.copy(lp);if(d.mf!==tagFrame){obj.updateMatrixWorld(true);W.cam.updateMatrixWorld();d.mf=tagFrame;}obj.localToWorld(w);w.project(W.cam);
+ const x=(w.x+1)*640,y=(1-w.y)*360,lx=x+off[0],ly=y+off[1];
+ d.el.style.left=lx+'px';d.el.style.top=ly+'px';d.ln.setAttribute('x1',x);d.ln.setAttribute('y1',y);d.ln.setAttribute('x2',lx);d.ln.setAttribute('y2',ly);d.dot.setAttribute('cx',x);d.dot.setAttribute('cy',y);
+ op(d.el,v);op(d.ln,v);op(d.dot,v);}
+function endTags(){for(const k in tagPool){const d=tagPool[k];if(d.used!==tagFrame){op(d.el,0);op(d.ln,0);op(d.dot,0);}}}
+let chipNow=null;
+function chip(html,v){if(v>0)chipNow={html,v};}
+
+
+/* 자막: 한 줄(최대 폭)에 맞게 쉼표·마침표 기준으로 나누기 */
+const SUBW=1150,subCache={};let subCtx=null;
+function subW(s){if(!subCtx){subCtx=document.createElement('canvas').getContext('2d');subCtx.font='600 27px "Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif';}return subCtx.measureText(s).width+36;}
+function subChunks(tx){if(subCache[tx])return subCache[tx];const out=[];const push=s=>{s=s.trim();if(s)out.push(s);};
+ const sents=tx.match(/[^.?!]+[.?!]+\s*|[^.?!]+$/g)||[tx];
+ for(const sen of sents){if(subW(sen.trim())<=SUBW){push(sen);continue;}
+  const cls=sen.match(/[^,]+,?\s*/g)||[sen];let cur='';
+  for(const c of cls){const cand=cur+c;if(subW(cand.trim())<=SUBW){cur=cand;continue;}
+   push(cur);cur='';if(subW(c.trim())<=SUBW){cur=c;continue;}
+   let w='';for(const word of c.trim().split(' ')){const cw=w?w+' '+word:word;if(subW(cw)<=SUBW)w=cw;else{push(w);w=word;}}cur=w+' ';}
+  push(cur);}
+ return subCache[tx]=out.length?out:[tx];}
+/* ───────── 프레임 ───────── */
+const FX={gl:0};
+function frame(t){
+ tagFrame++;chipNow=null;FX.gl=0;W.reset();
+ const cur=PAGES.find(p=>t>=p.t0&&t<p.t1)||PAGES[PAGES.length-1];if(typeof ensureInit==='function')ensureInit(cur);
+ const last=PAGES[PAGES.length-1];
+ for(const p of PAGES){if(p!==cur){if(p.layer.style.display!=='none')p.layer.style.display='none';continue;}
+  p.layer.style.display='';op(p.layer,ramp(t,p.t0-0.01,p.t0+0.5)*(p===last?1:1-ramp(t,p.t1-0.3,p.t1)));
+  p.draw(t,p);}
+ // 3D
+ W.cv.style.opacity=FX.gl.toFixed(3);if(FX.gl>0.001)W.R.render(W.scene,W.cam);
+ endTags();
+ // 칩
+ const c=$('chip');const ch=chipNow?chipNow.html:'';if(c.dataset.v!==ch){c.dataset.v=ch;c.innerHTML=ch;}op(c,chipNow?chipNow.v:0);
+ // 제목 카드
+ const P0=PAGES[0];const tv=cur===P0?1-ramp(t,P0.t0+2.6,P0.t0+3.3):0;
+ if($('titleNm').dataset.v!==P0.id){$('titleNm').dataset.v=P0.id;$('titleNm').textContent=(P0.label||P0.id)+' '+P0.title;}
+ op($('title'),tv);
+ // 코너 표시
+ const sc=cur.scenes.find(s=>t>=s.t0&&t<s.t1)||cur.scenes[cur.scenes.length-1];
+ const tg=`${EP.name} · <b>${cur.label||cur.id} ${cur.title}</b> · ${sc.name}`;if($('tag').dataset.v!==tg){$('tag').dataset.v=tg;$('tag').innerHTML=tg;}
+ op($('tag'),cur===P0?ramp(t,P0.t0+2.6,P0.t0+3.2):1);$('scn').textContent=(cur.label||cur.id)+' · '+sc.name;
+ // 자막
+ let line=null;for(const l of ALL)if(!l.nosub&&t>=l.t0&&t<l.t1+0.25)line=l;
+ let want='';if(line){const ch=subChunks(line.tx);const tot=ch.reduce((a,c)=>a+c.length,0);let acc=0;want=ch[ch.length-1];
+  for(const c of ch){acc+=c.length;if(t<line.t0+(line.t1-line.t0)*acc/tot){want=c;break;}}}
+ const sub=$('sub');if(sub.dataset.v!==want){sub.dataset.v=want;sub.innerHTML=want?`<span>${want}</span>`:'';}
+}
+
+/* ───────── 장면 시간 도우미 ───────── */
+// 페이지 안에서 장면 i, 줄 j의 시작/끝
+const LS=(p,i,j)=>p.scenes[i].L[j].t0, LE=(p,i,j)=>p.scenes[i].L[j].t1;
+const ST=(p,i)=>p.scenes[i].t0, SE=(p,i)=>p.scenes[i].t1;
+// 줄 j 동안 k번째 하위 단계(0..n-1)를 균등 분할
+const sub_=(p,i,j,k,n)=>{const a=LS(p,i,j),b=LE(p,i,j);return a+(b-a)*k/n;};
+</script>
+<script>"use strict";
+/* 실제 음성 길이(초) */
+Object.assign(DUR,{"c1-1_01":5.76,"c1-1_02":6.8,"c1-2_01":10.08,"c1-2_02":9.92,"c1-2_03":7.52,"c1-2_04":4.72,"c1-3_01":10.8,"c1-3_02":9.68,"c1-3_03":12.48,"c1-4_01":6.4,"c1-4_02":10.48,"c1-4_03":5.04,"c1-4_04":12.08,"c1-5_01":9.84,"c1-5_02":5.68,"c1-5_03":5.36});
+</script>
+<script>"use strict";
+/* ───────── 3D 공용 세계 ───────── */
+const W=(()=>{
+const cv=$('gl');
+const R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});R.setSize(1280,720,false);
+const scene=new THREE.Scene();
+const cam=new THREE.PerspectiveCamera(38,1280/720,0.05,100);
+scene.add(new THREE.AmbientLight(0xffffff,0.55));
+const dl=new THREE.DirectionalLight(0xffffff,0.95);dl.position.set(3,5,6);scene.add(dl);
+const dl2=new THREE.DirectionalLight(0x9fc0ff,0.45);dl2.position.set(-4,2,-5);scene.add(dl2);
+const dl3=new THREE.DirectionalLight(0xffffff,0.35);dl3.position.set(5,1,-3);scene.add(dl3);
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+const glowTex=(()=>{const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d');const g=x.createRadialGradient(32,32,0,32,32,32);
+ g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(0.3,'rgba(255,255,255,.6)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(0,0,64,64);return new THREE.CanvasTexture(c);})();
+function capsule(a,b,r,mat,parent){const d=b.clone().sub(a);const g=new THREE.CapsuleGeometry(r,d.length(),8,24);const m=new THREE.Mesh(g,mat);
+ m.position.copy(a).add(b).multiplyScalar(0.5);m.quaternion.setFromUnitVectors(V(0,1,0),d.normalize());parent.add(m);return m;}
+function tube(pts,r,mat,parent,seg=64,rad=8){const c=new THREE.CatmullRomCurve3(pts);const g=new THREE.TubeGeometry(c,seg,r,rad);const m=new THREE.Mesh(g,mat);parent.add(m);
+ return {c,g,m,seg,rad,grow(p){g.setDrawRange(0,Math.floor(cl(p)*seg)*rad*6);}};}
+function sprites(n,col,parent,size=0.34){const a=[];for(let i=0;i<n;i++){const s=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:col,blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false}));s.scale.set(size,size,1);s.renderOrder=6;parent.add(s);a.push(s);}return a;}
+const shellMat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,
+ uniforms:{c:{value:new THREE.Color(0x9cc4ec)},op:{value:1}},
+ vertexShader:'varying vec3 vN;varying vec3 vV;void main(){vec4 mv=modelViewMatrix*vec4(position,1.);vN=normalize(normalMatrix*normal);vV=normalize(-mv.xyz);gl_Position=projectionMatrix*mv;}',
+ fragmentShader:'uniform vec3 c;uniform float op;varying vec3 vN;varying vec3 vV;void main(){float f=pow(1.0-abs(dot(normalize(vN),normalize(vV))),2.4);gl_FragColor=vec4(c,(0.025+0.5*f)*op);}'});
+
+/* ── 1) 전신 (1-1) ── */
+const body=new THREE.Group();scene.add(body);
+{const head=new THREE.Mesh(new THREE.SphereGeometry(0.5,40,30),shellMat);head.scale.set(0.86,1.08,0.98);head.position.set(0,3.27,0.02);body.add(head);
+ capsule(V(0,2.62,0),V(0,2.95,0),0.2,shellMat,body);
+ const prof=[[0.001,0.3],[0.5,0.34],[0.66,0.55],[0.64,0.85],[0.56,1.2],[0.6,1.6],[0.7,2.0],[0.78,2.3],[0.74,2.5],[0.5,2.66],[0.22,2.74],[0.001,2.76]].map(p=>new THREE.Vector2(p[0],p[1]));
+ const torso=new THREE.Mesh(new THREE.LatheGeometry(prof,48),shellMat);torso.scale.set(1.13,1,0.56);body.add(torso);
+ for(const sx of [1,-1]){
+  capsule(V(sx*0.92,2.42,0),V(sx*1.22,1.36,0.02),0.15,shellMat,body);capsule(V(sx*1.22,1.36,0.02),V(sx*1.44,0.42,0.06),0.12,shellMat,body);
+  capsule(V(sx*1.45,0.36,0.07),V(sx*1.53,-0.02,0.09),0.1,shellMat,body);capsule(V(sx*0.38,0.48,0),V(sx*0.45,-1.18,0.02),0.21,shellMat,body);
+  capsule(V(sx*0.45,-1.18,0.02),V(sx*0.48,-2.66,0.02),0.15,shellMat,body);capsule(V(sx*0.49,-2.8,0.0),V(sx*0.53,-2.86,0.32),0.09,shellMat,body);}}
+const cnsMat=new THREE.MeshStandardMaterial({color:0xd8a7a2,roughness:0.55,metalness:0.0,emissive:0x000000});
+{const bg=new THREE.SphereGeometry(1,96,72);const bp=bg.attributes.position;
+ for(let i=0;i<bp.count;i++){const x=bp.getX(i),y=bp.getY(i),z=bp.getZ(i);
+  let r=1+0.045*Math.sin(x*17+y*3)*Math.sin(y*15+z*4)*Math.sin(z*13+x*2)+0.02*Math.sin(x*31+z*27);
+  if(Math.abs(x)<0.07&&y>-0.2)r-=0.09*(1-Math.abs(x)/0.07);if(y<-0.3)r*=0.95;bp.setXYZ(i,x*r,y*r,z*r);}
+ bg.computeVertexNormals();const brain=new THREE.Mesh(bg,cnsMat);brain.scale.set(0.36,0.3,0.43);brain.position.set(0,3.37,-0.02);body.add(brain);
+ const cereb=new THREE.Mesh(new THREE.SphereGeometry(1,40,30),cnsMat);cereb.scale.set(0.22,0.12,0.15);cereb.position.set(0,3.14,-0.27);body.add(cereb);
+ capsule(V(0,3.22,-0.11),V(0,2.96,-0.13),0.065,cnsMat,body);
+ const cc=new THREE.CatmullRomCurve3([V(0,2.98,-0.13),V(0,2.6,-0.17),V(0,1.95,-0.23),V(0,1.25,-0.21),V(0,0.86,-0.18)]);
+ body.add(new THREE.Mesh(new THREE.TubeGeometry(cc,80,0.058,12),cnsMat));}
+const nervMat=new THREE.MeshBasicMaterial({color:0x4aa8ff,transparent:true,opacity:0.9,depthWrite:false});
+const nerves=[];
+function nerve(pts,r,group){const o=tube(pts,r,nervMat,body);o.m.renderOrder=2;o.group=group;nerves.push(o);return o;}
+for(const sx of [1,-1]){
+ nerve([V(0,2.46,-0.18),V(sx*0.45,2.43,-0.1),V(sx*0.93,2.36,0),V(sx*1.22,1.36,0.03),V(sx*1.44,0.42,0.07),V(sx*1.52,0.0,0.1)],0.03,'arm');
+ nerve([V(0,0.9,-0.18),V(sx*0.25,0.62,-0.1),V(sx*0.4,0.3,0),V(sx*0.45,-1.2,0.04),V(sx*0.48,-2.62,0.04),V(sx*0.52,-2.86,0.3)],0.034,'leg');
+ for(const y of [2.1,1.8,1.5,1.2]) nerve([V(0,y,-0.21),V(sx*0.5,y-0.04,-0.2),V(sx*0.8,y-0.1,0.08),V(sx*0.48,y-0.18,0.36)],0.016,'trunk');
+ nerve([V(0,3.02,-0.08),V(sx*0.18,3.08,0.18),V(sx*0.27,3.12,0.38)],0.018,'cran');
+ nerve([V(0,3.0,-0.1),V(sx*0.2,2.96,0.12),V(sx*0.3,2.88,0.36)],0.016,'cran');}
+nerve([V(0.04,2.98,-0.08),V(0.12,2.7,0.1),V(0.14,2.3,0.16),V(0.1,1.7,0.12)],0.018,'cran');
+function sigPath(pts,col){const mat=new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:1,depthWrite:false});const o=tube(pts,0.042,mat,body,120,8);o.m.renderOrder=3;o.mat=mat;o.sp=sprites(4,col,body);return o;}
+const sens=sigPath([V(1.52,0.0,0.1),V(1.44,0.42,0.07),V(1.22,1.36,0.03),V(0.93,2.36,0),V(0.45,2.43,-0.1),V(0.03,2.46,-0.18),V(0,2.8,-0.14),V(0,3.1,-0.07),V(0,3.36,0.02)],0x4fb2ff);
+const motor=sigPath([V(0,3.36,0.02),V(0,3.05,-0.1),V(0,2.3,-0.21),V(0,1.3,-0.21),V(0,0.9,-0.18),V(-0.25,0.62,-0.1),V(-0.4,0.3,0),V(-0.45,-1.2,0.04),V(-0.47,-1.85,0.06)],0xff6a5a);
+function drawSig(o,p,t,speed){o.grow(p);o.mat.opacity=p>0?0.95:0;
+ o.sp.forEach((s,i)=>{if(p<=0){s.visible=false;return;}s.visible=true;const u=p<1?cl(p-i*0.03):((t*speed)+i*0.25)%1;s.position.copy(o.c.getPointAt(u));s.material.opacity=p<1?(i==0?1:0.5):0.95;});}
+
+/* ── 2) 큰 뇌 (1-4, 1-5, 1-8, 1-9) ── */
+const brain=new THREE.Group();scene.add(brain);
+const XS=1.45;
+const yF=Z=>-0.16+(0.62-Z)*0.2;      // 외측고랑 높이
+const zC=Y=>0.22-0.42*Y;              // 중심고랑 위치
+const BASE=new THREE.Color(0xdba7a0);
+const LC={1:new THREE.Color(0x5f9dff),2:new THREE.Color(0x52cf8f),3:new THREE.Color(0xffa94d),4:new THREE.Color(0xbd85ff)};
+function makeHemi(s){
+ const g=new THREE.SphereGeometry(1,170,124);const P=g.attributes.position;const n=P.count;const lobe=new Uint8Array(n);
+ for(let i=0;i<n;i++){const x=P.getX(i),y=P.getY(i),z=P.getZ(i);
+  let X=x*0.56,Y=y*0.66,Z=z*1.08;
+  if(Z<0)X*=1-0.22*Math.pow(-Z/1.08,2);
+  if(Z>0.5)Y*=1-0.15*(Z-0.5)/0.6;
+  if(Y<-0.28)Y=-0.28+(Y+0.28)*0.6;
+  X+=s*0.5;
+  const lf=cl((X*s-0.55)/0.35);
+  if(Y<0.05)Y-=0.15*lf*Math.exp(-Math.pow((Z-0.05)/0.5,2))*cl(-Y/0.3+0.2);
+  const yf=Z>-0.5?yF(Z):yF(-0.5);
+  lobe[i]=Z<-0.66?4:(Y<yf&&Z<0.68)?3:(Z>zC(Y)?1:2);
+  let dep=0;
+  if(Z>-0.5&&Z<0.66)dep+=0.075*lf*Math.exp(-Math.pow((Y-yf)/0.045,2));
+  if(Y>yf+0.02)dep+=0.045*Math.exp(-Math.pow((Z-zC(Y))/0.035,2))*cl((X*s-0.3)/0.3);
+  {const w1=11*Z+2.4*Math.sin(6*Y+1.3)+1.8*Math.sin(9*X+4*Z),w2=12*Y+2.2*Math.sin(5*Z+0.7)+1.6*Math.sin(8*X+3*Y);
+   dep+=0.026*Math.pow(1-Math.abs(Math.sin(w1)),5)+0.022*Math.pow(1-Math.abs(Math.sin(w2)),5)-0.006*Math.sin(w1*0.5+w2);}
+  const vx=X-s*0.5,m=Math.hypot(vx,Y,Z)||1;X-=vx/m*dep;Y-=Y/m*dep;Z-=Z/m*dep;
+  if(X*s<0.02)X=s*0.02;P.setXYZ(i,X,Y,Z);}
+ g.computeVertexNormals();g.setAttribute('color',new THREE.BufferAttribute(new Float32Array(n*3),3));
+ const mat=new THREE.MeshStandardMaterial({vertexColors:true,roughness:0.62,metalness:0,transparent:true});
+ const m=new THREE.Mesh(g,mat);m.scale.x=XS;m.userData={lobe,s,key:''};brain.add(m);return m;}
+const hemi={L:makeHemi(1),R:makeHemi(-1)};   // L = 환자의 왼쪽(+x)
+function colorHemi(m,w,tint,tk){const key=[1,2,3,4].map(k=>(w[k]||0).toFixed(2)).join()+(tint?tint.getHexString()+tk.toFixed(2):'');
+ if(m.userData.key===key)return;m.userData.key=key;const C=m.geometry.attributes.color,lb=m.userData.lobe,c=new THREE.Color();
+ for(let i=0;i<lb.length;i++){c.copy(BASE);const k=w[lb[i]]||0;if(k>0)c.lerp(LC[lb[i]],k);if(tint&&tk>0)c.lerp(tint,tk);C.setXYZ(i,c.r,c.g,c.b);}C.needsUpdate=true;}
+const partMat=c=>new THREE.MeshStandardMaterial({color:c,roughness:0.6,transparent:true});
+const cerebMat=partMat(0xcf9c95),midMat=partMat(0xd2a29c),ponsMat=partMat(0xd2a29c),medMat=partMat(0xd2a29c),cordMat=partMat(0xd2a29c),thalMat=partMat(0xffd54a);
+const cereb=(()=>{const g=new THREE.SphereGeometry(1,90,70);const P=g.attributes.position;
+ for(let i=0;i<P.count;i++){const x=P.getX(i),y=P.getY(i),z=P.getZ(i);const r=1+0.035*Math.sin(y*38+z*6)+(Math.abs(x)<0.12?-0.06:0);P.setXYZ(i,x*r,y*r,z*r);}
+ g.computeVertexNormals();const m=new THREE.Mesh(g,cerebMat);m.scale.set(0.82,0.28,0.42);m.position.set(0,-0.62,-0.72);brain.add(m);return m;})();
+const midb=capsule(V(0,-0.22,-0.2),V(0,-0.46,-0.22),0.14,midMat,brain);
+const pons=new THREE.Mesh(new THREE.SphereGeometry(1,48,36),ponsMat);pons.scale.set(0.2,0.17,0.17);pons.position.set(0,-0.62,-0.13);brain.add(pons);
+const medu=capsule(V(0,-0.74,-0.2),V(0,-1.0,-0.26),0.1,medMat,brain);
+const cord=capsule(V(0,-1.02,-0.26),V(0,-1.55,-0.3),0.075,cordMat,brain);
+const thal=new THREE.Group();brain.add(thal);
+for(const sx of [1,-1]){const m=new THREE.Mesh(new THREE.SphereGeometry(1,32,24),thalMat);m.scale.set(0.12,0.11,0.2);m.position.set(sx*0.13,-0.04,-0.1);thal.add(m);}
+const hypo=new THREE.Mesh(new THREE.SphereGeometry(1,24,18),partMat(0xff9f6b));hypo.scale.set(0.09,0.06,0.1);hypo.position.set(0,-0.17,0.05);thal.add(hypo);
+brain.updateMatrixWorld(true);
+/* 표면 위 점 찾기 (바깥에서 광선을 쏴서) */
+const rc=new THREE.Raycaster();
+const surfC={};
+function surf(m,Y,Z,lift=0.012){const s=m.userData.s;const key=s+':'+Y.toFixed(3)+':'+Z.toFixed(3)+':'+lift;if(key in surfC)return surfC[key];rc.set(V(s*3,Y,Z),V(-s,0,0));const h=rc.intersectObject(m);return surfC[key]=h.length?h[0].point.clone().add(V(s*lift,0,0)):null;}
+function surfTop(m,X,Z){rc.set(V(X,3,Z),V(0,-1,0));const h=rc.intersectObject(m);return h.length?h[0].point.clone():null;}
+const lineMat=()=>new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0,depthWrite:false});
+const sulc={};
+for(const k of ['L','R']){const m=hemi[k];
+ const cs=[];for(let Y=0.6;Y>=-0.05;Y-=0.025){const Z=zC(Y);if(Y<yF(Z)+0.03)break;const p=surf(m,Y,Z);if(p)cs.push(p);}
+ const lf=[];for(let Z=0.6;Z>=-0.48;Z-=0.03){const p=surf(m,yF(Z),Z);if(p)lf.push(p);}
+ const mc=lineMat(),ml=lineMat();sulc[k]={cs:tube(cs,0.014,mc,brain,80,6),lf:tube(lf,0.014,ml,brain,80,6),mc,ml};}
+{const pts=[];for(let Z=1.0;Z>=-1.0;Z-=0.05){const p=surfTop(hemi.L,0.04,Z);if(p)pts.push(V(0,p.y+0.01,Z));}const m=lineMat();sulc.long={t:tube(pts,0.016,m,brain,80,6),m};}
+/* 섬유다발 (1-8) */
+const fib={comm:[],assoc:[],proj:[]};
+const commMat=new THREE.MeshBasicMaterial({color:0xffb15c,transparent:true,depthWrite:false});
+const assocMat=new THREE.MeshBasicMaterial({color:0x4fe0b0,transparent:true,depthWrite:false});
+const projMat=new THREE.MeshBasicMaterial({color:0xa6e36b,transparent:true,depthWrite:false});
+for(const z of [-0.55,-0.32,-0.1,0.12,0.34]){const o=tube([V(1.05,0.3,z),V(0.52,0.2,z),V(0,0.13,z),V(-0.52,0.2,z),V(-1.05,0.3,z)],0.022,commMat,brain,60,8);o.m.renderOrder=4;fib.comm.push(o);}
+const WER=V(0.93*XS,-0.17,-0.36),BRO=V(0.9*XS,-0.06,0.56);
+{const o=tube([WER,V(0.88*XS,0.02,-0.46),V(0.82*XS,0.24,-0.28),V(0.8*XS,0.24,0.05),V(0.84*XS,0.12,0.36),BRO],0.035,assocMat,brain,90,10);o.m.renderOrder=4;fib.assoc.push(o);}
+const areaMat=c=>new THREE.MeshBasicMaterial({color:c,transparent:true,depthWrite:false});
+const werM=new THREE.Mesh(new THREE.SphereGeometry(0.1,24,18),areaMat(0xff7a6a));werM.position.copy(WER);werM.scale.set(0.5,1,1.2);brain.add(werM);
+const broM=new THREE.Mesh(new THREE.SphereGeometry(0.1,24,18),areaMat(0x6aaeff));broM.position.copy(BRO);broM.scale.set(0.5,1,1.2);brain.add(broM);
+werM.renderOrder=broM.renderOrder=5;
+const IC=V(0.3,-0.12,0.0);
+for(const tp of [[0.3,0.6,0.45],[0.36,0.65,0.12],[0.36,0.64,-0.2],[0.3,0.57,-0.5],[0.72,0.38,0.32],[0.76,0.44,-0.08],[0.7,0.34,-0.42]]){
+ const T=V(tp[0]*XS,tp[1],tp[2]);const mid=T.clone().lerp(IC,0.5);mid.y+=0.05;const o=tube([T,mid,IC,V(0.1,-0.38,-0.18),V(0.03,-0.85,-0.24)],0.016,projMat,brain,70,6);o.m.renderOrder=4;fib.proj.push(o);}
+
+/* 매 프레임 초기화 */
+function reset(){body.visible=false;brain.visible=false;}
+function brainDefault(){brain.visible=true;brain.rotation.set(0,0,0);
+ for(const k of ['L','R']){hemi[k].visible=true;hemi[k].material.opacity=1;hemi[k].material.depthWrite=true;colorHemi(hemi[k],{},null,0);sulc[k].mc.opacity=0;sulc[k].ml.opacity=0;}
+ sulc.long.m.opacity=0;
+ for(const m of [cerebMat,midMat,ponsMat,medMat,cordMat]){m.color.setHex(m===cerebMat?0xcf9c95:0xd2a29c);m.emissive.setHex(0);m.opacity=1;}
+ thal.visible=false;for(const g of ['comm','assoc','proj'])for(const o of fib[g]){o.m.visible=false;o.grow(0);}werM.visible=broM.visible=false;}
+const ORB={yaw:0,pitch:0};
+const camKeys=(keys,t)=>{let i=0;while(i<keys.length-2&&t>keys[i+1][0])i++;const a=keys[i],b=keys[i+1]||a;const k=sm((t-a[0])/Math.max(0.001,b[0]-a[0]));
+ cam.position.lerpVectors(a[1],b[1],k);const tg=a[2].clone().lerp(b[2],k);
+ if(ORB.yaw||ORB.pitch){const off=cam.position.clone().sub(tg);const sp=new THREE.Spherical().setFromVector3(off);sp.theta+=ORB.yaw;sp.phi=cl(sp.phi-ORB.pitch,0.15,Math.PI-0.15);off.setFromSpherical(sp);cam.position.copy(tg).add(off);}
+ cam.lookAt(tg);};
+const hiPart=(m,col,k)=>{const c=new THREE.Color(m===cerebMat?0xcf9c95:0xd2a29c);c.lerp(new THREE.Color(col),k);m.color.copy(c);m.emissive.setHex(col).multiplyScalar(0.25*k);};
+return {tube,sprites,capsule,partMat,glowTex,ORB,XS,cv,R,scene,cam,V,tmp:new THREE.Vector3(),reset,brainDefault,camKeys,hiPart,
+ body,shellMat,cnsMat,nervMat,nerves,sens,motor,drawSig,
+ brain,hemi,colorHemi,surf,sulc,thal,cereb,midb,pons,medu,cord,cerebMat,midMat,ponsMat,medMat,cordMat,fib,werM,broM,WER,BRO,yF,zC};
+})();
+</script>
+<script>"use strict";
+/* ───────── 해부 그림(SVG) 공용 ───────── */
+/* 이름표: 점 + 지시선 + 글자(여러 줄 가능) */
+function svLab(parent,o){const g=sv('g',{opacity:0},parent);const col=o.col||'#eef3fb';
+ if(o.lx!=null){sv('line',{x1:o.x,y1:o.y,x2:o.lx,y2:o.ly,stroke:o.lc||'#d6e2f2','stroke-width':2},g);sv('circle',{cx:o.x,cy:o.y,r:4.5,fill:'#fff'},g);}
+ const tx=o.lx!=null?o.lx+(o.anchor==='end'?-8:o.anchor==='middle'?0:8):o.x,ty=o.lx!=null?o.ly:o.y;
+ const t=sv('text',{x:tx,y:ty,'text-anchor':o.anchor||'start','dominant-baseline':'middle',fill:col,'font-size':o.size||24,'font-weight':o.w||700,'paint-order':'stroke',stroke:'rgba(6,10,20,.85)','stroke-width':5,'stroke-linejoin':'round'},g);
+ const ls=o.tx.split('\n');ls.forEach((s,i)=>{const sp=sv('tspan',{x:tx,dy:i?(o.size||24)*1.25:-(ls.length-1)*(o.size||24)*0.62},t);sp.textContent=s;if(i&&o.col2)sp.setAttribute('fill',o.col2);if(i)sp.setAttribute('font-size',(o.size||24)*0.88);});
+ return g;}
+const mir=pts=>pts.map(p=>[-p[0],p[1]]);
+
+/* 관상면(앞에서 세로로 자른 면). 600x520 좌표, 가운데 x=300 */
+function coronal(parent,opt={}){
+ const g=sv('g',{},parent);const X=p=>[300+p[0],p[1]];const P={};
+ const half=[[6,40],[70,22],[160,30],[235,75],[278,150],[290,225],[278,268],[250,286],[218,292],[250,300],[275,325],[281,375],[258,425],[210,455],[150,463],[105,442],[80,405],[62,372],[40,354],[14,350]];
+ const outline=half.concat(mir(half).reverse()).map(X);
+ const od=wavy(smoothPath(outline,true),5,34,900);
+ const cid='cc'+Math.random().toString(36).slice(2,7);
+ const defs=sv('defs',{},g);const cp=sv('clipPath',{id:cid},defs);sv('path',{d:od},cp);
+ P.wm=sv('path',{d:od,fill:'#eee6d6'},g);
+ P.ctx=sv('path',{d:od,fill:'none',stroke:'#b49cb2','stroke-width':40,'clip-path':`url(#${cid})`},g);
+ sv('path',{d:od,fill:'none',stroke:'#7d6a83','stroke-width':2},g);
+ sv('line',{x1:300,y1:30,x2:300,y2:163,stroke:'#0b1324','stroke-width':6},g);
+ P.cc=sv('path',{d:'M188,186 Q300,140 412,186',fill:'none',stroke:'#d9cfbb','stroke-width':17,'stroke-linecap':'round'},g);
+ P.ic=sv('path',{d:smoothPath([[392,238],[402,280],[388,322]].map(p=>[p[0],p[1]])),fill:'none',stroke:'#f6f1e6','stroke-width':16,'stroke-linecap':'round',opacity:0.9},g);
+ P.icL=sv('path',{d:smoothPath([[208,238],[198,280],[212,322]]),fill:'none',stroke:'#f6f1e6','stroke-width':16,'stroke-linecap':'round',opacity:0.9},g);
+ const gm='#a48fb4';
+ P.cau=sv('g',{},g);for(const s of [1,-1])sv('ellipse',{cx:300+s*90,cy:214,rx:22,ry:28,fill:gm,stroke:'#76618a','stroke-width':2},P.cau);
+ P.put=sv('g',{},g);for(const s of [1,-1])sv('ellipse',{cx:300+s*156,cy:270,rx:26,ry:54,fill:gm,stroke:'#76618a','stroke-width':2},P.put);
+ P.gp=sv('g',{},g);for(const s of [1,-1])sv('ellipse',{cx:300+s*125,cy:278,rx:15,ry:36,fill:'#c8b7cf',stroke:'#76618a','stroke-width':2},P.gp);
+ P.thal=sv('g',{},g);for(const s of [1,-1])sv('ellipse',{cx:300+s*43,cy:268,rx:36,ry:40,fill:'#b79ac0',stroke:'#76618a','stroke-width':2},P.thal);
+ P.hyp=sv('g',{},g);for(const s of [1,-1])sv('ellipse',{cx:300+s*19,cy:330,rx:18,ry:14,fill:'#c99aa8',stroke:'#8a6175','stroke-width':2},P.hyp);
+ P.hip=sv('g',{},g);for(const s of [1,-1]){sv('path',{d:`M${300+s*96},404 q${s*14},-16 ${s*34},-6 q${s*14},10 ${s*2},20 q${-s*12},8 ${-s*22},0`,fill:'#a48fb4',stroke:'#76618a','stroke-width':2},P.hip);}
+ P.bs=sv('path',{d:smoothPath([[262,344],[338,344],[333,420],[322,520],[278,520],[267,420]],true),fill:'#dccbbb',stroke:'#9c8f73','stroke-width':2},g);
+ P.sn=sv('g',{},g);for(const s of [1,-1])sv('ellipse',{cx:300+s*17,cy:386,rx:14,ry:5.5,fill:'#3a2626',transform:`rotate(${s*28} ${300+s*17} 386)`},P.sn);
+ const vc='#2c5d93';
+ P.vent=sv('g',{},g);
+ for(const s of [1,-1])sv('path',{d:smoothPath([[6,190],[64,184],[84,196],[44,222],[6,226]].map(p=>[300+s*p[0],p[1]]),true),fill:vc},P.vent);
+ sv('rect',{x:296,y:232,width:8,height:88,rx:4,fill:vc},P.vent);
+ for(const s of [1,-1])sv('ellipse',{cx:300+s*126,cy:386,rx:17,ry:5,fill:vc},P.vent);
+ P.ventG=P.vent;return {g,P};}
+
+/* 횡단면(위에서 가로로 자른 면, 앞=위). 440x520 좌표, 가운데 x=220 */
+function axial(parent){const g=sv('g',{},parent);const P={};const X=p=>[220+p[0],p[1]];
+ const half=[[4,30],[70,20],[130,42],[176,98],[196,180],[201,260],[193,342],[170,412],[124,470],[64,498],[4,502]];
+ const od=wavy(smoothPath(half.concat(mir(half).reverse()).map(X),true),4.5,40,900);
+ const cid='ax'+Math.random().toString(36).slice(2,7);const cp=sv('clipPath',{id:cid},sv('defs',{},g));sv('path',{d:od},cp);
+ sv('path',{d:od,fill:'#eee6d6'},g);sv('path',{d:od,fill:'none',stroke:'#b49cb2','stroke-width':36,'clip-path':`url(#${cid})`},g);sv('path',{d:od,fill:'none',stroke:'#7d6a83','stroke-width':2},g);
+ sv('line',{x1:220,y1:24,x2:220,y2:112,stroke:'#0b1324','stroke-width':6},g);sv('line',{x1:220,y1:428,x2:220,y2:508,stroke:'#0b1324','stroke-width':6},g);
+ sv('path',{d:'M186,124 Q220,100 254,124',fill:'none',stroke:'#d9cfbb','stroke-width':13,'stroke-linecap':'round'},g);
+ sv('path',{d:'M184,408 Q220,432 256,408',fill:'none',stroke:'#d9cfbb','stroke-width':13,'stroke-linecap':'round'},g);
+ const gm='#a48fb4';
+ for(const s of [1,-1]){const x=v=>220+s*v;
+  sv('path',{d:`M${x(170)},196 Q${x(182)},250 ${x(172)},306`,fill:'none',stroke:'#b49cb2','stroke-width':12,'stroke-linecap':'round'},g);
+  sv('ellipse',{cx:x(54),cy:170,rx:16,ry:24,fill:gm,stroke:'#76618a','stroke-width':2},g);
+  sv('ellipse',{cx:x(112),cy:248,rx:20,ry:50,fill:gm,stroke:'#76618a','stroke-width':2},g);
+  sv('ellipse',{cx:x(86),cy:254,rx:11,ry:32,fill:'#c8b7cf',stroke:'#76618a','stroke-width':2},g);
+  sv('ellipse',{cx:x(30),cy:285,rx:24,ry:40,fill:'#b79ac0',stroke:'#76618a','stroke-width':2},g);}
+ const vc='#2c5d93';P.vent=sv('g',{},g);
+ for(const s of [1,-1]){const f=pts=>pts.map(p=>[220+s*p[0],p[1]]);
+  sv('path',{d:smoothPath(f([[4,135],[26,128],[42,140],[34,175],[14,196],[4,198]]),true),fill:vc},P.vent);
+  sv('path',{d:smoothPath(f([[58,318],[76,330],[96,372],[98,402],[84,404],[70,370],[52,338]]),true),fill:vc},P.vent);}
+ sv('rect',{x:217,y:240,width:6,height:80,rx:3,fill:vc},P.vent);
+ return {g,P};}
+/* 시상면 뇌실 (옆면 그림 좌표 900x560 위에 겹침) */
+function sagVent(parent){const vc='#2c6fb3',v2='#3d8fe0';const g=sv('g',{},parent);
+ sv('path',{d:smoothPath([[330,238],[380,205],[470,195],[560,205],[625,236],[655,268]]),fill:'none',stroke:vc,'stroke-width':24,'stroke-linecap':'round'},g);
+ sv('path',{d:smoothPath([[650,265],[700,275],[730,272]]),fill:'none',stroke:vc,'stroke-width':16,'stroke-linecap':'round'},g);
+ sv('path',{d:smoothPath([[652,270],[630,320],[565,355],[485,365]]),fill:'none',stroke:vc,'stroke-width':16,'stroke-linecap':'round'},g);
+ sv('path',{d:smoothPath([[432,256],[468,288],[503,302]]),fill:'none',stroke:v2,'stroke-width':18,'stroke-linecap':'round'},g);
+ sv('path',{d:smoothPath([[505,305],[545,350],[565,385]]),fill:'none',stroke:v2,'stroke-width':6},g);
+ sv('path',{d:'M560,385 L618,412 L566,442Z',fill:v2},g);sv('path',{d:'M566,442 L572,545',stroke:v2,'stroke-width':4},g);
+ return g;}
+
+/* 뇌 옆면(왼쪽 반구 바깥면, 앞=왼쪽). 900x560 좌표 */
+const LAT=[[95,290],[115,200],[185,125],[300,72],[440,52],[580,62],[700,115],[785,200],[818,290],[800,360],[740,395],[640,410],[540,440],[430,452],[330,440],[268,400],[258,372],[230,368],[160,365],[110,345]];
+function lateralBrain(parent,opt={}){const g=sv('g',{},parent);const P={};
+ P.cb=sv('g',{},g);sv('ellipse',{cx:690,cy:440,rx:120,ry:62,fill:'#cf9c95',stroke:'#8d5f59','stroke-width':2},P.cb);
+ for(let i=0;i<7;i++)sv('path',{d:`M${590+i*6},${400+i*12} Q690,${392+i*14} ${795-i*5},${410+i*10}`,fill:'none',stroke:'#a66f69','stroke-width':1.6},P.cb);
+ P.bs=sv('path',{d:smoothPath([[470,350],[540,340],[566,392],[580,462],[574,560],[534,560],[528,470],[497,445],[476,402]],true),fill:'#d8b0a6',stroke:'#8d5f59','stroke-width':2},g);
+ const od=wavy(smoothPath(LAT,true),4,44,900);P.od=od;
+ P.br=sv('path',{d:od,fill:opt.fill||'#dba7a0',stroke:'#7d5452','stroke-width':2.5},g);
+ if(opt.gyri!==false){const gy=sv('g',{opacity:0.55},g);
+  const lines=[[[180,170],[240,230],[230,300]],[[260,110],[300,180],[285,250]],[[640,110],[600,170],[640,230]],[[700,170],[670,240],[720,300]],[[600,330],[680,340],[740,360]],[[330,400],[450,395],[560,380]],[[150,250],[200,280],[240,330]]];
+  for(const l of lines)sv('path',{d:smoothPath(l),fill:'none',stroke:'#8d5f59','stroke-width':2},gy);P.gy=gy;}
+ P.cs=sv('path',{d:smoothPath([[505,54],[480,140],[455,220],[425,305]]),fill:'none',stroke:'#5a3634','stroke-width':4,'stroke-linecap':'round'},g);
+ P.lf=sv('path',{d:smoothPath([[262,368],[330,338],[400,320],[520,292],[575,252]]),fill:'none',stroke:'#5a3634','stroke-width':5,'stroke-linecap':'round'},g);
+ return {g,P};}
+</script>
+<script>"use strict";
+const SVGROOT=layer=>sv('svg',{viewBox:'0 0 1280 720',style:'position:absolute;left:0;top:0;width:1280px;height:720px;overflow:visible'},layer);
+const tx_=(par,x,y,t,o={})=>{const e=sv('text',Object.assign({x,y,'text-anchor':'middle',fill:'#eef3fb','font-size':24,'font-weight':700,'paint-order':'stroke',stroke:'rgba(6,10,20,.85)','stroke-width':5,'stroke-linejoin':'round'},o),par);e.textContent=t;return e;};
+const TYPE_COL={s:'#5fb2ff',m:'#ff6f61',x:'#c58cff'};
+/* 뇌 아랫면 (앞=위) 700x560 */
+function brainBottom3(parent){const g=sv('g',{},parent);const P={};
+ const out=[[350,30],[470,44],[560,108],[600,198],[592,268],[560,298],[602,352],[600,420],[560,480],[470,520],[350,536],[230,520],[140,480],[100,420],[98,352],[140,298],[108,268],[100,198],[140,108],[230,44]];
+ sv('path',{d:wavy(smoothPath(out,true),3.5,46,900),fill:'#dba7a0',stroke:'#7d5452','stroke-width':2.5},g);
+ sv('line',{x1:350,y1:34,x2:350,y2:180,stroke:'#5a3634','stroke-width':4},g);
+ for(const s of [1,-1])sv('path',{d:smoothPath([[350+s*90,300],[350+s*175,292],[350+s*230,330],[350+s*215,380]]),fill:'none',stroke:'#a16f69','stroke-width':3},g);
+ const cb=sv('g',{},g);sv('path',{d:smoothPath([[150,440],[250,410],[350,430],[450,410],[550,440],[540,500],[450,530],[350,528],[250,530],[160,500]],true),fill:'#cf9c95',stroke:'#8d5f59','stroke-width':2},cb);
+ for(let i=0;i<5;i++)sv('path',{d:`M${175+i*4},${450+i*16} Q350,${436+i*16} ${525-i*4},${450+i*16}`,fill:'none',stroke:'#a66f69','stroke-width':1.6},cb);
+ P.mid=sv('path',{d:'M300,232 L400,232 L392,276 L308,276Z',fill:'#e2b5ad',stroke:'#8d5f59','stroke-width':2},g);
+ sv('path',{d:'M350,236 L350,272',stroke:'#8d5f59','stroke-width':2},g);
+ P.pons=sv('ellipse',{cx:350,cy:318,rx:74,ry:46,fill:'#e7beb6',stroke:'#8d5f59','stroke-width':2},g);
+ for(let i=0;i<4;i++)sv('path',{d:`M${292+i*2},${300+i*10} Q350,${292+i*10} ${408-i*2},${300+i*10}`,fill:'none',stroke:'#c99b93','stroke-width':1.4},g);
+ P.med=sv('path',{d:'M318,362 L382,362 L372,470 L328,470Z',fill:'#e2b5ad',stroke:'#8d5f59','stroke-width':2},g);
+ for(const s of [1,-1]){sv('ellipse',{cx:350+s*22,cy:400,rx:8,ry:20,fill:'#d6a39b',stroke:'#8d5f59','stroke-width':1.5},g);}
+ sv('line',{x1:350,y1:364,x2:350,y2:468,stroke:'#8d5f59','stroke-width':1.5},g);
+ // I, II 구조
+ for(const s of [1,-1]){sv('path',{d:`M${350+s*20},${86} L${350+s*24},${178}`,stroke:'#f2d7a8','stroke-width':6,'stroke-linecap':'round'},g);sv('ellipse',{cx:350+s*19,cy:84,rx:9,ry:16,fill:'#f2d7a8',stroke:'#a8874c','stroke-width':1.5},g);}
+ for(const s of [1,-1])sv('path',{d:`M${350+s*44},${150} L${350+s*10},${205} M${350+s*10},${205} L${350+s*36},${228}`,stroke:'#f2d7a8','stroke-width':9,'stroke-linecap':'round'},g);
+ // 뇌신경 줄기 (양쪽)
+ const N={I:[[369,80],[392,70]],II:[[394,150],[420,140]],III:[[362,262],[396,246],[420,236]],IV:[[402,266],[440,258],[462,250]],V:[[418,318],[470,306],[500,300]],VI:[[360,364],[372,334],[384,300]],
+  VII:[[414,372],[470,370],[492,368]],VIII:[[416,384],[476,392],[498,396]],IX:[[388,404],[440,414],[468,418]],X:[[389,418],[442,432],[470,440]],XI:[[384,450],[430,466],[456,476]],XII:[[364,412],[392,446],[420,470]]};
+ const T={I:'s',II:'s',III:'m',IV:'m',V:'x',VI:'m',VII:'x',VIII:'s',IX:'x',X:'x',XI:'m',XII:'m'};
+ P.N={};for(const k in N){const gg=sv('g',{opacity:0},g);const pts=N[k];const w=k==='V'?10:k==='II'||k==='I'?0:6;
+  for(const s of [1,-1]){const pp=pts.map(q=>[350+s*(q[0]-350),q[1]]);if(w)sv('path',{d:smoothPath(pp),fill:'none',stroke:TYPE_COL[T[k]],'stroke-width':w,'stroke-linecap':'round'},gg);}
+  if(!w){for(const s of [1,-1]){const q=pts[0];sv('circle',{cx:350+s*(q[0]-350),cy:q[1],r:7,fill:TYPE_COL[T[k]]},gg);}}
+  P.N[k]={g:gg,end:pts[pts.length-1],type:T[k]};}
+ return {g,P,T};}
+
+</script>
+<script>"use strict";
+/* ───────── 치매 1편 · 인지의 기초 ───────── */
+const E12C={time:'#ffb36b',place:'#7fc8ff',person:'#c58cff',ok:'#71e6ac',bad:'#ff8a7a',gold:'#ffe08a',ink:'#eaf1fb',dim:'#7f93b3'};
+function e12Card(L,x,y,w,title,col,body,fs=22){const c=hdiv('card ov','',L,`left:${x}px;top:${y}px;width:${w}px;padding:14px 22px;box-sizing:border-box;border-color:${col}`);
+ c.innerHTML=`<h3 style="color:${col};font-size:27px;margin:0 0 8px">${title}</h3><div style="font-size:${fs}px;line-height:1.5;color:#eaf1fb">${body}</div>`;return c;}
+const e12Cur=(t,s,i)=>t>=s.L[i].t0&&t<(s.L[i+1]?s.L[i+1].t0:s.t1);
+
+/* ═════════ c1-1 지남력 ═════════ */
+page({id:'c1-1',label:'1-1',title:'인지와 지남력',scenes:[
+ {name:'지남력',pre:3.2,post:1.2,lines:[
+  '지남력은 시간, 장소, 사람, 그리고 상황을 올바로 아는 능력입니다.',
+  '치매에서는 시간 지남력이 가장 먼저 손상되고, 이어서 장소, 사람 순서로 무너집니다.']}],
+ init(L){const s=SVGROOT(L);const g=this.g=sv('g',{},s);const cx=400,cy=340;
+  this.R=[[230,E12C.time,'시간'],[158,E12C.place,'장소'],[86,E12C.person,'사람']].map(([r,c,t],i)=>{const rg=sv('g',{},g);
+   const ring=sv('circle',{cx,cy,r,fill:i===2?'rgba(197,140,255,.18)':'none',stroke:c,'stroke-width':i===2?4:40,'stroke-opacity':i===2?1:.28},rg);
+   sv('circle',{cx,cy,r,fill:'none',stroke:c,'stroke-width':3},rg);
+   tx_(rg,cx,cy-r+(i===2?8:9),t,{'font-size':i===2?30:26,fill:c});return {g:rg,ring};});
+  // 아이콘: 달력(시간), 집(장소), 얼굴(사람)
+  const cal=sv('g',{},this.R[0].g);sv('rect',{x:cx+168,y:cy-26,width:52,height:50,rx:6,fill:'#2a2238',stroke:E12C.time,'stroke-width':3},cal);sv('rect',{x:cx+168,y:cy-26,width:52,height:14,fill:E12C.time},cal);tx_(cal,cx+194,cy+18,'15',{'font-size':20,fill:'#fff'});
+  const hs=sv('g',{},this.R[1].g);sv('path',{d:`M${cx+108},${cy+10} L${cx+132},${cy-14} L${cx+156},${cy+10} L${cx+150},${cy+10} L${cx+150},${cy+32} L${cx+114},${cy+32} L${cx+114},${cy+10}Z`,fill:'#1d3550',stroke:E12C.place,'stroke-width':3},hs);
+  const fc=sv('g',{},this.R[2].g);sv('circle',{cx,cy:cy+16,r:30,fill:'#e7c3a8',stroke:'#8d6a55','stroke-width':2},fc);sv('path',{d:`M${cx-30},${cy+8} Q${cx},${cy-30} ${cx+30},${cy+8} Q${cx+20},${cy-8} ${cx},${cy-6} Q${cx-20},${cy-8} ${cx-30},${cy+8}Z`,fill:'#4a3428'},fc);
+  for(const d of [-11,11])sv('circle',{cx:cx+d,cy:cy+14,r:3,fill:'#2a1a12'},fc);sv('path',{d:`M${cx-9},${cy+30} Q${cx},${cy+36} ${cx+9},${cy+30}`,fill:'none',stroke:'#7a4a3a','stroke-width':2.5},fc);
+  this.card=e12Card(L,760,150,450,'지남력','#9fdcff','<b style="color:#ffb36b">시간</b> · <b style="color:#7fc8ff">장소</b> · <b style="color:#c58cff">사람</b> (· 상황)<br>을 올바로 아는 능력');
+  this.ord=e12Card(L,760,330,450,'★ 치매에서 손상 순서','#ff8a7a','<span style="font-size:26px;font-weight:800"><span style="color:#ffb36b">시간</span> → <span style="color:#7fc8ff">장소</span> → <span style="color:#c58cff">사람</span></span><br><span style="color:#aab9d0">시간 지남력이 가장 먼저</span>');
+ },
+ draw(t,p){const [a]=p.scenes;op(this.g,ramp(t,a.t0+0.2,a.t0+1));op(this.card,ramp(t,a.L[0].t0,a.L[0].t0+0.5));op(this.ord,ramp(t,a.L[1].t0,a.L[1].t0+0.5));
+  const L1=a.L[1];this.R.forEach((r,i)=>{const s0=lerp(L1.t0+0.6,L1.t1-0.6,i/2.6);const k=ramp(t,s0,s0+1);op(r.g,1-0.78*k);});}});
+
+/* ═════════ c1-2 주의력 4가지 ═════════ */
+page({id:'c1-2',label:'1-2',title:'주의력 4가지',scenes:[
+ {name:'주의력 4가지',pre:0.6,post:1.4,lines:[
+  '주의력은 네 가지로 나눕니다. 지속적 주의는 일정 시간 동안 주의를 유지하는 능력으로, 문자나 기호를 계속 찾아 지우는 소거 과제로 봅니다.',
+  '선택적 주의는 방해 자극을 떨치고 특정 자극에만 집중하는 능력으로, 스트룹 검사로 봅니다. 시끄러운 거실에서 대화하기가 여기에 해당합니다.',
+  '교대적 주의는 서로 다른 과제를 오가며 하는 능력으로, 숫자와 글자를 번갈아 잇는 기호 잇기 검사로 봅니다.',
+  '분할적 주의는 여러 과제를 동시에 하는 능력으로, 이중 과제로 봅니다.']}],
+ init(L){const s=SVGROOT(L);const P=[[70,92],[650,92],[70,332],[650,332]],W=560,H=224;
+  const T=[['지속적 주의','#ffb36b','유지 · 소거 과제'],['선택적 주의','#7fc8ff','한 자극만 · 스트룹 검사'],['교대적 주의','#71e6ac','오가기 · 기호 잇기 검사'],['분할적 주의','#c58cff','동시에 · 이중 과제']];
+  this.pn=P.map(([x,y],i)=>{const g=sv('g',{},s);g.box=sv('rect',{x,y,width:W,height:H,rx:18,fill:'rgba(12,22,40,.92)',stroke:T[i][1],'stroke-width':2.5},g);
+   tx_(g,x+22,y+38,T[i][0],{'font-size':26,fill:T[i][1],'text-anchor':'start'});tx_(g,x+W-20,y+38,T[i][2],{'font-size':19,fill:'#c9d6ea','text-anchor':'end'});g.x=x;g.y=y;return g;});
+  // 지속: 글자 줄에서 ㄱ 지우기
+  {const g=this.pn[0],x0=g.x+34,y0=g.y+100;const row='ㄴㄱㄷㄹㄱㅁㅂㄱㅅㄱㅇㄷㄱㅈ';this.c1=[];
+   [...row].forEach((ch,i)=>{const x=x0+i*36;const tt=tx_(g,x,y0+(i%2?0:0),ch,{'font-size':28,fill:'#dbe5f3'});if(ch==='ㄱ'){const ln=sv('line',{x1:x-14,y1:y0-26,x2:x+14,y2:y0+6,stroke:E12C.bad,'stroke-width':4,opacity:0},g);this.c1.push({ln,i});}});
+   const row2='ㄷㄱㅂㅅㄹㄱㅁㄴㄱㅇㅈㄱㄹㅂ';[...row2].forEach((ch,i)=>{const x=x0+i*36;tx_(g,x,y0+50,ch,{'font-size':28,fill:'#dbe5f3'});if(ch==='ㄱ'){const ln=sv('line',{x1:x-14,y1:y0+24,x2:x+14,y2:y0+56,stroke:E12C.bad,'stroke-width':4,opacity:0},g);this.c1.push({ln,i:i+14});}});
+   tx_(g,g.x+22,g.y+H-18,'목표: ㄱ 찾아 지우기',{'font-size':19,fill:'#ffd2a6','text-anchor':'start'});
+   const cx=g.x+W-50,cy=g.y+H-44;sv('circle',{cx,cy,r:24,fill:'none',stroke:'#3d5683','stroke-width':6},g);this.arc=sv('circle',{cx,cy,r:24,fill:'none',stroke:'#ffb36b','stroke-width':6,'stroke-dasharray':'151','stroke-dashoffset':'151',transform:`rotate(-90 ${cx} ${cy})`},g);}
+  // 선택: 스트룹 + 소음
+  {const g=this.pn[1];const cx=g.x+W/2,cy=g.y+128;this.noise=[];
+   for(let i=0;i<7;i++){const a=i/7*Math.PI*2;const n=tx_(g,cx+Math.cos(a)*215,cy-8+Math.sin(a)*48,['♪','♫','왁자','쿵','♪','하하','♫'][i],{'font-size':22,fill:'#7f93b3'});this.noise.push(n);}
+   sv('rect',{x:cx-90,y:cy-40,width:180,height:80,rx:14,fill:'#f4f1ea',stroke:'#7fc8ff','stroke-width':4},g);tx_(g,cx,cy+16,'빨강',{'font-size':44,fill:'#2f6fe0',stroke:'none'});
+   tx_(g,cx,g.y+H-16,'글자 뜻 말고 잉크 색을 말하기 → "파랑"',{'font-size':19,fill:'#9fdcff'});}
+  // 교대: 1-가-2-나
+  {const g=this.pn[2];const pts=[[g.x+70,g.y+150],[g.x+160,g.y+90],[g.x+250,g.y+160],[g.x+340,g.y+95],[g.x+430,g.y+160],[g.x+500,g.y+100]];const lb=['1','가','2','나','3','다'];
+   this.trail=sv('path',{d:'M'+pts.map(p=>p.join(',')).join(' L'),fill:'none',stroke:'#71e6ac','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+   this.tn=pts.map((p,i)=>{const c=sv('circle',{cx:p[0],cy:p[1],r:24,fill:'#14243c',stroke:i%2?'#ffe08a':'#71e6ac','stroke-width':3},g);tx_(g,p[0],p[1]+9,lb[i],{'font-size':24,fill:'#fff'});return c;});
+   tx_(g,g.x+22,g.y+H-18,'숫자 ↔ 글자 번갈아 잇기',{'font-size':19,fill:'#b6f2d2','text-anchor':'start'});}
+  // 분할: 운전 + 대화
+  {const g=this.pn[3];const cx=g.x+170,cy=g.y+135;this.wheel=sv('g',{},g);sv('circle',{cx,cy,r:58,fill:'none',stroke:'#c9d6ea','stroke-width':12},this.wheel);sv('circle',{cx,cy,r:14,fill:'#c9d6ea'},this.wheel);
+   for(const a of [90,210,330]){const r=a*Math.PI/180;sv('line',{x1:cx,y1:cy,x2:cx+Math.cos(r)*56,y2:cy+Math.sin(r)*56,stroke:'#c9d6ea','stroke-width':8},this.wheel);}
+   this.wc=[cx,cy];const bx=g.x+300,by=g.y+80;this.bub=sv('g',{},g);sv('path',{d:`M${bx},${by} h200 a16 16 0 0 1 16 16 v56 a16 16 0 0 1 -16 16 h-150 l-26 22 l4 -22 h-28 a16 16 0 0 1 -16 -16 v-56 a16 16 0 0 1 16 -16Z`,fill:'#2a2140',stroke:'#c58cff','stroke-width':3},this.bub);
+   this.dots=[0,1,2].map(i=>sv('circle',{cx:bx+70+i*36,cy:by+44,r:8,fill:'#e2c9ff'},this.bub));
+   tx_(g,g.x+W-24,g.y+H-18,'운전하며 대화',{'font-size':19,fill:'#e2c9ff','text-anchor':'end'});}
+ },
+ draw(t,p){const [a]=p.scenes;
+  this.pn.forEach((g,i)=>{const on=t>=a.L[i].t0-0.2;const cur=e12Cur(t,a,i);op(g,on?(cur||t>=a.L[3].t1?1:0.5):0);g.box.setAttribute('stroke-width',cur?5:2.5);});
+  // 지속
+  const L0=a.L[0],k0=ramp(t,L0.t0+1,L0.t1);this.c1.forEach((c,j)=>op(c.ln,k0*this.c1.length>j?1:0));this.arc.setAttribute('stroke-dashoffset',(151*(1-k0)).toFixed(1));
+  // 선택
+  const L1=a.L[1];this.noise.forEach((n,j)=>{const ph=(t*1.3+j)%2;op(n,t>=L1.t0?0.25+0.45*Math.abs(Math.sin(t*2+j)):0.6);});
+  // 교대
+  const L2=a.L[2],k2=ramp(t,L2.t0+0.8,L2.t1-0.6);grow(this.trail,t<L2.t0?0:k2);this.tn.forEach((c,j)=>c.setAttribute('fill',k2*5>=j-0.01&&t>=L2.t0?'#1f4a3a':'#14243c'));
+  // 분할
+  const L3=a.L[3],act=t>=L3.t0;const ang=act?Math.sin(t*2.2)*18:0;this.wheel.setAttribute('transform',`rotate(${ang.toFixed(1)} ${this.wc[0]} ${this.wc[1]})`);
+  this.dots.forEach((d,j)=>op(d,act?0.35+0.65*Math.max(0,Math.sin(t*5-j)):0.6));
+ }});
+
+/* ═════════ c1-3 기억의 흐름 · 작업기억 ═════════ */
+page({id:'c1-3',label:'1-3',title:'기억의 흐름과 작업기억',scenes:[
+ {name:'감각 → 단기 → 장기',pre:0.6,post:0.6,lines:[
+  '기억은 감각기억에서 단기기억, 그리고 장기기억으로 넘어갑니다. 단기기억은 1, 2분 정도 유지되고, 시연과 군집화로 오래 붙잡을 수 있습니다.']},
+ {name:'작업기억',pre:0.4,post:1.4,lines:[
+  '작업기억은 정보를 잠깐 붙잡고 조작하는 기억입니다. 전화번호를 들으며 메모하거나, 숫자를 거꾸로 말하는 과제가 여기에 해당합니다.',
+  '배들리 모형에서는 소리를 붙잡는 음운 고리, 이미지와 위치를 붙잡는 시공간 메모장, 장기기억과 연결하는 일화적 완충기가 있고, 이 셋을 중앙 집행기가 조절합니다.']}],
+ init(L){const s=SVGROOT(L);const g=this.flow=sv('g',{},s);const B=[[220,'감각기억','반향 · 영상','#9fdcff'],[640,'단기기억','1~2분 · 시연 · 군집화','#ffe08a'],[1060,'장기기억','오래 저장','#71e6ac']];
+  B.forEach(([x,t,d,c],i)=>{sv('rect',{x:x-150,y:230,width:300,height:150,rx:22,fill:'rgba(12,22,40,.94)',stroke:c,'stroke-width':3},g);tx_(g,x,290,t,{'font-size':32,fill:c});tx_(g,x,335,d,{'font-size':20,fill:'#c9d6ea'});
+   if(i<2)sv('path',{d:`M${x+160},305 L${x+250},305`,stroke:'#5d7aa6','stroke-width':6,'marker-end':''},g),sv('path',{d:`M${x+238},293 L${x+254},305 L${x+238},317`,fill:'none',stroke:'#5d7aa6','stroke-width':5},g);});
+  this.pt=[];for(let i=0;i<14;i++){this.pt.push({c:sv('circle',{r:9,fill:['#9fdcff','#ffe08a','#ffb36b','#c58cff'][i%4],opacity:0},g),dz:i<6?1:i<10?2:3,o:i/14});}
+  this.fade=tx_(g,430,456,'일부는 사라짐',{'font-size':20,fill:'#7f93b3'});tx_(g,850,440,'',{'font-size':20});
+  // 작업기억
+  const w=this.wm=sv('g',{opacity:0},s);
+  const box=(x,y,wd,t,d,c)=>{const bg=sv('g',{},w);bg.r=sv('rect',{x:x-wd/2,y,width:wd,height:96,rx:18,fill:'rgba(12,22,40,.95)',stroke:c,'stroke-width':3},bg);tx_(bg,x,y+42,t,{'font-size':26,fill:c});tx_(bg,x,y+76,d,{'font-size':18,fill:'#c9d6ea'});return bg;};
+  this.ce=box(640,250,340,'중앙 집행기','셋을 조절','#ff8a7a');
+  this.sub3=[box(330,420,280,'음운 고리','소리를 속말로 유지','#7fc8ff'),box(640,420,280,'일화적 완충기','장기기억과 연결','#71e6ac'),box(950,420,280,'시공간 메모장','이미지 · 위치','#ffb36b')];
+  this.lnk=[330,640,950].map(x=>sv('line',{x1:640,y1:346,x2:x,y2:420,stroke:'#ff8a7a','stroke-width':3,'stroke-dasharray':'7 6'},w));
+  this.memo=hdiv('card ov','',L,'left:330px;top:110px;width:620px;padding:12px 22px;text-align:center;border-color:#ffe08a');
+  this.memo.innerHTML='<div style="font-size:21px;color:#c9d6ea">정보를 잠깐 붙잡고 <b style="color:#ffe08a">조작</b>하기</div><div style="font-size:30px;font-weight:800;margin-top:6px;letter-spacing:2px">☎ <span class="ph">010-2486-1357</span> &nbsp;·&nbsp; <span style="color:#9fdcff">3 8 5 → 5 8 3</span></div>';
+ },
+ draw(t,p){const [a,b]=p.scenes;const vA=win(t,a.t0,a.t1+0.2,0.4);op(this.flow,vA);
+  const L0=a.L[0];this.pt.forEach(q=>{const u=((t-L0.t0)*0.22+q.o)%1;const xmax=q.dz===1?430:q.dz===2?850:1060;const x=lerp(120,1100,u);const vis=t>=L0.t0&&x<xmax?1:0;const fadeOut=x>xmax-60?1-ramp(x,xmax-60,xmax):1;
+   q.c.setAttribute('cx',x.toFixed(1));q.c.setAttribute('cy',(408+Math.sin(u*20+q.o*9)*8).toFixed(1));q.c.setAttribute('opacity',(vis*fadeOut).toFixed(2));});
+  op(this.fade,ramp(t,L0.t0+2,L0.t0+3));
+  const vB=win(t,b.t0,b.t1+0.2,0.4);op(this.wm,vB*ramp(t,b.L[1].t0,b.L[1].t0+0.5));op(this.memo,win(t,b.L[0].t0,b.L[1].t0+0.1,0.4));
+  const L2=b.L[1];this.sub3.forEach((x,i)=>{const s0=sub_(p,1,1,i,4);op(x,ramp(t,s0,s0+0.4));});op(this.ce,ramp(t,sub_(p,1,1,3,4),sub_(p,1,1,3,4)+0.4));this.lnk.forEach(l=>op(l,ramp(t,sub_(p,1,1,3,4),sub_(p,1,1,3,4)+0.6)));
+ }});
+
+/* 기억 나무 (1-4 · 1-5 공용) */
+function e12Tree(par,withWM){const g=sv('g',{},par),N={};const br=(d,w)=>{const e=sv('path',{d,fill:'none',stroke:'#6b4a33','stroke-width':w,'stroke-linecap':'round'},g);return e;};
+ N.trunk=br('M640,470 L640,395',26);
+ N.bD=br('M640,400 C600,360 470,350 390,320',16);N.bN=br('M640,400 C680,360 840,350 900,320',16);
+ N.bS=br('M390,300 C360,260 300,230 260,200',11);N.bE=br('M390,300 C420,260 490,230 530,200',11);N.bP=br('M900,300 L900,205',11);
+ const leaves=(x,y,n=9,r=16)=>{const lg=sv('g',{},g);for(let i=0;i<n;i++){const a=i/n*Math.PI*2;sv('circle',{cx:x+Math.cos(a)*r*1.9,cy:y-12+Math.sin(a)*r*0.95,r,fill:'#4fbf78',opacity:.9},lg);}return lg;};
+ const node=(x,y,w,t,d,c)=>{const ng=sv('g',{},g);ng.r=sv('rect',{x:x-w/2,y:y-32,width:w,height:64,rx:16,fill:'rgba(12,22,40,.96)',stroke:c,'stroke-width':3},ng);ng.t=tx_(ng,x,y-4,t,{'font-size':24,fill:c});ng.d=tx_(ng,x,y+22,d,{'font-size':16,fill:'#c9d6ea'});return ng;};
+ N.lS=leaves(260,150);N.lE=leaves(530,150);N.lP=leaves(900,150);
+ N.S=node(260,170,250,'의미기억','대한민국의 수도는 서울','#9fdcff');N.E=node(530,170,250,'★ 일화기억','지난 주말에 있었던 일','#ffe08a');N.P=node(900,170,250,'절차기억','자전거 타기 · 양치하기','#71e6ac');
+ N.D=node(390,315,280,'서술기억 (what)','의식적으로 떠올려 말함','#c9d6ea');N.Nd=node(900,315,280,'비서술기억 (how)','몸으로 하는 기억','#c9d6ea');
+ N.R=node(640,445,220,'장기기억','','#eaf1fb');
+ if(withWM){N.lW=leaves(1160,300,7,13);N.W=node(1160,315,180,'작업기억','(1-3)','#ff8a7a');}
+ const col=(h)=>{const a=[0x4f,0xbf,0x78],b=[0x8a,0x6a,0x4a];return `rgb(${a.map((v,i)=>Math.round(lerp(b[i],v,h))).join(',')})`;};
+ g.set=(k,h)=>{const L=N['l'+k];if(L){[...L.children].forEach((c,i)=>{c.setAttribute('fill',col(h));c.setAttribute('opacity',(0.15+0.75*h*(i%3===0?1:Math.min(1,h*1.6))).toFixed(2));c.setAttribute('transform',`translate(0 ${(1-h)*(10+i*3)})`);});}
+  const nd=N[k];if(nd){nd.r.setAttribute('stroke-opacity',(0.35+0.65*h).toFixed(2));op(nd.t,0.4+0.6*h);op(nd.d,0.4+0.6*h);}};
+ g.N=N;return g;}
+
+/* ═════════ c1-4 장기기억과 평가 시점 ═════════ */
+page({id:'c1-4',label:'1-4',title:'장기기억과 평가 시점',scenes:[
+ {name:'장기기억 나무',pre:0.6,post:1.2,lines:[
+  '장기기억은 의식적으로 떠올려 말하는 서술기억과, 몸으로 하는 비서술기억으로 나뉩니다.',
+  '서술기억에는 대한민국의 수도는 서울이라는 일반 지식인 의미기억과, 지난 주말에 있었던 일처럼 시간과 장소가 있는 경험인 일화기억이 있습니다.',
+  '비서술기억의 대표는 자전거 타기, 양치하기 같은 절차기억입니다.',
+  '평가 시점으로 보면 바로 떠올리는 즉각 기억, 몇 분에서 몇 시간 뒤의 최근 기억, 먼 과거의 원격 기억, 그리고 오후 3시에 약 먹기 같은 미래기억이 있습니다.']}],
+ init(L){const s=SVGROOT(L);this.T=e12Tree(s,false);const N=this.T.N;this.grp={base:[N.trunk,N.R,N.bD,N.bN,N.D,N.Nd],decl:[N.bS,N.bE,N.S,N.E,N.lS,N.lE],proc:[N.bP,N.P,N.lP]};
+  const tl=this.tl=sv('g',{opacity:0},s);sv('line',{x1:150,y1:478,x2:1130,y2:478,stroke:'#5d7aa6','stroke-width':4},tl);
+  this.tm=[['즉각','바로 회상',230,'#9fdcff'],['최근(지연)','몇 분~몇 시간 뒤',490,'#ffe08a'],['원격','먼 과거',750,'#c9d6ea'],['미래기억','오후 3시에 약 먹기',1010,'#c58cff']].map(([a,b,x,c])=>{const m=sv('g',{},tl);sv('circle',{cx:x,cy:478,r:11,fill:c},m);tx_(m,x,460,a,{'font-size':22,fill:c});tx_(m,x,510,b,{'font-size':18,fill:'#c9d6ea'});return m;});
+  // 1-4 동안 나무는 아래 시간축과 겹치지 않도록 위로
+  this.T.setAttribute('transform','translate(96 -14) scale(0.85)');
+ },
+ draw(t,p){const [a]=p.scenes;const vA=win(t,a.t0,a.t1+0.2,0.4);op(this.T,vA);
+  const s1=a.L[1].t0,s2=a.L[2].t0;this.grp.base.forEach(e=>op(e,ramp(t,a.L[0].t0,a.L[0].t0+0.8)));this.grp.decl.forEach(e=>op(e,ramp(t,s1,s1+0.8)));this.grp.proc.forEach(e=>op(e,ramp(t,s2,s2+0.8)));
+  const N=this.T.N;N.S.r.setAttribute('stroke-width',e12Cur(t,a,1)&&t<sub_(p,0,1,1,2)?6:3);N.E.r.setAttribute('stroke-width',e12Cur(t,a,1)&&t>=sub_(p,0,1,1,2)?6:3);N.P.r.setAttribute('stroke-width',e12Cur(t,a,2)?6:3);
+  op(this.tl,ramp(t,a.L[3].t0,a.L[3].t0+0.5));const L3=a.L[3];this.tm.forEach((m,i)=>{const s0=lerp(L3.t0+0.3,L3.t1-1.2,i/3);op(m,ramp(t,s0,s0+0.4));});
+ }});
+
+/* ═════════ c1-5 알츠하이머에서 시드는 가지 ═════════ */
+page({id:'c1-5',label:'1-5',title:'알츠하이머에서 시드는 기억',scenes:[
+ {name:'단계별 기억 손상',pre:0.6,post:1.4,lines:[
+  '알츠하이머병에서는 이 가지들이 순서대로 시듭니다. 초기에는 일화기억과 작업기억이 먼저 떨어지고, 의미기억과 절차기억은 남아 있습니다.',
+  '중기에는 의미기억 일부까지 손상되고, 말기에는 서술기억이 모두 무너집니다.',
+  '그래도 습관이나 조건 반응 같은 일부 절차기억은 마지막까지 남습니다.']}],
+ init(L){const s=SVGROOT(L);this.T=e12Tree(s,true);this.st=hdiv('ov','',L,'left:60px;top:100px;width:180px;text-align:center;font-size:26px;font-weight:800;padding:8px 0;border-radius:24px;background:rgba(20,34,58,.95);border:2px solid #ff8a7a;color:#ffb2a6');},
+ draw(t,p){const [a]=p.scenes;const vA=win(t,a.t0,a.t1+0.2,0.4);op(this.T,vA);const T=this.T;
+  const L0=a.L[0],L1=a.L[1],L2=a.L[2];
+  const early=ramp(t,L0.t0+1.5,L0.t0+4);const mid=ramp(t,L1.t0+0.3,sub_(p,0,1,1,2));const late=ramp(t,sub_(p,0,1,1,2),L1.t1);
+  T.set('E',1-0.88*early);T.set('W',1-0.88*early);T.set('S',1-0.5*mid-0.45*late);T.set('P',1-0.35*late);
+  T.N.D.r.setAttribute('stroke-opacity',(1-0.6*late).toFixed(2));
+  const glow=t>=L2.t0?0.5+0.5*Math.abs(Math.sin((t-L2.t0)*3)):0;T.N.P.r.setAttribute('stroke-width',(3+4*glow).toFixed(1));
+  const stage=t<L1.t0?'초기':t<sub_(p,0,1,1,2)?'중기':'말기';this.st.textContent=stage;op(this.st,vA*ramp(t,L0.t0+1,L0.t0+1.5));
+  if(t>=L2.t0)chip('<span style="color:#71e6ac">절차기억</span> 일부(습관 · 조건 반응)는 끝까지 남음',ramp(t,L2.t0,L2.t0+0.4));
+ }});
+
+/* ═════════ c1-6 확인 문제 ═════════ */
+const QC1=[
+ {q:'TV 소리가 큰 거실에서 상대방 말에만 집중해 대화한다. 이와 관련된 주의와 평가 과제는?',o:['지속적 주의 · 소거 과제','선택적 주의 · 스트룹 검사','교대적 주의 · 기호 잇기','분할적 주의 · 이중 과제','작업기억 · 숫자 거꾸로'],a:1,x:'방해 자극을 떨치고 한 자극에 집중 = 선택적 주의 · 스트룹'},
+ {q:'1 → 가 → 2 → 나 순서로 숫자와 글자를 번갈아 잇는 과제가 평가하는 주의는?',o:['지속적 주의','선택적 주의','교대적 주의','분할적 주의','미래기억'],a:2,x:'두 과제를 오가기 = 교대적 주의 · 기호 잇기 검사'},
+ {q:'"지난 주말에 있었던 일"을 떠올리는 기억은?',o:['의미기억','절차기억','일화기억','감각기억','원격 기억'],a:2,x:'시간 · 장소가 있는 개인 경험 = 일화기억'},
+ {q:'자전거 타기, 양치하기와 같은 기억은?',o:['일화기억','의미기억','작업기억','절차기억','미래기억'],a:3,x:'비서술기억(how) = 절차기억'},
+ {q:'치매에서 가장 먼저 손상되는 지남력은?',o:['사람','장소','시간','상황','모두 동시에'],a:2,x:'시간 → 장소 → 사람 순서'},
+ {q:'초기 알츠하이머병에서 비교적 보존되는 기억은?',o:['일화기억 · 작업기억','의미기억 · 절차기억','일화기억 · 절차기억','작업기억 · 의미기억','모든 서술기억'],a:1,x:'초기엔 일화 · 작업기억 손상, 의미 · 절차기억 보존'}];
+page({id:'c1-6',label:'1-6',title:'확인 문제',mute:true,scenes:QC1.map((q,i)=>({name:'문제 '+(i+1),pre:i===0?0.6:0.4,post:0.6,lines:[{tx:q.q,d:10,nosub:true},{tx:'정답',d:6,nosub:true}]})),
+ init(L){const N='①②③④⑤';this.cards=QC1.map((q,i)=>hdiv('quiz ov',`<div class="qn">문제 ${i+1} / ${QC1.length} · 잠깐 멈추고 풀어 보세요</div><div class="qt">${q.q}</div>`+q.o.map((o,j)=>`<div class="op">${N[j]} ${o}</div>`).join('')+`<div class="ex ov" style="position:relative">정답 ${N[q.a]} · ${q.x}</div>`,L));},
+ draw(t,p){this.cards.forEach((c,i)=>{const s=p.scenes[i];op(c,win(t,s.t0+(i===0?0.3:0),s.t1+0.1,0.35));const rv=t>=s.L[1].t0;c.querySelectorAll('.op').forEach((e,j)=>e.classList.toggle('ok',rv&&j===QC1[i].a));op(c.querySelector('.ex'),ramp(t,s.L[1].t0,s.L[1].t0+0.4));});}});
+</script>
+<script>"use strict";
+/* 치매 1편: 모든 페이지는 ep12_p1.js */
+</script>
+<script>"use strict";
+/* ───────── 시작 ───────── */
+for(const p of PAGES){p.layer=hdiv('page','',$('layers'));p.layer.style.display='none';}
+let initN=0;function ensureInit(p){const k=Math.max(0,PAGES.indexOf(p));while(initN<=k&&initN<PAGES.length){const q=PAGES[initN++];q.init(q.layer);}}
+ensureInit(PAGES[0]);
+function bgInit(){if(initN>=PAGES.length)return;ensureInit(PAGES[initN]);setTimeout(bgInit,30);}
+buildTimeline();
+const AL=ALL.filter(l=>l.has);
+function aud(l){if(!l.a){l.a=new Audio(l.src);l.a.preload='auto';}return l.a;}
+function prefetch(l,n=2){let i=AL.indexOf(l);for(let k=1;k<=n&&i+k<AL.length;k++)aud(AL[i+k]);}
+if(AL.length){aud(AL[0]);prefetch(AL[0]);}
+
+let rate=1,t=0,playing=false,last=performance.now(),dragging=false,wasPlaying=false,curA=null;
+const fmt=s=>{s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
+const icoPlay='<svg width="24" height="24" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#fff"/></svg>',icoPause='<svg width="24" height="24" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1" fill="#fff"/><rect x="14" y="4" width="4" height="16" rx="1" fill="#fff"/></svg>';
+const icoFull='<path d="M4 9V4h5v2H6v3zm11-5h5v5h-2V6h-3zM4 15h2v3h3v2H4zm14 0h2v5h-5v-2h3z" fill="#fff"/>',icoExit='<path d="M9 4v5H4V7h3V4zm6 0h2v3h3v2h-5zM4 15h5v5H7v-3H4zm11 0h5v2h-3v3h-2z" fill="#fff"/>';
+let SCALE=1,hideT=null;const CTL=$('ctl'),VP=$('vp');
+function subShift(){const vis=!CTL.classList.contains('hide');$('sub').style.bottom=(vis?30+Math.max(0,CTL.offsetHeight-34)/SCALE:30)+'px';}
+function showCtl(){CTL.classList.remove('hide');VP.classList.remove('nocur');clearTimeout(hideT);if(playing&&!dragging&&!overCtl&&$('menu').style.display!=='block')hideT=setTimeout(()=>{CTL.classList.add('hide');VP.classList.add('nocur');subShift();},2600);subShift();}
+VP.addEventListener('pointermove',showCtl);VP.addEventListener('pointerdown',showCtl);
+let overCtl=false;CTL.addEventListener('pointerenter',()=>{overCtl=true;clearTimeout(hideT);CTL.classList.remove('hide');VP.classList.remove('nocur');});CTL.addEventListener('pointerleave',()=>{overCtl=false;showCtl();});
+function stopAudio(){for(const l of ALL)if(l.a&&!l.a.paused)l.a.pause();curA=null;}
+function syncAudio(){if(!playing||dragging){stopAudio();return;}
+ const l=AL.find(l=>t>=l.t0&&t<l.t1);
+ if(l){aud(l);prefetch(l);}
+ if(!l){if(curA)stopAudio();return;}
+ if(curA!==l){stopAudio();curA=l;l.a.playbackRate=rate;l.a.currentTime=Math.max(0,t-l.t0);l.a.play().catch(()=>{});}
+ else if(!l.a.paused&&Math.abs(l.a.currentTime-(t-l.t0))>0.3)l.a.currentTime=Math.max(0,t-l.t0);}
+function ui(){$('fill').style.width=(t/TOTAL*100)+'%';$('knob').style.left=(t/TOTAL*100)+'%';$('time').textContent=fmt(t)+' / '+fmt(TOTAL);
+ const bp=$('bplay'),st=playing?'pause':'play';if(bp.dataset.st!==st){bp.dataset.st=st;bp.innerHTML=playing?icoPause:icoPlay;}op($('bigplay'),playing||t>0.01?0:1);}
+function setPlay(v){if(v&&t>=TOTAL-0.05)t=0;playing=v;last=performance.now();if(!v)stopAudio();else syncAudio();ui();showCtl();}
+function seek(x){t=cl(x,0,TOTAL);stopAudio();frame(t);ui();if(playing)syncAudio();}
+function flash(txt,left){const f=$('flash');f.textContent=txt;f.style.left=left?'80px':'';f.style.right=left?'':'80px';f.style.opacity=1;clearTimeout(flash.h);flash.h=setTimeout(()=>f.style.opacity=0,500);}
+function loop(now){const dt=Math.min(0.5,(now-last)/1000);last=now;
+ if(playing&&!dragging){
+  if(curA&&!curA.a.paused&&curA.a.currentTime>0&&!curA.a.ended)t=curA.t0+curA.a.currentTime;else t+=dt*rate;
+  if(t>=TOTAL){t=TOTAL;playing=false;stopAudio();if(EP.next){const n=$('nextEp');if(n)n.style.display='flex';}}
+  syncAudio();frame(t);ui();}
+ requestAnimationFrame(loop);}
+for(const p of PAGES){for(const s of p.scenes){if(s.t0<=0)continue;const k=hdiv('tick'+(s===p.scenes[0]?' pg':''),'',$('ticks'));k.style.left=(s.t0/TOTAL*100)+'%';k.title=(p.label||p.id)+' '+s.name;}}
+$('menu').innerHTML=PAGES.map((p,i)=>`<div data-i="${i}"><b>${p.label||p.id}</b>${p.title} <span style="color:#7d90ad;font-size:17px">${fmt(p.t0)}</span></div>`).join('');
+$('menu').addEventListener('pointerup',e=>{e.stopPropagation();const d=e.target.closest('[data-i]');if(!d)return;seek(PAGES[+d.dataset.i].t0+0.01);$('menu').style.display='none';});
+$('bmenu').onclick=()=>{const m=$('menu');m.style.display=m.style.display==='block'?'none':'block';showCtl();};
+function toggleFull(){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen().catch(()=>{});}
+$('bfull').onclick=toggleFull;
+document.addEventListener('fullscreenchange',()=>{const ic=document.getElementById('icoFull');if(ic)ic.innerHTML=document.fullscreenElement?icoExit:icoFull;setTimeout(fit,100);});
+$('bplay').onclick=()=>setPlay(!playing);
+$('bback').onclick=()=>{seek(t-10);flash('◀◀ 10초',true);};
+$('bfwd').onclick=()=>{seek(t+10);flash('10초 ▶▶',false);};
+const prog=$('prog');const px=e=>{const r=prog.getBoundingClientRect();return cl((e.clientX-r.left)/r.width)*TOTAL;};
+prog.addEventListener('pointerdown',e=>{dragging=true;CTL.classList.add('drag');wasPlaying=playing;playing=false;prog.setPointerCapture(e.pointerId);seek(px(e));});
+prog.addEventListener('pointermove',e=>{if(dragging)seek(px(e));});
+prog.addEventListener('pointerup',e=>{if(!dragging)return;dragging=false;CTL.classList.remove('drag');seek(px(e));setPlay(wasPlaying);});
+const stage=$('stage');let tapT=0,tapH=null,pd=null,lastPage=null;
+stage.addEventListener('pointerdown',e=>{pd={x:e.clientX,y:e.clientY,yaw:W.ORB.yaw,pitch:W.ORB.pitch,drag:false};});
+stage.addEventListener('pointermove',e=>{if(!pd||+W.cv.style.opacity<0.3)return;const dx=e.clientX-pd.x,dy=e.clientY-pd.y;if(!pd.drag&&Math.hypot(dx,dy)>8)pd.drag=true;
+ if(pd.drag){W.ORB.yaw=pd.yaw-dx*0.008;W.ORB.pitch=cl(pd.pitch+dy*0.006,-0.9,0.9);frame(t);}});
+stage.addEventListener('pointerup',e=>{const wasDrag=pd&&pd.drag;pd=null;if(wasDrag)return;if($('menu').style.display==='block'){$('menu').style.display='none';return;}
+ if(e.pointerType==='mouse'){setPlay(!playing);return;}
+ const now=performance.now();const r=stage.getBoundingClientRect();const left=(e.clientX-r.left)<r.width/2;
+ if(now-tapT<300){clearTimeout(tapH);tapT=0;if(left){seek(t-10);flash('◀◀ 10초',true);}else{seek(t+10);flash('10초 ▶▶',false);}return;}
+ tapT=now;tapH=setTimeout(()=>setPlay(!playing),300);});
+const VOICED=()=>ALL.filter(l=>!l.nosub);
+function nextLine(d){const L=VOICED();if(d>0){const n=L.find(l=>l.t0>t+0.05);if(n)seek(n.t0);}else{const ps=L.filter(l=>l.t0<t-0.8);if(ps.length)seek(ps[ps.length-1].t0);else seek(0);}}
+function setRate(r){rate=Math.round(cl(r,0.5,2)*100)/100;for(const l of ALL)if(l.a)l.a.playbackRate=rate;$('bspd').textContent=rate.toFixed(rate*10%1?2:1)+'×';flash('속도 '+rate+'×',false);}
+const RATES=[0.5,0.75,0.9,1,1.1,1.25,1.5,1.75,2];
+addEventListener('keydown',e=>{const k=e.key,c=e.code;if(e.ctrlKey||e.metaKey||e.altKey)return;
+ if(c==='Space'||k==='k'||k==='K'){e.preventDefault();setPlay(!playing);}
+ else if(k==='j'||k==='J'||(e.shiftKey&&c==='ArrowLeft')){seek(t-10);flash('◀◀ 10초',true);}
+ else if(k==='l'||k==='L'||(e.shiftKey&&c==='ArrowRight')){seek(t+10);flash('10초 ▶▶',false);}
+ else if(c==='ArrowLeft'){nextLine(-1);flash('◀ 이전 대사',true);}
+ else if(c==='ArrowRight'){nextLine(1);flash('다음 대사 ▶',false);}
+ else if(/^[0-9]$/.test(k)){seek(TOTAL*(+k)/10);}
+ else if(k==='<'||k===','){setRate(RATES[Math.max(0,RATES.findIndex(r=>r>=rate)-1)]);}
+ else if(k==='>'||k==='.'){setRate(RATES[Math.min(RATES.length-1,RATES.findIndex(r=>r>rate))]||2);}
+ else if(k==='r'||k==='R'){seek(0);setPlay(true);}
+ else if(k==='Escape'){if($('menu').style.display==='block')$('menu').style.display='none';else location.href='index.html';}
+ else if(k==='f'||k==='F'){toggleFull();}
+ showCtl();});
+$('bspd').onclick=()=>{const i=RATES.indexOf(rate);setRate(RATES[(i+1)%RATES.length]);};
+$('bhome').onclick=()=>{location.href='index.html';};
+function fit(){const vp=$('vp');const s=Math.min(vp.clientWidth/1280,vp.clientHeight/720);SCALE=s;stage.style.transform=`translate(-50%,-50%) scale(${s})`;W.R.setPixelRatio(Math.min(2,(window.devicePixelRatio||1)*s));W.R.setSize(1280,720,false);frame(t);}
+addEventListener('resize',fit);fit();ui();showCtl();requestAnimationFrame(loop);
+{const h=decodeURIComponent(location.hash.slice(1));const pg=PAGES.find(p=>p.id===h);if(pg)seek(pg.t0+0.01);}
+const _frame=frame;frame=function(tt){const cur=PAGES.find(p=>tt>=p.t0&&tt<p.t1);ensureInit(cur||PAGES[PAGES.length-1]);if(cur!==lastPage){lastPage=cur;W.ORB.yaw=0;W.ORB.pitch=0;}_frame(tt);};
+setTimeout(bgInit,500);
+window.DBG={seek,get TOTAL(){return TOTAL},PAGES,get t(){return t},ALL};
+</script>
+</body>
+</html>
