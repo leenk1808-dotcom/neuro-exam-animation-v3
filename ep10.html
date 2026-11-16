@@ -517,6 +517,87 @@ function e10Panel(par,x,y,w,h,col=E10.blue){return sv('rect',{x,y,width:w,height
 function e10Head(par,x,y,t,col=E10.ink,fs=22){return tx_(par,x,y,t,{'font-size':fs,fill:col});}
 function e10Dot(par,x,y,r,col){return sv('circle',{cx:x,cy:y,r,fill:col,stroke:'#fff','stroke-width':1.5},par);}
 function e10Glyph(par,x,y,t,col=E10.blue){const g=sv('g',{},par);sv('circle',{cx:x,cy:y,r:30,fill:'rgba(20,35,58,.96)',stroke:col,'stroke-width':2.5},g);tx_(g,x,y+8,t,{'font-size':23,fill:col});return g;}
+const E10TK=[
+ [294,262, 300,242,360,236,430,236, 505,236,565,250,584,290, 594,320,590,352,578,372, 552,380, 500,352,420,334,340,322, 308,316,292,292],
+ [292,250, 298,230,352,250,425,252, 500,254,562,232,586,270, 594,320,590,352,578,372, 552,380, 500,352,420,334,340,322, 308,316,292,292],
+ [292,232, 300,214,350,212,420,224, 495,246,560,244,586,282, 594,320,590,352,578,372, 552,380, 500,352,420,334,340,322, 308,316,292,292],
+ [292,230, 300,212,380,210,465,214, 530,220,575,250,588,292, 596,322,590,352,578,372, 552,380, 500,352,420,334,340,322, 308,316,292,292],
+ [292,230, 300,212,380,210,470,214, 545,216,600,238,616,292, 622,324,606,354,590,374, 558,382, 500,352,420,334,340,322, 308,316,292,292]];
+function e10Tongue(P,v){v=Math.max(0,Math.min(4,v));const i=Math.min(3,Math.floor(v)),q=v-i,A=E10TK[i],B=E10TK[i+1],n=A.map((a,j)=>(a+(B[j]-a)*q).toFixed(1));
+ P.tongue.setAttribute('d','M'+n[0]+' '+n[1]+' C'+n.slice(2,8).join(' ')+' C'+n.slice(8,14).join(' ')+' C'+n.slice(14,20).join(' ')+' L'+n[20]+' '+n[21]+' C'+n.slice(22,28).join(' ')+' C'+n.slice(28,32).join(' ')+' '+n[0]+' '+n[1]+'Z');}
+function e10Velum(P,k){k=Math.max(0,Math.min(1,k));const tx=lerp(548,664,k),ty=lerp(262,212,k);
+ P.velum.setAttribute('d','M466 201 Q'+lerp(522,580,k)+' '+lerp(200,194,k)+' '+tx+' '+ty+' Q'+lerp(506,572,k)+' '+lerp(250,232,k)+' 466 215Z');}
+function e10Sag(par,tf,C){const s=par,g=sv('g',{transform:tf},s),P={};const AIR=C.air,TIS=C.tis,WALL=C.wall,BONE=C.bone;
+ sv('path',{d:'M318 98 C300 110 296 125 300 142 L248 182 Q244 193 262 197 Q270 210 261 223 Q256 236 270 244 Q257 254 263 268 Q273 284 281 300 C281 332 302 350 340 360 Q402 374 470 398 L486 578 L770 578 L768 360 C792 300 800 220 780 160 C760 112 700 96 640 96 Z',fill:TIS,stroke:WALL,'stroke-width':4},g);
+ for(let y=196;y<570;y+=44)sv('rect',{x:680,y:y,width:54,height:36,rx:8,fill:C.sp,stroke:C.sp2,'stroke-width':2},g);
+ const lum=sv('g',{fill:AIR},g);
+ sv('path',{d:'M262 194 Q285 160 330 152 L540 150 Q600 150 640 172 Q664 190 666 232 L600 236 L560 206 L300 206 Z'},lum);
+ sv('path',{d:'M282 210 L470 208 Q540 212 592 240 L602 300 L585 300 L560 262 L300 262 Z'},lum);
+ sv('path',{d:'M586 200 L666 200 L664 300 L662 400 L656 470 L618 470 L612 398 L590 392 L582 300Z'},lum);
+ sv('path',{d:'M618 466 L656 466 L654 580 L620 580Z'},lum);sv('path',{d:'M540 200 L604 200 L604 300 L560 262 Z'},lum);
+ sv('path',{d:'M592 394 L612 394 L613 580 L556 580 L556 486 Q558 440 580 408Z'},lum);
+ const W={fill:'none',stroke:WALL,'stroke-width':3,'stroke-linecap':'round'};
+ sv('path',Object.assign({d:'M300 152 L540 150 Q600 150 640 172 Q664 190 666 232 L664 300 L662 400 L656 470 L654 580'},W),g);
+ sv('path',Object.assign({d:'M620 580 L618 470 L613 400'},W),g);
+ sv('path',Object.assign({d:'M556 580 L556 486 Q558 440 580 408'},W),g);
+ sv('path',{d:'M296 206 L470 206',stroke:BONE,'stroke-width':11,'stroke-linecap':'round'},g);
+ sv('path',{d:'M280 212 L292 212 L290 242 L282 242Z',fill:C.tooth},g);sv('path',{d:'M281 248 L290 248 L292 274 L283 274Z',fill:C.tooth},g);
+ sv('path',{d:'M300 290 C300 322 314 342 350 350 L470 362',fill:'none',stroke:BONE,'stroke-width':6,'stroke-linecap':'round',opacity:.45},g);
+ P.velum=sv('path',{fill:C.vel,stroke:C.mus2,'stroke-width':2.5},g);e10Velum(P,0);
+ P.tongue=sv('path',{fill:C.tg,stroke:C.mus2,'stroke-width':3},g);e10Tongue(P,0);
+ P.pyr=sv('ellipse',{cx:640,cy:446,rx:14,ry:22,fill:'none',stroke:C.pyr,'stroke-width':2,'stroke-dasharray':'4 4'},g);
+ P.larynx=sv('g',{},g);
+ sv('path',{d:'M578 410 L548 424 L542 474 L556 488',fill:'none',stroke:C.thy,'stroke-width':4,'stroke-linejoin':'round'},P.larynx);
+ for(let y=500;y<575;y+=17)sv('path',{d:'M558 '+y+' Q585 '+(y+7)+' 611 '+y,fill:'none',stroke:C.ring,'stroke-width':3},P.larynx);
+ P.hyoid=sv('ellipse',{cx:546,cy:390,rx:12,ry:6,fill:BONE,stroke:C.bone2,'stroke-width':2},P.larynx);
+ P.fv1=sv('path',{stroke:C.fv,'stroke-width':6,'stroke-linecap':'round'},P.larynx);P.fv2=sv('path',{stroke:C.fv,'stroke-width':6,'stroke-linecap':'round'},P.larynx);
+ P.vf1=sv('path',{stroke:C.vf,'stroke-width':7,'stroke-linecap':'round'},P.larynx);P.vf2=sv('path',{stroke:C.vf,'stroke-width':7,'stroke-linecap':'round'},P.larynx);
+ P.epi=sv('path',{d:'M588 402 Q598 376 604 346 Q614 352 611 374 Q604 394 598 406Z',fill:C.epi,stroke:C.epi2,'stroke-width':2.5},P.larynx);
+ P.ues1=sv('path',{stroke:C.ues,'stroke-width':8,'stroke-linecap':'round'},g);P.ues2=sv('path',{stroke:C.ues,'stroke-width':8,'stroke-linecap':'round'},g);
+ P.food=sv('g',{opacity:0},g);sv('ellipse',{cx:0,cy:0,rx:17,ry:11,fill:C.food,stroke:C.food2,'stroke-width':3},P.food);sv('circle',{cx:-4,cy:-2,r:3,fill:C.food3},P.food);
+ P.pt={oral:[420,236],oralBack:[510,234],fauc:[575,252],oroph:[628,290],vall:[589,378],epiTop:[630,360],hypo:[638,430],pyr:[640,446],vest:[598,426],trach:[584,520],ues:[637,486],eso:[637,548],fold:458};
+ P.g=g;P.s=s;e10Air(P,.1,0,0);return P;}
+function e10Food(P,x,y,v=1){P.food.setAttribute('transform','translate('+x+' '+y+')');P.food.setAttribute('opacity',v);}
+function e10Path(P,pts,k,v=1){k=Math.max(0,Math.min(1,k));const n=pts.length-1,i=Math.min(n-1,Math.floor(k*n)),q=k*n-i;e10Food(P,lerp(pts[i][0],pts[i+1][0],q),lerp(pts[i][1],pts[i+1][1],q),v);}
+function e10Air(P,closure,lift=0,flip=0){P.larynx.setAttribute('transform','translate('+(-6*lift)+' '+(-14*lift)+')');P.epi.setAttribute('transform','rotate('+(50*flip)+' 593 404)');
+ const gap=20*(1-closure);P.vf1.setAttribute('d','M561 456 L'+(586-gap/2)+' 461');P.vf2.setAttribute('d','M611 456 L'+(588+gap/2)+' 461');
+ P.fv1.setAttribute('d','M562 436 L'+(584-gap/2)+' 441');P.fv2.setAttribute('d','M611 436 L'+(590+gap/2)+' 441');
+ const o=Math.max(0,Math.min(1,(lift-.3)/.6))*13;P.ues1.setAttribute('d','M620 486 L'+(636-o)+' 486');P.ues2.setAttribute('d','M654 486 L'+(638+o)+' 486');e10Velum(P,Math.max(lift,flip));}
+
+const E10N={air:'#1b1729',tis:'#4c3644',wall:'#d8a49d',bone:'#efdcc4',sp:'#5c4752',sp2:'#7d6670',vel:'#c9868a',mus2:'#8f4f5a',tg:'#d98083',pyr:'#8d7a8c',thy:'#c7b9a6',ring:'#607b96',bone2:'#9b8a70',fv:'#b8a8bc',vf:'#f2e4d7',epi:'#f0bd8b',epi2:'#9a6557',ues:'#f8c976',food:'#ffcf70',food2:'#fff1bd',food3:'#fff5d4',tooth:'#f6efe4'};
+const E10X={air:'#bdbdbd',tis:'#8c8c8c',wall:'#a0a0a0',bone:'#4d4d4d',sp:'#6a6a6a',sp2:'#555',vel:'#808080',mus2:'#737373',tg:'#818181',pyr:'rgba(0,0,0,0)',thy:'#5c5c5c',ring:'#a8a8a8',bone2:'#333',fv:'#6d6d6d',vf:'#5a5a5a',epi:'#6e6e6e',epi2:'#5d5d5d',ues:'rgba(0,0,0,0)',food:'#151515',food2:'#000',food3:'#333',tooth:'#2e2e2e'};
+function e10Mon(par,x,y,w,h,id,cap){const d=sv('defs',{},par),cp=sv('clipPath',{id},d);sv('rect',{x,y,width:w,height:h,rx:10},cp);
+ sv('rect',{x,y,width:w,height:h,rx:10,fill:'#c8c8c8'},par);const inner=sv('g',{'clip-path':'url(#'+id+')'},par);
+ sv('rect',{x,y,width:w,height:h,rx:10,fill:'none',stroke:'#2a2f38','stroke-width':5},par);if(cap)tx_(par,x+14,y+26,cap,{'font-size':15,fill:'#222',stroke:'none','text-anchor':'start'});return {inner};}
+function e10Chip(L,x,y,w,txt,col){return hdiv('ov','<div style="border:2px solid '+col+';border-radius:12px;background:rgba(9,18,34,.95);padding:7px 12px;font-size:19px;font-weight:700;color:'+col+';text-align:center">'+txt+'</div>',L,'left:'+x+'px;top:'+y+'px;width:'+w+'px');}
+function e10Res(P,list,col){const g=sv('g',{opacity:0},P.g);list.forEach(q=>sv('ellipse',{cx:q[0],cy:q[1],rx:q[2],ry:q[3],fill:col}, g));return g;}
+const E10PTS=[[420,238],[510,236],[592,262],[642,320],[640,420],[637,486],[637,552]];
+function e10Cycle(P,k){k=Math.max(0,Math.min(1,k));e10Tongue(P,k<.14?1+k/.14*2:k<.28?3+(k-.14)/.14:k<.55?4:Math.max(0,4-(k-.55)/.25*4));const a=Math.min(ramp(k,.2,.3),1-ramp(k,.72,.82));e10Air(P,.1+.85*a,a,a);e10Velum(P,Math.min(ramp(k,.06,.16),1-ramp(k,.72,.82)));e10Path(P,E10PTS,k,k>.02&&k<.97?1:0);return a;}
+function e10XLab(P){const T=(x,y,t,o)=>tx_(P.g,x,y,t,Object.assign({'font-size':22},o||{}));T(380,232,'구강',{fill:'#fff'});T(700,262,'인두',{fill:'#fff','text-anchor':'start'});T(552,466,'진성대',{fill:'#ffe08a','text-anchor':'end'});T(548,545,'기도',{fill:'#9fd9ff','text-anchor':'end'});T(700,548,'식도',{fill:'#fff','text-anchor':'start'});
+ sv('path',{d:'M664 258 L694 258',stroke:'#fff','stroke-width':2},P.g);sv('path',{d:'M652 542 L694 542',stroke:'#fff','stroke-width':2},P.g);}
+
+function e10AP(par){const o={};const M=e10Mon(par,845,172,360,320,'e10clAP','');const g=M.inner;const AIRc='#bdbdbd';
+ sv('path',{d:'M860 172 L1190 172 L1190 212 Q1170 272 1125 302 L1118 495 L932 495 L925 302 Q880 272 860 212Z',fill:'#8c8c8c'},g);
+ sv('path',{d:'M872 176 Q886 286 1025 297 Q1164 286 1178 176',fill:'none',stroke:'#4d4d4d','stroke-width':12},g);
+ for(let y=304;y<495;y+=38)sv('rect',{x:1000,y,width:50,height:30,rx:6,fill:'#7c7c7c'},g);
+ sv('path',{d:'M985 205 L1065 205 L1068 322 L982 322Z',fill:AIRc},g);
+ sv('ellipse',{cx:1003,cy:330,rx:17,ry:10,fill:AIRc},g);sv('ellipse',{cx:1047,cy:330,rx:17,ry:10,fill:AIRc},g);
+ sv('path',{d:'M984 334 Q962 384 972 440 Q988 472 1012 480 L1012 346Z',fill:AIRc},g);sv('path',{d:'M1066 334 Q1088 384 1078 440 Q1062 472 1038 480 L1038 346Z',fill:AIRc},g);
+ sv('path',{d:'M1013 350 L1037 350 L1036 495 L1014 495Z',fill:'#d6d6d6'},g);sv('path',{d:'M1013 402 L1022 405 M1037 402 L1028 405',stroke:'#5a5a5a','stroke-width':4},g);
+ sv('path',{d:'M1010 324 Q1025 312 1040 324',fill:'none',stroke:'#666','stroke-width':5},g);
+ o.c=sv('ellipse',{cx:1025,cy:240,rx:24,ry:14,fill:'#151515',opacity:0},g);o.l=sv('ellipse',{rx:12,ry:16,fill:'#151515',opacity:0},g);o.r=sv('ellipse',{rx:12,ry:16,fill:'#151515',opacity:0},g);
+ o.res=sv('g',{opacity:0},g);sv('ellipse',{cx:980,cy:432,rx:11,ry:20,fill:'#151515'},o.res);sv('ellipse',{cx:1003,cy:331,rx:9,ry:6,fill:'#151515'},o.res);
+ const T=(x,y,t,a,c)=>tx_(par,x,y,t,{'font-size':17,fill:c||'#fff','text-anchor':a||'middle'});
+ T(866,205,'R',null,'#ffe08a');T(1184,205,'L',null,'#ffe08a');
+ sv('path',{d:'M935 330 L984 330',stroke:'#fff','stroke-width':2},par);T(932,336,'후두개곡','end');
+ sv('path',{d:'M935 432 L966 432',stroke:'#fff','stroke-width':2},par);o.lab=T(932,438,'조롱박굴','end');
+ T(1025,470,'기도',null,'#9fd9ff');
+ return o;}
+function e10APdraw(o,k,res){const vis=(e,v)=>e.setAttribute('opacity',v);
+ if(k<.2||k>.68){vis(o.c,0);vis(o.l,0);vis(o.r,0);}else if(k<.36){const u=(k-.2)/.16;vis(o.c,1);o.c.setAttribute('cy',lerp(240,328,u));vis(o.l,0);vis(o.r,0);}
+ else{vis(o.c,0);const u=Math.min(1,(k-.36)/.32);const y=u<.6?lerp(338,430,u/.6):lerp(430,480,(u-.6)/.4),dx=u<.6?lerp(22,45,u/.6):lerp(45,8,(u-.6)/.4);
+  o.l.setAttribute('cx',1025-dx);o.l.setAttribute('cy',y);o.r.setAttribute('cx',1025+dx);o.r.setAttribute('cy',y);vis(o.l,u<.95?1:0);vis(o.r,u<.95?1:0);}
+ vis(o.res,res?ramp(k,.55,.65):0);}
 
 page({id:'s2-1',label:'2-1',title:'임상 평가와 절차',scenes:[{name:'임상 평가',pre:2,post:1,lines:[
  '삼킴 평가는 병력과 신체검사에서 시작합니다. 증상이 급성으로 생겼는지 서서히 진행했는지, 목 수술 이력이 있는지 확인합니다. 구강 구조와 혀 기능, 인지 상태를 살펴보고 폐도 청진합니다. 삼킴에 관여하는 오·칠·구·십·십이 번 뇌신경 기능을 함께 확인해 입술과 혀, 인두 감각, 후두 움직임 등을 살핍니다.',
@@ -541,9 +622,15 @@ page({id:'s2-3',label:'2-3',title:'기침반응 검사와 물 삼키기',scenes:
 page({id:'s2-4',label:'2-4',title:'VFSS (비디오투시조영검사)의 관찰과 장점',scenes:[{name:'비디오투시조영검사',pre:.4,post:.5,lines:[
  'VFSS(비디오투시조영검사)는 바륨을 섞은 여러 양과 점도의 음식을 삼키게 해, 음식이 입에서 인두와 식도로 이동하는 과정을 실시간으로 봅니다. 삼킴 반응의 시점과 기도 보호 동작도 함께 살펴볼 수 있어 가장 많이 사용되는 영상검사입니다.',
  '측면에서는 음식 이동과 반응 시점, 기도 보호와 잔여물을 봅니다. 전후면에서는 양쪽이 대칭으로 움직이는지, 한쪽에 잔여물이 남는지 확인합니다. 검사 중 자세와 삼킴 기법, 음식의 양과 점도를 바꾸어 효과를 비교할 수 있고, 흡인이 생기면 그 원인을 살펴 치료 방향을 정하는 데 도움을 줍니다.'
-]}],init(L){const s=SVGROOT(L);e10Panel(s,50,105,735,485,E10.blue);e10Panel(s,820,105,410,485,E10.purple);e10Head(s,415,148,'VFSS (비디오투시조영검사) · 측면 관찰',E10.blue,23);e10Head(s,1025,148,'전후면: 좌우 비교',E10.purple,23);
- const g=this.side=sv('g',{opacity:0},s);sv('path',{d:'M140 230 Q265 190 395 230 L395 275 Q275 252 165 290Z',fill:'#dba7a0',stroke:'#8d5f59','stroke-width':3},g);e10Head(g,263,210,'구강',E10.ink,18);sv('path',{d:'M390 255 Q455 290 445 360 Q430 425 410 510',fill:'none',stroke:'#e0a49b','stroke-width':42,'stroke-linecap':'round'},g);sv('path',{d:'M420 270 Q470 320 472 390 L472 520',fill:'none',stroke:'#ff887f','stroke-width':24,'stroke-linecap':'round'},g);sv('path',{d:'M380 276 Q360 342 376 418 L377 520',fill:'none',stroke:'#8ec6ff','stroke-width':26,'stroke-linecap':'round'},g);sv('line',{x1:348,y1:395,x2:403,y2:395,stroke:'#ffdddd','stroke-width':8},g);e10Head(g,520,335,'인두',E10.ink,18);e10Head(g,536,450,'기도',E10.coral,18);e10Head(g,345,490,'식도',E10.blue,18);e10Head(g,407,380,'진성대',E10.gold,16);this.bolus=e10Dot(g,190,255,15,E10.gold);this.resid=e10Dot(g,432,335,8,E10.coral);this.resid.setAttribute('opacity','0');
- const fr=this.front=sv('g',{opacity:0},s);sv('path',{d:'M950 235 Q935 310 950 375 L950 500',fill:'none',stroke:'#ff887f','stroke-width':32,'stroke-linecap':'round'},fr);sv('path',{d:'M1095 235 Q1110 310 1095 375 L1095 500',fill:'none',stroke:'#ff887f','stroke-width':32,'stroke-linecap':'round'},fr);sv('path',{d:'M1022 240 L1022 500',stroke:'#8ec6ff','stroke-width':24},fr);e10Dot(fr,950,390,12,E10.gold);e10Dot(fr,1095,330,12,E10.gold);e10Head(fr,950,535,'왼쪽',E10.ink,18);e10Head(fr,1095,535,'오른쪽',E10.ink,18);this.caps=e10Card(L,855,555,340,54,'바로 비교','자세 · 기법 · 양 · 점도',E10.mint);this.capSide=e10Card(L,175,515,530,54,'측면에서 보는 것','삼킴 반응 · 기도 보호 · 잔여물',E10.gold);},draw(t,p){const a=p.scenes[0],start=a.L[0].t0+1;op(this.side,win(t,a.L[0].t0,a.t1,.3));op(this.front,win(t,a.L[1].t0,a.t1,.3));op(this.caps,win(t,a.L[1].t0,a.t1,.3));op(this.capSide,win(t,a.L[0].t0,a.L[1].t0,.3));const k=Math.max(0,Math.min(1,(t-start)/Math.max(1,a.L[1].t0-start)));const pts=[[190,255],[285,255],[356,280],[405,320],[420,365],[400,405],[377,465]];const q=k*(pts.length-1),i=Math.min(pts.length-2,Math.floor(q)),u=q-i;this.bolus.setAttribute('cx',pts[i][0]+(pts[i+1][0]-pts[i][0])*u);this.bolus.setAttribute('cy',pts[i][1]+(pts[i+1][1]-pts[i][1])*u);op(this.resid,k>.72?1:0);}});
+]}],init(L){const s=SVGROOT(L);e10Panel(s,50,105,735,485,E10.blue);e10Panel(s,820,105,410,485,E10.purple);e10Head(s,415,148,'VFSS (비디오투시조영검사) · 측면 영상',E10.blue,23);e10Head(s,1025,148,'전후면: 좌우 비교',E10.purple,23);
+ const g=this.side=sv('g',{opacity:0},s);const M=e10Mon(g,72,168,488,404,'e10clS4','VFSS 측면');this.P=e10Sag(M.inner,'translate(-90 96) scale(.8)',E10X);e10XLab(this.P);
+ this.res=e10Res(this.P,[[589,380,12,7],[640,450,9,15]],'#151515');tx_(g,548,560,'바륨 = 검게 보임',{'font-size':16,fill:'#ffe08a','text-anchor':'end'});
+ this.chips=[['① 삼킴 반응 시점',E10.gold],['② 기도 보호',E10.coral],['③ 잔여물',E10.blue]].map((c,i)=>e10Chip(L,578,230+i*95,192,c[0],c[1]));
+ this.front=sv('g',{opacity:0},s);this.ap=e10AP(this.front);this.caps=e10Chip(L,845,512,360,'바로 비교: 자세 · 기법 · 양 · 점도',E10.mint);},
+ draw(t,p){const a=p.scenes[0],L0=a.L[0],L1=a.L[1];op(this.side,win(t,L0.t0,a.t1,.3));op(this.front,win(t,L1.t0,a.t1,.3));op(this.caps,win(t,L1.t0+2,a.t1,.3));
+  const u=t-L0.t0-1,k=u<0?0:Math.min(1,(u%7)/5.2);const air=e10Cycle(this.P,k);this.res.setAttribute('opacity',ramp(k,.8,.9).toFixed(3));
+  const lit=[k>.14&&k<.34,air>.5,k>.8];this.chips.forEach((c,i)=>{op(c,u<0?0:(lit[i]?1:.38));c.style.transform=lit[i]?'scale(1.05)':'';});
+  const u2=t-L1.t0-.6,k2=u2<0?0:Math.min(1,(u2%6)/4.6);e10APdraw(this.ap,k2,true);}});
 </script>
 <script>"use strict";
 page({id:'s2-5',label:'2-5',title:'VFSS 한계와 검사 흐름',scenes:[{name:'한계와 흐름',pre:.4,post:.5,lines:[
@@ -557,9 +644,39 @@ page({id:'s2-6',label:'2-6',title:'FEES와 VFSS 비교',scenes:[{name:'두 영�
  'FEES(연성내시경 삼킴검사)는 내시경을 코로 넣어 인두와 후두를 위에서 봅니다. 실제 음식을 사용하고 침과 분비물을 직접 관찰할 수 있습니다. 방사선이 없어 침상에서 반복하거나 오래 관찰할 수 있고, 피로에 따른 변화나 자세·전략의 효과를 살피는 데 유리합니다.',
  '삼키는 순간에는 인두가 내시경을 감싸 화면이 잠시 하얗게 가려지는 화이트아웃이 생겨, 그 순간의 음식 이동을 직접 볼 수 없습니다. 구강·식도 단계와 설골·후두 이동, UES 개방도 직접 확인하기 어렵습니다. VFSS는 음식 이동과 구조 움직임을 볼 수 있지만 방사선이 있습니다. 두 검사는 서로 다른 장점과 한계가 있어 필요한 정보를 고려해 선택합니다.'
 ]}],init(L){const s=SVGROOT(L);e10Panel(s,65,115,555,485,E10.purple);e10Panel(s,660,115,555,485,E10.blue);e10Head(s,340,155,'FEES (연성내시경 삼킴검사)',E10.purple,24);e10Head(s,938,155,'VFSS (비디오투시조영검사)',E10.blue,24);
- const f=this.fees=sv('g',{opacity:0},s);sv('path',{d:'M150 275 Q245 235 335 270 L335 305 Q240 285 160 325Z',fill:'#dba7a0',stroke:'#8d5f59','stroke-width':3},f);sv('path',{d:'M330 280 Q395 320 390 400 L382 515',fill:'none',stroke:'#e0a49b','stroke-width':42,'stroke-linecap':'round'},f);sv('path',{d:'M180 250 C270 220 320 230 350 290 Q380 340 420 420',fill:'none',stroke:E10.gold,'stroke-width':8},f);sv('circle',{cx:420,cy:420,r:14,fill:E10.purple,stroke:'#fff','stroke-width':2},f);e10Head(f,485,455,'카메라',E10.purple,18);this.white=e10Panel(f,250,330,205,100,E10.gold);this.white.setAttribute('opacity','0');e10Head(f,350,390,'순간 관찰이 가려짐',E10.gold,18);this.after=e10Card(L,130,485,425,70,'삼킴 직후','다시 보이는 잔여물·분비물',E10.mint);
- const v=this.vfss=sv('g',{opacity:0},s);sv('path',{d:'M745 270 Q850 235 970 275 L970 305 Q855 285 760 325Z',fill:'#dba7a0',stroke:'#8d5f59','stroke-width':3},v);sv('path',{d:'M960 290 Q1020 335 1010 430 L1000 520',fill:'none',stroke:'#e0a49b','stroke-width':35,'stroke-linecap':'round'},v);sv('path',{d:'M985 300 L1040 420 L1030 530',fill:'none',stroke:'#8ec6ff','stroke-width':22,'stroke-linecap':'round'},v);sv('path',{d:'M690 220 L1100 220',stroke:E10.blue,'stroke-width':2,'stroke-dasharray':'8 7'},v);this.food=e10Dot(v,800,285,13,E10.gold);e10Head(v,875,475,'움직임·기도 보호·잔여물',E10.blue,19);
- },draw(t,p){const a=p.scenes[0];op(this.fees,win(t,a.t0,a.t1,.3));op(this.vfss,win(t,a.L[1].t0,a.t1,.3));const k=Math.max(0,Math.min(1,(t-a.L[0].t0-1)/2));op(this.white,k>.35&&k<.75?1:0);op(this.after,win(t,a.L[0].t0+2,a.L[1].t0,.3));if(this.food){this.food.setAttribute('cx',800+Math.min(1,k)*170);this.food.setAttribute('cy',285+Math.min(1,k)*85);}}});
+ const f=this.fees=sv('g',{opacity:0},s);const d=sv('defs',{},f);const gr=sv('radialGradient',{id:'e10mg',cx:'50%',cy:'50%',r:'50%'},d);sv('stop',{offset:'0%','stop-color':'#e8a69e'},gr);sv('stop',{offset:'60%','stop-color':'#b55a59'},gr);sv('stop',{offset:'100%','stop-color':'#3f1015'},gr);
+ const cp=sv('clipPath',{id:'e10clE'},d);sv('circle',{cx:0,cy:0,r:135},cp);
+ const E=sv('g',{transform:'translate(250 335)'},f);sv('circle',{cx:0,cy:0,r:146,fill:'#0b0b0e'},E);const V=sv('g',{'clip-path':'url(#e10clE)'},E);
+ sv('circle',{cx:0,cy:0,r:135,fill:'url(#e10mg)'},V);
+ sv('path',{d:'M-140 -140 L140 -140 L140 -96 Q70 -80 0 -88 Q-70 -80 -140 -96Z',fill:'#d48682'},V);
+ sv('ellipse',{cx:-32,cy:-77,rx:27,ry:10,fill:'#5e1c23'},V);sv('ellipse',{cx:32,cy:-77,rx:27,ry:10,fill:'#5e1c23'},V);sv('path',{d:'M0 -88 L0 -70',stroke:'#c47a76','stroke-width':4},V);
+ sv('path',{d:'M-118 -22 Q-114 50 -72 98 Q-58 70 -64 10 Q-80 -28 -118 -22Z',fill:'#561820'},V);sv('path',{d:'M118 -22 Q114 50 72 98 Q58 70 64 10 Q80 -28 118 -22Z',fill:'#561820'},V);
+ sv('path',{d:'M-140 140 L140 140 L140 100 Q0 124 -140 100Z',fill:'#a54d4d'},V);
+ sv('path',{d:'M-76 -40 Q-82 30 -42 76 Q0 94 42 76 Q82 30 76 -40 Q40 -54 0 -56 Q-40 -54 -76 -40Z',fill:'#d18884',stroke:'#a8595a','stroke-width':2},V);
+ sv('path',{d:'M-58 -36 Q-62 20 -30 62 Q0 72 30 62 Q62 20 58 -36 Q30 -46 0 -46 Q-30 -46 -58 -36Z',fill:'#2a0b10'},V);
+ sv('path',{d:'M-50 -30 Q-56 15 -30 56 L-21 52 Q-40 10 -36 -28Z',fill:'#c06f70'},V);sv('path',{d:'M50 -30 Q56 15 30 56 L21 52 Q40 10 36 -28Z',fill:'#c06f70'},V);
+ this.vf1=sv('path',{stroke:'#f4ece6','stroke-width':9,'stroke-linecap':'round'},V);this.vf2=sv('path',{stroke:'#f4ece6','stroke-width':9,'stroke-linecap':'round'},V);
+ sv('ellipse',{cx:-18,cy:63,rx:15,ry:11,fill:'#e0998f'},V);sv('ellipse',{cx:18,cy:63,rx:15,ry:11,fill:'#e0998f'},V);
+ sv('path',{d:'M-80 -40 Q-74 -80 0 -76 Q74 -80 80 -40 Q66 -55 0 -58 Q-66 -55 -80 -40Z',fill:'#f2c3b7',stroke:'#b46e66','stroke-width':2.5},V);
+ this.sec=sv('g',{opacity:0},V);[[-92,52,6],[-84,64,5],[-96,68,4],[-88,40,4]].forEach(q=>sv('circle',{cx:q[0],cy:q[1],r:q[2],fill:'#fffaf0','fill-opacity':.85,stroke:'#e9dccd'},this.sec));
+ this.food=sv('ellipse',{cx:0,cy:-120,rx:30,ry:14,fill:'#7fcf62',opacity:0},V);
+ this.fres=sv('g',{opacity:0},V);sv('ellipse',{cx:-32,cy:-77,rx:20,ry:7,fill:'#7fcf62'},this.fres);sv('ellipse',{cx:30,cy:-76,rx:14,ry:6,fill:'#7fcf62'},this.fres);sv('ellipse',{cx:-90,cy:58,rx:10,ry:18,fill:'#7fcf62'},this.fres);
+ this.white=sv('g',{opacity:0},V);sv('circle',{cx:0,cy:0,r:135,fill:'#fffdf4'},this.white);tx_(this.white,0,8,'화이트아웃',{'font-size':26,fill:'#9a8a5a',stroke:'none'});
+ const T=(x,y,t,o)=>tx_(E,x,y,t,Object.assign({'font-size':15},o||{}));this.labs=sv('g',{},E);const TL=(x,y,t)=>tx_(this.labs,x,y,t,{'font-size':15});
+ TL(0,-104,'혀 기저부');TL(-58,-92,'후두개곡');TL(0,-63,'후두개');TL(0,24,'성대');TL(-102,104,'조롱박굴');TL(0,92,'피열');
+ T(0,166,'내시경 화면 (위에서 내려다봄)',{'font-size':16,fill:'#d2a7ff'});
+ this.ins=e10Sag(f,'translate(376 160) scale(.3)',E10N);sv('path',{d:'M262 196 Q300 172 560 168 Q640 172 650 232 L646 330',fill:'none',stroke:'#ffe08a','stroke-width':8},this.ins.g);sv('circle',{cx:646,cy:336,r:14,fill:E10.purple,stroke:'#fff','stroke-width':3},this.ins.g);
+ tx_(f,525,345,'코로 넣은 내시경',{'font-size':16,fill:'#ffe08a'});
+ this.after=e10Chip(L,95,526,500,'삼킴 직후: 다시 보이는 잔여물 · 분비물',E10.mint);
+ const v=this.vfss=sv('g',{opacity:0},s);const M=e10Mon(v,690,175,496,362,'e10clV6','VFSS 측면');this.P=e10Sag(M.inner,'translate(522 108) scale(.72)',E10X);e10XLab(this.P);this.res=e10Res(this.P,[[589,380,12,7]],'#151515');
+ tx_(v,1172,202,'☢ 방사선',{'font-size':17,fill:'#ffcf70','text-anchor':'end'});e10Head(v,938,568,'움직임 · 기도 보호 · 잔여물',E10.blue,19);
+ },draw(t,p){const a=p.scenes[0],L0=a.L[0],L1=a.L[1];op(this.fees,win(t,a.t0,a.t1,.3));
+  const s0=L1.t0+.5,fe=ramp(t,s0,s0+.4)*(1-ramp(t,s0+1.2,s0+1.4)),wo=Math.min(ramp(t,s0+1.2,s0+1.45),1-ramp(t,s0+2.6,s0+2.9));
+  const sw=t>s0+.9&&t<s0+2.9;const gap=sw?2:22+7*Math.sin(t*1.7);this.vf1.setAttribute('d','M0 -30 L'+(-gap)+' 46');this.vf2.setAttribute('d','M0 -30 L'+gap+' 46');
+  this.food.setAttribute('opacity',fe.toFixed(3));this.food.setAttribute('cy',lerp(-120,-80,ramp(t,s0,s0+1.2)));this.white.setAttribute('opacity',wo.toFixed(3));
+  this.sec.setAttribute('opacity',ramp(t,L0.t0+(L0.t1-L0.t0)*.3,L0.t0+(L0.t1-L0.t0)*.3+.8).toFixed(3));this.fres.setAttribute('opacity',ramp(t,s0+2.6,s0+2.9).toFixed(3));
+  op(this.after,win(t,s0+2.9,L1.t0+(L1.t1-L1.t0)*.55,.3));
+  const tv=L1.t0+(L1.t1-L1.t0)*0.590;op(this.vfss,win(t,tv-.3,a.t1,.3));const u=t-tv,k=u<0?0:Math.min(1,(u%6)/4.8);e10Cycle(this.P,k);this.res.setAttribute('opacity',ramp(k,.8,.9).toFixed(3));}});
 
 page({id:'s2-7',label:'2-7',title:'그 밖의 검사',scenes:[{name:'비영상·보완 검사',pre:.5,post:.5,lines:[
  '초음파는 혀 기능과 구강 통과시간을 보지만 인두는 볼 수 없습니다. 섬광조영술은 방사성 물질을 삼켜 흡인과 잔여물의 양을 측정하며, 위식도 역류 확인에도 활용됩니다.',
