@@ -234,7 +234,7 @@ const sub_=(p,i,j,k,n)=>{const a=LS(p,i,j),b=LE(p,i,j);return a+(b-a)*k/n;};
 </script>
 <script>"use strict";
 /* 실제 음성 길이(초) */
-Object.assign(DUR,{"s3-1_01":8.56,"s3-1_02":11.68,"s3-2_01":9.92,"s3-2_02":9.28,"s3-2_03":10.96,"s3-3_01":10,"s3-3_02":9.76,"s3-3_03":7.6,"s3-4_01":9.68,"s3-4_02":8.96,"s3-4_03":14.4,"s3-5_01":9.52,"s3-5_02":8.64,"s3-5_03":13.28,"s3-6_01":11.2,"s3-6_02":8.56,"s3-6_03":8,"s3-7_01":10.72,"s3-7_02":11.04,"s3-7_03":15.76,"s3-8_01":9.52,"s3-8_02":13.04,"s3-8_03":4.4});
+Object.assign(DUR,{"s3-1_01":8.56,"s3-1_02":11.68,"s3-3_01":10,"s3-5_01":9.52,"s3-5_02":8.64,"s3-6_01":11.2,"s3-6_03":8.56,"s3-7_01":10.72,"s3-7_03":11.04,"s3-8_01":9.52,"s3-8_02":13.04,"s3-8_03":4.4,"s3-2_05":10.96,"s3-3_06":7.6,"s3-4_05":14.4,"s3-5_04":13.28,"s3-6_05":8,"s3-2_01":12.4,"s3-2_02":7.44,"s3-2_03":11.12,"s3-2_04":8.4,"s3-2_06":9.52,"s3-2_07":6.16,"s3-3_02":6.88,"s3-3_03":10.56,"s3-3_04":6.56,"s3-3_05":10.32,"s3-4_01":10.4,"s3-4_02":5.6,"s3-4_03":10.32,"s3-4_04":12.48,"s3-4_06":11.6,"s3-5_03":11.6,"s3-6_02":11.68,"s3-6_04":5.92,"s3-6_06":13.36,"s3-7_02":8.8,"s3-7_04":6.56,"s3-7_05":10.56});
 </script>
 <script>"use strict";
 /* ───────── 3D 공용 세계 ───────── */
@@ -516,6 +516,118 @@ function e11Text(g,x,y,t,fs=23,col=E11C.white,anchor='middle'){return tx_(g,x,y,
 function e11Label(L,x,y,w,t,col=E11C.blue){const d=hdiv('card ov',
  '<div style="font-size:21px;color:'+col+';font-weight:800;text-align:center">'+t+'</div>',L,
  'left:'+x+'px;top:'+y+'px;width:'+w+'px;padding:10px 14px');return d;}
+const E11TK=[
+ [294,262, 300,242,360,236,430,236, 505,236,565,250,584,290, 594,320,590,352,578,372, 552,380, 500,352,420,334,340,322, 308,316,292,292],
+ [292,250, 298,230,352,250,425,252, 500,254,562,232,586,270, 594,320,590,352,578,372, 552,380, 500,352,420,334,340,322, 308,316,292,292],
+ [292,232, 300,214,350,212,420,224, 495,246,560,244,586,282, 594,320,590,352,578,372, 552,380, 500,352,420,334,340,322, 308,316,292,292],
+ [292,230, 300,212,380,210,465,214, 530,220,575,250,588,292, 596,322,590,352,578,372, 552,380, 500,352,420,334,340,322, 308,316,292,292],
+ [292,230, 300,212,380,210,470,214, 545,216,600,238,616,292, 622,324,606,354,590,374, 558,382, 500,352,420,334,340,322, 308,316,292,292]];
+function e11Tongue(P,v){v=Math.max(0,Math.min(4,v));const i=Math.min(3,Math.floor(v)),q=v-i,A=E11TK[i],B=E11TK[i+1],n=A.map((a,j)=>(a+(B[j]-a)*q).toFixed(1));
+ P.tongue.setAttribute('d','M'+n[0]+' '+n[1]+' C'+n.slice(2,8).join(' ')+' C'+n.slice(8,14).join(' ')+' C'+n.slice(14,20).join(' ')+' L'+n[20]+' '+n[21]+' C'+n.slice(22,28).join(' ')+' C'+n.slice(28,32).join(' ')+' '+n[0]+' '+n[1]+'Z');}
+function e11Velum(P,k){k=Math.max(0,Math.min(1,k));const tx=lerp(548,664,k),ty=lerp(262,212,k);
+ P.velum.setAttribute('d','M466 201 Q'+lerp(522,580,k)+' '+lerp(200,194,k)+' '+tx+' '+ty+' Q'+lerp(506,572,k)+' '+lerp(250,232,k)+' 466 215Z');}
+function e11Sag(par,tf,C){const s=par,g=sv('g',{transform:tf},s),P={};const AIR=C.air,TIS=C.tis,WALL=C.wall,BONE=C.bone;
+ sv('path',{d:'M318 98 C300 110 296 125 300 142 L248 182 Q244 193 262 197 Q270 210 261 223 Q256 236 270 244 Q257 254 263 268 Q273 284 281 300 C281 332 302 350 340 360 Q402 374 470 398 L486 578 L770 578 L768 360 C792 300 800 220 780 160 C760 112 700 96 640 96 Z',fill:TIS,stroke:WALL,'stroke-width':4},g);
+ for(let y=196;y<570;y+=44)sv('rect',{x:680,y:y,width:54,height:36,rx:8,fill:C.sp,stroke:C.sp2,'stroke-width':2},g);
+ const lum=sv('g',{fill:AIR},g);
+ sv('path',{d:'M262 194 Q285 160 330 152 L540 150 Q600 150 640 172 Q664 190 666 232 L600 236 L560 206 L300 206 Z'},lum);
+ sv('path',{d:'M282 210 L470 208 Q540 212 592 240 L602 300 L585 300 L560 262 L300 262 Z'},lum);
+ sv('path',{d:'M586 200 L666 200 L664 300 L662 400 L656 470 L618 470 L612 398 L590 392 L582 300Z'},lum);
+ sv('path',{d:'M618 466 L656 466 L654 580 L620 580Z'},lum);sv('path',{d:'M540 200 L604 200 L604 300 L560 262 Z'},lum);
+ sv('path',{d:'M592 394 L612 394 L613 580 L556 580 L556 486 Q558 440 580 408Z'},lum);
+ const W={fill:'none',stroke:WALL,'stroke-width':3,'stroke-linecap':'round'};
+ sv('path',Object.assign({d:'M300 152 L540 150 Q600 150 640 172 Q664 190 666 232 L664 300 L662 400 L656 470 L654 580'},W),g);
+ sv('path',Object.assign({d:'M620 580 L618 470 L613 400'},W),g);
+ sv('path',Object.assign({d:'M556 580 L556 486 Q558 440 580 408'},W),g);
+ sv('path',{d:'M296 206 L470 206',stroke:BONE,'stroke-width':11,'stroke-linecap':'round'},g);
+ sv('path',{d:'M280 212 L292 212 L290 242 L282 242Z',fill:C.tooth},g);sv('path',{d:'M281 248 L290 248 L292 274 L283 274Z',fill:C.tooth},g);
+ sv('path',{d:'M300 290 C300 322 314 342 350 350 L470 362',fill:'none',stroke:BONE,'stroke-width':6,'stroke-linecap':'round',opacity:.45},g);
+ P.velum=sv('path',{fill:C.vel,stroke:C.mus2,'stroke-width':2.5},g);e11Velum(P,0);
+ P.tongue=sv('path',{fill:C.tg,stroke:C.mus2,'stroke-width':3},g);e11Tongue(P,0);
+ P.pyr=sv('ellipse',{cx:640,cy:446,rx:14,ry:22,fill:'none',stroke:C.pyr,'stroke-width':2,'stroke-dasharray':'4 4'},g);
+ P.larynx=sv('g',{},g);
+ sv('path',{d:'M578 410 L548 424 L542 474 L556 488',fill:'none',stroke:C.thy,'stroke-width':4,'stroke-linejoin':'round'},P.larynx);
+ for(let y=500;y<575;y+=17)sv('path',{d:'M558 '+y+' Q585 '+(y+7)+' 611 '+y,fill:'none',stroke:C.ring,'stroke-width':3},P.larynx);
+ P.hyoid=sv('ellipse',{cx:546,cy:390,rx:12,ry:6,fill:BONE,stroke:C.bone2,'stroke-width':2},P.larynx);
+ P.fv1=sv('path',{stroke:C.fv,'stroke-width':6,'stroke-linecap':'round'},P.larynx);P.fv2=sv('path',{stroke:C.fv,'stroke-width':6,'stroke-linecap':'round'},P.larynx);
+ P.vf1=sv('path',{stroke:C.vf,'stroke-width':7,'stroke-linecap':'round'},P.larynx);P.vf2=sv('path',{stroke:C.vf,'stroke-width':7,'stroke-linecap':'round'},P.larynx);
+ P.epi=sv('path',{d:'M588 402 Q598 376 604 346 Q614 352 611 374 Q604 394 598 406Z',fill:C.epi,stroke:C.epi2,'stroke-width':2.5},P.larynx);
+ P.ues1=sv('path',{stroke:C.ues,'stroke-width':8,'stroke-linecap':'round'},g);P.ues2=sv('path',{stroke:C.ues,'stroke-width':8,'stroke-linecap':'round'},g);
+ P.food=sv('g',{opacity:0},g);sv('ellipse',{cx:0,cy:0,rx:17,ry:11,fill:C.food,stroke:C.food2,'stroke-width':3},P.food);sv('circle',{cx:-4,cy:-2,r:3,fill:C.food3},P.food);
+ P.pt={oral:[420,236],oralBack:[510,234],fauc:[575,252],oroph:[628,290],vall:[589,378],epiTop:[630,360],hypo:[638,430],pyr:[640,446],vest:[598,426],trach:[584,520],ues:[637,486],eso:[637,548],fold:458};
+ P.g=g;P.s=s;e11Air(P,.1,0,0);return P;}
+function e11Food(P,x,y,v=1){P.food.setAttribute('transform','translate('+x+' '+y+')');P.food.setAttribute('opacity',v);}
+function e11Path(P,pts,k,v=1){k=Math.max(0,Math.min(1,k));const n=pts.length-1,i=Math.min(n-1,Math.floor(k*n)),q=k*n-i;e11Food(P,lerp(pts[i][0],pts[i+1][0],q),lerp(pts[i][1],pts[i+1][1],q),v);}
+function e11Air(P,closure,lift=0,flip=0){P.larynx.setAttribute('transform','translate('+(-6*lift)+' '+(-14*lift)+')');P.epi.setAttribute('transform','rotate('+(50*flip)+' 593 404)');
+ const gap=20*(1-closure);P.vf1.setAttribute('d','M561 456 L'+(586-gap/2)+' 461');P.vf2.setAttribute('d','M611 456 L'+(588+gap/2)+' 461');
+ P.fv1.setAttribute('d','M562 436 L'+(584-gap/2)+' 441');P.fv2.setAttribute('d','M611 436 L'+(590+gap/2)+' 441');
+ const o=Math.max(0,Math.min(1,(lift-.3)/.6))*13;P.ues1.setAttribute('d','M620 486 L'+(636-o)+' 486');P.ues2.setAttribute('d','M654 486 L'+(638+o)+' 486');e11Velum(P,Math.max(lift,flip));}
+
+/* 공용: 머리·목 정중 단면 (삼킴 1편과 같은 그림). e11Sag(부모 g, transform 문자열, 팔레트) → P
+   P.g 안 좌표계: 얼굴 왼쪽, 뒤 오른쪽. 주요 지점 P.pt (oral, oralBack, fauc, oroph, vall=후두개곡, hypo, pyr=조롱박굴, vest=후두전정, trach, ues, eso, fold=진성대 y)
+   e11Tongue(P,0~4) 혀 모양, e11Velum(P,0~1) 연구개, e11Air(P,성대닫힘,후두상승,후두개접힘), e11Food(P,x,y,불투명도), e11Path(P,점목록,k) */
+const E11N={air:'#1b1729',tis:'#4c3644',wall:'#d8a49d',bone:'#efdcc4',sp:'#5c4752',sp2:'#7d6670',vel:'#c9868a',mus2:'#8f4f5a',tg:'#d98083',pyr:'#8d7a8c',thy:'#c7b9a6',ring:'#607b96',bone2:'#9b8a70',fv:'#b8a8bc',vf:'#f2e4d7',epi:'#f0bd8b',epi2:'#9a6557',ues:'#f8c976',food:'#ffcf70',food2:'#fff1bd',food3:'#fff5d4',tooth:'#f6efe4'};
+const E11PTS=[[420,238],[510,236],[592,262],[642,320],[640,420],[637,486],[637,552]];
+function e11Res(P,list,col){const g=sv('g',{opacity:0},P.g);list.forEach(q=>sv('ellipse',{cx:q[0],cy:q[1],rx:q[2],ry:q[3],fill:col||'#ffcf70',stroke:'#fff1bd','stroke-width':2},g));return g;}
+function e11Cycle(P,k){k=Math.max(0,Math.min(1,k));e11Tongue(P,k<.14?1+k/.14*2:k<.28?3+(k-.14)/.14:k<.55?4:Math.max(0,4-(k-.55)/.25*4));const a=Math.min(ramp(k,.2,.3),1-ramp(k,.72,.82));e11Air(P,.1+.85*a,a,a);e11Velum(P,Math.min(ramp(k,.06,.16),1-ramp(k,.72,.82)));e11Path(P,E11PTS,k,k>.02&&k<.97?1:0);return a;}
+function e11Lab(P,list){list.forEach(q=>tx_(P.g,q[0],q[1],q[2],Object.assign({'font-size':q[3]||20,fill:q[4]||'#f5ddc8'},q[5]||{})));}
+
+
+/* ── 3-2~3-4 공용 (e11A*) ── */
+let e11AClipN=0;
+function e11APanel(par,x,y,w,h,col,title,tx){const id='e11Acl'+(e11AClipN++);const d=sv('defs',{},par),cp=sv('clipPath',{id},d);sv('rect',{x,y,width:w,height:h,rx:18},cp);
+ sv('rect',{x,y,width:w,height:h,rx:18,fill:'rgba(9,18,34,.93)'},par);const g=sv('g',{'clip-path':'url(#'+id+')'},par);
+ sv('rect',{x,y,width:w,height:h,rx:18,fill:'none',stroke:col,'stroke-width':2.5},par);
+ let T=null;if(title)T=tx_(par,tx!=null?tx:x+w/2,y+32,title,{'font-size':21,fill:col,'text-anchor':tx!=null?'start':'middle'});return {g,T};}
+function e11ASet(P,cx,cy,s,rot,px,py){P.g.setAttribute('transform','translate('+cx+' '+cy+') rotate('+rot+') scale('+s+') translate('+(-px)+' '+(-py)+')');}
+function e11AFr(t,l){return Math.max(0,Math.min(1,(t-l.t0)/(l.t1-l.t0)));}
+function e11AL(u,a,b){return ramp(u,a,b);}
+function e11AVis(e,v){e.setAttribute('opacity',(+v).toFixed(3));}
+function e11AScale(P,sc){if(sc!==1)P.food.setAttribute('transform',P.food.getAttribute('transform')+' scale('+sc+')');}
+function e11AFoodCol(P,col,col2){const e=P.food.firstChild;e.setAttribute('fill',col);e.setAttribute('stroke',col2||'#fff');}
+function e11AChip(L,x,y,w,html,col){return hdiv('ov','<div style="border:2px solid '+col+';border-radius:12px;background:rgba(9,18,34,.95);padding:6px 12px;font-size:19px;font-weight:700;color:'+col+';text-align:center">'+html+'</div>',L,'left:'+x+'px;top:'+y+'px;width:'+w+'px;box-sizing:border-box');}
+function e11ACard(L,x,y,w,title,body,col){return hdiv('card ov','<div style="color:'+col+';font-size:21px;font-weight:800;margin:0 0 3px">'+title+'</div><div style="font-size:17px;line-height:1.35;color:#eaf1fb">'+body+'</div>',L,'left:'+x+'px;top:'+y+'px;width:'+w+'px;padding:9px 16px;box-sizing:border-box;border-color:'+col);}
+function e11ACardAct(c,v,act){op(c,v*(act?1:.42));c.style.boxShadow=act?'0 0 0 2px rgba(255,255,255,.3)':'';}
+function e11AGrav(par,x,y,len,lab){const g=sv('g',{},par);sv('path',{d:'M'+x+' '+y+' L'+x+' '+(y+len),stroke:'#ffe08a','stroke-width':5,'stroke-linecap':'round'},g);sv('path',{d:'M'+(x-11)+' '+(y+len-12)+' L'+x+' '+(y+len+3)+' L'+(x+11)+' '+(y+len-12),fill:'none',stroke:'#ffe08a','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);tx_(g,x,y+len+28,lab||'중력',{'font-size':18,fill:'#ffe08a'});return g;}
+function e11ACur(s,t){let c=0;s.L.forEach((l,i)=>{if(t>=l.t0)c=i;});return c;}
+/* 앞에서 본 인두 (전후면). 지역 좌표: 인두 상자 x -150~150, y -160~170, 얼굴 y -320~-160 */
+function e11AAP(par,face){const C=E11N,o={};o.g=sv('g',{},par);const g=o.g;
+ if(face){o.face=sv('g',{},g);sv('rect',{x:-34,y:-178,width:68,height:34,fill:'#c99a8f'},o.face);
+  o.earL=sv('ellipse',{cx:-70,cy:-240,rx:10,ry:20,fill:'#d4a395',stroke:'#8a5d5a','stroke-width':2},o.face);o.earR=sv('ellipse',{cx:70,cy:-240,rx:10,ry:20,fill:'#d4a395',stroke:'#8a5d5a','stroke-width':2},o.face);
+  sv('ellipse',{cx:0,cy:-240,rx:68,ry:80,fill:'#dcab9e',stroke:'#8a5d5a','stroke-width':3},o.face);sv('path',{d:'M-68 -258 Q-64 -330 0 -322 Q64 -330 68 -258 Q50 -298 0 -296 Q-50 -298 -68 -258Z',fill:'#4a3530'},o.face);
+  o.feat=sv('g',{},o.face);sv('ellipse',{cx:-24,cy:-248,rx:7,ry:5,fill:'#2b1d1d'},o.feat);sv('ellipse',{cx:24,cy:-248,rx:7,ry:5,fill:'#2b1d1d'},o.feat);
+  sv('path',{d:'M0 -244 L-7 -218 L7 -218',fill:'none',stroke:'#8a5d5a','stroke-width':3,'stroke-linejoin':'round'},o.feat);sv('path',{d:'M-20 -198 Q0 -188 20 -198',fill:'none',stroke:'#8a3f45','stroke-width':4,'stroke-linecap':'round'},o.feat);}
+ sv('rect',{x:-150,y:-160,width:300,height:330,rx:34,fill:C.tis,stroke:C.wall,'stroke-width':3},g);
+ sv('path',{d:'M-100 -146 Q0 -160 100 -146 L100 -40 L-100 -40Z',fill:C.air},g);
+ o.chL=sv('path',{fill:C.air},g);o.chR=sv('path',{fill:C.air},g);sv('rect',{x:-24,y:104,width:48,height:66,fill:C.air},g);
+ sv('ellipse',{cx:-24,cy:-80,rx:17,ry:8,fill:'#100c19'},g);sv('ellipse',{cx:24,cy:-80,rx:17,ry:8,fill:'#100c19'},g);
+ sv('path',{d:'M-44 -52 Q0 -76 44 -52 L44 72 Q22 108 0 108 Q-22 108 -44 72Z',fill:C.tis,stroke:C.wall,'stroke-width':3},g);
+ sv('path',{d:'M-28 -40 Q0 -54 28 -40 L22 60 Q0 78 -22 60Z',fill:'#241d33'},g);
+ sv('path',{d:'M-24 16 L-4 50 M24 16 L4 50',stroke:C.vf,'stroke-width':6,'stroke-linecap':'round'},g);
+ sv('path',{d:'M-48 -52 Q0 -86 48 -52',fill:'none',stroke:C.epi,'stroke-width':8,'stroke-linecap':'round'},g);
+ o.sq=sv('g',{opacity:0},g);[-10,40].forEach(y=>{sv('path',{d:'M-146 '+y+' L-112 '+y,stroke:'#ff7568','stroke-width':6,'stroke-linecap':'round'},o.sq);sv('path',{d:'M-124 '+(y-10)+' L-108 '+y+' L-124 '+(y+10),fill:'none',stroke:'#ff7568','stroke-width':6,'stroke-linecap':'round'},o.sq);});
+ const FB={fill:C.food,stroke:C.food2,'stroke-width':2,opacity:0};
+ o.rL=sv('ellipse',Object.assign({cx:-70,cy:50,rx:11,ry:17},FB),g);o.rR=sv('ellipse',Object.assign({cx:70,cy:50,rx:11,ry:17},FB),g);
+ o.bL=sv('ellipse',Object.assign({rx:13,ry:10},FB),g);o.bR=sv('ellipse',Object.assign({rx:13,ry:10},FB),g);
+ o.xL=tx_(g,-72,22,'✕',{'font-size':30,fill:'#ff7568',opacity:0});
+ tx_(g,0,6,'후두',{'font-size':15,fill:'#c9b8d0'});tx_(g,0,150,'식도',{'font-size':16,fill:'#f5ddc8'});tx_(g,0,-104,'후두개곡',{'font-size':13,fill:'#f0bd8b'});
+ e11AAPw(o,1,1);return o;}
+function e11AAPw(o,wl,wr){const f=(sd,w)=>{const xo=sd*(44+56*w);return 'M'+sd*44+' -42 L'+xo+' -42 L'+xo+' 46 Q'+xo+' 98 '+sd*24+' 120 L0 120 L0 108 Q'+sd*22+' 108 '+sd*44+' 72Z';};o.chL.setAttribute('d',f(-1,wl));o.chR.setAttribute('d',f(1,wr));}
+function e11AAPb(o,b,sd,k){const pts=[[0,-138],[0,-100],[sd*40,-58],[sd*72,-12],[sd*72,46],[sd*36,108],[0,150]];k=Math.max(0,Math.min(1,k));const n=pts.length-1,i=Math.min(n-1,Math.floor(k*n)),q=k*n-i;
+ b.setAttribute('cx',lerp(pts[i][0],pts[i+1][0],q));b.setAttribute('cy',lerp(pts[i][1],pts[i+1][1],q));b.setAttribute('opacity',k>.001&&k<.97?1:0);}
+function e11AAPturn(o,k){if(!o.feat)return;o.feat.setAttribute('transform','translate('+(-16*k)+' 0)');o.earL.setAttribute('opacity',(1-k).toFixed(2));}
+/* 누운 사람 (위·식도) — 왼쪽이 머리. ang: 상체를 올린 각도 */
+function e11ABody(par,x,y,ang){const o={};const g=sv('g',{transform:'translate('+x+' '+y+') scale(.82)'},par);
+ sv('rect',{x:30,y:22,width:12,height:60,fill:'#46516a'},g);sv('rect',{x:222,y:22,width:12,height:60,fill:'#46516a'},g);sv('rect',{x:40,y:8,width:200,height:14,rx:7,fill:'#5d6b85'},g);
+ sv('rect',{x:40,y:-40,width:178,height:46,rx:20,fill:'#6f84a8'},g);
+ o.T=sv('g',{transform:'rotate('+ang+' 40 8)'},g);sv('rect',{x:-210,y:8,width:255,height:14,rx:7,fill:'#5d6b85'},o.T);
+ sv('rect',{x:-140,y:-58,width:192,height:62,rx:28,fill:'#7c93bb'},o.T);sv('circle',{cx:-172,cy:-26,r:28,fill:'#dcab9e',stroke:'#8a5d5a','stroke-width':2},o.T);
+ sv('path',{d:'M-138 -30 L-18 -30',stroke:'#e0a49b','stroke-width':11,'stroke-linecap':'round'},o.T);
+ sv('ellipse',{cx:8,cy:-26,rx:32,ry:21,fill:'#c97a7a',stroke:'#8f4f5a','stroke-width':2},o.T);sv('path',{d:'M-20 -20 Q8 -6 36 -20 L34 -12 Q8 0 -18 -12Z',fill:'#ffcf70'},o.T);
+ tx_(o.T,-78,-40,'식도',{'font-size':16,fill:'#fff'});tx_(o.T,8,-52,'위',{'font-size':16,fill:'#fff'});
+ o.drop=sv('circle',{r:8,fill:'#ffcf70',stroke:'#fff1bd','stroke-width':2,opacity:0},o.T);
+ o.set=r=>{o.drop.setAttribute('cx',lerp(-16,-136,r));o.drop.setAttribute('cy',-30);o.drop.setAttribute('opacity',r>.03?1:0);};return o;}
+
 function e11Swallow(g,x=360,y=330){const z=sv('g',{},g);
  // simple lateral sagittal swallowing anatomy: oral cavity, pharynx, airway, esophagus
  sv('path',{d:'M110,190 Q250,150 420,188 L475,232 Q500,255 488,300 L455,365 Q420,412 334,412 L205,390 Q148,352 110,300Z',fill:'#322a3a',stroke:'#d7b3ad','stroke-width':4},z);
@@ -551,52 +663,348 @@ page({id:'s3-1',label:'3-1',title:'보상과 재활',scenes:[{name:'치료의 �
  e11Label(L,685,330,500,'근육 운동 · 삼킴 기법','#76e8be')];
  this.direct=e11Label(L,355,485,570,'직접 치료: 음식 사용   ·   간접 치료: 음식 없이 훈련','#ffe08a');},draw(t,p){const a=p.scenes[0];this.cards.forEach((c,i)=>op(c,ramp(t,e11At(a,0)+i*.35,e11At(a,0)+i*.35+.4)));op(this.direct,ramp(t,e11At(a,1),e11At(a,1)+.4));}});
 page({id:'s3-2',label:'3-2',title:'자세 기법',scenes:[{name:'자세 네 가지',pre:1,post:1,lines:[
- '턱 당기기는 인두 삼킴 반응이 늦거나 일부 기도 보호가 낮을 때 고려합니다. 턱을 가슴 쪽으로 당기면 후두 입구를 좁히는 데 도움이 됩니다.',
- '고개 뒤로 젖히기는 혀 추진력이 약해 구강에서 넘기기 어려울 때 중력을 이용합니다. 인두 기능 저하나 흡인이 있으면 쓰지 않습니다.',
- '고개 돌리기는 약한 쪽으로, 기울이기는 강한 쪽으로 합니다. 오른쪽 마비라면 오른쪽으로 돌리고 왼쪽으로 기울입니다. 효과는 검사로 확인합니다.']}],init(L){
- this.h=e11Head(SVGROOT(L),270,345,0);this.h2=e11Head(SVGROOT(L),635,345,-20);this.h3=e11Head(SVGROOT(L),995,345,16);
- this.txt=[e11Label(L,80,115,380,'턱 당기기','#76c7ff'),e11Label(L,450,115,380,'뒤로 젖히기','#ffe08a'),e11Label(L,820,115,380,'돌리기 · 기울이기','#76e8be')];
- this.detail=e11Label(L,250,540,780,'인두 반응 지연 · 혀 추진 저하 · 편측 약화에 맞춰 선택','#eef3fb');},draw(t,p){const a=p.scenes[0];this.txt.forEach((c,i)=>op(c,ramp(t,e11At(a,0)+i*.8,e11At(a,0)+i*.8+.4)));op(this.detail,ramp(t,e11At(a,2),e11At(a,2)+.4));
- this.h.setAttribute('transform','translate(270 345) rotate('+(-ramp(t,e11At(a,0),e11At(a,0)+1)*18)+' )');this.h2.setAttribute('transform','translate(635 345) rotate('+(ramp(t,e11At(a,1),e11At(a,1)+1)*18-20)+' )');this.h3.setAttribute('transform','translate(995 345) rotate('+(ramp(t,e11At(a,2),e11At(a,2)+.8)*12)+' )');}});
+ '턱 당기기는 인두 삼킴 반응이 늦거나 일부 기도 보호가 낮을 때 고려합니다. 삼킴 반응이 늦으면, 반응이 일어나기 전에 음식이 열려 있는 기도로 먼저 흘러 들어갈 수 있습니다.',
+ '턱을 당기면 후두개곡이 넓어져 음식이 그곳에 잠시 머물고, 후두개가 뒤로 밀려 기도 입구가 좁아집니다.',
+ '고개 뒤로 젖히기는 혀 추진력이 약해 구강에서 넘기기 어려울 때 씁니다. 혀가 음식을 뒤로 보내지 못해도, 고개를 젖히면 중력이 음식을 인두로 보내 줍니다.',
+ '하지만 음식이 인두로 빨리 떨어지기 때문에, 인두 반응이 늦거나 기도 보호가 약하면 그대로 기도로 들어갈 수 있어 쓰지 않습니다.',
+ '고개 돌리기는 약한 쪽으로, 기울이기는 강한 쪽으로 합니다. 오른쪽 마비라면 오른쪽으로 돌리고 왼쪽으로 기울입니다. 효과는 검사로 확인합니다.',
+ '고개를 약한 쪽으로 돌리면 그쪽 인두 통로가 눌려 닫혀, 음식이 힘이 남아 있는 쪽으로 지나갑니다. 한쪽 성대가 약할 때도 씁니다.',
+ '고개를 강한 쪽으로 기울이면 중력 때문에 음식이 입안과 인두에서 강한 쪽으로 모입니다.']}],init(L){const s=SVGROOT(L);
+ this.A=sv('g',{},s);const pa=e11APanel(this.A,60,100,560,455,'#ff9a8a','바른 자세 · 삼킴 반응 지연'),pb=e11APanel(this.A,660,100,560,455,'#76c7ff','턱 당기기');
+ this.PL=e11Sag(pa.g,'',E11N);this.PR=e11Sag(pb.g,'',E11N);
+ [this.PL,this.PR].forEach(P=>e11Lab(P,[[548,545,'기도',22,'#9fd9ff',{'text-anchor':'end'}],[700,548,'식도',22,'#f5ddc8',{'text-anchor':'start'}]]));
+ sv('path',{d:'M604 378 L700 378',stroke:'#ffe08a','stroke-width':2},this.PR.g);e11Lab(this.PR,[[704,385,'후두개곡',21,'#ffe08a',{'text-anchor':'start'}]]);
+ this.cL=e11AChip(L,90,500,500,'✕ 반응 전에 열린 기도로 흘러듦','#ff7568');this.cR1=e11AChip(L,690,500,500,'후두개곡이 넓어지고 기도 입구가 좁아짐','#ffe08a');this.cR2=e11AChip(L,690,500,500,'✓ 후두개곡에 잠시 머문 뒤 식도로','#76e8be');
+ this.B=sv('g',{},s);const pB=e11APanel(this.B,60,100,660,455,'#ffe08a','고개 뒤로 젖히기',84);this.PB=e11Sag(pB.g,'',E11N);
+ e11Lab(this.PB,[[548,545,'기도',22,'#9fd9ff',{'text-anchor':'end'}],[700,548,'식도',22,'#f5ddc8',{'text-anchor':'start'}]]);this.grav=e11AGrav(this.B,660,150,80);
+ this.b1=e11ACard(L,750,150,470,'혀 추진력이 약할 때 ✓','고개를 젖히면 <b>중력</b>이 음식을 인두로 보내 줌','#76e8be');this.b2=e11ACard(L,750,300,470,'쓰지 않는 경우 ✕','인두 반응 지연 · 기도 보호 저하<br>→ 빨리 떨어진 음식이 그대로 기도로','#ff7568');
+ this.C=sv('g',{},s);this.ap=e11AAP(this.C,true);
+ tx_(this.C,205,290,'환자 오른쪽',{'font-size':20,fill:'#ff9a8a','text-anchor':'end'});tx_(this.C,205,316,'(마비 · 약한 쪽)',{'font-size':16,fill:'#ff9a8a','text-anchor':'end'});
+ tx_(this.C,562,290,'환자 왼쪽',{'font-size':20,fill:'#76e8be','text-anchor':'start'});tx_(this.C,562,316,'(강한 쪽)',{'font-size':16,fill:'#76e8be','text-anchor':'start'});
+ tx_(this.C,380,540,'앞에서 본 인두',{'font-size':16,fill:'#9fb0c8'});this.gC=e11AGrav(this.C,600,380,70);
+ this.c1=e11ACard(L,700,118,520,'고개 돌리기 → 약한 쪽 (오른쪽)','그쪽 인두 통로가 눌려 닫힘 → 강한 쪽으로 지나감<br>한쪽 성대가 약할 때도 사용','#76c7ff');
+ this.c2=e11ACard(L,700,262,520,'고개 기울이기 → 강한 쪽 (왼쪽)','중력으로 음식이 강한 쪽에 모임','#76e8be');
+ this.ex=e11AChip(L,700,375,520,'<span style="font-size:17px">예: 오른쪽 마비 → 오른쪽으로 돌리기 · 왼쪽으로 기울이기</span>','#eef3fb');this.ban=e11AChip(L,700,450,520,'둘 다 결국 <b>강한 쪽</b>으로 음식을 보냄','#ffe08a');},
+ draw(t,p){const s=p.scenes[0],L=s.L;
+ const vA=1-ramp(t,L[2].t0-.35,L[2].t0),vB=Math.min(ramp(t,L[2].t0-.35,L[2].t0),1-ramp(t,L[4].t0-.35,L[4].t0)),vC=ramp(t,L[4].t0-.35,L[4].t0);e11AVis(this.A,vA);e11AVis(this.B,vB);e11AVis(this.C,vC);
+ {const u=e11AFr(t,L[0]),P=this.PL;e11ASet(P,391,411,.68,0,600,480);const k=e11AL(u,.12,.72);e11Tongue(P,k<.4?1+k/.4*2:3);e11Velum(P,e11AL(k,.1,.3));e11Air(P,0,0,0);
+  e11Path(P,[[420,238],[510,236],[592,262],[642,320],[626,372],[600,420],[592,462],[584,522]],k,1);op(this.cL,vA*e11AL(u,.72,.8));}
+ {const u=e11AFr(t,L[1]),P=this.PR,rk=e11AL(u,0,.18);e11ASet(P,991,411,.68,-22*rk,600,480);const k=e11AL(u,.18,.45),a=e11AL(u,.6,.7),k2=e11AL(u,.64,.9);
+  e11Tongue(P,a>0?3+a:1+2*k);e11Velum(P,u>.2?1-e11AL(u,.9,.98):0);e11Air(P,.1+.85*a,a,Math.max(.35*rk,a));
+  if(u<=0)e11Food(P,420,238,1);else if(k2<=0)e11Path(P,[[420,238],[510,236],[592,262],[612,312],[589,374]],k,1);else e11Path(P,[[589,374],[612,410],[638,440],[637,486],[637,552]],k2,k2<.97?1:0);
+  op(this.cR1,vA*Math.min(e11AL(u,.3,.38),1-e11AL(u,.8,.85)));op(this.cR2,vA*e11AL(u,.85,.92));}
+ {const u2=e11AFr(t,L[2]),u3=e11AFr(t,L[3]),P=this.PB;e11ASet(P,446,470,.74,22*e11AL(u2,0,.22),600,480);e11Tongue(P,0);
+  if(t<L[3].t0){const k=e11AL(u2,.3,.7),a=e11AL(u2,.72,.82),k2=e11AL(u2,.75,.95);e11Velum(P,k>0?1-e11AL(u2,.95,1):0);e11Air(P,.1+.85*a,a,a);
+   if(k2<=0)e11Path(P,[[420,232],[510,232],[592,262],[642,320]],k,1);else e11Path(P,[[642,320],[640,420],[637,486],[637,552]],k2,k2<.97?1:0);}
+  else{const k=e11AL(u3,.06,.3),k2=e11AL(u3,.3,.62);e11Velum(P,1);e11Air(P,0,0,0);if(k2<=0)e11Path(P,[[420,232],[510,232],[592,262],[642,320]],k,1);else e11Path(P,[[642,320],[626,372],[600,420],[592,462],[584,522]],k2,1);}
+  e11AVis(this.grav,e11AL(u2,.25,.35));const a3=t>=L[3].t0;e11ACardAct(this.b1,vB*e11AL(u2,.05,.15),!a3);e11ACardAct(this.b2,vB*e11AL(u3,0,.1),a3);}
+ {const o=this.ap,u4=e11AFr(t,L[4]),u5=e11AFr(t,L[5]),u6=e11AFr(t,L[6]);let turn=0,wl=1,tilt=0,ph=0;o.bL.setAttribute('opacity',0);o.bR.setAttribute('opacity',0);
+  if(t<L[5].t0){const k=e11AL(u4,.15,.85);e11AAPb(o,o.bL,-1,k);e11AAPb(o,o.bR,1,k);}
+  else if(t<L[6].t0){ph=1;turn=e11AL(u5,0,.2);wl=1-.88*e11AL(u5,.1,.35);e11AAPb(o,o.bR,1,e11AL(u5,.4,.9));}
+  else{ph=2;const b=e11AL(u6,0,.15);turn=1-b;wl=.12+.88*b;tilt=12*e11AL(u6,.1,.3);e11AAPb(o,o.bR,1,e11AL(u6,.35,.85));}
+  e11AAPturn(o,turn);e11AAPw(o,wl,1);o.g.setAttribute('transform','translate(380 362) scale(.85) rotate('+tilt.toFixed(2)+' 0 -20)');
+  e11AVis(o.sq,wl<.5?1:0);e11AVis(o.xL,wl<.4?1:0);e11AVis(this.gC,e11AL(tilt,3,8));
+  e11ACardAct(this.c1,vC*e11AL(u4,.05,.15),ph!==2);e11ACardAct(this.c2,vC*e11AL(u4,.3,.4),ph!==1);op(this.ex,vC*e11AL(u4,.55,.65));op(this.ban,vC*(ph===2?e11AL(u6,.82,.9):0));}}});
 page({id:'s3-3',label:'3-3',title:'눕기와 앉기',scenes:[{name:'상황에 맞는 자세',pre:1,post:1,lines:[
  '기본은 의자나 침대에서 상체를 세워 90도로 앉는 자세입니다. 편측 약화와 인두 잔여물에는 온전한 쪽으로 눕는 자세를 고려할 수 있습니다.',
- '바로 누운 자세를 사용할 때는 앉기 전에 기침해 잔여물을 제거합니다. 위식도 역류가 있으면 상체를 15도에서 30도 높입니다.',
- '편측 인두 약화와 삼킴반사 지연이 함께 있을 때는 고개를 숙인 채 마비 쪽으로 돌리는 복합 자세를 고려합니다.']}],init(L){
- this.cards=[['90° 앉기','기본 자세'],['온전한 쪽으로 눕기','편측 약화·잔여물'],['바로 눕기','앉기 전 기침'],['상체 15~30°','역류가 있을 때']].map((x,i)=>hdiv('card ov','<h3 style="color:'+['#76c7ff','#76e8be','#ffe08a','#c58cff'][i]+'">'+x[0]+'</h3><p style="font-size:22px">'+x[1]+'</p>',L,'left:'+(85+i*287)+'px;top:240px;width:220px;text-align:center;padding:25px 10px'));
- this.note=e11Label(L,220,450,840,'자세는 평가 결과에 따라 선택 · 효과를 확인','#ff9a8a');},draw(t,p){const a=p.scenes[0];this.cards.forEach((c,i)=>op(c,ramp(t,e11At(a,0)+i*.45,e11At(a,0)+i*.45+.4)));op(this.note,ramp(t,e11At(a,2),e11At(a,2)+.4));}});
+ '온전한 쪽으로 누우면 중력으로 음식이 온전한 쪽 통로로만 흘러, 약한 쪽 인두벽에 남지 않습니다.',
+ '바로 누운 자세는 양쪽 인두벽의 힘이 약하거나 후두 상승이 약할 때 씁니다. 누우면 남은 음식이 인두 뒷벽에 고여 기도로 바로 떨어지지 않습니다.',
+ '대신 일어나 앉으면 고여 있던 잔여물이 기도로 떨어질 수 있어, 앉기 전에 기침해 뱉어 냅니다.',
+ '위식도 역류가 있으면 상체를 15도에서 30도 높입니다. 상체를 높이면 위 내용물이 식도로 거꾸로 올라오는 것을 중력이 막아 줍니다.',
+ '편측 인두 약화와 삼킴반사 지연이 함께 있을 때는 고개를 숙인 채 마비 쪽으로 돌리는 복합 자세를 고려합니다.']}],init(L){const s=SVGROOT(L);
+ this.cards=[['90° 앉기','기본 자세','#76c7ff'],['온전한 쪽으로 눕기','음식이 온전한 쪽으로만','#76e8be'],['바로 눕기','뒷벽에 고임 · 앉기 전 기침','#ffe08a'],['상체 15~30° 높이기','역류를 중력이 막음','#c58cff'],['복합 자세','턱 숙이기 + 마비 쪽 돌리기','#ff9a8a']].map((c,i)=>e11ACard(L,890,108+i*92,330,c[0],c[1],c[2]));
+ this.G0=sv('g',{},s);const p0=e11APanel(this.G0,60,100,800,455,'#76c7ff','상체를 세워 90도로 앉기',84);this.P0=e11Sag(p0.g,'',E11N);e11ASet(this.P0,519,450,.78,0,600,480);
+ e11Lab(this.P0,[[548,545,'기도',22,'#9fd9ff',{'text-anchor':'end'}],[700,548,'식도',22,'#f5ddc8',{'text-anchor':'start'}]]);
+ {const g=sv('g',{stroke:'#9fb0c8','stroke-width':5,'stroke-linecap':'round',fill:'none'},p0.g);sv('path',{d:'M128 392 L128 500 L232 500 M140 500 L140 548 M224 500 L224 548'},g);
+  const pz=sv('g',{stroke:'#dcab9e','stroke-width':7,'stroke-linecap':'round',fill:'none'},p0.g);sv('circle',{cx:160,cy:392,r:15,fill:'#dcab9e',stroke:'none'},pz);sv('path',{d:'M160 410 L160 492 L222 492 L222 546'},pz);
+  sv('path',{d:'M160 462 A30 30 0 0 0 190 492',stroke:'#ffe08a','stroke-width':3,fill:'none'},p0.g);tx_(p0.g,205,470,'90°',{'font-size':18,fill:'#ffe08a','text-anchor':'start'});}
+ this.G1=sv('g',{},s);const p1a=e11APanel(this.G1,60,100,280,455,'#ff9a8a','앉은 자세'),p1b=e11APanel(this.G1,360,100,500,455,'#76e8be','온전한 쪽으로 눕기');
+ this.ap0=e11AAP(p1a.g,false);this.ap0.g.setAttribute('transform','translate(200 340) scale(.62)');this.ap0.rL.setAttribute('opacity',1);
+ tx_(this.G1,140,468,'오른쪽',{'font-size':15,fill:'#ff9a8a'});tx_(this.G1,262,468,'왼쪽',{'font-size':15,fill:'#76e8be'});tx_(this.G1,200,510,'약한 쪽(오른쪽)에 잔여물',{'font-size':17,fill:'#ff9a8a'});
+ this.ap1=e11AAP(p1b.g,true);this.ap1.g.setAttribute('transform','translate(560 335) scale(.62) rotate(90)');sv('rect',{x:420,y:440,width:420,height:12,rx:6,fill:'#5d6b85'},p1b.g);
+ tx_(this.G1,610,215,'약한 쪽 (오른쪽) · 위',{'font-size':17,fill:'#ff9a8a'});tx_(this.G1,610,482,'온전한 쪽 (왼쪽) · 아래',{'font-size':17,fill:'#76e8be'});this.g1=e11AGrav(this.G1,410,250,80);
+ this.G2=sv('g',{},s);const p2=e11APanel(this.G2,60,100,800,455,'#ffe08a','바로 눕기',84);this.P2=e11Sag(p2.g,'',E11N);this.bed=sv('rect',{x:200,y:498,width:520,height:12,rx:6,fill:'#5d6b85'},p2.g);
+ this.r2=sv('ellipse',{cx:652,cy:375,rx:9,ry:24,fill:'#ffcf70',stroke:'#fff1bd','stroke-width':2},this.P2.g);
+ this.cough=sv('g',{opacity:0},this.P2.g);sv('path',{d:'M598 470 Q626 360 640 300 Q600 248 470 236',fill:'none',stroke:'#76e8be','stroke-width':7,'stroke-dasharray':'14 9','stroke-linecap':'round'},this.cough);sv('path',{d:'M492 222 L464 236 L492 252',fill:'none',stroke:'#76e8be','stroke-width':7,'stroke-linecap':'round'},this.cough);
+ this.c2d=e11AChip(L,190,505,540,'양쪽 인두벽 약화 · 후두 상승 약화','#ffe08a');this.c2a=e11AChip(L,190,505,540,'✓ 인두 뒷벽에 고여 기도로 바로 떨어지지 않음','#76e8be');
+ this.c2b=e11AChip(L,190,505,540,'✕ 그대로 일어나 앉으면 잔여물이 기도로','#ff7568');this.c2e=e11AChip(L,190,505,540,'앉기 전에 기침','#76e8be');this.c2c=e11AChip(L,190,505,540,'✓ 기침으로 뱉어 낸 뒤 앉기','#76e8be');
+ this.G3=sv('g',{},s);const p3a=e11APanel(this.G3,60,100,390,455,'#ff7568','평평하게 누움'),p3b=e11APanel(this.G3,470,100,390,455,'#76e8be','상체 15~30° 높임');
+ this.bodA=e11ABody(p3a.g,250,380,0);this.bodB=e11ABody(p3b.g,655,380,25);this.g3=e11AGrav(this.G3,800,165,60);
+ this.c3a=e11AChip(L,85,495,340,'✕ 위 내용물이 거꾸로 올라옴','#ff7568');this.c3b=e11AChip(L,495,495,340,'✓ 중력이 역류를 막음','#76e8be');
+ this.G4=sv('g',{},s);const p4=e11APanel(this.G4,60,100,800,455,'#ff9a8a','복합 자세',84);this.P4=e11Sag(p4.g,'',E11N);e11ASet(this.P4,335,370,.55,-22,600,480);
+ tx_(this.G4,455,320,'+',{'font-size':56,fill:'#eef3fb'});this.ap4=e11AAP(p4.g,true);this.ap4.g.setAttribute('transform','translate(670 345) scale(.6)');
+ tx_(this.G4,572,262,'마비 쪽',{'font-size':17,fill:'#ff9a8a','text-anchor':'end'});
+ this.c4a=e11AChip(L,85,470,360,'턱 숙이기 · 삼킴반사 지연','#76c7ff');this.c4b=e11AChip(L,470,470,375,'마비 쪽으로 돌리기 · 편측 인두 약화','#ff9a8a');},
+ draw(t,p){const s=p.scenes[0],L=s.L,u=L.map(l=>e11AFr(t,l)),tA=L[0].t0+(L[0].t1-L[0].t0)*.55;
+ const v0=1-ramp(t,tA-.3,tA),v1=Math.min(ramp(t,tA-.3,tA),1-ramp(t,L[2].t0-.3,L[2].t0)),v2=Math.min(ramp(t,L[2].t0-.3,L[2].t0),1-ramp(t,L[4].t0-.3,L[4].t0)),v3=Math.min(ramp(t,L[4].t0-.3,L[4].t0),1-ramp(t,L[5].t0-.3,L[5].t0)),v4=ramp(t,L[5].t0-.3,L[5].t0);
+ [this.G0,this.G1,this.G2,this.G3,this.G4].forEach((g,i)=>e11AVis(g,[v0,v1,v2,v3,v4][i]));
+ const ci=e11ACur(s,t),app=[L[0].t0,tA,L[2].t0,L[4].t0,L[5].t0],act=t<tA?0:[0,1,2,2,3,4][ci];this.cards.forEach((c,j)=>e11ACardAct(c,ramp(t,app[j]-.2,app[j]+.2),j===act));
+ e11Cycle(this.P0,Math.min(1,(Math.max(0,t-L[0].t0)%4.6)/3.6));
+ {const o=this.ap1;o.bL.setAttribute('opacity',0);e11AAPb(o,o.bR,1,e11AL(u[1],.15,.7));}
+ {const P=this.P2;let rot=90,rx=652,ry=375,ro=0;const R=(pts,k)=>{const n=pts.length-1,i=Math.min(n-1,Math.floor(k*n)),q=k*n-i;rx=lerp(pts[i][0],pts[i+1][0],q);ry=lerp(pts[i][1],pts[i+1][1],q);};
+  [this.c2a,this.c2b,this.c2c,this.c2d,this.c2e].forEach(c=>op(c,0));e11AVis(this.cough,0);
+  if(t<L[3].t0){const k=e11AL(u[2],.1,.6);e11Cycle(P,k);ro=e11AL(u[2],.55,.68);op(this.c2d,v2*(1-e11AL(u[2],.6,.66)));op(this.c2a,v2*e11AL(u[2],.68,.75));}
+  else{const w=u[3];e11Tongue(P,0);e11Velum(P,0);e11Food(P,0,0,0);ro=1;
+   if(w<.45){rot=90-90*e11AL(w,.05,.28);R([[652,375],[650,425],[628,438],[600,430],[592,465],[586,520]],e11AL(w,.12,.4));e11Air(P,0,0,0);op(this.c2b,v2*e11AL(w,.3,.36));}
+   else{const ck=e11AL(w,.5,.7);rot=w<.75?90:90-90*e11AL(w,.75,.92);R([[652,375],[645,300],[612,248],[540,232],[440,232],[380,236]],ck);ro=1-e11AL(ck,.7,1);e11Air(P,0,0,0);
+    e11AVis(this.cough,Math.min(e11AL(w,.47,.52),1-e11AL(w,.72,.77)));op(this.c2e,v2*Math.min(e11AL(w,.47,.52),1-e11AL(w,.86,.9)));op(this.c2c,v2*e11AL(w,.9,.95));}}
+  e11ASet(P,460,300,.7,rot,524,337);this.r2.setAttribute('cx',rx);this.r2.setAttribute('cy',ry);e11AVis(this.r2,ro);e11AVis(this.bed,rot/90);}
+ {const r=e11AL(u[4],.15,.7);this.bodA.set(r);this.bodB.set(.3*Math.sin(Math.PI*r));op(this.c3a,v3*e11AL(u[4],.65,.72));op(this.c3b,v3*e11AL(u[4],.65,.72));e11AVis(this.g3,e11AL(u[4],.1,.2));}
+ {const P=this.P4,k=Math.max(0,t-L[5].t0)%5/4,a=e11AL(k,.45,.55);e11Air(P,.1+.85*a,a,Math.max(.35,a));e11Tongue(P,3);if(k<.5)e11Food(P,589,374,1);else e11Path(P,[[589,374],[612,410],[638,440],[637,486],[637,552]],e11AL(k,.5,.95),k<.95?1:0);
+  const o=this.ap4;e11AAPturn(o,1);e11AAPw(o,.12,1);e11AVis(o.sq,1);e11AVis(o.xL,1);o.bL.setAttribute('opacity',0);e11AAPb(o,o.bR,1,e11AL(k,.5,.95));
+  op(this.c4a,v4*e11AL(u[5],.1,.2));op(this.c4b,v4*e11AL(u[5],.35,.45));}}});
 page({id:'s3-4',label:'3-4',title:'양·감각·점도와 잔여물',scenes:[{name:'식사 방법 조절',pre:1,post:1,lines:[
- '보통은 적은 양부터 확인하고 안전하면 늘립니다. 삼킨 뒤 마른 삼킴을 두세 번 반복하면 남은 음식물을 줄이는 데 도움이 됩니다.',
- '교대 삼킴은 성질이 다른 음식을 번갈아 삼키는 방법입니다. 감각 입력은 신맛이나 차가운 자극 등으로 높일 수 있습니다.',
- '점도를 무조건 높이지 않습니다. 삼킴 반사가 늦거나 후두 폐쇄가 불완전하면 걸쭉하게 조절할 수 있지만, 인두 연동이 약하면 된 음식보다 묽은 음식이 나을 수 있습니다. 검사 소견에 따라 선택합니다.']}],init(L){
- this.c=e11Label(L,110,160,1060,'적은 양부터  →  안전 확인  →  필요한 만큼 조정','#76c7ff');
- this.repeat=e11Label(L,95,310,500,'반복 삼킴   ·   마른 삼킴 2~3회','#ffe08a');
- this.alt=e11Label(L,685,310,500,'교대 삼킴   ·   음식과 액체를 번갈아','#76e8be');
- this.sens=e11Label(L,210,460,860,'신맛 · 차가움은 감각 입력을 높일 수 있어','#c58cff');},draw(t,p){const a=p.scenes[0];op(this.c,ramp(t,e11At(a,0),e11At(a,0)+.4));op(this.repeat,ramp(t,e11At(a,0)+1,e11At(a,0)+1.4));op(this.alt,ramp(t,e11At(a,1),e11At(a,1)+.4));op(this.sens,ramp(t,e11At(a,1)+1,e11At(a,1)+1.4));}});
+ '보통은 적은 양부터 확인하고 안전하면 늘립니다. 반응이 늦은 일부 환자는 오히려 많은 양이 감각을 더 크게 줘 삼킴 반응을 일으키기도 합니다.',
+ '삼킨 뒤 마른 삼킴을 두세 번 반복하면 남은 음식물을 줄이는 데 도움이 됩니다.',
+ '교대 삼킴은 성질이 다른 음식을 번갈아 삼키는 방법입니다. 과자 다음에 물을 삼키는 것처럼, 뒤의 음식이 인두에 남은 잔여물을 씻어 내립니다.',
+ '감각 입력은 신맛이나 차가운 자극 등으로 높일 수 있습니다. 감각을 강하게 주면 삼킴 반응이 더 빨리 일어나도록 돕고, 삼킴 시작이 늦거나 입안 감각이 떨어진 환자에게 씁니다.',
+ '점도를 무조건 높이지 않습니다. 삼킴 반사가 늦거나 후두 폐쇄가 불완전하면 걸쭉하게 조절할 수 있지만, 인두 연동이 약하면 된 음식보다 묽은 음식이 나을 수 있습니다. 검사 소견에 따라 선택합니다.',
+ '걸쭉한 음식은 천천히 흘러 삼킴 반응이 일어날 시간을 벌어 줍니다. 반대로 인두를 짜내는 힘이 약하면 된 음식이 인두에 남기 쉬워, 묽은 음식이 나을 수 있습니다.']}],init(L){const s=SVGROOT(L);
+ this.cards=[['양','적은 양부터 · 반응 지연엔 많은 양','#76c7ff'],['마른 삼킴','2~3회 반복 → 잔여물 ↓','#ffe08a'],['교대 삼킴','과자 → 물로 씻어 내림','#76e8be'],['감각 입력','신맛 · 차가움 → 반응 빨리','#c58cff'],['점도','검사 소견에 따라 선택','#ff9a8a']].map((c,i)=>e11ACard(L,890,108+i*92,330,c[0],c[1],c[2]));
+ const LB=P=>e11Lab(P,[[548,545,'기도',26,'#9fd9ff',{'text-anchor':'end'}],[700,548,'식도',26,'#f5ddc8',{'text-anchor':'start'}]]);
+ this.G0=sv('g',{},s);const qa=e11APanel(this.G0,60,100,390,455,'#76c7ff','적은 양'),qb=e11APanel(this.G0,470,100,390,455,'#ffe08a','많은 양 (반응 지연 일부)');
+ this.Pa=e11Sag(qa.g,'',E11N);this.Pb=e11Sag(qb.g,'',E11N);e11ASet(this.Pa,300,380,.6,0,600,480);e11ASet(this.Pb,710,380,.6,0,600,480);LB(this.Pa);LB(this.Pb);
+ this.spark=sv('path',{d:'M612 226 L620 252 L648 252 L626 268 L634 294 L612 278 L590 294 L598 268 L576 252 L604 252Z',fill:'#ffe08a',stroke:'#fff','stroke-width':2,opacity:0},this.Pb.g);
+ this.c0a=e11AChip(L,85,495,340,'✓ 안전하면 양을 늘림','#76e8be');this.c0b=e11AChip(L,495,495,340,'감각 ↑ → 삼킴 반응 시작','#ffe08a');
+ this.G1=sv('g',{},s);const q1=e11APanel(this.G1,60,100,800,455,'#ffe08a','');this.t1a=tx_(this.G1,84,132,'마른 삼킴',{'font-size':21,fill:'#ffe08a','text-anchor':'start'});this.t1b=tx_(this.G1,84,132,'교대 삼킴',{'font-size':21,fill:'#76e8be','text-anchor':'start'});
+ this.P1=e11Sag(q1.g,'',E11N);e11ASet(this.P1,521,445,.8,0,600,480);LB(this.P1);
+ sv('path',{d:'M606 378 L700 378 M652 450 L700 450',stroke:'#eef3fb','stroke-width':2},this.P1.g);e11Lab(this.P1,[[704,385,'후두개곡',22,'#eef3fb',{'text-anchor':'start'}],[704,457,'조롱박굴',22,'#eef3fb',{'text-anchor':'start'}]]);
+ const RS={fill:'#c08a4a',stroke:'#f0d0a0','stroke-width':2};this.rv=sv('ellipse',Object.assign({cx:590,cy:377},RS),this.P1.g);this.rp=sv('ellipse',Object.assign({cx:640,cy:450},RS),this.P1.g);
+ this.cnt=hdiv('ov','<div style="border:2px solid #ffe08a;border-radius:12px;background:rgba(9,18,34,.95);padding:6px 12px;font-size:20px;font-weight:800;color:#ffe08a;text-align:center">마른 삼킴 <span>①</span> <span>②</span> <span>③</span></div>',L,'left:600px;top:118px;width:240px;box-sizing:border-box');this.cs=[...this.cnt.querySelectorAll('span')];
+ this.cw1=e11AChip(L,600,118,240,'🍪 과자 잔여물','#e0b070');this.cw2=e11AChip(L,600,118,240,'💧 물이 씻어 내림 ✓','#76c7ff');
+ this.G3=sv('g',{},s);e11APanel(this.G3,60,100,800,455,'#c58cff','감각 입력과 삼킴 반응 시점',84);
+ this.rows=[[235,'보통',700,'#ff7568','기다리는 동안 흡인 위험'],[395,'신맛 · 차가운 자극',420,'#76e8be','반응이 빨리']].map(r=>{const g=sv('g',{},this.G3),y=r[0],o={};tx_(g,90,y+7,r[1],{'font-size':20,fill:'#eef3fb','text-anchor':'start'});
+  sv('path',{d:'M300 '+y+' L830 '+y,stroke:'#55657f','stroke-width':4},g);o.bar=sv('rect',{x:300,y:y-8,width:0,height:16,rx:6,fill:r[3],opacity:.55},g);
+  sv('circle',{cx:300,cy:y,r:10,fill:'#ffcf70',stroke:'#fff','stroke-width':2},g);tx_(g,300,y-24,'덩이 도착',{'font-size':16,fill:'#ffcf70'});
+  o.m=sv('rect',{x:r[2]-4,y:y-24,width:8,height:48,rx:3,fill:'#eef3fb'},g);tx_(g,r[2],y-32,'삼킴 반응',{'font-size':16,fill:'#eef3fb'});o.rx=r[2];o.lab=tx_(g,(300+r[2])/2,y+40,r[4],{'font-size':17,fill:r[3],opacity:0});return o;});
+ this.ph=sv('path',{d:'M300 190 L300 440',stroke:'#ffe08a','stroke-width':3,'stroke-dasharray':'6 5'},this.G3);this.c3=e11AChip(L,190,490,540,'대상: 삼킴 시작이 늦음 · 입안 감각 저하','#c58cff');
+ this.r0=e11AChip(L,100,130,740,'점도를 무조건 높이지 않음','#eef3fb');this.r1=e11ACard(L,100,200,740,'삼킴 반사 지연 · 후두 폐쇄 불완전','→ <b>걸쭉하게</b> 조절','#ffe08a');this.r2=e11ACard(L,100,320,740,'인두 연동이 약함','→ 된 음식보다 <b>묽은 음식</b>','#76c7ff');this.r3=e11AChip(L,100,450,740,'검사 소견에 따라 선택','#76e8be');
+ this.G5=sv('g',{},s);const qt=e11APanel(this.G5,60,150,390,405,'#76c7ff','묽은 액체'),qk=e11APanel(this.G5,470,150,390,405,'#f0a050','걸쭉한 음식');
+ this.Pt=e11Sag(qt.g,'',Object.assign({},E11N,{food:'#7cc4ff',food2:'#d8eeff'}));this.Pk=e11Sag(qk.g,'',Object.assign({},E11N,{food:'#f0a050',food2:'#ffd9a8'}));e11ASet(this.Pt,300,430,.6,0,600,480);e11ASet(this.Pk,710,430,.6,0,600,480);LB(this.Pt);LB(this.Pk);
+ this.rk=sv('g',{opacity:0},this.Pk.g);sv('ellipse',{cx:590,cy:377,rx:14,ry:8,fill:'#f0a050',stroke:'#ffd9a8','stroke-width':2},this.rk);sv('ellipse',{cx:640,cy:450,rx:10,ry:18,fill:'#f0a050',stroke:'#ffd9a8','stroke-width':2},this.rk);
+ this.ph1=e11AChip(L,210,104,500,'삼킴 반응이 늦을 때','#ffe08a');this.ph2=e11AChip(L,210,104,500,'인두를 짜내는 힘이 약할 때','#ff9a8a');
+ this.c5=[e11AChip(L,85,495,340,'✕ 반응 전에 기도로','#ff7568'),e11AChip(L,495,495,340,'✓ 천천히 흘러 반응할 시간','#76e8be'),e11AChip(L,85,495,340,'✓ 묽으면 잘 내려감','#76e8be'),e11AChip(L,495,495,340,'✕ 된 음식이 인두에 남음','#ff7568')];},
+ draw(t,p){const s=p.scenes[0],L=s.L,u=L.map(l=>e11AFr(t,l));const W=(a,b)=>Math.min(ramp(t,a-.3,a),1-ramp(t,b-.3,b));
+ const v0=1-ramp(t,L[1].t0-.3,L[1].t0),v1=W(L[1].t0,L[3].t0),v3=W(L[3].t0,L[4].t0),v4=W(L[4].t0,L[5].t0),v5=ramp(t,L[5].t0-.3,L[5].t0);
+ e11AVis(this.G0,v0);e11AVis(this.G1,v1);e11AVis(this.G3,v3);e11AVis(this.G5,v5);
+ const ci=e11ACur(s,t),act=[0,1,2,3,4,4][ci];this.cards.forEach((c,j)=>e11ACardAct(c,ramp(t,L[j].t0-.2,L[j].t0+.2),j===act));
+ {const w=u[0];e11Cycle(this.Pa,e11AL(w,.05,.42));e11AScale(this.Pa,.65);op(this.c0a,v0*e11AL(w,.4,.46));
+  const P=this.Pb;if(w<.45){e11Tongue(P,1);e11Velum(P,0);e11Air(P,.1,0,0);e11Food(P,420,240,1);}
+  else if(w<.62){e11Tongue(P,1+3*e11AL(w,.45,.6));e11Velum(P,e11AL(w,.5,.6));e11Air(P,.1,0,0);e11Path(P,[[420,240],[510,236],[592,262],[606,272]],e11AL(w,.45,.6),1);}
+  else{const a=e11AL(w,.66,.74);e11Tongue(P,4-4*e11AL(w,.9,1));e11Velum(P,1-e11AL(w,.92,1));e11Air(P,.1+.85*a,a,a);e11Path(P,[[606,272],[642,320],[640,420],[637,486],[637,552]],e11AL(w,.68,.95),w<.95?1:0);}
+  e11AScale(P,1.7);e11AVis(this.spark,Math.min(e11AL(w,.58,.62),1-e11AL(w,.72,.78)));op(this.c0b,v0*e11AL(w,.62,.68));}
+ {const P=this.P1;let sc=1,on=t<L[2].t0;e11AVis(this.t1a,on?1:0);e11AVis(this.t1b,on?0:1);
+  if(on){const w=u[1];let a=0;[[.15,.33],[.4,.58],[.65,.83]].forEach((r,i)=>{const b=Math.sin(Math.PI*e11AL(w,r[0],r[1]));a=Math.max(a,b);this.cs[i].style.opacity=w>=r[0]?1:.3;});
+   e11Air(P,.1+.85*a,a,a);e11Tongue(P,1+3*a);e11Velum(P,a);e11Food(P,0,0,0);sc=1-.35*e11AL(w,.2,.33)-.3*e11AL(w,.45,.58)-.3*e11AL(w,.7,.83);op(this.cnt,v1);op(this.cw1,0);op(this.cw2,0);}
+  else{const w=u[2];e11AFoodCol(P,'#7cc4ff','#d8eeff');const k=e11AL(w,.35,.85);e11Cycle(P,k);sc=1-e11AL(k,.5,.75);op(this.cnt,0);op(this.cw1,v1*(1-e11AL(w,.75,.8)));op(this.cw2,v1*e11AL(w,.8,.86));}
+  if(on)e11AFoodCol(P,'#ffcf70','#fff1bd');sc=Math.max(0,sc);this.rv.setAttribute('rx',14*sc);this.rv.setAttribute('ry',8*sc);this.rp.setAttribute('rx',10*sc);this.rp.setAttribute('ry',18*sc);e11AVis(this.rv,sc>.03?1:0);e11AVis(this.rp,sc>.03?1:0);}
+ {const w=u[3],x=lerp(300,830,e11AL(w,.08,.75));this.ph.setAttribute('d','M'+x+' 190 L'+x+' 440');this.rows.forEach(o=>{o.bar.setAttribute('width',Math.max(0,Math.min(x,o.rx)-300));const hit=x>=o.rx;o.m.setAttribute('fill',hit?'#ffe08a':'#eef3fb');o.m.setAttribute('width',hit?12:8);e11AVis(o.lab,hit?1:0);});op(this.c3,v3*e11AL(w,.5,.56));}
+ {const w=u[4];op(this.r0,v4*e11AL(w,0,.06));op(this.r1,v4*e11AL(w,.15,.22));op(this.r2,v4*e11AL(w,.45,.52));op(this.r3,v4*e11AL(w,.85,.9));}
+ {const w=u[5],A=w<.5;op(this.ph1,v5*(A?1:0));op(this.ph2,v5*(A?0:1));this.c5.forEach(c=>op(c,0));
+  if(A){const P=this.Pt,k=e11AL(w,.05,.25),a=e11AL(w,.3,.38);e11Tongue(P,k<.5?1+4*k:3);e11Velum(P,e11AL(k,.1,.3));e11Air(P,.1+.85*a,a,a);e11Path(P,[[420,238],[510,236],[592,262],[642,320],[626,372],[600,420],[592,462],[584,522]],k,1);e11AScale(P,.9);op(this.c5[0],v5*e11AL(w,.28,.33));
+   const Q=this.Pk,k1=e11AL(w,.05,.32),b=e11AL(w,.3,.38),k2=e11AL(w,.32,.46);e11Tongue(Q,b>0?3+b:1+2*k1);e11Velum(Q,e11AL(k1,.1,.3));e11Air(Q,.1+.85*b,b,b);if(k2<=0)e11Path(Q,[[420,238],[510,236],[592,262],[642,320]],k1,1);else e11Path(Q,[[642,320],[640,420],[637,486],[637,552]],k2,k2<.97?1:0);e11AScale(Q,1.25);op(this.c5[1],v5*e11AL(w,.44,.48));e11AVis(this.rk,0);}
+  else{const k=e11AL(w,.52,.85);e11Cycle(this.Pt,k);e11AScale(this.Pt,.9);e11Cycle(this.Pk,k);e11AScale(this.Pk,1.25);e11AVis(this.rk,e11AL(w,.78,.86));op(this.c5[2],v5*e11AL(w,.84,.9));op(this.c5[3],v5*e11AL(w,.84,.9));}}}});
 </script>
 <script>
+
+/* ── 3-5~3-7 공용 (e11B*) ── */
+let e11BN=0;
+function e11BPanel(par,x,y,w,h,col,title){const id='e11Bcl'+(e11BN++);const d=sv('defs',{},par),cp=sv('clipPath',{id},d);sv('rect',{x,y,width:w,height:h,rx:16},cp);
+ const G=sv('g',{},par);sv('rect',{x,y,width:w,height:h,rx:16,fill:'rgba(9,18,34,.93)'},G);const g=sv('g',{'clip-path':'url(#'+id+')'},G);sv('rect',{x,y,width:w,height:h,rx:16,fill:'none',stroke:col,'stroke-width':2.5},G);
+ const T=tx_(G,x+w/2,y+30,title||'',{'font-size':20,fill:col});return {G,g,T};}
+function e11BLi(a,t){if(t<a.L[0].t0)return -1;const k=a.L.findIndex(l=>t>=l.t0&&t<l.t1);if(k>=0)return k;for(let j=a.L.length-1;j>=0;j--)if(t>=a.L[j].t0)return j;return -1;}
+function e11BF(t,l){return Math.max(0,Math.min(1,(t-l.t0)/(l.t1-l.t0)));}
+function e11BV(e,v){e.setAttribute('opacity',(+v).toFixed(3));}
+function e11BFold(P,vc,fc){const g=20*(1-vc),f=20*(1-fc);P.vf1.setAttribute('d','M561 456 L'+(586-g/2)+' 461');P.vf2.setAttribute('d','M611 456 L'+(588+g/2)+' 461');P.fv1.setAttribute('d','M562 436 L'+(584-f/2)+' 441');P.fv2.setAttribute('d','M611 436 L'+(590+f/2)+' 441');}
+function e11BTgArr(P,a){const n=a.map(v=>(+v).toFixed(1));P.tongue.setAttribute('d','M'+n[0]+' '+n[1]+' C'+n.slice(2,8).join(' ')+' C'+n.slice(8,14).join(' ')+' C'+n.slice(14,20).join(' ')+' L'+n[20]+' '+n[21]+' C'+n.slice(22,28).join(' ')+' C'+n.slice(28,32).join(' ')+' '+n[0]+' '+n[1]+'Z');}
+function e11BArrow(par,x1,y1,x2,y2,col,w){w=w||5;const g=sv('g',{},par);sv('path',{d:'M'+x1+' '+y1+' L'+x2+' '+y2,stroke:col,'stroke-width':w,'stroke-linecap':'round'},g);const a=Math.atan2(y2-y1,x2-x1),L=w*2.8;sv('path',{d:'M'+(x2-L*Math.cos(a-.5))+' '+(y2-L*Math.sin(a-.5))+' L'+x2+' '+y2+' L'+(x2-L*Math.cos(a+.5))+' '+(y2-L*Math.sin(a+.5)),fill:'none',stroke:col,'stroke-width':w,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g;}
+function e11BChip(L,x,y,w,html,col){return e11AChip(L,x,y,w,html,col);}
+function e11BTv(k){return k<.14?1+k/.14*2:k<.28?3+(k-.14)/.14:k<.55?4:Math.max(0,4-(k-.55)/.25*4);}
+const E11B_EF=E11TK[4].map((v,i)=>[10,12,14,16,18].includes(i)?v+12:i===20?v+6:v);
+const E11B_MS=[252,246, 262,234,330,232,430,236, 505,236,565,250,584,290, 594,320,590,352,578,372, 552,380, 500,352,420,334,340,322, 300,312,256,262];
+/* 성문위 삼킴 순서: u 0~1 */
+function e11BGlot(u){const R=ramp;
+ const vc=u<.56?R(u,.15,.22):u<.72?1-R(u,.56,.6):u<.9?R(u,.72,.76):1-R(u,.9,.96);
+ const lift=u<.6?Math.min(R(u,.36,.42),1-R(u,.5,.55)):Math.min(R(u,.76,.8),1-R(u,.86,.9));
+ const tg=u<.6?(u<.3?1:u<.5?1+3*R(u,.3,.36):4-3*R(u,.5,.55)):(u<.74?1:u<.86?1+3*R(u,.74,.8):4-3*R(u,.86,.9));
+ let ph=u<.15?0:u<.3?1:u<.56?2:u<.72?3:4;return {vc,lift,tg,ph};}
+function e11BGlotSet(P,u,o){const s=e11BGlot(u);e11Air(P,0,s.lift,s.lift);e11BFold(P,s.vc,s.vc*.6);e11Tongue(P,s.tg);
+ const lx=-6*s.lift,ly=-14*s.lift;
+ if(u<.52)e11Path(P,E11PTS,ramp(u,.3,.52),1);else e11Food(P,637,552,0);
+ let px=592+lx,py=447+ly,pv=0,pr=1;
+ if(u>=.43&&u<.58){pv=ramp(u,.43,.46);}
+ else if(u>=.58&&u<.72){const q=ramp(u,.58,.7);px=lerp(592,628,q);py=lerp(447,300,q);pv=1;pr=lerp(1,.8,q);}
+ else if(u>=.72&&u<.88){const q=ramp(u,.76,.86);const pts=[[628,300],[640,420],[637,486],[637,552]];const n=3,i=Math.min(2,Math.floor(q*n)),r=q*n-i;px=lerp(pts[i][0],pts[i+1][0],r);py=lerp(pts[i][1],pts[i+1][1],r);pv=q<.98?1:0;pr=.8;}
+ o.pool.setAttribute('transform','translate('+px.toFixed(1)+' '+py.toFixed(1)+') scale('+pr+')');e11BV(o.pool,pv);
+ e11BV(o.dn,u<.15?Math.min(1,u/.03):0);e11BV(o.up,u>=.56&&u<.68?1:0);if(o.lock)e11BV(o.lock,s.vc>.9&&u<.56?1:0);return s;}
+function e11BGlotParts(P,aw){const o={};o.pool=sv('g',{opacity:0},P.g);sv('ellipse',{cx:0,cy:0,rx:9,ry:6,fill:'#ffcf70',stroke:'#fff1bd','stroke-width':1.5},o.pool);
+ o.dn=e11BArrow(P.g,584,494,584,548,'#9fd9ff',aw);o.up=e11BArrow(P.g,584,548,584,494,'#ff9a8a',aw);e11BV(o.dn,0);e11BV(o.up,0);return o;}
 page({id:'s3-5',label:'3-5',title:'성문위 삼킴',scenes:[{name:'삼킴 전 기도 보호',pre:1,post:1,lines:[
  '성문위 삼킴은 진성대 폐쇄가 약하거나 늦고, 삼킴 전 흡인 위험이 있을 때 사용합니다. 먼저 숨을 들이쉬고 참습니다.',
  '숨을 참은 채 삼킨 다음 즉시 기침하고, 다시 삼킵니다. 지시를 이해하고 숨을 참으며 효과적으로 기침할 수 있어야 합니다.',
+ '숨을 참으면 삼키기 전에 성대가 먼저 닫혀 기도를 막습니다. 삼킨 뒤 바로 기침하면 성대 위에 고인 음식을 밖으로 뱉어 내고, 다시 삼켜 남은 것을 치웁니다.',
  '최대 성문위 삼킴은 더 강하게 숨을 참으며 힘을 줍니다. 진성대와 가성대 폐쇄, 피열연골의 앞쪽 기울임으로 후두 입구를 보호합니다. 심혈관·호흡기 상태를 고려합니다.']}],init(L){
- const s=SVGROOT(L);this.A=e11Swallow(s);
- this.step=[e11Label(L,700,175,420,'① 숨 들이쉬고 참기','#76c7ff'),e11Label(L,700,270,420,'② 참은 채 삼키기','#ffe08a'),e11Label(L,700,365,420,'③ 즉시 기침 → 다시 삼키기','#76e8be')];
- this.warn=e11Label(L,690,500,440,'수행·기침 가능 여부를 먼저 확인','#ff9a8a');},draw(t,p){const a=p.scenes[0];const k=ramp(t,e11At(a,0),e11At(a,0)+2.4);
- this.A.bolus.setAttribute('cx',190+300*k);this.A.bolus.setAttribute('cy',250+95*k);
- const shut=k>.35&&k<.83?1:0;this.A.folds.setAttribute('d',shut?'M515,401 Q520,394 525,401':'M500,401 Q520,410 540,401');
- this.A.epi.setAttribute('d',k>.35&&k<.86?'M480,300 Q508,355 515,375 Q510,390 495,395':'M480,300 Q520,313 520,340 Q513,365 488,375');
- this.A.hyoid.setAttribute('cx',470+18*shut);this.A.hyoid.setAttribute('cy',387-15*shut);
- this.step.forEach((c,i)=>op(c,ramp(t,e11At(a,0)+i*.85,e11At(a,0)+i*.85+.35)));op(this.warn,ramp(t,e11At(a,1),e11At(a,1)+.4));}});
+ const s=SVGROOT(L);
+ const A=this.A=e11BPanel(s,40,110,390,445,'#76c7ff','옆에서 본 단면');
+ this.P=e11Sag(A.g,'translate(-109 112) scale(.66)',E11N);this.oP=e11BGlotParts(this.P,7);
+ this.labA=sv('g',{},A.g);[[128,290,'구강'],[392,262,'인두'],[300,463,'기도'],[400,463,'식도']].forEach(q=>tx_(this.labA,q[0],q[1],q[2],{'font-size':17,fill:q[2]==='기도'?'#9fd9ff':'#f5ddc8'}));
+ this.P3=e11Sag(A.g,'translate(235 340) scale(2.3) translate(-590 -440)',E11N);e11BV(this.P3.g,0);
+ const B=this.B=e11BPanel(s,445,110,405,360,'#ffe08a','후두 확대');
+ this.P2=e11Sag(B.g,'translate(647.5 300) scale(2.5) translate(-590 -435)',E11N);this.o2=e11BGlotParts(this.P2,3);
+ this.ary=sv('path',{d:'M605 452 L617 452 L612 416 Z',fill:'#c7b9a6',stroke:'#7d6670','stroke-width':1.5,opacity:0},this.P2.larynx);
+ const Z=(x,y)=>[647.5+(x-590)*2.5,300+(y-435)*2.5];
+ this.labB=sv('g',{},B.g);const TB=(x,y,t,c,an)=>tx_(this.labB,x,y,t,{'font-size':17,fill:c||'#f5ddc8','text-anchor':an||'middle'});
+ TB(535,318,'가성대','#c9b8d0','end');TB(535,366,'진성대','#fff0d9','end');TB(560,452,'기도','#9fd9ff');TB(790,452,'식도');TB(708,186,'후두개','#f0bd8b','start');
+ this.o2.lock=tx_(B.g,700,372,'🔒',{'font-size':30,stroke:'none'});
+ this.aryT=tx_(B.g,712,300,'피열연골',{'font-size':17,fill:'#e6d7c3','text-anchor':'start',opacity:0});
+ this.lab3=tx_(A.g,235,548,'진성대만 닫힘',{'font-size':19,fill:'#76c7ff',opacity:0});this.lab2=tx_(B.g,647.5,455,'',{'font-size':19,fill:'#ffe08a',opacity:0});
+ this.stat=e11BChip(L,445,485,405,'','#ffe08a');this.stat2=e11BChip(L,445,485,405,'세 곳이 닫혀 후두 입구까지 막음','#ffe08a');
+ const W='<span class="e11Bw" style="opacity:0">';
+ this.cards=[['① 숨 들이쉬고 참기',W+'성대가 먼저 닫혀 기도를 막음</span>','#76c7ff'],['② 참은 채 삼키기',W+'닫힌 성대 위에 조금 고일 수 있음</span>','#ffe08a'],['③ 즉시 기침 → 다시 삼키기',W+'고인 음식을 뱉고, 남은 것을 치움</span>','#76e8be']].map((c,i)=>e11ACard(L,870,122+i*92,365,c[0],c[1],c[2]));
+ this.warn=e11BChip(L,870,410,365,'지시 이해 · 숨 참기 · 기침이 가능해야','#ff9a8a');
+ this.cmp=[e11ACard(L,870,122,365,'성문위 삼킴','진성대 닫힘','#76c7ff'),e11ACard(L,870,222,365,'최대 성문위 삼킴','진성대 + 가성대 닫힘<br>+ 피열연골 앞으로 기울임','#ffe08a'),e11BChip(L,870,360,365,'강하게 힘주기 → 심혈관 · 호흡기 상태 확인','#ff9a8a')];
+ this.phT=['숨 들이쉬기 · 성대 열림','숨 참기 · 성대 닫힘','삼키기 · 닫힌 성대 위에 조금 고임','기침 · 고인 음식을 뱉어 냄','다시 삼키기 · 남은 것을 치움'];this._ph=-1;},
+ draw(t,p){const a=p.scenes[0],Ls=a.L,i=e11BLi(a,t);let u;
+  if(i<=0){const f=i<0?0:e11BF(t,Ls[0]);u=f<.45?0:.3*ramp(f,.45,.95);}else if(i===1)u=lerp(.3,1,e11BF(t,Ls[1]));else if(i===2)u=lerp(.1,1,e11BF(t,Ls[2]));else u=.3;
+  const m=i===3?ramp(t,Ls[3].t0,Ls[3].t0+.5):0;
+  e11BV(this.P.g,1-m);e11BV(this.labA,1-m);e11BV(this.P3.g,m);e11BV(this.lab3,m);e11BV(this.labB,1-m);this.A.T.textContent=m>.5?'성문위 삼킴 (확대)':'옆에서 본 단면';this.B.T.textContent=m>.5?'최대 성문위 삼킴 (확대)':'후두 확대';
+  if(i<3){const st=e11BGlotSet(this.P,u,this.oP);e11BGlotSet(this.P2,u,this.o2);e11BV(this.ary,0);e11BV(this.aryT,0);this.lab2.textContent='';
+   if(st.ph!==this._ph){this._ph=st.ph;this.stat.firstChild.textContent=this.phT[st.ph];}
+   const act=st.ph<2?0:st.ph===2?1:2;const vis=i<0?0:1;
+   this.cards.forEach((c,j)=>{e11ACardAct(c,vis*ramp(t,Ls[0].t0+j*.5,Ls[0].t0+j*.5+.4),j===act);const w=c.querySelector('.e11Bw');if(w)w.style.opacity=i>=2?1:0;});
+   op(this.stat,vis);op(this.warn,i>=1?ramp(t,Ls[1].t0,Ls[1].t0+.4):0);this.cmp.forEach(c=>op(c,0));op(this.stat2,0);}
+  else{const c=Math.min(1,1.5*(.5-.5*Math.cos((t-Ls[3].t0)*1.4)));
+   [this.P2,this.P3].forEach(P=>{e11Air(P,0,0,0);e11Tongue(P,1);e11Food(P,0,0,0);e11BV(P===this.P2?this.o2.pool:this.oP.pool,0);});
+   e11BFold(this.P3,c,0);e11BFold(this.P2,c,c);this.ary.setAttribute('transform','rotate('+(-28*c).toFixed(1)+' 611 452)');e11BV(this.ary,m);e11BV(this.aryT,m);
+   ['dn','up','lock'].forEach(k=>this.o2[k]&&e11BV(this.o2[k],0));this.lab2.textContent='진성대 + 가성대 + 피열연골';
+   this.cards.forEach(c=>op(c,1-m));op(this.warn,1-m);op(this.stat,0);op(this.stat2,m);
+   this.cmp.forEach((c,j)=>op(c,m*ramp(t,Ls[3].t0+j*.6,Ls[3].t0+j*.6+.4)));this.cmp[0].style.boxShadow='';}}});
 page({id:'s3-6',label:'3-6',title:'멘델슨·노력·마사코',scenes:[{name:'삼킴 기법 세 가지',pre:1,post:1,lines:[
  '멘델슨 기법은 후두 상승이나 UES(상부식도괄약근) 개방이 낮을 때 씁니다. 삼킬 때 후두가 가장 높이 올라간 순간을 환자가 스스로 2초에서 3초 유지합니다.',
+ 'UES는 설골과 후두가 앞위로 끌려 올라갈 때 열립니다. 후두를 높이 올린 채 버티면 UES가 열려 있는 시간이 길어져, 음식이 식도로 더 잘 넘어갑니다.',
  '노력 삼킴은 혀 기저부와 인두 추진이 약할 때 힘껏 삼키는 방법입니다. 효과는 검사 소견을 근거로 확인합니다.',
- '마사코는 혀 앞부분을 앞니 사이에 둔 채 침을 삼키는 간접 훈련입니다. 음식이나 액체와 함께 하지 않습니다.']}],init(L){
- this.cards=[['멘델슨','최고점 도달 후<br>스스로 유지','2~3초','#76c7ff'],['노력 삼킴','혀 기저부·인두에<br>힘을 주기','세게 삼키기','#ffe08a'],['마사코','혀 앞을 앞니 사이에 고정','침만 삼키기','#76e8be']].map((c,i)=>hdiv('card ov','<h3 style="color:'+c[3]+'">'+c[0]+'</h3><div style="font-size:21px;line-height:1.5">'+c[1]+'</div><b style="display:block;margin-top:15px;color:'+c[3]+';font-size:23px">'+c[2]+'</b>',L,'left:'+(90+i*390)+'px;top:210px;width:300px;height:195px;text-align:center;padding:22px 14px'));
- this.safe=e11Label(L,330,470,620,'마사코는 음식·액체 없이 하는 간접 훈련','#ff9a8a');},draw(t,p){const a=p.scenes[0];this.cards.forEach((c,i)=>op(c,ramp(t,e11At(a,0)+i*.75,e11At(a,0)+i*.75+.4)));op(this.safe,ramp(t,e11At(a,2),e11At(a,2)+.4));}});
+ '힘껏 삼키면 혀 기저부가 더 세게 뒤로 밀려, 후두개곡에 남는 음식이 줄어듭니다.',
+ '마사코는 혀 앞부분을 앞니 사이에 둔 채 침을 삼키는 간접 훈련입니다. 음식이나 액체와 함께 하지 않습니다.',
+ '혀 기저부와 인두 뒷벽이 잘 닿지 않을 때 씁니다. 혀를 앞니 사이에 고정하면 혀뿌리가 뒤로 가지 못해 인두 뒷벽이 앞으로 더 많이 움직여야 하므로, 인두 뒷벽 움직임을 키우는 훈련이 됩니다.']}],init(L){
+ const s=SVGROOT(L);const A=this.A=e11BPanel(s,40,110,725,445,'#76c7ff','');
+ /* 멘델슨 */
+ const gM=this.gM=sv('g',{},A.g);this.PM=e11Sag(gM,'translate(-120 92) scale(.8)',E11N);
+ sv('circle',{cx:640,cy:215,r:38,fill:'none',stroke:'#2c3a55','stroke-width':9},gM);this.tArc=sv('path',{fill:'none',stroke:'#76c7ff','stroke-width':9,'stroke-linecap':'round'},gM);
+ this.tTx=tx_(gM,640,223,'2~3초',{'font-size':20,fill:'#eaf1fb'});tx_(gM,640,283,'최고점에서 버티기',{'font-size':17,fill:'#76c7ff'});
+ this.gBar=sv('g',{},gM);tx_(this.gBar,648,338,'UES 열린 시간',{'font-size':18,fill:'#ffe08a'});
+ tx_(this.gBar,548,375,'보통',{'font-size':17,'text-anchor':'start'});tx_(this.gBar,548,423,'멘델슨',{'font-size':17,'text-anchor':'start'});
+ sv('rect',{x:610,y:358,width:140,height:22,rx:6,fill:'#1e2a40'},this.gBar);sv('rect',{x:610,y:406,width:140,height:22,rx:6,fill:'#1e2a40'},this.gBar);
+ this.b1=sv('rect',{x:610,y:358,width:0,height:22,rx:6,fill:'#9fb3cc'},this.gBar);this.b2=sv('rect',{x:610,y:406,width:0,height:22,rx:6,fill:'#76c7ff'},this.gBar);
+ this.gWhyM=sv('g',{},gM);this.uRing=sv('circle',{cx:637,cy:486,r:20,fill:'none',stroke:'#ffe08a','stroke-width':4},this.PM.g);this.hArr=e11BArrow(this.PM.g,560,420,532,382,'#ffe08a',5);
+ tx_(this.gWhyM,200,470,'설골 · 후두 앞위로',{'font-size':17,fill:'#ffe08a'});tx_(this.gWhyM,432,505,'UES 열림',{'font-size':17,fill:'#ffe08a','text-anchor':'start'});
+ [['구강',95,282],['인두',418,268],['식도',418,540]].forEach(q=>tx_(gM,q[1],q[2],q[0],{'font-size':17,fill:'#f5ddc8','text-anchor':'start'}));
+ /* 노력 삼킴 */
+ const gE=this.gE=sv('g',{opacity:0},A.g);this.PA=e11Sag(gE,'translate(-86 125) scale(.6)',E11N);this.PB=e11Sag(gE,'translate(264 125) scale(.6)',E11N);
+ this.rA=e11Res(this.PA,[[589,378,15,9]],'#ffcf70');this.rB=e11Res(this.PB,[[589,379,6,4]],'#ffcf70');
+ tx_(gE,228,174,'보통 삼킴',{'font-size':19,fill:'#9fb3cc'});tx_(gE,578,174,'노력 삼킴',{'font-size':19,fill:'#ffe08a'});
+ this.eArr=e11BArrow(this.PB.g,570,322,616,322,'#ffe08a',6);
+ this.eA=e11BChip(L,70,500,320,'후두개곡에 잔여물이 남음','#ff9a8a');this.eB=e11BChip(L,420,500,330,'혀 기저부 더 뒤로 → 잔여물 ↓','#76e8be');
+ /* 마사코 */
+ const gS=this.gS=sv('g',{opacity:0},A.g);this.PS=e11Sag(gS,'translate(-120 92) scale(.8)',E11N);e11BTgArr(this.PS,E11B_MS);
+ this.wall=sv('path',{fill:'#4c3644'},this.PS.g);this.wallL=sv('path',{fill:'none',stroke:'#ffe08a','stroke-width':5,'stroke-linecap':'round'},this.PS.g);
+ this.wArr=e11BArrow(gS,590,330,452,330,'#ffe08a',6);tx_(gS,640,300,'인두 뒷벽 앞으로',{'font-size':18,fill:'#ffe08a'});
+ e11BArrow(gS,92,372,84,302,'#ffcf70',3);tx_(gS,70,392,'혀끝을 앞니 사이에',{'font-size':17,fill:'#ffcf70','text-anchor':'start'});
+ this.sOnly=e11BChip(L,560,180,190,'침만 · 음식 ✕','#ff9a8a');
+ this.chain=[['혀뿌리 뒤로 ✕','#ff9a8a'],['인두 뒷벽 더 앞으로','#ffe08a'],['움직임 훈련','#76e8be']].map((c,j)=>e11BChip(L,543,392+j*56,215,c[0],c[1]));
+ this.cards=[['멘델슨','최고점에서 2~3초 버티기<br>→ UES 열린 시간 ↑','#76c7ff'],['노력 삼킴','힘껏 삼키기<br>→ 혀 기저부 더 뒤로 · 후두개곡 잔여물 ↓','#ffe08a'],['마사코','혀끝을 앞니 사이에 · 침만<br>→ 인두 뒷벽 움직임 ↑','#76e8be']].map((c,j)=>e11ACard(L,790,120+j*150,445,c[0],c[1],c[2]));},
+ draw(t,p){const a=p.scenes[0],Ls=a.L,i=e11BLi(a,t),grp=i<2?0:i<4?1:2;
+  const fade=(g0,j)=>{const t0=j===0?a.t0:Ls[j*2].t0,t1=j===2?a.t1+1:Ls[j*2+2].t0;return Math.min(ramp(t,t0,t0+.4),1-ramp(t,t1-.3,t1));};
+  e11BV(this.gM,grp===0?(i<0?1:fade(0,0)):0);e11BV(this.gE,grp===1?fade(0,1):0);e11BV(this.gS,grp===2?fade(0,2):0);
+  this.A.T.textContent=['멘델슨 기법','보통 삼킴 vs 노력 삼킴','마사코 (혀 유지 삼킴)'][grp];
+  this.cards.forEach((c,j)=>e11ACardAct(c,i<0?0:ramp(t,Ls[0].t0+j*.5,Ls[0].t0+j*.5+.4),j===grp));
+  if(grp===0){const P=this.PM,k=(((t-(Ls[0]?Ls[0].t0:0))%7)+7)%7/7;
+   e11Tongue(P,k<.15?1+3*ramp(k,0,.15):k<.75?4:4-3*ramp(k,.75,.85));const lf=Math.min(ramp(k,.15,.25),1-ramp(k,.75,.85));e11Air(P,lf,lf,lf);
+   e11Path(P,E11PTS,ramp(k,0,.45),k<.47&&t>=Ls[0].t0?1:0);
+   const tp=ramp(k,.27,.72),on=k>.25&&k<.78;const ang=-Math.PI/2+tp*2*Math.PI*.999,ex=640+38*Math.cos(ang),ey=215+38*Math.sin(ang);
+   this.tArc.setAttribute('d',tp>0?'M640 177 A38 38 0 '+(tp>.5?1:0)+' 1 '+ex.toFixed(1)+' '+ey.toFixed(1):'');e11BV(this.tArc,on?1:.25);
+   const w=i===1?ramp(t,Ls[1].t0+.5,Ls[1].t0+3):0;this.b1.setAttribute('width',(45*w).toFixed(1));this.b2.setAttribute('width',(135*w).toFixed(1));e11BV(this.gBar,i===1?1:0);
+   const wy=i===1?1:0;e11BV(this.gWhyM,wy);e11BV(this.uRing,wy*(lf>.3?1:.4));e11BV(this.hArr,wy);}
+  op(this.eA,grp===1?fade(0,1):0);op(this.eB,grp===1?fade(0,1):0);
+  if(grp===1){const k=(((t-Ls[2].t0)%6)+6)%6/6;e11Cycle(this.PA,k);e11Cycle(this.PB,k);const tv=e11BTv(k);if(tv>3)e11BTgArr(this.PB,E11TK[3].map((v,j)=>lerp(v,E11B_EF[j],tv-3)));
+   const r=ramp(k,.8,.9);e11BV(this.rA,r);e11BV(this.rB,r);e11BV(this.eArr,tv>3.5?1:0);this.eA.style.transform=i===3?'scale(1.04)':'';this.eB.style.transform=i===3?'scale(1.04)':'';}
+  op(this.sOnly,grp===2?fade(0,2):0);this.chain.forEach((c,j)=>op(c,grp===2&&i===5?ramp(t,Ls[5].t0+j*1.8,Ls[5].t0+j*1.8+.4):0));
+  if(grp===2){const P=this.PS,k=(((t-Ls[4].t0)%6)+6)%6/6;e11BTgArr(P,E11B_MS);const sw=Math.min(ramp(k,.3,.4),1-ramp(k,.55,.65));e11Air(P,sw,sw,sw);e11Food(P,0,0,0);
+   const b=16*sw;const wq='M666 222 Q'+(666-2.6*b).toFixed(1)+' 312 663 402';this.wall.setAttribute('d',wq+' L678 402 L678 222Z');this.wallL.setAttribute('d',wq);e11BV(this.wArr,.35+.65*sw);}}});
 page({id:'s3-7',label:'3-7',title:'Shaker(샤케어)·CTAR(저항성 턱 당기기)·감각 촉진',scenes:[{name:'운동과 감각 촉진',pre:1,post:1,lines:[
  'Shaker(샤케어) 운동은 UES(상부식도괄약근) 개방 저하나 후두 상승 감소로 삼킨 뒤 흡인이 생기는 경우 고려합니다. 바로 누워 어깨를 바닥에 둔 채 고개만 들어 발가락을 봅니다.',
+ '고개를 드는 동안 턱 아래 설골상근이 강해지고, 이 근육이 설골과 후두를 앞위로 끌어올려 UES가 더 크게 열립니다.',
  '등척성은 1분 유지, 1분 휴식을 세 번 반복하고 등속성은 고개를 들었다 내리는 동작을 30회 합니다. 경추나 심혈관 상태 등을 고려해야 합니다.',
- 'CTAR(저항성 턱 당기기)는 턱 아래 저항물을 눌러 설골상근군을 강화합니다. 온도촉각 자극은 차가운 도구로 양쪽 앞구개활을 자극해 감각과 삼킴 반응을 촉진합니다. 근력 강화가 아니며 장기 효과 근거는 제한적입니다.']}],init(L){
- this.head=e11Head(SVGROOT(L),275,380,0);this.sh=e11Label(L,90,155,370,'Shaker(샤케어) · 어깨는 바닥에','#76c7ff');this.timer=e11Label(L,110,490,340,'1분 유지 · 1분 휴식 × 3','#ffe08a');this.ct=e11Label(L,500,270,300,'CTAR(저항성 턱 당기기) · 턱 아래 저항','#76e8be');this.therm=e11Label(L,860,395,320,'온도촉각 자극 · 감각 촉진','#c58cff');this.rep=e11Label(L,510,490,300,'등속성 30회','#ffe08a');},draw(t,p){const a=p.scenes[0];const k=ramp(t,e11At(a,0),e11At(a,0)+1.2);this.head.setAttribute('transform','translate(275 380) rotate('+(k>0.3&&k<.8?-12:0)+')');for(const [c,i] of [[this.sh,0],[this.timer,0],[this.ct,2],[this.rep,1],[this.therm,2]])op(c,ramp(t,e11At(a,i),e11At(a,i)+.4));}});
+ 'CTAR(저항성 턱 당기기)는 같은 설골상근을, 앉은 자세에서 턱 아래 공을 눌러 강화합니다.',
+ '온도촉각 자극은 차가운 도구로 양쪽 앞구개활을 자극해 감각과 삼킴 반응을 촉진합니다. 근력 강화가 아니며 장기 효과 근거는 제한적입니다.']}],init(L){
+ const s=SVGROOT(L);const A=this.A=e11BPanel(s,40,110,560,295,'#76c7ff','');const B=this.B=e11BPanel(s,620,110,620,295,'#ffe08a','');
+ const SK='#e2b8a8',CL='#6f84a8';
+ /* 누운 자세 */
+ const gU=this.gU=sv('g',{},A.g);sv('path',{d:'M60 362 L580 362',stroke:'#5d6b85','stroke-width':4},gU);
+ sv('rect',{x:198,y:320,width:178,height:40,rx:16,fill:CL},gU);sv('rect',{x:370,y:330,width:170,height:26,rx:12,fill:'#46516a'},gU);
+ sv('rect',{x:528,y:300,width:20,height:56,rx:8,fill:SK},gU);sv('rect',{x:226,y:346,width:120,height:12,rx:6,fill:SK},gU);
+ this.hd=sv('g',{},gU);sv('rect',{x:168,y:328,width:42,height:20,rx:8,fill:SK},this.hd);sv('circle',{cx:150,cy:334,r:30,fill:SK},this.hd);
+ sv('path',{d:'M144 305 L150 292 L158 305Z',fill:SK},this.hd);sv('circle',{cx:162,cy:320,r:3.5,fill:'#222'},this.hd);sv('path',{d:'M124 314 Q140 296 168 304',fill:'none',stroke:'#4a3a33','stroke-width':6},this.hd);
+ this.gaze=sv('path',{d:'',fill:'none',stroke:'#ffe08a','stroke-width':2.5,'stroke-dasharray':'6 6'},gU);
+ e11BArrow(gU,250,398,250,368,'#76e8be',4);tx_(gU,268,392,'어깨는 바닥에',{'font-size':17,fill:'#76e8be','text-anchor':'start'});
+ tx_(gU,470,290,'발가락 보기',{'font-size':17,fill:'#ffe08a'});
+ /* 앉은 자세 CTAR */
+ const gCo=sv('g',{transform:'translate(50 62) scale(.85)'},A.g);const gC=this.gC=sv('g',{opacity:0},gCo);sv('path',{d:'M60 382 L580 382',stroke:'#5d6b85','stroke-width':4},gC);
+ sv('rect',{x:236,y:300,width:130,height:12,rx:4,fill:'#5d6b85'},gC);sv('rect',{x:240,y:312,width:10,height:70,fill:'#46516a'},gC);sv('rect',{x:352,y:312,width:10,height:70,fill:'#46516a'},gC);sv('rect',{x:236,y:200,width:12,height:110,rx:4,fill:'#5d6b85'},gC);
+ sv('rect',{x:262,y:200,width:56,height:104,rx:18,fill:CL},gC);sv('rect',{x:300,y:282,width:130,height:24,rx:10,fill:'#46516a'},gC);sv('rect',{x:414,y:292,width:22,height:88,rx:8,fill:'#46516a'},gC);
+ this.hd2=sv('g',{},gC);sv('rect',{x:280,y:176,width:24,height:30,rx:8,fill:SK},this.hd2);sv('circle',{cx:300,cy:156,r:30,fill:SK},this.hd2);
+ sv('path',{d:'M328 150 L342 158 L328 164Z',fill:SK},this.hd2);sv('circle',{cx:316,cy:146,r:3.5,fill:'#222'},this.hd2);sv('path',{d:'M272 140 Q290 122 318 130',fill:'none',stroke:'#4a3a33','stroke-width':6},this.hd2);
+ this.ball=sv('ellipse',{cx:322,cy:200,rx:16,ry:15,fill:'#ff9a5c',stroke:'#fff','stroke-width':2},gC);
+ tx_(gC,360,214,'턱 아래 공 누르기',{'font-size':18,fill:'#ff9a5c','text-anchor':'start'});tx_(gC,180,250,'앉은 자세',{'font-size':17,fill:'#9fb3cc'});
+ /* 입 정면 (온도촉각) */
+ const gT=this.gT=sv('g',{opacity:0},A.g);const d=sv('defs',{},gT),cp=sv('clipPath',{id:'e11Bmouth'},d);sv('ellipse',{cx:320,cy:262,rx:150,ry:98},cp);
+ sv('ellipse',{cx:320,cy:262,rx:176,ry:120,fill:'#c9868a',stroke:'#8f4f5a','stroke-width':3},gT);const M=sv('g',{'clip-path':'url(#e11Bmouth)'},gT);
+ sv('rect',{x:160,y:160,width:320,height:210,fill:'#3a0e15'},M);sv('path',{d:'M170 160 L470 160 L470 210 Q320 150 170 210Z',fill:'#d79a96'},M);
+ sv('path',{d:'M262 270 Q270 205 320 196 Q370 205 378 270 Z',fill:'#5a1820'},M);
+ sv('path',{d:'M250 290 Q246 214 310 190',fill:'none',stroke:'#b05a62','stroke-width':11},M);sv('path',{d:'M390 290 Q394 214 330 190',fill:'none',stroke:'#b05a62','stroke-width':11},M);
+ this.arL=sv('path',{d:'M222 296 Q222 208 304 182',fill:'none',stroke:'#f0a8a8','stroke-width':14,'stroke-linecap':'round'},M);this.arR=sv('path',{d:'M418 296 Q418 208 336 182',fill:'none',stroke:'#f0a8a8','stroke-width':14,'stroke-linecap':'round'},M);
+ sv('path',{d:'M310 186 Q320 236 330 186 Z',fill:'#e08e92'},M);sv('ellipse',{cx:320,cy:343,rx:140,ry:62,fill:'#d98083',stroke:'#8f4f5a','stroke-width':2},M);
+ for(let x=190;x<460;x+=27)sv('rect',{x,y:160,width:24,height:16,rx:4,fill:'#f6efe4'},M);
+ sv('path',{d:'M215 236 L120 210',stroke:'#fff','stroke-width':2},gT);tx_(gT,115,206,'앞구개활',{'font-size':17,'text-anchor':'end'});sv('path',{d:'M425 236 L500 168',stroke:'#fff','stroke-width':2},gT);tx_(gT,505,162,'앞구개활',{'font-size':17,'text-anchor':'start'});
+ tx_(gT,320,215,'목젖',{'font-size':14,fill:'#ffe0e0'});
+ this.tool=sv('g',{},gT);this.tLine=sv('path',{stroke:'#cfd8e3','stroke-width':7,'stroke-linecap':'round'},this.tool);this.tTip=sv('circle',{r:10,fill:'#bfe6ff',stroke:'#fff','stroke-width':2},this.tool);this.tSn=tx_(this.tool,0,0,'❄',{'font-size':22,fill:'#bfe6ff',stroke:'none'});
+ /* 목 확대 */
+ const gN=this.gN=sv('g',{},B.g);this.PN=e11Sag(gN,'translate(930 270) scale(1.6) translate(-520 -420)',E11N);
+ this.mus=sv('path',{fill:'none',stroke:'#ff8a7a','stroke-width':9,'stroke-linecap':'round'},this.PN.g);this.nArr=e11BArrow(this.PN.g,566,414,540,380,'#ffe08a',3.5);
+ this.uR=sv('circle',{cx:637,cy:486,r:15,fill:'none',stroke:'#ffe08a','stroke-width':3},this.PN.g);
+ tx_(gN,796,190,'설골상근',{'font-size':18,fill:'#ff9a8a'});tx_(gN,985,212,'설골',{'font-size':17,fill:'#efdcc4','text-anchor':'start'});this.uT=tx_(gN,1135,378,'UES 열림',{'font-size':17,fill:'#ffe08a','text-anchor':'start'});
+ /* 반응 시간 막대 */
+ const gR=this.gR=sv('g',{opacity:0},B.g);tx_(gR,660,215,'자극 전',{'font-size':19,'text-anchor':'start'});tx_(gR,660,295,'자극 후',{'font-size':19,'text-anchor':'start'});
+ this.r1=sv('rect',{x:760,y:196,width:0,height:28,rx:7,fill:'#ff9a8a'},gR);this.r2=sv('rect',{x:760,y:276,width:0,height:28,rx:7,fill:'#76e8be'},gR);
+ this.r1T=tx_(gR,0,217,'늦음',{'font-size':17,fill:'#ff9a8a','text-anchor':'start'});this.r2T=tx_(gR,0,297,'빨라짐',{'font-size':17,fill:'#76e8be','text-anchor':'start'});
+ tx_(gR,930,360,'감각을 깨워 삼킴 반응을 촉진',{'font-size':18,fill:'#c58cff'});
+ /* 아래 칩 */
+ this.chain=[['① 설골상근 강해짐','#ff9a8a'],['② 설골 · 후두 앞위로','#ffe08a'],['③ UES 더 크게 열림','#76e8be']].map((c,j)=>e11BChip(L,60+j*400,425,360,c[0],c[1]));
+ this.arrs=[0,1].map(j=>hdiv('ov','<div style="font-size:28px;color:#cbd8e8;font-weight:800">→</div>',L,'left:'+(426+j*400)+'px;top:425px;width:28px'));
+ this.rep=[e11BChip(L,60,490,420,'등척성: 1분 유지 · 1분 휴식 × 3','#ffe08a'),e11BChip(L,500,490,380,'등속성: 들었다 내리기 30회','#ffe08a'),e11BChip(L,900,490,320,'경추 · 심혈관 상태 고려','#ff9a8a')];
+ this.ctC=e11BChip(L,60,440,700,'턱 아래 공 누르기 → 같은 설골상근 강화','#76e8be');
+ this.thC=[e11BChip(L,60,440,640,'양쪽 앞구개활 · 차가운 도구 → 감각 · 반응 촉진','#c58cff'),e11BChip(L,720,440,500,'근력 강화 ✕ · 장기 효과 근거 제한','#ff9a8a')];},
+ draw(t,p){const a=p.scenes[0],Ls=a.L,i=e11BLi(a,t),f=i<0?0:e11BF(t,Ls[i]);
+  const mode=i<3?0:i===3?1:2;const fin=j=>j===0?1:ramp(t,Ls[j===1?3:4].t0,Ls[j===1?3:4].t0+.5);
+  e11BV(this.gU,mode===0?1:1-fin(1));e11BV(this.gC,mode===1?fin(1):0);e11BV(this.gT,mode===2?fin(2):0);e11BV(this.gN,mode<2?1:1-fin(2));e11BV(this.gR,mode===2?fin(2):0);
+  this.A.T.textContent=['Shaker(샤케어) · 누워서 고개 들기','CTAR(저항성 턱 당기기) · 앉아서','온도촉각 자극 · 입 안 정면'][mode];this.B.T.textContent=mode<2?'목 안 · 설골상근':'삼킴 반응까지 걸리는 시간';
+  let c=0;
+  if(mode===0){c=i<=0?ramp(f,.55,.75):i===1?.5-.5*Math.cos((t-Ls[1].t0)*2.2):(f<.5?1:.5-.5*Math.cos((t-Ls[2].t0)*3.2));}
+  else if(mode===1){c=.5-.5*Math.cos((t-Ls[3].t0)*2.2);}
+  this.hd.setAttribute('transform','rotate('+(40*(mode===0?c:0)).toFixed(1)+' 206 338)');
+  const hc=mode===0?c:0,ex=206+(162-206)*Math.cos(40*hc*Math.PI/180)-(320-338)*Math.sin(40*hc*Math.PI/180),ey=338+(162-206)*Math.sin(40*hc*Math.PI/180)+(320-338)*Math.cos(40*hc*Math.PI/180);
+  this.gaze.setAttribute('d',hc>.6?'M'+ex.toFixed(1)+' '+ey.toFixed(1)+' L536 300':'');
+  this.hd2.setAttribute('transform','rotate('+(16*(mode===1?c:0)).toFixed(1)+' 292 196)');this.ball.setAttribute('ry',(15-5*(mode===1?c:0)).toFixed(1));
+  if(mode<2){e11Air(this.PN,.3,c,0);e11Tongue(this.PN,1);const hx=546-6*c,hy=390-14*c;this.mus.setAttribute('d','M372 352 Q460 '+(372-6*c).toFixed(1)+' '+hx.toFixed(1)+' '+(hy-2).toFixed(1));
+   this.mus.setAttribute('stroke-width',(7+5*c).toFixed(1));e11BV(this.mus,.5+.5*c);e11BV(this.nArr,c>.3?1:.2);e11BV(this.uR,c>.4?1:.25);e11BV(this.uT,c>.4?1:.3);}
+  const cv=i===1?1:i===2?.55:0;this.chain.forEach((e,j)=>op(e,cv*(i===1?ramp(t,Ls[1].t0+j*(Ls[1].t1-Ls[1].t0)/3,Ls[1].t0+j*(Ls[1].t1-Ls[1].t0)/3+.4):1)));this.arrs.forEach((e,j)=>op(e,cv*(i===1?ramp(t,Ls[1].t0+(j+1)*(Ls[1].t1-Ls[1].t0)/3-.3,Ls[1].t0+(j+1)*(Ls[1].t1-Ls[1].t0)/3):1)));
+  this.rep.forEach((e,j)=>op(e,i===2?ramp(t,Ls[2].t0+[0,.45,.8][j]*(Ls[2].t1-Ls[2].t0),Ls[2].t0+[0,.45,.8][j]*(Ls[2].t1-Ls[2].t0)+.4):0));
+  op(this.ctC,mode===1?fin(1):0);this.thC.forEach((e,j)=>op(e,mode===2?ramp(t,Ls[4].t0+j*(Ls[4].t1-Ls[4].t0)*.55,Ls[4].t0+j*(Ls[4].t1-Ls[4].t0)*.55+.4):0));
+  if(mode===2){const q=e11BF(t,Ls[4]),side=q<.45?0:1,u=side?ramp(q,.45,.8):ramp(q,.05,.4);
+   const x=side?lerp(338,418,u):lerp(302,222,u),y=lerp(186,290,u)-(side?(1-Math.abs(2*u-1))*0:0);const bx=side?560:560,by=392;
+   this.tLine.setAttribute('d','M'+bx+' '+by+' L'+x.toFixed(1)+' '+y.toFixed(1));this.tTip.setAttribute('cx',x.toFixed(1));this.tTip.setAttribute('cy',y.toFixed(1));this.tSn.setAttribute('x',(x+18).toFixed(1));this.tSn.setAttribute('y',(y-8).toFixed(1));
+   this.arL.setAttribute('stroke',!side&&u>0&&u<1?'#bfe6ff':'#f0a8a8');this.arR.setAttribute('stroke',side&&u>0&&u<1?'#bfe6ff':'#f0a8a8');
+   const w=ramp(q,.25,.6);this.r1.setAttribute('width',(330*w).toFixed(1));this.r2.setAttribute('width',(190*ramp(q,.45,.8)).toFixed(1));this.r1T.setAttribute('x',(770+330*w).toFixed(1));this.r2T.setAttribute('x',(770+190*ramp(q,.45,.8)).toFixed(1));}}});
+
 page({id:'s3-8',label:'3-8',title:'문제에서 치료 고르기',scenes:[{name:'문제와 전략 연결',pre:1,post:1,lines:[
  '삼킴 전 흡인 위험과 성대 폐쇄 저하는 성문위 삼킴, 후두 상승이나 UES(상부식도괄약근) 개방 저하는 멘델슨이나 Shaker(샤케어)와 연결됩니다.',
  '혀 기저부 후퇴 저하에는 노력 삼킴, 편측 약화에는 돌리기와 기울이기를 구분해 연결합니다. 필요하면 풍선 확장, 보툴리눔 톡신, 근절개술 같은 의료적 중재가 고려됩니다.',
