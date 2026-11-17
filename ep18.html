@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>말실행증 2편 · 치료 · 아동기 말실행증</title>
+<style>*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#04070d;color:#eef3fb;font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif;overflow:hidden}
+#wrap{position:fixed;inset:0;display:flex;flex-direction:column}
+#vp{flex:1;position:relative;overflow:hidden}
+#stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center;overflow:hidden;
+ background:radial-gradient(ellipse at 50% 38%,#17263f 0%,#0b1324 58%,#060a13 100%);cursor:pointer;user-select:none}
+#gl{position:absolute;left:0;top:0;width:1280px;height:720px}
+#layers{position:absolute;inset:0}
+.page{position:absolute;inset:0;pointer-events:none}
+.ov{position:absolute;opacity:0;pointer-events:none}
+.abs{position:absolute}
+#tags{position:absolute;inset:0;pointer-events:none}
+#lead{position:absolute;inset:0;width:1280px;height:720px}
+.t3{position:absolute;font-size:23px;font-weight:700;white-space:nowrap;padding:4px 12px;border-radius:8px;background:rgba(6,12,24,.82);border:1px solid #4a6a96;transform:translate(0,-50%)}
+.t3.l{transform:translate(-100%,-50%)}
+.t3.blue{color:#7cc3ff;border-color:#3d8fe0}.t3.red{color:#ff8a7a;border-color:#e0574a}.t3.yel{color:#ffd54a;border-color:#c79f2c}
+.t3.grn{color:#7fe8c4;border-color:#34b08a}.t3.org{color:#ffc27a;border-color:#d8892e}.t3.pur{color:#d8b4ff;border-color:#9a6ad6}
+#tag{left:28px;top:22px;font-size:20px;color:#a9bcd6;letter-spacing:.02em;z-index:5}
+#tag b{color:#fff;font-weight:700}
+#title{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(6,10,19,.72);z-index:8}
+#title .ep{font-size:26px;color:#8fc4ff;letter-spacing:.12em}
+#title .nm{font-size:64px;font-weight:800;margin-top:14px}
+#sub{position:absolute;left:40px;right:40px;bottom:30px;text-align:center;font-size:27px;line-height:1.45;font-weight:600;pointer-events:none;white-space:nowrap;transition:bottom .25s;
+ text-shadow:0 2px 6px #000,0 0 2px #000;z-index:6}
+#sub span{background:rgba(4,8,16,.66);padding:6px 16px;border-radius:10px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#chip{left:50%;top:70px;transform:translateX(-50%);font-size:26px;font-weight:700;padding:10px 26px;border-radius:40px;
+ background:rgba(20,34,58,.9);border:1px solid #34507a;white-space:nowrap;z-index:4}
+.card{position:absolute;padding:24px 28px;border-radius:18px;background:rgba(12,22,40,.9);border:2px solid #355a8c}
+.card h3{margin:0 0 10px;font-size:32px}
+.card .big{font-size:27px;font-weight:700;margin-bottom:8px}
+.card p{margin:0;font-size:23px;line-height:1.5;color:#c9d6ea}
+.card ul{margin:6px 0 0;padding-left:24px;font-size:23px;line-height:1.55;color:#dbe5f3}
+.lbl{font-family:inherit}
+svg text{font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+.hl{filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 10px rgba(255,255,255,.6))}
+/* 1-1 */
+.node{position:absolute;transform:translate(-50%,-50%);text-align:center;border-radius:16px;padding:16px 20px;background:rgba(12,22,40,.92);border:2px solid #3b5679}
+.node h4{margin:0;font-size:30px}
+.node .d{font-size:22px;color:#c9d6ea;line-height:1.5;margin-top:8px}
+.node.on{box-shadow:0 0 0 3px rgba(255,255,255,.18),0 0 28px rgba(110,180,255,.35)}
+.pill{display:inline-block;margin:4px 4px 0;padding:3px 12px;border-radius:20px;font-size:21px;font-weight:700}
+.pill.s{background:#4a1d1d;color:#ffb2a6}.pill.p{background:#123a33;color:#9ff0d6}
+.col{position:absolute;top:56px;width:540px;height:456px;border-radius:20px;padding:22px 26px;background:rgba(12,20,36,.93)}
+.col h3{margin:0;font-size:34px}.col .k{font-size:22px;color:#c9d6ea;margin-top:4px}
+.row{display:flex;align-items:center;height:82px;border-top:1px solid #24344f;opacity:0}
+.row:first-of-type{margin-top:14px}
+.row svg{width:96px;height:80px;flex:none}
+.row .lab{width:110px;font-size:24px;color:#aab9d0;margin-left:12px}
+.row .val{font-size:28px;font-weight:800}
+/* quiz */
+.quiz{position:absolute;left:110px;right:110px;top:70px;bottom:40px;border-radius:22px;background:rgba(10,18,34,.94);border:2px solid #34507a;padding:30px 40px}
+.quiz .qn{font-size:24px;color:#8fc4ff;font-weight:700}
+.quiz .qt{font-size:28px;font-weight:700;line-height:1.45;margin:10px 0 18px}
+.quiz .op{font-size:25px;line-height:1.3;padding:7px 14px;border-radius:12px;margin:6px 0;border:2px solid transparent}
+.quiz .op.ok{background:rgba(40,140,100,.28);border-color:#3fcf98;color:#c9ffe9;font-weight:800}
+.quiz .ex{margin-top:12px;font-size:22px;line-height:1.5;color:#ffe08a;padding:12px 18px;border-radius:12px;background:rgba(60,48,10,.55)}
+.quiz .fig{position:absolute;right:40px;top:110px;width:400px;height:330px}
+/* menu */
+#menu{position:absolute;right:16px;bottom:96px;width:400px;max-height:70vh;overflow:auto;border-radius:14px;background:rgba(20,22,28,.96);border:1px solid #3a4150;padding:8px;display:none;z-index:40;cursor:default;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+#menu div{font-size:16px;padding:10px 14px;border-radius:10px;cursor:pointer;color:#eef3fb}
+#menu div:hover{background:#2c3342}
+#menu div b{color:#8fc4ff;margin-right:8px}
+#bigplay{inset:0;display:flex;align-items:center;justify-content:center;opacity:1;z-index:9}
+#bigplay div{width:120px;height:120px;border-radius:50%;background:rgba(10,20,40,.7);border:3px solid #9cc7ff;display:flex;align-items:center;justify-content:center}
+#ctl{position:absolute;left:0;right:0;bottom:0;z-index:30;padding:40px 16px 12px;background:linear-gradient(to bottom,rgba(0,0,0,0),rgba(0,0,0,.72));transition:opacity .25s;font-family:inherit}
+#ctl.hide{opacity:0;pointer-events:none}
+#vp.nocur{cursor:none}
+#prog{height:18px;position:relative;cursor:pointer;touch-action:none;margin:0 6px 6px}
+#track{position:absolute;left:0;right:0;top:7px;height:4px;border-radius:2px;background:rgba(255,255,255,.28);transition:height .12s,top .12s}
+#fill{position:absolute;left:0;top:7px;height:4px;border-radius:2px;background:#5aa9ff;transition:height .12s,top .12s}
+#prog:hover #track,#prog:hover #fill{top:6px;height:6px}
+#knob{position:absolute;top:2px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#5aa9ff;transform:scale(0);transition:transform .12s}
+#prog:hover #knob,#ctl.drag #knob{transform:scale(1)}
+.tick{position:absolute;top:7px;width:2px;height:4px;background:rgba(0,0,0,.55)}
+.tick.pg{background:rgba(255,255,255,.85);width:3px;top:4px;height:10px;border-radius:1px}
+.crow{display:flex;align-items:center;gap:10px}
+.crow .sp{flex:1}
+.grp{display:flex;align-items:center;background:rgba(30,32,38,.72);border-radius:26px;padding:3px;gap:2px}
+.pill{background:rgba(30,32,38,.72);border-radius:22px;padding:0 16px;height:42px;display:flex;align-items:center;font-size:15px;font-weight:600;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums}
+#scn{color:#d6e2f2;font-weight:500;max-width:340px;overflow:hidden;text-overflow:ellipsis}
+#ctl button{border:0;background:transparent;color:#fff;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;border-radius:22px}
+#ctl button:hover{background:rgba(255,255,255,.14)}
+#ctl button.ic{width:44px;height:40px}
+#ctl button.tx{height:40px;padding:0 13px;gap:6px;font-size:15px;font-weight:700}
+#flash{top:50%;transform:translateY(-50%);font-size:34px;font-weight:800;padding:14px 22px;border-radius:40px;background:rgba(0,0,0,.55);z-index:10}
+
+#ctl button svg,#ctl button span{pointer-events:none}
+</style>
+</head>
+<body>
+<div id="wrap">
+ <div id="vp">
+  <div id="stage">
+   <canvas id="gl" width="1280" height="720"></canvas>
+   <div id="layers"></div>
+   <div id="tags"><svg id="lead" viewBox="0 0 1280 720"></svg></div>
+   <div id="tag" class="ov"></div>
+   <div id="chip" class="ov"></div>
+   <div id="sub"></div>
+   <div id="title" class="ov"><div class="ep">말실행증 2편 · 치료 · 아동기 말실행증</div><div class="nm" id="titleNm"></div></div>
+   <div id="bigplay" class="ov"><div><svg width="54" height="54" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#cfe4ff"/></svg></div></div>
+   <div id="nextEp" style="position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;gap:18px;background:rgba(6,10,19,.8);z-index:12"><div style="font-size:30px;font-weight:800">말실행증 2편 끝</div><a href="index.html" style="font-size:26px;font-weight:800;color:#fff;background:#4a6ae0;padding:14px 30px;border-radius:30px;text-decoration:none">목록으로 ▶</a></div>
+   <div id="flash" class="ov"></div>
+  </div>
+ </div>
+ <div id="ctl">
+  <div id="prog"><div id="track"></div><div id="ticks"></div><div id="fill"></div><div id="knob"></div></div>
+  <div class="crow">
+   <div class="grp"><button id="bplay" class="ic" title="재생/일시정지 (Space·K)"></button><button id="bback" class="ic" title="10초 뒤로 (← · J)"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 5V2L7 6l5 4V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z" fill="#fff"/><text x="12" y="16.2" text-anchor="middle" font-size="7" font-weight="700" fill="#fff" font-family="sans-serif">10</text></svg></button><button id="bfwd" class="ic" title="10초 앞으로 (→ · L)"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 5V2l5 4-5 4V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z" fill="#fff"/><text x="12" y="16.2" text-anchor="middle" font-size="7" font-weight="700" fill="#fff" font-family="sans-serif">10</text></svg></button></div>
+   <div class="pill" id="time">0:00 / 0:00</div>
+   <div class="pill" id="scn"></div>
+   <div class="sp"></div>
+   <div class="grp"><button id="bspd" class="tx" title="재생 속도 (&lt; &gt;)">1.0×</button><button id="bmenu" class="tx" title="목차"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 6h2v2H4zm4 0h12v2H8zM4 11h2v2H4zm4 0h12v2H8zM4 16h2v2H4zm4 0h12v2H8z" fill="#fff"/></svg><span>목차</span></button><button id="bhome" class="tx" title="목록 (Esc)"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4zm9 0h7v7h-7z" fill="#fff"/></svg><span>목록</span></button><button id="bfull" class="ic" title="전체화면 (F)"><svg id="icoFull" viewBox="0 0 24 24" width="24" height="24"><path d="M4 9V4h5v2H6v3zm11-5h5v5h-2V6h-3zM4 15h2v3h3v2H4zm14 0h2v5h-5v-2h3z" fill="#fff"/></svg></button></div>
+  </div>
+ </div>
+ <div id="menu"></div>
+</div>
+</div>
+<svg id="measure" width="0" height="0" style="position:absolute;left:-9999px"></svg>
+<script src="lib/three.min.js"></script>
+<script>window.EP={name:'말실행증 2편',sub:'치료 원칙 · 로젠벡 8단계 · PROMPT · 아동기 말실행증',next:'index.html'};</script>
+<script>"use strict";
+window.EP=window.EP||{name:'해부 1편',sub:'뇌의 구조'};
+/* ───────── 공용 도구 ───────── */
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const sm=x=>{x=cl(x);return x*x*(3-2*x)};
+const ramp=(t,a,b)=>sm((t-a)/(b-a));
+const win=(t,a,b,f=0.5)=>Math.min(ramp(t,a,a+f),1-ramp(t,b-f,b));
+const lerp=(a,b,k)=>a+(b-a)*k;
+const op=(e,v)=>{if(e)e.style.opacity=(+v).toFixed(3);};
+const NS='http://www.w3.org/2000/svg';
+function sv(tag,attrs,parent){const e=document.createElementNS(NS,tag);if(attrs)for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function hdiv(cls,html,parent,style){const e=document.createElement('div');if(cls)e.className=cls;if(html!=null)e.innerHTML=html;if(style)e.style.cssText=style;if(parent)parent.appendChild(e);return e;}
+function smoothPath(pts,closed){const n=pts.length;let d=`M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`;const P=i=>closed?pts[(i+n)%n]:pts[cl(i,0,n-1)];
+ const m=closed?n:n-1;for(let i=0;i<m;i++){const p0=P(i-1),p1=P(i),p2=P(i+1),p3=P(i+2);
+  d+=` C${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)},${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)} ${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)},${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;}
+ return d+(closed?'Z':'');}
+/* 매끈한 윤곽선을 이랑처럼 물결치게 */
+const WAVYC={};
+function wavy(d,amp,waves,N=520){const _k=d+'|'+amp+'|'+waves+'|'+N;if(WAVYC[_k])return WAVYC[_k];return WAVYC[_k]=_wavy(d,amp,waves,N);}
+function _wavy(d,amp,waves,N){const p=sv('path',{d},$('measure'));const L=p.getTotalLength();const P=[];for(let i=0;i<N;i++)P.push(p.getPointAtLength(L*i/N));
+ let s='';for(let i=0;i<N;i++){const a=P[(i-1+N)%N],b=P[(i+1)%N];let nx=b.y-a.y,ny=-(b.x-a.x);const m=Math.hypot(nx,ny)||1;nx/=m;ny/=m;
+  const w=amp*(Math.sin(i/N*2*Math.PI*waves)+0.25*Math.sin(i/N*2*Math.PI*waves*1.7+1.7));s+=(i?'L':'M')+(P[i].x+nx*w).toFixed(1)+','+(P[i].y+ny*w).toFixed(1);}
+ p.remove();return s+'Z';}
+/* 경로를 따라 자라는 선 */
+function grow(path,p){const L=path.__L||(path.__L=path.getTotalLength());path.style.strokeDasharray=L;path.style.strokeDashoffset=L*(1-cl(p));path.style.opacity=p>0?1:0;}
+function ptOn(path,u){const L=path.__L||(path.__L=path.getTotalLength());return path.getPointAtLength(L*cl(u));}
+
+/* ───────── 페이지·타임라인 ───────── */
+const PAGES=[];const ALL=[];let TOTAL=0;
+const DUR={};   // 실제 음성 길이(초). 음성이 있는 줄만 기록
+const est=tx=>{const n=tx.replace(/[\s,.?!·~()]/g,'').length;return Math.max(1.6,n*0.172+0.3);};
+function page(def){PAGES.push(def);return def;}
+function buildTimeline(){let T=0;
+ for(const p of PAGES){p.t0=T;let n=0;const first=p===PAGES[0];
+  for(const s of p.scenes){s.t0=T;T+=(s===p.scenes[0]&&!first)?Math.min(s.pre||0,0.9):(s.pre||0);s.L=[];
+   for(const raw of s.lines||[]){const o=typeof raw==='string'?{tx:raw}:raw;n++;
+    const id=p.id+'_'+String(n).padStart(2,'0');const mute=!!(o.mute||p.mute);
+    const d=o.d||(DUR[id]!=null?DUR[id]:est(o.tx));
+    const l={id,tx:o.tx,t0:T,t1:T+d,mute,nosub:!!o.nosub,has:!mute&&DUR[id]!=null,src:'audio/'+id+'.mp3'};
+    s.L.push(l);ALL.push(l);T+=d+(o.gap!=null?o.gap:0.4);}
+   T+=(s===p.scenes[p.scenes.length-1]&&p!==PAGES[PAGES.length-1])?Math.min(s.post||0,1.2):(s.post||0);s.t1=T;}
+  p.t1=T;}
+ TOTAL=T;}
+
+/* ───────── 화면 공용: 3D 이름표, 칩 ───────── */
+const tagPool={};let tagFrame=0;
+function tag3(key,obj,lp,text,off,cls,v){if(v<=0)return;let d=tagPool[key];
+ if(!d){d=tagPool[key]={el:hdiv('t3',''),ln:sv('line',{stroke:'#cfe0f5','stroke-width':2}),dot:sv('circle',{r:5,fill:'#fff'})};$('tags').appendChild(d.el);$('lead').appendChild(d.ln);$('lead').appendChild(d.dot);}
+ d.used=tagFrame;d.el.className='t3 '+(cls||'')+(off[0]<0?' l':'');if(d.el.textContent!==text)d.el.textContent=text;
+ if(!lp)return;const w=W.tmp.copy(lp);if(d.mf!==tagFrame){obj.updateMatrixWorld(true);W.cam.updateMatrixWorld();d.mf=tagFrame;}obj.localToWorld(w);w.project(W.cam);
+ const x=(w.x+1)*640,y=(1-w.y)*360,lx=x+off[0],ly=y+off[1];
+ d.el.style.left=lx+'px';d.el.style.top=ly+'px';d.ln.setAttribute('x1',x);d.ln.setAttribute('y1',y);d.ln.setAttribute('x2',lx);d.ln.setAttribute('y2',ly);d.dot.setAttribute('cx',x);d.dot.setAttribute('cy',y);
+ op(d.el,v);op(d.ln,v);op(d.dot,v);}
+function endTags(){for(const k in tagPool){const d=tagPool[k];if(d.used!==tagFrame){op(d.el,0);op(d.ln,0);op(d.dot,0);}}}
+let chipNow=null;
+function chip(html,v){if(v>0)chipNow={html,v};}
+
+
+/* 자막: 한 줄(최대 폭)에 맞게 쉼표·마침표 기준으로 나누기 */
+const SUBW=1150,subCache={};let subCtx=null;
+function subW(s){if(!subCtx){subCtx=document.createElement('canvas').getContext('2d');subCtx.font='600 27px "Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif';}return subCtx.measureText(s).width+36;}
+function subChunks(tx){if(subCache[tx])return subCache[tx];const out=[];const push=s=>{s=s.trim();if(s)out.push(s);};
+ const sents=tx.match(/[^.?!]+[.?!]+\s*|[^.?!]+$/g)||[tx];
+ for(const sen of sents){if(subW(sen.trim())<=SUBW){push(sen);continue;}
+  const cls=sen.match(/[^,]+,?\s*/g)||[sen];let cur='';
+  for(const c of cls){const cand=cur+c;if(subW(cand.trim())<=SUBW){cur=cand;continue;}
+   push(cur);cur='';if(subW(c.trim())<=SUBW){cur=c;continue;}
+   let w='';for(const word of c.trim().split(' ')){const cw=w?w+' '+word:word;if(subW(cw)<=SUBW)w=cw;else{push(w);w=word;}}cur=w+' ';}
+  push(cur);}
+ return subCache[tx]=out.length?out:[tx];}
+/* ───────── 프레임 ───────── */
+const FX={gl:0};
+function frame(t){
+ tagFrame++;chipNow=null;FX.gl=0;W.reset();
+ const cur=PAGES.find(p=>t>=p.t0&&t<p.t1)||PAGES[PAGES.length-1];if(typeof ensureInit==='function')ensureInit(cur);
+ const last=PAGES[PAGES.length-1];
+ for(const p of PAGES){if(p!==cur){if(p.layer.style.display!=='none')p.layer.style.display='none';continue;}
+  p.layer.style.display='';op(p.layer,ramp(t,p.t0-0.01,p.t0+0.5)*(p===last?1:1-ramp(t,p.t1-0.3,p.t1)));
+  p.draw(t,p);}
+ // 3D
+ W.cv.style.opacity=FX.gl.toFixed(3);if(FX.gl>0.001)W.R.render(W.scene,W.cam);
+ endTags();
+ // 칩
+ const c=$('chip');const ch=chipNow?chipNow.html:'';if(c.dataset.v!==ch){c.dataset.v=ch;c.innerHTML=ch;}op(c,chipNow?chipNow.v:0);
+ // 제목 카드
+ const P0=PAGES[0];const tv=cur===P0?1-ramp(t,P0.t0+2.6,P0.t0+3.3):0;
+ if($('titleNm').dataset.v!==P0.id){$('titleNm').dataset.v=P0.id;$('titleNm').textContent=(P0.label||P0.id)+' '+P0.title;}
+ op($('title'),tv);
+ // 코너 표시
+ const sc=cur.scenes.find(s=>t>=s.t0&&t<s.t1)||cur.scenes[cur.scenes.length-1];
+ const tg=`${EP.name} · <b>${cur.label||cur.id} ${cur.title}</b> · ${sc.name}`;if($('tag').dataset.v!==tg){$('tag').dataset.v=tg;$('tag').innerHTML=tg;}
+ op($('tag'),cur===P0?ramp(t,P0.t0+2.6,P0.t0+3.2):1);$('scn').textContent=(cur.label||cur.id)+' · '+sc.name;
+ // 자막
+ let line=null;for(const l of ALL)if(!l.nosub&&t>=l.t0&&t<l.t1+0.25)line=l;
+ let want='';if(line){const ch=subChunks(line.tx);const tot=ch.reduce((a,c)=>a+c.length,0);let acc=0;want=ch[ch.length-1];
+  for(const c of ch){acc+=c.length;if(t<line.t0+(line.t1-line.t0)*acc/tot){want=c;break;}}}
+ const sub=$('sub');if(sub.dataset.v!==want){sub.dataset.v=want;sub.innerHTML=want?`<span>${want}</span>`:'';}
+}
+
+/* ───────── 장면 시간 도우미 ───────── */
+// 페이지 안에서 장면 i, 줄 j의 시작/끝
+const LS=(p,i,j)=>p.scenes[i].L[j].t0, LE=(p,i,j)=>p.scenes[i].L[j].t1;
+const ST=(p,i)=>p.scenes[i].t0, SE=(p,i)=>p.scenes[i].t1;
+// 줄 j 동안 k번째 하위 단계(0..n-1)를 균등 분할
+const sub_=(p,i,j,k,n)=>{const a=LS(p,i,j),b=LE(p,i,j);return a+(b-a)*k/n;};
+</script>
+<script>"use strict";
+/* 실제 음성 길이(초) */
+Object.assign(DUR,{"as2-1_01":7.2,"as2-1_02":11.12,"as2-1_03":5.6,"as2-2_01":7.44,"as2-2_02":7.12,"as2-2_03":8.56,"as2-3_01":12,"as2-3_02":13.2,"as2-3_03":6.24,"as2-4_01":10.8,"as2-4_02":8.32,"as2-4_03":7.28,"as2-4_04":9.12,"as2-5_01":8.8,"as2-5_02":14.16,"as2-5_03":14.72,"as2-6_01":6.16,"as2-6_02":16.4,"as2-6_03":16.72,"as2-7_01":11.12,"as2-7_02":10.24,"as2-7_03":9.92,"as2-8_01":9.6,"as2-8_02":13.28,"as2-8_03":10.32,"as2-8_04":11.28});
+</script>
+<script>"use strict";
+/* ───────── 3D 공용 세계 ───────── */
+const W=(()=>{
+const cv=$('gl');
+const R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});R.setSize(1280,720,false);
+const scene=new THREE.Scene();
+const cam=new THREE.PerspectiveCamera(38,1280/720,0.05,100);
+scene.add(new THREE.AmbientLight(0xffffff,0.55));
+const dl=new THREE.DirectionalLight(0xffffff,0.95);dl.position.set(3,5,6);scene.add(dl);
+const dl2=new THREE.DirectionalLight(0x9fc0ff,0.45);dl2.position.set(-4,2,-5);scene.add(dl2);
+const dl3=new THREE.DirectionalLight(0xffffff,0.35);dl3.position.set(5,1,-3);scene.add(dl3);
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+const glowTex=(()=>{const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d');const g=x.createRadialGradient(32,32,0,32,32,32);
+ g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(0.3,'rgba(255,255,255,.6)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(0,0,64,64);return new THREE.CanvasTexture(c);})();
+function capsule(a,b,r,mat,parent){const d=b.clone().sub(a);const g=new THREE.CapsuleGeometry(r,d.length(),8,24);const m=new THREE.Mesh(g,mat);
+ m.position.copy(a).add(b).multiplyScalar(0.5);m.quaternion.setFromUnitVectors(V(0,1,0),d.normalize());parent.add(m);return m;}
+function tube(pts,r,mat,parent,seg=64,rad=8){const c=new THREE.CatmullRomCurve3(pts);const g=new THREE.TubeGeometry(c,seg,r,rad);const m=new THREE.Mesh(g,mat);parent.add(m);
+ return {c,g,m,seg,rad,grow(p){g.setDrawRange(0,Math.floor(cl(p)*seg)*rad*6);}};}
+function sprites(n,col,parent,size=0.34){const a=[];for(let i=0;i<n;i++){const s=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:col,blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false}));s.scale.set(size,size,1);s.renderOrder=6;parent.add(s);a.push(s);}return a;}
+const shellMat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,
+ uniforms:{c:{value:new THREE.Color(0x9cc4ec)},op:{value:1}},
+ vertexShader:'varying vec3 vN;varying vec3 vV;void main(){vec4 mv=modelViewMatrix*vec4(position,1.);vN=normalize(normalMatrix*normal);vV=normalize(-mv.xyz);gl_Position=projectionMatrix*mv;}',
+ fragmentShader:'uniform vec3 c;uniform float op;varying vec3 vN;varying vec3 vV;void main(){float f=pow(1.0-abs(dot(normalize(vN),normalize(vV))),2.4);gl_FragColor=vec4(c,(0.025+0.5*f)*op);}'});
+
+/* ── 1) 전신 (1-1) ── */
+const body=new THREE.Group();scene.add(body);
+{const head=new THREE.Mesh(new THREE.SphereGeometry(0.5,40,30),shellMat);head.scale.set(0.86,1.08,0.98);head.position.set(0,3.27,0.02);body.add(head);
+ capsule(V(0,2.62,0),V(0,2.95,0),0.2,shellMat,body);
+ const prof=[[0.001,0.3],[0.5,0.34],[0.66,0.55],[0.64,0.85],[0.56,1.2],[0.6,1.6],[0.7,2.0],[0.78,2.3],[0.74,2.5],[0.5,2.66],[0.22,2.74],[0.001,2.76]].map(p=>new THREE.Vector2(p[0],p[1]));
+ const torso=new THREE.Mesh(new THREE.LatheGeometry(prof,48),shellMat);torso.scale.set(1.13,1,0.56);body.add(torso);
+ for(const sx of [1,-1]){
+  capsule(V(sx*0.92,2.42,0),V(sx*1.22,1.36,0.02),0.15,shellMat,body);capsule(V(sx*1.22,1.36,0.02),V(sx*1.44,0.42,0.06),0.12,shellMat,body);
+  capsule(V(sx*1.45,0.36,0.07),V(sx*1.53,-0.02,0.09),0.1,shellMat,body);capsule(V(sx*0.38,0.48,0),V(sx*0.45,-1.18,0.02),0.21,shellMat,body);
+  capsule(V(sx*0.45,-1.18,0.02),V(sx*0.48,-2.66,0.02),0.15,shellMat,body);capsule(V(sx*0.49,-2.8,0.0),V(sx*0.53,-2.86,0.32),0.09,shellMat,body);}}
+const cnsMat=new THREE.MeshStandardMaterial({color:0xd8a7a2,roughness:0.55,metalness:0.0,emissive:0x000000});
+{const bg=new THREE.SphereGeometry(1,96,72);const bp=bg.attributes.position;
+ for(let i=0;i<bp.count;i++){const x=bp.getX(i),y=bp.getY(i),z=bp.getZ(i);
+  let r=1+0.045*Math.sin(x*17+y*3)*Math.sin(y*15+z*4)*Math.sin(z*13+x*2)+0.02*Math.sin(x*31+z*27);
+  if(Math.abs(x)<0.07&&y>-0.2)r-=0.09*(1-Math.abs(x)/0.07);if(y<-0.3)r*=0.95;bp.setXYZ(i,x*r,y*r,z*r);}
+ bg.computeVertexNormals();const brain=new THREE.Mesh(bg,cnsMat);brain.scale.set(0.36,0.3,0.43);brain.position.set(0,3.37,-0.02);body.add(brain);
+ const cereb=new THREE.Mesh(new THREE.SphereGeometry(1,40,30),cnsMat);cereb.scale.set(0.22,0.12,0.15);cereb.position.set(0,3.14,-0.27);body.add(cereb);
+ capsule(V(0,3.22,-0.11),V(0,2.96,-0.13),0.065,cnsMat,body);
+ const cc=new THREE.CatmullRomCurve3([V(0,2.98,-0.13),V(0,2.6,-0.17),V(0,1.95,-0.23),V(0,1.25,-0.21),V(0,0.86,-0.18)]);
+ body.add(new THREE.Mesh(new THREE.TubeGeometry(cc,80,0.058,12),cnsMat));}
+const nervMat=new THREE.MeshBasicMaterial({color:0x4aa8ff,transparent:true,opacity:0.9,depthWrite:false});
+const nerves=[];
+function nerve(pts,r,group){const o=tube(pts,r,nervMat,body);o.m.renderOrder=2;o.group=group;nerves.push(o);return o;}
+for(const sx of [1,-1]){
+ nerve([V(0,2.46,-0.18),V(sx*0.45,2.43,-0.1),V(sx*0.93,2.36,0),V(sx*1.22,1.36,0.03),V(sx*1.44,0.42,0.07),V(sx*1.52,0.0,0.1)],0.03,'arm');
+ nerve([V(0,0.9,-0.18),V(sx*0.25,0.62,-0.1),V(sx*0.4,0.3,0),V(sx*0.45,-1.2,0.04),V(sx*0.48,-2.62,0.04),V(sx*0.52,-2.86,0.3)],0.034,'leg');
+ for(const y of [2.1,1.8,1.5,1.2]) nerve([V(0,y,-0.21),V(sx*0.5,y-0.04,-0.2),V(sx*0.8,y-0.1,0.08),V(sx*0.48,y-0.18,0.36)],0.016,'trunk');
+ nerve([V(0,3.02,-0.08),V(sx*0.18,3.08,0.18),V(sx*0.27,3.12,0.38)],0.018,'cran');
+ nerve([V(0,3.0,-0.1),V(sx*0.2,2.96,0.12),V(sx*0.3,2.88,0.36)],0.016,'cran');}
+nerve([V(0.04,2.98,-0.08),V(0.12,2.7,0.1),V(0.14,2.3,0.16),V(0.1,1.7,0.12)],0.018,'cran');
+function sigPath(pts,col){const mat=new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:1,depthWrite:false});const o=tube(pts,0.042,mat,body,120,8);o.m.renderOrder=3;o.mat=mat;o.sp=sprites(4,col,body);return o;}
+const sens=sigPath([V(1.52,0.0,0.1),V(1.44,0.42,0.07),V(1.22,1.36,0.03),V(0.93,2.36,0),V(0.45,2.43,-0.1),V(0.03,2.46,-0.18),V(0,2.8,-0.14),V(0,3.1,-0.07),V(0,3.36,0.02)],0x4fb2ff);
+const motor=sigPath([V(0,3.36,0.02),V(0,3.05,-0.1),V(0,2.3,-0.21),V(0,1.3,-0.21),V(0,0.9,-0.18),V(-0.25,0.62,-0.1),V(-0.4,0.3,0),V(-0.45,-1.2,0.04),V(-0.47,-1.85,0.06)],0xff6a5a);
+function drawSig(o,p,t,speed){o.grow(p);o.mat.opacity=p>0?0.95:0;
+ o.sp.forEach((s,i)=>{if(p<=0){s.visible=false;return;}s.visible=true;const u=p<1?cl(p-i*0.03):((t*speed)+i*0.25)%1;s.position.copy(o.c.getPointAt(u));s.material.opacity=p<1?(i==0?1:0.5):0.95;});}
+
+/* ── 2) 큰 뇌 (1-4, 1-5, 1-8, 1-9) ── */
+const brain=new THREE.Group();scene.add(brain);
+const XS=1.45;
+const yF=Z=>-0.16+(0.62-Z)*0.2;      // 외측고랑 높이
+const zC=Y=>0.22-0.42*Y;              // 중심고랑 위치
+const BASE=new THREE.Color(0xdba7a0);
+const LC={1:new THREE.Color(0x5f9dff),2:new THREE.Color(0x52cf8f),3:new THREE.Color(0xffa94d),4:new THREE.Color(0xbd85ff)};
+function makeHemi(s){
+ const g=new THREE.SphereGeometry(1,170,124);const P=g.attributes.position;const n=P.count;const lobe=new Uint8Array(n);
+ for(let i=0;i<n;i++){const x=P.getX(i),y=P.getY(i),z=P.getZ(i);
+  let X=x*0.56,Y=y*0.66,Z=z*1.08;
+  if(Z<0)X*=1-0.22*Math.pow(-Z/1.08,2);
+  if(Z>0.5)Y*=1-0.15*(Z-0.5)/0.6;
+  if(Y<-0.28)Y=-0.28+(Y+0.28)*0.6;
+  X+=s*0.5;
+  const lf=cl((X*s-0.55)/0.35);
+  if(Y<0.05)Y-=0.15*lf*Math.exp(-Math.pow((Z-0.05)/0.5,2))*cl(-Y/0.3+0.2);
+  const yf=Z>-0.5?yF(Z):yF(-0.5);
+  lobe[i]=Z<-0.66?4:(Y<yf&&Z<0.68)?3:(Z>zC(Y)?1:2);
+  let dep=0;
+  if(Z>-0.5&&Z<0.66)dep+=0.075*lf*Math.exp(-Math.pow((Y-yf)/0.045,2));
+  if(Y>yf+0.02)dep+=0.045*Math.exp(-Math.pow((Z-zC(Y))/0.035,2))*cl((X*s-0.3)/0.3);
+  {const w1=11*Z+2.4*Math.sin(6*Y+1.3)+1.8*Math.sin(9*X+4*Z),w2=12*Y+2.2*Math.sin(5*Z+0.7)+1.6*Math.sin(8*X+3*Y);
+   dep+=0.026*Math.pow(1-Math.abs(Math.sin(w1)),5)+0.022*Math.pow(1-Math.abs(Math.sin(w2)),5)-0.006*Math.sin(w1*0.5+w2);}
+  const vx=X-s*0.5,m=Math.hypot(vx,Y,Z)||1;X-=vx/m*dep;Y-=Y/m*dep;Z-=Z/m*dep;
+  if(X*s<0.02)X=s*0.02;P.setXYZ(i,X,Y,Z);}
+ g.computeVertexNormals();g.setAttribute('color',new THREE.BufferAttribute(new Float32Array(n*3),3));
+ const mat=new THREE.MeshStandardMaterial({vertexColors:true,roughness:0.62,metalness:0,transparent:true});
+ const m=new THREE.Mesh(g,mat);m.scale.x=XS;m.userData={lobe,s,key:''};brain.add(m);return m;}
+const hemi={L:makeHemi(1),R:makeHemi(-1)};   // L = 환자의 왼쪽(+x)
+function colorHemi(m,w,tint,tk){const key=[1,2,3,4].map(k=>(w[k]||0).toFixed(2)).join()+(tint?tint.getHexString()+tk.toFixed(2):'');
+ if(m.userData.key===key)return;m.userData.key=key;const C=m.geometry.attributes.color,lb=m.userData.lobe,c=new THREE.Color();
+ for(let i=0;i<lb.length;i++){c.copy(BASE);const k=w[lb[i]]||0;if(k>0)c.lerp(LC[lb[i]],k);if(tint&&tk>0)c.lerp(tint,tk);C.setXYZ(i,c.r,c.g,c.b);}C.needsUpdate=true;}
+const partMat=c=>new THREE.MeshStandardMaterial({color:c,roughness:0.6,transparent:true});
+const cerebMat=partMat(0xcf9c95),midMat=partMat(0xd2a29c),ponsMat=partMat(0xd2a29c),medMat=partMat(0xd2a29c),cordMat=partMat(0xd2a29c),thalMat=partMat(0xffd54a);
+const cereb=(()=>{const g=new THREE.SphereGeometry(1,90,70);const P=g.attributes.position;
+ for(let i=0;i<P.count;i++){const x=P.getX(i),y=P.getY(i),z=P.getZ(i);const r=1+0.035*Math.sin(y*38+z*6)+(Math.abs(x)<0.12?-0.06:0);P.setXYZ(i,x*r,y*r,z*r);}
+ g.computeVertexNormals();const m=new THREE.Mesh(g,cerebMat);m.scale.set(0.82,0.28,0.42);m.position.set(0,-0.62,-0.72);brain.add(m);return m;})();
+const midb=capsule(V(0,-0.22,-0.2),V(0,-0.46,-0.22),0.14,midMat,brain);
+const pons=new THREE.Mesh(new THREE.SphereGeometry(1,48,36),ponsMat);pons.scale.set(0.2,0.17,0.17);pons.position.set(0,-0.62,-0.13);brain.add(pons);
+const medu=capsule(V(0,-0.74,-0.2),V(0,-1.0,-0.26),0.1,medMat,brain);
+const cord=capsule(V(0,-1.02,-0.26),V(0,-1.55,-0.3),0.075,cordMat,brain);
+const thal=new THREE.Group();brain.add(thal);
+for(const sx of [1,-1]){const m=new THREE.Mesh(new THREE.SphereGeometry(1,32,24),thalMat);m.scale.set(0.12,0.11,0.2);m.position.set(sx*0.13,-0.04,-0.1);thal.add(m);}
+const hypo=new THREE.Mesh(new THREE.SphereGeometry(1,24,18),partMat(0xff9f6b));hypo.scale.set(0.09,0.06,0.1);hypo.position.set(0,-0.17,0.05);thal.add(hypo);
+brain.updateMatrixWorld(true);
+/* 표면 위 점 찾기 (바깥에서 광선을 쏴서) */
+const rc=new THREE.Raycaster();
+const surfC={};
+function surf(m,Y,Z,lift=0.012){const s=m.userData.s;const key=s+':'+Y.toFixed(3)+':'+Z.toFixed(3)+':'+lift;if(key in surfC)return surfC[key];rc.set(V(s*3,Y,Z),V(-s,0,0));const h=rc.intersectObject(m);return surfC[key]=h.length?h[0].point.clone().add(V(s*lift,0,0)):null;}
+function surfTop(m,X,Z){rc.set(V(X,3,Z),V(0,-1,0));const h=rc.intersectObject(m);return h.length?h[0].point.clone():null;}
+const lineMat=()=>new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0,depthWrite:false});
+const sulc={};
+for(const k of ['L','R']){const m=hemi[k];
+ const cs=[];for(let Y=0.6;Y>=-0.05;Y-=0.025){const Z=zC(Y);if(Y<yF(Z)+0.03)break;const p=surf(m,Y,Z);if(p)cs.push(p);}
+ const lf=[];for(let Z=0.6;Z>=-0.48;Z-=0.03){const p=surf(m,yF(Z),Z);if(p)lf.push(p);}
+ const mc=lineMat(),ml=lineMat();sulc[k]={cs:tube(cs,0.014,mc,brain,80,6),lf:tube(lf,0.014,ml,brain,80,6),mc,ml};}
+{const pts=[];for(let Z=1.0;Z>=-1.0;Z-=0.05){const p=surfTop(hemi.L,0.04,Z);if(p)pts.push(V(0,p.y+0.01,Z));}const m=lineMat();sulc.long={t:tube(pts,0.016,m,brain,80,6),m};}
+/* 섬유다발 (1-8) */
+const fib={comm:[],assoc:[],proj:[]};
+const commMat=new THREE.MeshBasicMaterial({color:0xffb15c,transparent:true,depthWrite:false});
+const assocMat=new THREE.MeshBasicMaterial({color:0x4fe0b0,transparent:true,depthWrite:false});
+const projMat=new THREE.MeshBasicMaterial({color:0xa6e36b,transparent:true,depthWrite:false});
+for(const z of [-0.55,-0.32,-0.1,0.12,0.34]){const o=tube([V(1.05,0.3,z),V(0.52,0.2,z),V(0,0.13,z),V(-0.52,0.2,z),V(-1.05,0.3,z)],0.022,commMat,brain,60,8);o.m.renderOrder=4;fib.comm.push(o);}
+const WER=V(0.93*XS,-0.17,-0.36),BRO=V(0.9*XS,-0.06,0.56);
+{const o=tube([WER,V(0.88*XS,0.02,-0.46),V(0.82*XS,0.24,-0.28),V(0.8*XS,0.24,0.05),V(0.84*XS,0.12,0.36),BRO],0.035,assocMat,brain,90,10);o.m.renderOrder=4;fib.assoc.push(o);}
+const areaMat=c=>new THREE.MeshBasicMaterial({color:c,transparent:true,depthWrite:false});
+const werM=new THREE.Mesh(new THREE.SphereGeometry(0.1,24,18),areaMat(0xff7a6a));werM.position.copy(WER);werM.scale.set(0.5,1,1.2);brain.add(werM);
+const broM=new THREE.Mesh(new THREE.SphereGeometry(0.1,24,18),areaMat(0x6aaeff));broM.position.copy(BRO);broM.scale.set(0.5,1,1.2);brain.add(broM);
+werM.renderOrder=broM.renderOrder=5;
+const IC=V(0.3,-0.12,0.0);
+for(const tp of [[0.3,0.6,0.45],[0.36,0.65,0.12],[0.36,0.64,-0.2],[0.3,0.57,-0.5],[0.72,0.38,0.32],[0.76,0.44,-0.08],[0.7,0.34,-0.42]]){
+ const T=V(tp[0]*XS,tp[1],tp[2]);const mid=T.clone().lerp(IC,0.5);mid.y+=0.05;const o=tube([T,mid,IC,V(0.1,-0.38,-0.18),V(0.03,-0.85,-0.24)],0.016,projMat,brain,70,6);o.m.renderOrder=4;fib.proj.push(o);}
+
+/* 매 프레임 초기화 */
+function reset(){body.visible=false;brain.visible=false;}
+function brainDefault(){brain.visible=true;brain.rotation.set(0,0,0);
+ for(const k of ['L','R']){hemi[k].visible=true;hemi[k].material.opacity=1;hemi[k].material.depthWrite=true;colorHemi(hemi[k],{},null,0);sulc[k].mc.opacity=0;sulc[k].ml.opacity=0;}
+ sulc.long.m.opacity=0;
+ for(const m of [cerebMat,midMat,ponsMat,medMat,cordMat]){m.color.setHex(m===cerebMat?0xcf9c95:0xd2a29c);m.emissive.setHex(0);m.opacity=1;}
+ thal.visible=false;for(const g of ['comm','assoc','proj'])for(const o of fib[g]){o.m.visible=false;o.grow(0);}werM.visible=broM.visible=false;}
+const ORB={yaw:0,pitch:0};
+const camKeys=(keys,t)=>{let i=0;while(i<keys.length-2&&t>keys[i+1][0])i++;const a=keys[i],b=keys[i+1]||a;const k=sm((t-a[0])/Math.max(0.001,b[0]-a[0]));
+ cam.position.lerpVectors(a[1],b[1],k);const tg=a[2].clone().lerp(b[2],k);
+ if(ORB.yaw||ORB.pitch){const off=cam.position.clone().sub(tg);const sp=new THREE.Spherical().setFromVector3(off);sp.theta+=ORB.yaw;sp.phi=cl(sp.phi-ORB.pitch,0.15,Math.PI-0.15);off.setFromSpherical(sp);cam.position.copy(tg).add(off);}
+ cam.lookAt(tg);};
+const hiPart=(m,col,k)=>{const c=new THREE.Color(m===cerebMat?0xcf9c95:0xd2a29c);c.lerp(new THREE.Color(col),k);m.color.copy(c);m.emissive.setHex(col).multiplyScalar(0.25*k);};
+return {tube,sprites,capsule,partMat,glowTex,ORB,XS,cv,R,scene,cam,V,tmp:new THREE.Vector3(),reset,brainDefault,camKeys,hiPart,
+ body,shellMat,cnsMat,nervMat,nerves,sens,motor,drawSig,
+ brain,hemi,colorHemi,surf,sulc,thal,cereb,midb,pons,medu,cord,cerebMat,midMat,ponsMat,medMat,cordMat,fib,werM,broM,WER,BRO,yF,zC};
+})();
+</script>
+<script>"use strict";
+/* ───────── 해부 그림(SVG) 공용 ───────── */
+/* 이름표: 점 + 지시선 + 글자(여러 줄 가능) */
+function svLab(parent,o){const g=sv('g',{opacity:0},parent);const col=o.col||'#eef3fb';
+ if(o.lx!=null){sv('line',{x1:o.x,y1:o.y,x2:o.lx,y2:o.ly,stroke:o.lc||'#d6e2f2','stroke-width':2},g);sv('circle',{cx:o.x,cy:o.y,r:4.5,fill:'#fff'},g);}
+ const tx=o.lx!=null?o.lx+(o.anchor==='end'?-8:o.anchor==='middle'?0:8):o.x,ty=o.lx!=null?o.ly:o.y;
+ const t=sv('text',{x:tx,y:ty,'text-anchor':o.anchor||'start','dominant-baseline':'middle',fill:col,'font-size':o.size||24,'font-weight':o.w||700,'paint-order':'stroke',stroke:'rgba(6,10,20,.85)','stroke-width':5,'stroke-linejoin':'round'},g);
+ const ls=o.tx.split('\n');ls.forEach((s,i)=>{const sp=sv('tspan',{x:tx,dy:i?(o.size||24)*1.25:-(ls.length-1)*(o.size||24)*0.62},t);sp.textContent=s;if(i&&o.col2)sp.setAttribute('fill',o.col2);if(i)sp.setAttribute('font-size',(o.size||24)*0.88);});
+ return g;}
+const mir=pts=>pts.map(p=>[-p[0],p[1]]);
+
+/* 관상면(앞에서 세로로 자른 면). 600x520 좌표, 가운데 x=300 */
+function coronal(parent,opt={}){
+ const g=sv('g',{},parent);const X=p=>[300+p[0],p[1]];const P={};
+ const half=[[6,40],[70,22],[160,30],[235,75],[278,150],[290,225],[278,268],[250,286],[218,292],[250,300],[275,325],[281,375],[258,425],[210,455],[150,463],[105,442],[80,405],[62,372],[40,354],[14,350]];
+ const outline=half.concat(mir(half).reverse()).map(X);
+ const od=wavy(smoothPath(outline,true),5,34,900);
+ const cid='cc'+Math.random().toString(36).slice(2,7);
+ const defs=sv('defs',{},g);const cp=sv('clipPath',{id:cid},defs);sv('path',{d:od},cp);
+ P.wm=sv('path',{d:od,fill:'#eee6d6'},g);
+ P.ctx=sv('path',{d:od,fill:'none',stroke:'#b49cb2','stroke-width':40,'clip-path':`url(#${cid})`},g);
+ sv('path',{d:od,fill:'none',stroke:'#7d6a83','stroke-width':2},g);
+ sv('line',{x1:300,y1:30,x2:300,y2:163,stroke:'#0b1324','stroke-width':6},g);
+ P.cc=sv('path',{d:'M188,186 Q300,140 412,186',fill:'none',stroke:'#d9cfbb','stroke-width':17,'stroke-linecap':'round'},g);
+ P.ic=sv('path',{d:smoothPath([[392,238],[402,280],[388,322]].map(p=>[p[0],p[1]])),fill:'none',stroke:'#f6f1e6','stroke-width':16,'stroke-linecap':'round',opacity:0.9},g);
+ P.icL=sv('path',{d:smoothPath([[208,238],[198,280],[212,322]]),fill:'none',stroke:'#f6f1e6','stroke-width':16,'stroke-linecap':'round',opacity:0.9},g);
+ const gm='#a48fb4';
+ P.cau=sv('g',{},g);for(const s of [1,-1])sv('ellipse',{cx:300+s*90,cy:214,rx:22,ry:28,fill:gm,stroke:'#76618a','stroke-width':2},P.cau);
+ P.put=sv('g',{},g);for(const s of [1,-1])sv('ellipse',{cx:300+s*156,cy:270,rx:26,ry:54,fill:gm,stroke:'#76618a','stroke-width':2},P.put);
+ P.gp=sv('g',{},g);for(const s of [1,-1])sv('ellipse',{cx:300+s*125,cy:278,rx:15,ry:36,fill:'#c8b7cf',stroke:'#76618a','stroke-width':2},P.gp);
+ P.thal=sv('g',{},g);for(const s of [1,-1])sv('ellipse',{cx:300+s*43,cy:268,rx:36,ry:40,fill:'#b79ac0',stroke:'#76618a','stroke-width':2},P.thal);
+ P.hyp=sv('g',{},g);for(const s of [1,-1])sv('ellipse',{cx:300+s*19,cy:330,rx:18,ry:14,fill:'#c99aa8',stroke:'#8a6175','stroke-width':2},P.hyp);
+ P.hip=sv('g',{},g);for(const s of [1,-1]){sv('path',{d:`M${300+s*96},404 q${s*14},-16 ${s*34},-6 q${s*14},10 ${s*2},20 q${-s*12},8 ${-s*22},0`,fill:'#a48fb4',stroke:'#76618a','stroke-width':2},P.hip);}
+ P.bs=sv('path',{d:smoothPath([[262,344],[338,344],[333,420],[322,520],[278,520],[267,420]],true),fill:'#dccbbb',stroke:'#9c8f73','stroke-width':2},g);
+ P.sn=sv('g',{},g);for(const s of [1,-1])sv('ellipse',{cx:300+s*17,cy:386,rx:14,ry:5.5,fill:'#3a2626',transform:`rotate(${s*28} ${300+s*17} 386)`},P.sn);
+ const vc='#2c5d93';
+ P.vent=sv('g',{},g);
+ for(const s of [1,-1])sv('path',{d:smoothPath([[6,190],[64,184],[84,196],[44,222],[6,226]].map(p=>[300+s*p[0],p[1]]),true),fill:vc},P.vent);
+ sv('rect',{x:296,y:232,width:8,height:88,rx:4,fill:vc},P.vent);
+ for(const s of [1,-1])sv('ellipse',{cx:300+s*126,cy:386,rx:17,ry:5,fill:vc},P.vent);
+ P.ventG=P.vent;return {g,P};}
+
+/* 횡단면(위에서 가로로 자른 면, 앞=위). 440x520 좌표, 가운데 x=220 */
+function axial(parent){const g=sv('g',{},parent);const P={};const X=p=>[220+p[0],p[1]];
+ const half=[[4,30],[70,20],[130,42],[176,98],[196,180],[201,260],[193,342],[170,412],[124,470],[64,498],[4,502]];
+ const od=wavy(smoothPath(half.concat(mir(half).reverse()).map(X),true),4.5,40,900);
+ const cid='ax'+Math.random().toString(36).slice(2,7);const cp=sv('clipPath',{id:cid},sv('defs',{},g));sv('path',{d:od},cp);
+ sv('path',{d:od,fill:'#eee6d6'},g);sv('path',{d:od,fill:'none',stroke:'#b49cb2','stroke-width':36,'clip-path':`url(#${cid})`},g);sv('path',{d:od,fill:'none',stroke:'#7d6a83','stroke-width':2},g);
+ sv('line',{x1:220,y1:24,x2:220,y2:112,stroke:'#0b1324','stroke-width':6},g);sv('line',{x1:220,y1:428,x2:220,y2:508,stroke:'#0b1324','stroke-width':6},g);
+ sv('path',{d:'M186,124 Q220,100 254,124',fill:'none',stroke:'#d9cfbb','stroke-width':13,'stroke-linecap':'round'},g);
+ sv('path',{d:'M184,408 Q220,432 256,408',fill:'none',stroke:'#d9cfbb','stroke-width':13,'stroke-linecap':'round'},g);
+ const gm='#a48fb4';
+ for(const s of [1,-1]){const x=v=>220+s*v;
+  sv('path',{d:`M${x(170)},196 Q${x(182)},250 ${x(172)},306`,fill:'none',stroke:'#b49cb2','stroke-width':12,'stroke-linecap':'round'},g);
+  sv('ellipse',{cx:x(54),cy:170,rx:16,ry:24,fill:gm,stroke:'#76618a','stroke-width':2},g);
+  sv('ellipse',{cx:x(112),cy:248,rx:20,ry:50,fill:gm,stroke:'#76618a','stroke-width':2},g);
+  sv('ellipse',{cx:x(86),cy:254,rx:11,ry:32,fill:'#c8b7cf',stroke:'#76618a','stroke-width':2},g);
+  sv('ellipse',{cx:x(30),cy:285,rx:24,ry:40,fill:'#b79ac0',stroke:'#76618a','stroke-width':2},g);}
+ const vc='#2c5d93';P.vent=sv('g',{},g);
+ for(const s of [1,-1]){const f=pts=>pts.map(p=>[220+s*p[0],p[1]]);
+  sv('path',{d:smoothPath(f([[4,135],[26,128],[42,140],[34,175],[14,196],[4,198]]),true),fill:vc},P.vent);
+  sv('path',{d:smoothPath(f([[58,318],[76,330],[96,372],[98,402],[84,404],[70,370],[52,338]]),true),fill:vc},P.vent);}
+ sv('rect',{x:217,y:240,width:6,height:80,rx:3,fill:vc},P.vent);
+ return {g,P};}
+/* 시상면 뇌실 (옆면 그림 좌표 900x560 위에 겹침) */
+function sagVent(parent){const vc='#2c6fb3',v2='#3d8fe0';const g=sv('g',{},parent);
+ sv('path',{d:smoothPath([[330,238],[380,205],[470,195],[560,205],[625,236],[655,268]]),fill:'none',stroke:vc,'stroke-width':24,'stroke-linecap':'round'},g);
+ sv('path',{d:smoothPath([[650,265],[700,275],[730,272]]),fill:'none',stroke:vc,'stroke-width':16,'stroke-linecap':'round'},g);
+ sv('path',{d:smoothPath([[652,270],[630,320],[565,355],[485,365]]),fill:'none',stroke:vc,'stroke-width':16,'stroke-linecap':'round'},g);
+ sv('path',{d:smoothPath([[432,256],[468,288],[503,302]]),fill:'none',stroke:v2,'stroke-width':18,'stroke-linecap':'round'},g);
+ sv('path',{d:smoothPath([[505,305],[545,350],[565,385]]),fill:'none',stroke:v2,'stroke-width':6},g);
+ sv('path',{d:'M560,385 L618,412 L566,442Z',fill:v2},g);sv('path',{d:'M566,442 L572,545',stroke:v2,'stroke-width':4},g);
+ return g;}
+
+/* 뇌 옆면(왼쪽 반구 바깥면, 앞=왼쪽). 900x560 좌표 */
+const LAT=[[95,290],[115,200],[185,125],[300,72],[440,52],[580,62],[700,115],[785,200],[818,290],[800,360],[740,395],[640,410],[540,440],[430,452],[330,440],[268,400],[258,372],[230,368],[160,365],[110,345]];
+function lateralBrain(parent,opt={}){const g=sv('g',{},parent);const P={};
+ P.cb=sv('g',{},g);sv('ellipse',{cx:690,cy:440,rx:120,ry:62,fill:'#cf9c95',stroke:'#8d5f59','stroke-width':2},P.cb);
+ for(let i=0;i<7;i++)sv('path',{d:`M${590+i*6},${400+i*12} Q690,${392+i*14} ${795-i*5},${410+i*10}`,fill:'none',stroke:'#a66f69','stroke-width':1.6},P.cb);
+ P.bs=sv('path',{d:smoothPath([[470,350],[540,340],[566,392],[580,462],[574,560],[534,560],[528,470],[497,445],[476,402]],true),fill:'#d8b0a6',stroke:'#8d5f59','stroke-width':2},g);
+ const od=wavy(smoothPath(LAT,true),4,44,900);P.od=od;
+ P.br=sv('path',{d:od,fill:opt.fill||'#dba7a0',stroke:'#7d5452','stroke-width':2.5},g);
+ if(opt.gyri!==false){const gy=sv('g',{opacity:0.55},g);
+  const lines=[[[180,170],[240,230],[230,300]],[[260,110],[300,180],[285,250]],[[640,110],[600,170],[640,230]],[[700,170],[670,240],[720,300]],[[600,330],[680,340],[740,360]],[[330,400],[450,395],[560,380]],[[150,250],[200,280],[240,330]]];
+  for(const l of lines)sv('path',{d:smoothPath(l),fill:'none',stroke:'#8d5f59','stroke-width':2},gy);P.gy=gy;}
+ P.cs=sv('path',{d:smoothPath([[505,54],[480,140],[455,220],[425,305]]),fill:'none',stroke:'#5a3634','stroke-width':4,'stroke-linecap':'round'},g);
+ P.lf=sv('path',{d:smoothPath([[262,368],[330,338],[400,320],[520,292],[575,252]]),fill:'none',stroke:'#5a3634','stroke-width':5,'stroke-linecap':'round'},g);
+ return {g,P};}
+</script>
+<script>"use strict";
+const SVGROOT=layer=>sv('svg',{viewBox:'0 0 1280 720',style:'position:absolute;left:0;top:0;width:1280px;height:720px;overflow:visible'},layer);
+const tx_=(par,x,y,t,o={})=>{const e=sv('text',Object.assign({x,y,'text-anchor':'middle',fill:'#eef3fb','font-size':24,'font-weight':700,'paint-order':'stroke',stroke:'rgba(6,10,20,.85)','stroke-width':5,'stroke-linejoin':'round'},o),par);e.textContent=t;return e;};
+const TYPE_COL={s:'#5fb2ff',m:'#ff6f61',x:'#c58cff'};
+/* 뇌 아랫면 (앞=위) 700x560 */
+function brainBottom3(parent){const g=sv('g',{},parent);const P={};
+ const out=[[350,30],[470,44],[560,108],[600,198],[592,268],[560,298],[602,352],[600,420],[560,480],[470,520],[350,536],[230,520],[140,480],[100,420],[98,352],[140,298],[108,268],[100,198],[140,108],[230,44]];
+ sv('path',{d:wavy(smoothPath(out,true),3.5,46,900),fill:'#dba7a0',stroke:'#7d5452','stroke-width':2.5},g);
+ sv('line',{x1:350,y1:34,x2:350,y2:180,stroke:'#5a3634','stroke-width':4},g);
+ for(const s of [1,-1])sv('path',{d:smoothPath([[350+s*90,300],[350+s*175,292],[350+s*230,330],[350+s*215,380]]),fill:'none',stroke:'#a16f69','stroke-width':3},g);
+ const cb=sv('g',{},g);sv('path',{d:smoothPath([[150,440],[250,410],[350,430],[450,410],[550,440],[540,500],[450,530],[350,528],[250,530],[160,500]],true),fill:'#cf9c95',stroke:'#8d5f59','stroke-width':2},cb);
+ for(let i=0;i<5;i++)sv('path',{d:`M${175+i*4},${450+i*16} Q350,${436+i*16} ${525-i*4},${450+i*16}`,fill:'none',stroke:'#a66f69','stroke-width':1.6},cb);
+ P.mid=sv('path',{d:'M300,232 L400,232 L392,276 L308,276Z',fill:'#e2b5ad',stroke:'#8d5f59','stroke-width':2},g);
+ sv('path',{d:'M350,236 L350,272',stroke:'#8d5f59','stroke-width':2},g);
+ P.pons=sv('ellipse',{cx:350,cy:318,rx:74,ry:46,fill:'#e7beb6',stroke:'#8d5f59','stroke-width':2},g);
+ for(let i=0;i<4;i++)sv('path',{d:`M${292+i*2},${300+i*10} Q350,${292+i*10} ${408-i*2},${300+i*10}`,fill:'none',stroke:'#c99b93','stroke-width':1.4},g);
+ P.med=sv('path',{d:'M318,362 L382,362 L372,470 L328,470Z',fill:'#e2b5ad',stroke:'#8d5f59','stroke-width':2},g);
+ for(const s of [1,-1]){sv('ellipse',{cx:350+s*22,cy:400,rx:8,ry:20,fill:'#d6a39b',stroke:'#8d5f59','stroke-width':1.5},g);}
+ sv('line',{x1:350,y1:364,x2:350,y2:468,stroke:'#8d5f59','stroke-width':1.5},g);
+ // I, II 구조
+ for(const s of [1,-1]){sv('path',{d:`M${350+s*20},${86} L${350+s*24},${178}`,stroke:'#f2d7a8','stroke-width':6,'stroke-linecap':'round'},g);sv('ellipse',{cx:350+s*19,cy:84,rx:9,ry:16,fill:'#f2d7a8',stroke:'#a8874c','stroke-width':1.5},g);}
+ for(const s of [1,-1])sv('path',{d:`M${350+s*44},${150} L${350+s*10},${205} M${350+s*10},${205} L${350+s*36},${228}`,stroke:'#f2d7a8','stroke-width':9,'stroke-linecap':'round'},g);
+ // 뇌신경 줄기 (양쪽)
+ const N={I:[[369,80],[392,70]],II:[[394,150],[420,140]],III:[[362,262],[396,246],[420,236]],IV:[[402,266],[440,258],[462,250]],V:[[418,318],[470,306],[500,300]],VI:[[360,364],[372,334],[384,300]],
+  VII:[[414,372],[470,370],[492,368]],VIII:[[416,384],[476,392],[498,396]],IX:[[388,404],[440,414],[468,418]],X:[[389,418],[442,432],[470,440]],XI:[[384,450],[430,466],[456,476]],XII:[[364,412],[392,446],[420,470]]};
+ const T={I:'s',II:'s',III:'m',IV:'m',V:'x',VI:'m',VII:'x',VIII:'s',IX:'x',X:'x',XI:'m',XII:'m'};
+ P.N={};for(const k in N){const gg=sv('g',{opacity:0},g);const pts=N[k];const w=k==='V'?10:k==='II'||k==='I'?0:6;
+  for(const s of [1,-1]){const pp=pts.map(q=>[350+s*(q[0]-350),q[1]]);if(w)sv('path',{d:smoothPath(pp),fill:'none',stroke:TYPE_COL[T[k]],'stroke-width':w,'stroke-linecap':'round'},gg);}
+  if(!w){for(const s of [1,-1]){const q=pts[0];sv('circle',{cx:350+s*(q[0]-350),cy:q[1],r:7,fill:TYPE_COL[T[k]]},gg);}}
+  P.N[k]={g:gg,end:pts[pts.length-1],type:T[k]};}
+ return {g,P,T};}
+
+</script>
+<script>"use strict";
+/* ═════════ 말실행증 2편 (ep18) 공용 도우미 (ep17에서 복사) ═════════ */
+const ASC={red:'#ff8a7a',blue:'#76c7ff',gold:'#ffe08a',mint:'#76e8be',pur:'#c58cff',org:'#ffb36b',ink:'#eef3fb',dim:'#9fb0c8',ok:'#7fe8b6',bad:'#ff7e70'};
+const AS2L={"as2-1":["치료 목표는 말의 명료도와 자연스러움을 높이고, 기능적 의사소통과 사회 참여를 최대로 하는 것입니다.","실어증이나 마비말장애가 함께 있으면 의사소통을 가장 크게 막는 문제부터 다룹니다. 예후는 안정된 경도가 좋고, 퇴행성이나 심도는 회복이 어렵습니다.","치료는 운동학습 원리에 따라 체계적이고 강도 높은 반복 훈련으로 진행합니다."],"as2-2":["치료 초기에는 짧은 기간에 몰아서, 같은 맥락에서, 한 목표를 끝낸 뒤 다음으로 넘어가며 연습합니다.","유지와 일반화 단계에서는 길게 나누어, 다른 맥락에서, 여러 목표를 섞어 무작위로 연습합니다.","피드백은 수행 과정과 결과, 자주와 가끔, 즉시와 지연을 조절하고, 환자가 스스로 점검하도록 이끕니다."],"as2-3":["자극은 쉬운 것에서 어려운 것으로 고릅니다. 음소와 1음절에서 다음절, 구, 문장으로 늘리고, 모음은 아, 우, 이가 가장 쉽습니다.","무의미 음절보다 의미 있는 단어가 효과적이고, 계속 틀리면 비단어를 씁니다. 단순한 조음에서 복잡한 조음으로, 잘 보이는 양순음과 치경음에서 잘 안 보이는 연구개음으로 갑니다.","요일 말하기 같은 자동적인 말에서 시작해 주말에 한 일 말하기 같은 명제말로 넘어갑니다."],"as2-4":["조음–운동학적 접근은 조음 위치와 방법을 직접 가르치는 것으로, 로젠벡 8단계 연속법, 조음 지시법, 최소 대립쌍, SPT(말소리 산출 치료)가 있습니다.","속도–리듬 제어 접근은 운율과 속도로 접근하며 메트로놈, 손가락 두드리기, 대조적 강세 훈련, MIT(멜로디 억양 치료)가 있습니다.","체계 간 재조직 접근은 촉각처럼 말이 아닌 다른 양식을 이용하는 것으로 PROMPT(촉각 단서 기법)와 제스처 결합이 있습니다.","보완대체의사소통은 의사소통판, 글자판, 음성출력기기를 쓰고, 발성 실행증 환자에게는 전기 후두를 쓸 수 있습니다."],"as2-5":["로젠벡 8단계 연속법은 통합 자극법으로, 내 말을 듣고 내 입을 보며 따라 하게 한 뒤 단서를 한 단계씩 줄여 갑니다.","1단계는 치료사와 동시에 말하기, 2단계는 치료사가 입 모양만 낼 때 소리 내어 말하기, 3단계는 모델을 들은 뒤 단서 없이 말하기, 4단계는 모델 후 여러 번 반복하기입니다.","5단계는 글자 카드를 보면서 말하기, 6단계는 카드를 본 뒤 치운 상태에서 말하기, 7단계는 치료사의 질문을 듣고 목표어로 대답하기, 8단계는 역할극으로 실제 대화에서 쓰기입니다."],"as2-6":["말소리 산출 치료는 4단계로 이루어지며, 수행이 좋으면 단계를 건너뛰고 빠르게 진행합니다.","MIT는 원래 비유창 실어증을 위한 기법이지만, 리듬과 멜로디로 말을 이끌어 속도–리듬 제어에도 씁니다. 청각적 이해가 좋고 조음과 따라말하기가 낮은 환자에게 맞고, 베르니케 영역의 넓은 손상이나 우반구 손상에는 맞지 않습니다.","PROMPT는 치료사가 손가락으로 얼굴, 턱 밑, 목을 접촉해 조음 위치, 턱 벌림, 발성, 타이밍 정보를 주는 방법입니다. 치료사가 외부 말운동 프로그래머 역할을 하며, 원래 아동기 말실행증 치료를 위해 만들어졌습니다."],"as2-7":["심도는 발성, 모음, 자음과 모음 음절, 짧은 기능어부터 시작하고, 잘 보이는 양순음과 자동구어를 활용하며, 보완대체의사소통을 함께 씁니다.","중도는 단어와 구에서 시작해 대조적 강세 훈련, 입 모양을 보며 함께 말하다 단서를 줄이는 시각 구성요소 자극법, 거울을 사용합니다.","경도는 구, 문장, 문단 수준에서 말속도와 운율, 자기 점검, 대화로의 일반화를 다루고, 모델과 반응 사이 간격을 늘립니다."],"as2-8":["아동기 말실행증은 언어발달이 끝나기 전 아동에게 나타나는 말실행증으로, 대부분 원인을 알 수 없고 뇌영상에서도 손상이 보이지 않습니다.","수용언어는 거의 정상인데 표현언어가 매우 낮으면 의심합니다. 모음과 자음 목록이 매우 제한되고, 모음 오류, 비일관적 오류, 길수록 늘어나는 오류, 운율 문제가 나타납니다.","말소리 지체와 구별할 때는 부적절한 쉼 여덟 가지를 보는 쉼 표지를 씁니다. 언어와 문해력 문제가 이어질 위험이 있고, 주된 치료는 PROMPT입니다.","성인 말실행증은 후천적 뇌손상으로 생기고 명제말이 더 어렵지만, 아동기 말실행증은 발달성이며 자동말과 명제말의 차이가 항상 뚜렷하지는 않습니다."]};
+function asW(l,w,off){const i=l.tx.indexOf(w);return l.t0+(l.t1-l.t0)*(i<0?0:i)/l.tx.length+(off||0);}
+function asF(l,f){return l.t0+(l.t1-l.t0)*f;}
+function asCard(L,x,y,w,h,title,body,col){return hdiv('card ov','<div style="color:'+col+';font-size:23px;font-weight:800;margin:0 0 6px">'+title+'</div><div style="font-size:18px;line-height:1.4;color:#dbe6f5">'+body+'</div>',L,'left:'+x+'px;top:'+y+'px;width:'+w+'px;height:'+h+'px;padding:12px 16px;box-sizing:border-box;border-color:'+col);}
+function asChip(L,x,y,w,html,col,fs){return hdiv('ov','<div style="border:2px solid '+col+';border-radius:14px;background:rgba(12,22,40,.95);padding:7px 12px;font-size:'+(fs||19)+'px;font-weight:700;color:'+col+';text-align:center;line-height:1.35">'+html+'</div>',L,'left:'+x+'px;top:'+y+'px;width:'+w+'px;box-sizing:border-box');}
+function asPanel(par,x,y,w,h,col,title,anchor){const g=sv('g',{},par);sv('rect',{x,y,width:w,height:h,rx:18,fill:'rgba(9,18,34,.9)',stroke:col,'stroke-width':2.5},g);if(title)tx_(g,anchor==='start'?x+22:x+w/2,y+34,title,{'font-size':22,fill:col,'text-anchor':anchor||'middle'});return g;}
+/* HTML 말풍선. tail: 'b'(아래) 'l'(왼쪽) 'r'(오른쪽), tp = 꼬리 위치(px) */
+function asBubble(L,x,y,w,html,tail,tp,fs){const tc=tail==='l'?'left:-13px;top:'+tp+'px;transform:rotate(135deg)':tail==='r'?'right:-13px;top:'+tp+'px;transform:rotate(-45deg)':'left:'+tp+'px;bottom:-13px;transform:rotate(45deg)';
+ return hdiv('ov','<div style="position:relative;background:#f7f3ea;color:#2b2b3a;border:2.5px solid #c9b98f;border-radius:22px;padding:14px 18px;font-size:'+(fs||26)+'px;font-weight:700;text-align:center;line-height:1.4"><span class="bt">'+html+'</span><div style="position:absolute;width:20px;height:20px;background:#f7f3ea;border-right:2.5px solid #c9b98f;border-bottom:2.5px solid #c9b98f;'+tc+'"></div></div>',L,'left:'+x+'px;top:'+y+'px;width:'+w+'px;box-sizing:border-box');}
+/* 정면 얼굴 (치매 편 얼굴 기반) + 눈동자 · 눈꺼풀 · 입 조절 */
+let asFN=0;
+function asFace(par,cx,cy,s,o={}){const g=sv('g',{transform:`translate(${cx},${cy}) scale(${s})`},par);const F={g};
+ const skin=o.skin||'#ebc6aa',sh=o.shade||'#c4977d',hair=o.hair||'#3b2a22';
+ if(!o.noBody){sv('path',{d:'M-150,195 Q-142,122 -62,104 L62,104 Q142,122 150,195 L150,215 L-150,215Z',fill:o.cloth||'#5a6f96'},g);
+  sv('path',{d:'M-30,58 L-30,110 Q0,126 30,110 L30,58Z',fill:sh},g);}
+ for(const k of [-1,1]){sv('ellipse',{cx:k*78,cy:-4,rx:13,ry:22,fill:skin,stroke:sh,'stroke-width':2},g);}
+ sv('path',{d:'M-76,-30 Q-78,40 -40,78 Q0,104 40,78 Q78,40 76,-30 Q72,-94 0,-98 Q-72,-94 -76,-30Z',fill:skin,stroke:sh,'stroke-width':2},g);
+ sv('path',{d:o.gray?'M-82,-20 Q-84,-108 0,-112 Q84,-108 82,-20 Q66,-82 6,-78 Q-50,-76 -82,-20Z':'M-80,-28 Q-86,-108 0,-112 Q86,-108 80,-28 Q70,-78 20,-80 Q-40,-74 -80,-28Z',fill:hair},g);
+ F.brows=[-1,1].map(k=>sv('path',{d:`M${k*16},-36 Q${k*34},-46 ${k*54},-38`,fill:'none',stroke:o.brow||hair,'stroke-width':4.5,'stroke-linecap':'round'},g));
+ F.iris=[];F.lid=[];F.lash=[];
+ for(const k of [-1,1]){const id='asE'+(asFN++);const eye=`M${k*18},-14 Q${k*34},-27 ${k*50},-14 Q${k*34},-5 ${k*18},-14Z`;
+  const cp=sv('clipPath',{id},sv('defs',{},g));sv('path',{d:eye},cp);
+  sv('path',{d:eye,fill:'#fbf8f4',stroke:'#5a4034','stroke-width':1.6},g);
+  const ig=sv('g',{'clip-path':`url(#${id})`},g);const ir=sv('g',{},ig);sv('circle',{cx:k*34,cy:-14,r:6.4,fill:o.iris||'#4a3428'},ir);sv('circle',{cx:k*34,cy:-14,r:2.7,fill:'#120c09'},ir);sv('circle',{cx:k*34+2,cy:-16.5,r:1.6,fill:'#fff'},ir);F.iris.push(ir);
+  F.lid.push(sv('path',{fill:skin,stroke:'none'},g));F.lash.push(sv('path',{fill:'none',stroke:'#3a2a22','stroke-width':2.4},g));F.lid[F.lid.length-1]._k=k;}
+ sv('path',{d:'M-3,-8 Q-5,16 -13,25 Q-4,31 0,29 Q4,31 13,25',fill:'none',stroke:sh,'stroke-width':2.4,'stroke-linecap':'round'},g);
+ if(o.old){for(const k of [-1,1]){sv('path',{d:`M${k*54},-8 l${k*9},3 M${k*54},-15 l${k*10},-2`,stroke:sh,'stroke-width':1.6,fill:'none'},g);sv('path',{d:`M${k*24},30 Q${k*34},44 ${k*27},60`,fill:'none',stroke:sh,'stroke-width':1.8},g);}
+  sv('path',{d:'M-32,-58 Q0,-64 32,-58 M-26,-66 Q0,-71 26,-66',fill:'none',stroke:sh,'stroke-width':1.3},g);}
+ F.m=sv('path',{fill:'#7a3a36',stroke:'#a5544e','stroke-width':3.5,'stroke-linejoin':'round'},g);
+ F.look=(dx,dy)=>F.iris.forEach(e=>e.setAttribute('transform',`translate(${(dx*9).toFixed(1)} ${(dy*4).toFixed(1)})`));
+ F.blink=(k)=>{k=Math.max(0,Math.min(1,k));F.lid.forEach((e,i)=>{const kk=e._k,yb=-27+22*k;e.setAttribute('d',`M${kk*16},-14 Q${kk*34},-29 ${kk*52},-14 Q${kk*34},${yb.toFixed(1)} ${kk*16},-14Z`);F.lash[i].setAttribute('d',`M${kk*18},-14 Q${kk*34},${yb.toFixed(1)} ${kk*50},-14`);});};
+ F.mouth=(smile,open)=>{open=open||0;F.m.setAttribute('d',`M-22,50 Q0,${(50+8*smile-3*open).toFixed(1)} 22,50 Q0,${(50+8*smile+16*open).toFixed(1)} -22,50Z`);};
+ F.brow=(k)=>F.brows.forEach((b,i)=>b.setAttribute('transform',`translate(0 ${(-4*k).toFixed(1)})`));
+ F.look(0,0);F.blink(0);F.mouth(0.4,0);return F;}
+
+function asSide(par,x,y,s=1){const g=sv('g',{transform:`translate(${x},${y}) scale(${s})`},par);const P={g};
+ sv('path',{d:'M150,10 C120,40 110,70 95,95 L60,140 Q48,154 70,158 L92,162 C94,176 88,186 80,192 Q64,202 72,212 L92,216 L74,224 Q62,238 80,248 C92,262 86,280 84,296 Q86,332 122,340 L222,346 C240,380 240,410 240,430 L428,430 C446,300 470,150 430,70 C390,14 260,-4 150,10Z',fill:'#e6bea4',stroke:'#9c6f5c','stroke-width':3},g);
+ const dk='#2a1a22';
+ sv('path',{d:'M66,152 Q90,128 112,122 C170,106 260,102 330,112 L402,130 L366,152 L350,168 L112,168 L90,160Z',fill:dk},g);
+ sv('path',{d:'M92,202 L128,180 L300,178 L355,142 L366,128 L402,128 L402,430 L358,430 L358,330 L120,252 L92,228Z',fill:dk},g);
+ sv('path',{d:'M70,214 L94,214 L94,224 L70,224Z',fill:dk},g);
+ sv('line',{x1:108,y1:173,x2:302,y2:173,stroke:'#f1dccb','stroke-width':10,'stroke-linecap':'round'},g);
+ P.tongue=sv('path',{d:'M100,232 Q110,208 140,206 C200,196 270,196 320,214 C352,228 358,270 356,330 L356,430 L300,430 Q230,330 140,262 Q105,250 100,232Z',fill:'#d9787f',stroke:'#a54d55','stroke-width':2},g);
+ P.lift=sv('path',{d:'M110,180 L300,180 L384,166 L388,178 L300,190 L112,190Z',fill:'#b8c4d6',stroke:'#e8eef7','stroke-width':2,opacity:0},g);
+ P.vel=sv('line',{x1:300,y1:174,x2:372,y2:232,stroke:'#e98f95','stroke-width':16,'stroke-linecap':'round'},g);
+ P.airN=sv('path',{d:'M380,420 L380,200 C380,150 360,132 320,128 L160,126 Q100,128 50,150',fill:'none',stroke:'#ff6a5a','stroke-width':6,'stroke-dasharray':'14 10',opacity:0},g);
+ P.airM=sv('path',{d:'M380,420 L380,240 C380,210 350,196 310,194 L150,192 Q110,196 92,218 L36,220',fill:'none',stroke:'#7fe8a0','stroke-width':6,'stroke-dasharray':'14 10',opacity:0},g);
+ P.setVel=(u)=>{P.vel.setAttribute('transform',`rotate(${(-48*cl(u)).toFixed(1)} 300 174)`);};
+ P.flow=(t)=>{const o=(-t*40)%24;P.airN.style.strokeDashoffset=o;P.airM.style.strokeDashoffset=o;};
+ return P;}
+
+function asWaveD(x0,x1,y,pl){let d='';for(let x=x0;x<=x1;x+=3){let v=0;for(const q of pl){const z=(x-q[0])/q[2];v+=q[1]*Math.exp(-z*z);}d+=(d?' L':'M')+x+','+(y-v).toFixed(1);}return d;}
+
+function asCur(a,t){let i=-1;a.L.forEach((l,j)=>{if(t>=l.t0)i=j;});return i;}
+function asO(e,v){if(e)e.setAttribute('opacity',(+v).toFixed(3));}
+/* 왼쪽 반구 옆모습 + 영역 표시 (앞 = 왼쪽) */
+function asBrain(par,ox,oy,s){const g=sv('g',{transform:'translate('+ox+' '+oy+') scale('+s+')'},par);const B=lateralBrain(g,{});const o={g,P:B.P,X:x=>ox+x*s,Y:y=>oy+y*s};
+ const R=(cx,cy,rx,ry,col,dash,rot)=>sv('ellipse',{cx,cy,rx,ry,fill:col,'fill-opacity':dash?.22:.6,stroke:col,'stroke-width':dash?5:4,'stroke-dasharray':dash?'11 7':'none',opacity:0,transform:rot?'rotate('+rot+' '+cx+' '+cy+')':''},g);
+ o.m1=sv('path',{d:smoothPath([[480,58],[457,140],[431,222],[404,298]]),fill:'none',stroke:'#9fb0c8','stroke-width':22,'stroke-linecap':'round',opacity:0},g);
+ o.broca=R(300,306,58,36,ASC.red,false,-12);o.sma=R(418,74,58,22,ASC.org,true);o.ins=R(415,318,58,26,ASC.pur,true,-18);
+ o.tp=R(628,292,56,42,ASC.gold);o.bg=R(440,262,46,30,ASC.mint,true);o.ipl=R(652,212,72,50,ASC.blue);o.stg=R(468,336,100,24,ASC.blue,false,-17);o.wer=R(575,328,56,32,ASC.pur);
+ return o;}
+function asLab(par,x1,y1,x2,y2,txt,col,anc,fs){const g=sv('g',{opacity:0},par);sv('path',{d:'M'+x1+' '+y1+' L'+x2+' '+y2,stroke:col,'stroke-width':2},g);sv('circle',{cx:x1,cy:y1,r:4,fill:col},g);tx_(g,x2+(anc==='end'?-5:anc==='start'?5:0),y2+6,txt,{'font-size':fs||19,fill:col,'text-anchor':anc||'start'});return g;}
+function asMark(par,x,y,ok,s){const g=sv('g',{opacity:0,transform:'translate('+x+' '+y+') scale('+(s||1)+')'},par);sv('circle',{cx:0,cy:0,r:20,fill:ok?'#1d4a3a':'#4a1d22',stroke:ok?ASC.ok:ASC.bad,'stroke-width':3},g);
+ sv('path',{d:ok?'M-9 0 L-3 7 L10 -8':'M-8 -8 L8 8 M8 -8 L-8 8',fill:'none',stroke:ok?ASC.ok:ASC.bad,'stroke-width':4.5,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g;}
+function asHtmlCard(L,x,y,w,h,col,html){return hdiv('ov','<div style="border:2.5px solid '+col+';border-radius:18px;background:rgba(12,22,40,.95);padding:12px 16px;height:'+h+'px;box-sizing:border-box">'+html+'</div>',L,'left:'+x+'px;top:'+y+'px;width:'+w+'px');}
+/* 손 + 빗 */
+function asHand(par){const g=sv('g',{},par);const H={g};H.comb=sv('g',{opacity:0},g);sv('rect',{x:-30,y:-6,width:60,height:10,rx:3,fill:'#3d4a66',stroke:'#cfd8ea','stroke-width':1.5},H.comb);for(let i=-26;i<=26;i+=5)sv('line',{x1:i,y1:4,x2:i,y2:14,stroke:'#cfd8ea','stroke-width':2},H.comb);
+ sv('ellipse',{cx:0,cy:0,rx:15,ry:12,fill:'#ebc6aa',stroke:'#c4977d','stroke-width':2},g);sv('path',{d:'M-10 -8 L-10 -22 M-4 -10 L-4 -26 M2 -10 L2 -25 M8 -8 L8 -20',stroke:'#ebc6aa','stroke-width':6,'stroke-linecap':'round'},g);
+ H.set=(x,y,r)=>g.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+') rotate('+(r||0).toFixed(1)+')');return H;}
+
+/* ═════════ 1-1 실행증이란 ═════════ */
+
+/* ═════════ 2-1 치료 원칙 ═════════ */
+page({id:'as2-1',label:'2-1',title:'치료 원칙',scenes:[{name:'가장 크게 막는 문제부터',pre:.6,post:.8,lines:AS2L['as2-1']}],
+ init(L){const s=SVGROOT(L);
+  asPanel(s,40,96,580,464,ASC.mint,'치료 목표','start');
+  this.g1=[asChip(L,70,148,250,'말 <b>명료도</b> ↑',ASC.blue,21),asChip(L,340,148,250,'말 <b>자연스러움</b> ↑',ASC.blue,21)];
+  this.arr=sv('g',{opacity:0},s);sv('path',{d:'M330 200 L330 230 M321 221 L330 232 L339 221',fill:'none',stroke:'#cfd8ea','stroke-width':3,'stroke-linecap':'round'},this.arr);
+  this.g2=asChip(L,70,240,520,'<b>기능적 의사소통</b> · <b>사회 참여</b>를 최대로',ASC.mint,22);
+  this.drG=sv('g',{opacity:0},s);sv('line',{x1:60,y1:314,x2:600,y2:314,stroke:'#33415e','stroke-width':2},this.drG);
+  tx_(this.drG,64,348,'운동학습 원리',{'font-size':21,fill:ASC.gold,'text-anchor':'start'});
+  this.ring=sv('g',{},this.drG);sv('circle',{cx:0,cy:0,r:60,fill:'none',stroke:'#2d3b58','stroke-width':12},this.ring);
+  sv('path',{d:'M0 -60 A60 60 0 1 1 -42.4 -42.4',fill:'none',stroke:ASC.gold,'stroke-width':10,'stroke-linecap':'round'},this.ring);
+  sv('path',{d:'M-26 -62 L-56 -50 L-38 -26Z',fill:ASC.gold},this.ring);
+  this.cnt=tx_(this.drG,170,462,'×1',{'font-size':30,fill:'#eef3fb'});tx_(this.drG,170,430,'물',{'font-size':22,fill:ASC.gold});
+  this.drC=[asChip(L,270,370,320,'체계적 · 강도 높게',ASC.gold,20),asChip(L,270,428,320,'<b>반복 훈련</b> (drill)',ASC.gold,22),asChip(L,270,486,320,'같은 목표어를 여러 번',ASC.dim,18)];
+  asPanel(s,660,96,580,464,ASC.gold,'함께 있으면 · 가장 크게 막는 문제부터','start');
+  sv('rect',{x:690,y:250,width:520,height:54,rx:8,fill:'#26314a'},s);sv('line',{x1:700,y1:277,x2:1200,y2:277,stroke:'#cfd8ea','stroke-width':3,'stroke-dasharray':'18 14',opacity:.5},s);
+  const pg=sv('g',{},s);sv('circle',{cx:712,cy:212,r:14,fill:'#ebc6aa'},pg);sv('path',{d:'M694 250 Q694 228 712 228 Q730 228 730 250Z',fill:'#5a6f96'},pg);tx_(pg,712,326,'환자',{'font-size':16,fill:ASC.dim});
+  tx_(s,1196,232,'💬',{'font-size':34,stroke:'none'});tx_(s,1190,326,'의사소통',{'font-size':16,fill:ASC.mint});
+  const BK=[['마비말장애',800,50,ASC.org],['이해 저하',920,128,ASC.red],['말실행증',1050,84,ASC.pur]];
+  this.bk=BK.map(b=>{const g=sv('g',{opacity:0},s);const r=sv('rect',{x:b[1],y:304-b[2],width:104,height:b[2],rx:8,fill:'rgba(20,30,52,.95)',stroke:b[3],'stroke-width':3},g);tx_(g,b[1]+52,304-b[2]/2+7,b[0],{'font-size':17,fill:b[3]});return {g,r};});
+  this.first=asChip(L,690,330,520,'① 의사소통을 가장 크게 막는 것부터<br><span style="font-size:16px">예) 이해가 심하게 떨어지면 → 이해 지원 먼저</span>',ASC.red,19);
+  this.pG=sv('g',{opacity:0},s);tx_(this.pG,690,440,'예후',{'font-size':21,fill:ASC.gold,'text-anchor':'start'});
+  const df=sv('defs',{},s),lg=sv('linearGradient',{id:'as2pg',x1:0,x2:1,y1:0,y2:0},df);sv('stop',{offset:0,'stop-color':'#4fd39a'},lg);sv('stop',{offset:.5,'stop-color':'#e8c860'},lg);sv('stop',{offset:1,'stop-color':'#e8665a'},lg);
+  sv('rect',{x:690,y:456,width:520,height:24,rx:12,fill:'url(#as2pg)'},this.pG);
+  tx_(this.pG,690,512,'안정된 경도 → 좋음',{'font-size':18,fill:ASC.ok,'text-anchor':'start'});tx_(this.pG,1210,512,'퇴행성 · 심도 → 회복 어려움',{'font-size':18,fill:ASC.bad,'text-anchor':'end'});
+  this.pk=sv('path',{d:'M0 0 L-9 -14 L9 -14Z',fill:'#eef3fb'},this.pG);},
+ draw(t,p){const a=p.scenes[0],Ls=a.L;
+  op(this.g1[0],ramp(t,asW(Ls[0],'명료도',-.3),asW(Ls[0],'명료도',.1)));op(this.g1[1],ramp(t,asW(Ls[0],'자연스러움',-.3),asW(Ls[0],'자연스러움',.1)));
+  const tf=asW(Ls[0],'기능적',-.3);asO(this.arr,ramp(t,tf,tf+.4));op(this.g2,ramp(t,tf,tf+.5));
+  this.bk.forEach((b,j)=>asO(b.g,ramp(t,Ls[1].t0+j*.3,Ls[1].t0+j*.3+.4)));
+  const tb=asW(Ls[1],'가장 크게',-.3),up=ramp(t,tb+.9,tb+2);const B=this.bk[1];B.r.setAttribute('stroke-width',t>tb&&up<1?6:3);B.g.setAttribute('transform','translate(0 '+(-60*up).toFixed(1)+')');if(t>tb+.9)asO(B.g,1-up);
+  op(this.first,ramp(t,tb,tb+.5));
+  const tp=asW(Ls[1],'예후는',-.3);asO(this.pG,ramp(t,tp,tp+.5));const tq=asW(Ls[1],'퇴행성',-.2);const px=lerp(720,1180,ramp(t,tq,tq+1));this.pk.setAttribute('transform','translate('+px.toFixed(1)+' 452)');
+  const td=asW(Ls[2],'반복',-.6);asO(this.drG,ramp(t,Ls[2].t0-.2,Ls[2].t0+.4));this.drC.forEach((c,j)=>op(c,ramp(t,[asW(Ls[2],'체계적',-.3),td,td+.6][j],[asW(Ls[2],'체계적',.1),td+.4,td+1][j])));
+  const u=Math.max(0,t-Ls[2].t0);this.ring.setAttribute('transform','translate(170 452) rotate('+(u*120%360).toFixed(1)+')');this.cnt.textContent='×'+(1+Math.floor(u*1.2));}});
+
+/* ═════════ 2-2 훈련 조건과 피드백 ═════════ */
+page({id:'as2-2',label:'2-2',title:'훈련 조건과 피드백',scenes:[{name:'초기 vs 유지·일반화',pre:.6,post:.8,lines:AS2L['as2-2']}],
+ init(L){const s=SVGROOT(L);
+  this.hd=[asChip(L,250,100,480,'치료 초기 (습득)',ASC.blue,22),asChip(L,760,100,480,'유지 · 일반화 단계',ASC.mint,22)];
+  const RL=[['분포','언제 · 얼마나 몰아서'],['변이성','어디서 · 어떤 맥락'],['일정','목표를 어떤 순서로']];
+  RL.forEach((r,i)=>{const y=152+i*100;sv('rect',{x:40,y,width:196,height:90,rx:14,fill:'rgba(12,22,40,.9)',stroke:'#56688a','stroke-width':2},s);tx_(s,138,y+40,r[0],{'font-size':23,fill:'#eef3fb'});tx_(s,138,y+68,r[1],{'font-size':15,fill:ASC.dim});});
+  const cell=(x,y,w,col,lab)=>{const g=sv('g',{opacity:0},s);sv('rect',{x,y,width:w,height:90,rx:14,fill:'rgba(12,22,40,.95)',stroke:col,'stroke-width':2.5},g);tx_(g,x+16,y+28,lab,{'font-size':18,fill:col,'text-anchor':'start'});return g;};
+  this.cL=[cell(250,152,480,ASC.blue,'짧은 기간에 몰아서 (massed)'),cell(250,252,480,ASC.blue,'같은 맥락에서 (constant)'),cell(250,352,480,ASC.blue,'한 목표 끝내고 다음 (blocked)')];
+  this.cR=[cell(760,152,480,ASC.mint,'길게 나눠서 (distributed)'),cell(760,252,480,ASC.mint,'다른 맥락에서 (variable)'),cell(760,352,480,ASC.mint,'섞어서 무작위 (random)')];
+  this.dL=[];for(let d=0;d<14;d++){const r=sv('rect',{x:266+d*32,y:196,width:26,height:30,rx:5,fill:'#22304a',stroke:'#3d4d6e','stroke-width':1.5},this.cL[0]);this.dL.push(r);}
+  tx_(this.cL[0],266,246,'',{});this.dR=[];for(let d=0;d<28;d++){const r=sv('rect',{x:776+d*16,y:196,width:13,height:30,rx:3,fill:'#22304a',stroke:'#3d4d6e','stroke-width':1},this.cR[0]);this.dR.push(r);}
+  this.onL=[0,1,2,3,4,5];this.onR=[1,5,9,13,17,21,25];
+  const tile=(par,x,y,txt,col)=>{const g=sv('g',{},par);sv('rect',{x,y,width:140,height:36,rx:10,fill:'#1a2740',stroke:col,'stroke-width':2},g);tx_(g,x+70,y+25,txt,{'font-size':17,fill:'#eef3fb'});return g;};
+  ['🏥 치료실','🏥 치료실','🏥 치료실'].forEach((x,i)=>tile(this.cL[1],266+i*152,294,x,ASC.blue));['🏥 치료실','🏠 집','🛒 마트'].forEach((x,i)=>tile(this.cR[1],776+i*152,294,x,ASC.mint));
+  const WC={'물':'#76c7ff','밥':'#ffe08a','빵':'#ff9a8a'};const seq=(par,x0,arr)=>arr.map((w,i)=>{const g=sv('g',{opacity:0},par);sv('rect',{x:x0+i*50,y:394,width:42,height:36,rx:9,fill:WC[w],opacity:.9},g);tx_(g,x0+i*50+21,419,w,{'font-size':19,fill:'#10203a',stroke:'none'});return g;});
+  this.sL=seq(this.cL[2],266,['물','물','물','밥','밥','밥','빵','빵','빵']);this.sR=seq(this.cR[2],776,['물','빵','밥','물','밥','빵','밥','물','빵']);
+  this.fbG=sv('g',{opacity:0},s);sv('rect',{x:40,y:456,width:1200,height:100,rx:16,fill:'rgba(9,18,34,.9)',stroke:ASC.gold,'stroke-width':2.5},this.fbG);tx_(this.fbG,64,498,'피드백',{'font-size':23,fill:ASC.gold,'text-anchor':'start'});tx_(this.fbG,64,526,'조절하기',{'font-size':17,fill:ASC.dim,'text-anchor':'start'});
+  this.fb=[asChip(L,190,478,230,'유형: 수행 과정 ↔ 결과',ASC.gold,18),asChip(L,436,478,230,'횟수: 자주 ↔ 가끔',ASC.gold,18),asChip(L,682,478,230,'시점: 즉시 ↔ 지연',ASC.gold,18),asChip(L,928,478,290,'🪞 환자가 <b>스스로 점검</b>',ASC.ok,19)];},
+ draw(t,p){const a=p.scenes[0],Ls=a.L,i=asCur(a,t);op(this.hd[0],ramp(t,Ls[0].t0,Ls[0].t0+.5));op(this.hd[1],ramp(t,Ls[1].t0,Ls[1].t0+.5));
+  const kL=['몰아서','같은 맥락','한 목표'].map(w=>asW(Ls[0],w,-.3)),kR=['나누어','다른 맥락','섞어'].map(w=>asW(Ls[1],w,-.3));
+  this.cL.forEach((c,j)=>{asO(c,ramp(t,kL[j],kL[j]+.4));c.firstChild.setAttribute('stroke-width',i===0&&t>=kL[j]&&(j===2||t<kL[j+1])?5:2.5);});
+  this.cR.forEach((c,j)=>{asO(c,ramp(t,kR[j],kR[j]+.4));c.firstChild.setAttribute('stroke-width',i===1&&t>=kR[j]&&(j===2||t<kR[j+1])?5:2.5);});
+  this.onL.forEach((d,j)=>this.dL[d].setAttribute('fill',t>kL[0]+.3+j*.18?ASC.blue:'#22304a'));this.onR.forEach((d,j)=>this.dR[d].setAttribute('fill',t>kR[0]+.3+j*.18?ASC.mint:'#22304a'));
+  this.sL.forEach((g,j)=>asO(g,ramp(t,kL[2]+.2+j*.12,kL[2]+.4+j*.12)));this.sR.forEach((g,j)=>asO(g,ramp(t,kR[2]+.2+j*.12,kR[2]+.4+j*.12)));
+  asO(this.fbG,ramp(t,Ls[2].t0-.2,Ls[2].t0+.3));['수행 과정','자주','즉시','스스로'].forEach((w,j)=>op(this.fb[j],ramp(t,asW(Ls[2],w,-.3),asW(Ls[2],w,.1))));}});
+
+/* ═════════ 2-3 자극 선택 순서 ═════════ */
+page({id:'as2-3',label:'2-3',title:'자극 선택 순서',scenes:[{name:'쉬운 것 → 어려운 것',pre:.6,post:.8,lines:AS2L['as2-3']}],
+ init(L){const s=SVGROOT(L);this.top=asChip(L,60,104,600,'쉬운 것 → 어려운 것 순서로 자극을 고름 ↗',ASC.gold,21);
+  const ST=[['① 짧은 것 → 긴 것','음소 · 1음절 → 다음절 → 구 → 문장'],['② 모음: 아 · 우 · 이','모음 사각도의 끝 = 가장 쉬움'],['③ 의미 있는 단어','밤 · 봉 · 북 · 벌 &gt; 무의미 음절<br><span style="color:#9fb0c8">계속 틀리면 비단어</span>'],['④ 단순 → 복잡 조음','밤 &lt; 벌<br>오이 · 아우 &lt; 곡식 · 산출'],['⑤ 보이는 → 안 보이는 소리','👄 양순음 · 치경음<br>→ 연구개음'],['⑥ 자동말 → 명제말','요일 말하기<br>→ 주말에 한 일 말하기']];
+  const CC=['#76e8be','#8fdcb0','#c8e08a','#ffe08a','#ffb36b','#ff8a7a'];
+  this.st=ST.map((q,i)=>{const x=60+i*194,top=470-i*56;const g=sv('g',{opacity:0},s);const r=sv('rect',{x,y:top,width:186,height:552-top,rx:10,fill:'rgba(14,26,46,.96)',stroke:CC[i],'stroke-width':2.5},g);
+   const d=hdiv('ov','<div style="font-size:17px;font-weight:800;color:'+CC[i]+';line-height:1.3">'+q[0]+'</div><div style="font-size:14.5px;color:#eef3fb;line-height:1.4;margin-top:4px">'+q[1]+'</div>',L,'left:'+(x+8)+'px;top:'+(top+7)+'px;width:172px');return {g,r,d};});
+  this.vq=sv('g',{opacity:0},s);tx_(this.vq,348,284,'모음 사각도',{'font-size':16,fill:ASC.dim});
+  sv('path',{d:'M278 300 L420 300 L420 392 L322 392Z',fill:'none',stroke:'#7f93b3','stroke-width':2.5},this.vq);
+  this.vc=[[278,300,'이'],[420,300,'우'],[372,392,'아']].map(v=>{const g=sv('g',{},this.vq);const c=sv('circle',{cx:v[0],cy:v[1],r:14,fill:'#8fdcb0',stroke:'#fff','stroke-width':2},g);tx_(g,v[0],v[1]+6,v[2],{'font-size':15,fill:'#10203a',stroke:'none'});return c;});
+  this.mk=sv('g',{opacity:0},s);sv('path',{d:'M90 430 L1150 150',stroke:ASC.gold,'stroke-width':3,'stroke-dasharray':'10 8',opacity:.5},this.mk);sv('path',{d:'M1150 150 L1132 152 L1142 166Z',fill:ASC.gold,opacity:.7},this.mk);},
+ draw(t,p){const a=p.scenes[0],Ls=a.L;op(this.top,ramp(t,Ls[0].t0,Ls[0].t0+.5));
+  const K=[Ls[0].t0+.3,asW(Ls[0],'모음은',-.3),asW(Ls[1],'무의미',-.3),asW(Ls[1],'단순한',-.3),asW(Ls[1],'잘 보이는',-.3),Ls[2].t0];
+  let cur=-1;K.forEach((k,j)=>{if(t>=k)cur=j;});
+  this.st.forEach((q,j)=>{const v=ramp(t,K[j],K[j]+.5);asO(q.g,v);op(q.d,v);q.r.setAttribute('stroke-width',j===cur?5:2.5);q.g.style.filter=j===cur?'drop-shadow(0 0 8px rgba(255,255,255,.35))':'';});
+  asO(this.mk,ramp(t,Ls[2].t1-2,Ls[2].t1-1));
+  asO(this.vq,ramp(t,K[1],K[1]+.5)*(1-ramp(t,K[2],K[2]+.5)));this.vc.forEach((c,j)=>c.setAttribute('r',(14+3*Math.max(0,Math.sin(t*4-j*1.2))).toFixed(1)));}});
+
+/* ═════════ 2-4 치료 접근 4범주 ═════════ */
+page({id:'as2-4',label:'2-4',title:'치료 접근 4범주',scenes:[{name:'네 가지 접근',pre:.6,post:.8,lines:AS2L['as2-4']}],
+ init(L){const s=SVGROOT(L);
+  const Q=[[40,96,'조음–운동학적 접근','조음 위치와 방법을 직접 가르침',ASC.red,[['로젠벡 8단계 연속법 ★','로젠벡'],['조음 지시법','조음 지시법'],['최소 대립쌍','최소'],['SPT(말소리 산출 치료)','SPT']]],
+   [650,96,'속도–리듬 제어','운율과 속도로 접근',ASC.gold,[['메트로놈','메트로놈'],['손가락 두드리기','손가락'],['대조적 강세 훈련','대조적'],['MIT(멜로디 억양 치료)','MIT']]],
+   [40,332,'체계 간 재조직','촉각 등 말이 아닌 다른 양식을 이용',ASC.pur,[['PROMPT(촉각 단서 기법)','PROMPT'],['제스처 결합','제스처']]],
+   [650,332,'보완대체의사소통 (AAC)','말 대신, 또는 말과 함께',ASC.mint,[['🗂️ 의사소통판','의사소통판'],['🔤 글자판','글자판'],['🔊 음성출력기기','음성출력'],['발성 실행증 → 전기 후두','전기 후두']]]];
+  this.Q=Q.map((q,i)=>{const g=sv('g',{opacity:0},s);const r=sv('rect',{x:q[0],y:q[1],width:590,height:224,rx:18,fill:'rgba(9,18,34,.92)',stroke:q[4],'stroke-width':2.5},g);
+   tx_(g,q[0]+22,q[1]+36,q[2],{'font-size':24,fill:q[4],'text-anchor':'start'});tx_(g,q[0]+22,q[1]+66,q[3],{'font-size':17,fill:'#dbe6f5','text-anchor':'start'});
+   const ch=q[5].map((c,j)=>({w:c[1],d:asChip(L,q[0]+22+(j%2)*278,q[1]+86+Math.floor(j/2)*58,(i===2?380:266),c[0],q[4],18)}));return {g,r,ch,d:0};});
+  this.Q[2].ch[1].d.style.left='62px';this.Q[2].ch[1].d.style.top='476px';this.Q[2].ch[0].d.style.left='62px';
+  /* 장식: 입 · 메트로놈 · 손 · 판 */
+  const g0=sv('g',{},this.Q[0].g);sv('path',{d:'M548 120 Q574 104 600 120 Q574 146 548 120Z',fill:'#d9787f',stroke:'#a54d55','stroke-width':2},g0);sv('path',{d:'M552 120 Q574 126 596 120',stroke:'#7a2a30','stroke-width':2,fill:'none'},g0);
+  const g1=sv('g',{},this.Q[1].g);sv('path',{d:'M1180 164 L1200 106 L1220 164Z',fill:'#5a4a30',stroke:ASC.gold,'stroke-width':2},g1);this.pend=sv('line',{x1:1200,y1:158,x2:1200,y2:108,stroke:'#eef3fb','stroke-width':3},g1);sv('circle',{cx:1200,cy:158,r:4,fill:ASC.gold},g1);
+  this.taps=[0,1,2,3].map(k=>sv('circle',{cx:1110+k*20,cy:300,r:6,fill:ASC.gold,opacity:.3},this.Q[1].g));
+  const g2=sv('g',{},this.Q[2].g);this.tF=asFace(g2,520,450,.42,{noBody:true});this.tP=[[0,50],[-60,40],[0,96],[24,112]].map(q=>sv('circle',{cx:520+q[0]*.42,cy:450+q[1]*.42,r:6,fill:ASC.pur,stroke:'#fff','stroke-width':1.5,opacity:0},g2));
+  const g3=sv('g',{},this.Q[3].g);for(let k=0;k<6;k++)sv('rect',{x:1130+(k%3)*30,y:352+Math.floor(k/3)*30,width:26,height:26,rx:4,fill:'#f4efe4',stroke:'#76e8be','stroke-width':1.5},g3);},
+ draw(t,p){const a=p.scenes[0],Ls=a.L,i=asCur(a,t);
+  this.Q.forEach((q,j)=>{const ts=Ls[j].t0-.2;asO(q.g,ramp(t,ts,ts+.5));q.r.setAttribute('stroke-width',i===j?5:2.5);q.g.style.opacity='';q.ch.forEach(c=>op(c.d,ramp(t,asW(Ls[j],c.w,-.3),asW(Ls[j],c.w,.1))));
+   if(i>=0&&i!==j&&t>=ts)q.g.style.filter='brightness(.7)';else q.g.style.filter='';});
+  this.pend.setAttribute('transform','rotate('+(24*Math.sin(t*4)).toFixed(1)+' 1200 158)');const b=Math.floor(t*2)%4;this.taps.forEach((c,k)=>c.setAttribute('opacity',k===b?1:.25));
+  const ph=Math.floor(t*1.5)%4;this.tP.forEach((c,k)=>c.setAttribute('opacity',i===2?(k===ph?1:.35):0));this.tF.mouth(.2,i===2&&ph===0?.5:0);}});
+</script>
+<script>"use strict";
+/* ═════════ 2-5 로젠벡 8단계 ═════════ */
+page({id:'as2-5',label:'2-5',title:'로젠벡 8단계 연속법 ★',scenes:[{name:'단서를 한 단계씩 줄임',pre:.6,post:.8,lines:AS2L['as2-5']}],
+ init(L){const s=SVGROOT(L);
+  this.c0=asChip(L,50,100,800,'통합 자극법: "내 말을 <b>듣고</b>, 내 입을 <b>보고</b>, 따라 하세요"',ASC.gold,20);
+  this.c1=asChip(L,50,152,600,'동시 → 모방 → 독립 → 글자 → 질문 대답 → 대화 <b>(단서 ↓)</b>',ASC.mint,18);
+  const S=[['동시에','🔊👄'],['입 모양만','👄'],['모델 후 혼자','🔊→'],['여러 번 반복','🔊×3'],['카드 보며','📝'],['카드 치운 뒤','📝✕'],['질문에 대답','❓'],['역할극','🎭']];
+  const CC=['#76c7ff','#76c7ff','#76e8be','#76e8be','#ffe08a','#ffe08a','#ffb36b','#ff8a7a'];
+  this.st=S.map((q,i)=>{const x=50+i*101,top=498-i*34;const g=sv('g',{opacity:0},s);const r=sv('rect',{x,y:top,width:97,height:556-top,rx:8,fill:'rgba(14,26,46,.96)',stroke:CC[i],'stroke-width':2.5},g);
+   tx_(g,x+48,top+24,String(i+1),{'font-size':22,fill:CC[i]});const d=hdiv('ov','<div style="font-size:14px;font-weight:700;color:#eef3fb;text-align:center;line-height:1.2">'+q[0]+'</div>',L,'left:'+(x+2)+'px;top:'+(top+30)+'px;width:93px');
+   tx_(g,x+48,top-10,q[1],{'font-size':17,fill:'#eef3fb',stroke:'none'});return {g,r,d};});
+  asPanel(s,870,96,370,462,'#7f93b3','','start');this.stT=tx_(s,1055,128,'',{'font-size':22,fill:ASC.gold});
+  this.fT=asFace(s,960,236,.42,{hair:'#3b2a22',cloth:'#4f7f6a'});this.fP=asFace(s,1150,236,.42,{old:true,gray:true,hair:'#9a9a9a',cloth:'#7d6f96'});
+  tx_(s,960,350,'치료사',{'font-size':16,fill:ASC.mint});tx_(s,1150,350,'환자',{'font-size':16,fill:ASC.pur});
+  this.wT=[0,1,2].map(k=>sv('path',{d:'M'+(1006+k*8)+' 250 q8 -12 0 -24',fill:'none',stroke:ASC.mint,'stroke-width':3,opacity:0},s));
+  this.mute=sv('g',{opacity:0},s);tx_(this.mute,1012,192,'🔇',{'font-size':24,stroke:'none'});
+  this.bT=asBubble(L,884,362,200,'','b',40,19);this.bP=asBubble(L,1092,362,136,'','b',70,22);
+  this.card=sv('g',{opacity:0},s);sv('rect',{x:1000,y:420,width:110,height:70,rx:8,fill:'#fffaf0',stroke:ASC.gold,'stroke-width':3},this.card);tx_(this.card,1055,467,'물',{'font-size':34,fill:'#2b2b3a',stroke:'none'});
+  this.cardX=asMark(s,1112,424,false,.7);
+  this.desc=asChip(L,890,500,330,'',ASC.gold,17);},
+ draw(t,p){const a=p.scenes[0],Ls=a.L;
+  op(this.c0,ramp(t,Ls[0].t0,Ls[0].t0+.5));op(this.c1,ramp(t,asW(Ls[0],'단서를',-.3),asW(Ls[0],'단서를',.2)));
+  const K=[asW(Ls[1],'1단계',-.2),asW(Ls[1],'2단계',-.2),asW(Ls[1],'3단계',-.2),asW(Ls[1],'4단계',-.2),asW(Ls[2],'5단계',-.2),asW(Ls[2],'6단계',-.2),asW(Ls[2],'7단계',-.2),asW(Ls[2],'8단계',-.2)];
+  let cur=-1;K.forEach((k,j)=>{if(t>=k)cur=j;});
+  this.st.forEach((q,j)=>{const v=t<Ls[1].t0?ramp(t,Ls[0].t0+.6+j*.18,Ls[0].t0+.9+j*.18):1;asO(q.g,v);op(q.d,v);q.r.setAttribute('stroke-width',j===cur?5:2.5);q.g.style.filter=cur>=0&&j!==cur?'brightness(.6)':'';});
+  const D=['① 치료사와 동시에 말하기','② 치료사는 입 모양만 · 환자는 소리','③ 모델 듣고 → 단서 없이 혼자','④ 모델 듣고 → 여러 번 반복','⑤ 글자 카드를 보면서','⑥ 카드를 본 뒤 치우고','⑦ 질문을 듣고 목표어로 대답','⑧ 역할극 · 실제 대화에서'];
+  this.stT.textContent=cur<0?'목표어: "물"':(cur+1)+'단계';this.desc.firstChild.textContent=cur<0?'':D[cur];op(this.desc,cur<0?0:1);
+  const u=cur<0?0:t-K[cur];const talk=(on)=>on&&Math.sin(t*14)>0?.7:0;
+  let bt='',bp='',tOn=false,pOn=false,snd=false,mute=false,card=0,cx=0;
+  if(cur===0){bt='물';bp='물';tOn=pOn=snd=true;}
+  else if(cur===1){bt='';bp='물';tOn=true;pOn=true;mute=true;}
+  else if(cur===2){if(u<1.2){bt='물';tOn=snd=true;}else{bp='물';pOn=true;}}
+  else if(cur===3){if(u<1){bt='물';tOn=snd=true;}else{bp=['물','물 · 물','물 · 물 · 물'][Math.min(2,Math.floor((u-1)/.7))];pOn=true;}}
+  else if(cur===4){card=1;bp='물';pOn=u>.6;}
+  else if(cur===5){card=1-ramp(u,.6,1.1);cx=ramp(u,.6,1);bp=u>1.2?'물':'';pOn=u>1.2;}
+  else if(cur===6){if(u<1.3){bt='뭐 드시고 싶어요?';tOn=true;snd=true;}else{bp='물';pOn=true;}}
+  else if(cur===7){if(u<1.2){bt='🎭 주문하시겠어요?';tOn=true;snd=true;}else{bp='물 주세요';pOn=true;}}
+  this.bT.querySelector('.bt').textContent=bt;this.bP.querySelector('.bt').textContent=bp;op(this.bT,bt?1:0);op(this.bP,bp?1:0);
+  this.fT.mouth(.3,talk(tOn));this.fP.mouth(.2,talk(pOn));this.wT.forEach((w,k)=>asO(w,snd&&Math.sin(t*8-k)>0?1:0));asO(this.mute,mute?1:0);
+  asO(this.card,card);asO(this.cardX,cur===5?cx:0);}});
+
+/* ═════════ 2-6 SPT · MIT · PROMPT ═════════ */
+page({id:'as2-6',label:'2-6',title:'SPT · MIT · PROMPT',scenes:[{name:'세 가지 기법',pre:.6,post:.8,lines:AS2L['as2-6']}],
+ init(L){const s=SVGROOT(L);
+  this.p=[sv('g',{opacity:0},s),sv('g',{opacity:0},s),sv('g',{opacity:0},s)];
+  asPanel(this.p[0],40,96,370,464,ASC.red,'');tx_(this.p[0],225,128,'SPT',{'font-size':24,fill:ASC.red});tx_(this.p[0],225,152,'(말소리 산출 치료)',{'font-size':16,fill:ASC.dim});
+  this.lad=[0,1,2,3].map(k=>{const g=sv('g',{},this.p[0]);const y=440-k*72;sv('rect',{x:110,y,width:160,height:56,rx:12,fill:'#1a2740',stroke:ASC.red,'stroke-width':2.5},g);tx_(g,190,y+36,(k+1)+'단계',{'font-size':21,fill:'#eef3fb'});return g;});
+  this.skip=sv('g',{opacity:0},this.p[0]);sv('path',{d:'M276 468 C350 440 350 330 276 312',fill:'none',stroke:ASC.gold,'stroke-width':3.5,'stroke-dasharray':'8 6'},this.skip);sv('path',{d:'M276 312 L292 306 L286 322Z',fill:ASC.gold},this.skip);tx_(this.skip,352,390,'건너뜀',{'font-size':16,fill:ASC.gold});
+  this.sC=[asChip(L,60,170,330,'수행이 좋으면 단계 생략 · 빠르게',ASC.gold,17),asChip(L,60,508,330,'운동 순서 훈련 + 음운 과제',ASC.dim,16)];
+  asPanel(this.p[1],430,96,410,464,ASC.gold,'');tx_(this.p[1],635,128,'MIT',{'font-size':24,fill:ASC.gold});tx_(this.p[1],635,152,'(멜로디 억양 치료)',{'font-size':16,fill:ASC.dim});
+  this.mC0=asChip(L,450,170,370,'원래 <b>비유창 실어증</b>용 → 속도–리듬 제어에도',ASC.gold,16);
+  for(let k=0;k<2;k++)sv('line',{x1:460,y1:262+k*40,x2:810,y2:262+k*40,stroke:'#3d4d6e','stroke-width':1.5},this.p[1]);tx_(this.p[1],455,258,'높게',{'font-size':13,fill:ASC.dim,'text-anchor':'start'});tx_(this.p[1],455,322,'낮게',{'font-size':13,fill:ASC.dim,'text-anchor':'start'});
+  const NT=[['물',1],['좀',0],['주',1],['세',0],['요',0]];this.nt=NT.map((n,k)=>{const x=520+k*64,y=n[1]?262:302;const g=sv('g',{},this.p[1]);const c=sv('circle',{cx:x,cy:y,r:16,fill:ASC.gold},g);tx_(g,x,345,n[0],{'font-size':22,fill:'#eef3fb'});return c;});
+  sv('path',{d:'M520 262 L584 302 L648 262 L712 302 L776 302',fill:'none',stroke:ASC.gold,'stroke-width':2,opacity:.5},this.p[1]);
+  this.hand=sv('g',{},this.p[1]);tx_(this.hand,0,0,'✋',{'font-size':30,stroke:'none'});tx_(this.p[1],460,232,'음절마다 손으로 두드리며',{'font-size':15,fill:ASC.dim,'text-anchor':'start'});
+  this.mOk=asChip(L,450,422,370,'✓ 청각 이해 양호 · 조음 · 따라말하기 낮음',ASC.ok,16);this.mNo=asChip(L,450,478,370,'✕ 베르니케 넓은 손상 · 우반구 손상',ASC.bad,16);
+  asPanel(this.p[2],860,96,380,464,ASC.pur,'');tx_(this.p[2],1050,128,'PROMPT',{'font-size':24,fill:ASC.pur});tx_(this.p[2],1050,152,'(촉각 단서 기법)',{'font-size':16,fill:ASC.dim});
+  this.F=asFace(this.p[2],1020,282,.62,{hair:'#3b2a22',cloth:'#5a6f96'});
+  const TP=[[0,50,'조음 위치',ASC.blue,1140,296,'start'],[-62,32,'턱 벌림',ASC.gold,922,330,'end'],[0,98,'발성 (턱 밑)',ASC.mint,1140,346,'start'],[26,116,'목 · 타이밍',ASC.red,1140,396,'start']];
+  this.tp=TP.map(q=>{const x=1020+q[0]*.62,y=282+q[1]*.62;const g=sv('g',{},this.p[2]);sv('path',{d:'M'+x+' '+y+' L'+q[4]+' '+q[5],stroke:q[3],'stroke-width':1.5},g);const f=sv('ellipse',{cx:x,cy:y,rx:7,ry:10,fill:'#f0c9ad',stroke:q[3],'stroke-width':2.5},g);const pu=sv('circle',{cx:x,cy:y,r:10,fill:'none',stroke:q[3],'stroke-width':2},g);tx_(g,q[4]+(q[6]==='end'?-4:4),q[5]+6,q[2],{'font-size':15,fill:q[3],'text-anchor':q[6]});return {g,pu};});
+  this.pC=[asChip(L,880,450,340,'치료사 = <b>외부 말운동 프로그래머</b>',ASC.pur,17),asChip(L,880,504,340,'원래 <b>아동기 말실행증</b> 치료용',ASC.gold,17)];},
+ draw(t,p){const a=p.scenes[0],Ls=a.L,i=asCur(a,t);
+  this.p.forEach((g,j)=>{asO(g,ramp(t,Ls[j].t0-.3,Ls[j].t0+.2));g.style.filter=i>=0&&i!==j?'brightness(.6)':'';});
+  this.lad.forEach((g,k)=>asO(g,ramp(t,Ls[0].t0+k*.3,Ls[0].t0+.3+k*.3)));const ts=asW(Ls[0],'건너뛰고',-.3);asO(this.skip,ramp(t,ts,ts+.5));op(this.sC[0],ramp(t,ts,ts+.5));op(this.sC[1],ramp(t,Ls[0].t0+1,Ls[0].t0+1.5)*(i===0?1:.6));
+  op(this.mC0,ramp(t,Ls[1].t0,Ls[1].t0+.5));const b=Math.floor((t-Ls[1].t0)*1.6)%6;this.nt.forEach((c,k)=>c.setAttribute('r',i===1&&k===b?21:16));const hx=b<5?520+b*64:520;this.hand.setAttribute('transform','translate('+hx+' '+(i===1&&b<5&&(t*1.6%1)<.4?400:392)+')');
+  op(this.mOk,ramp(t,asW(Ls[1],'청각적',-.3),asW(Ls[1],'청각적',.1)));op(this.mNo,ramp(t,asW(Ls[1],'베르니케',-.3),asW(Ls[1],'베르니케',.1)));
+  const kw=['얼굴','얼굴','턱 밑','목'];const ph=Math.floor((t-Ls[2].t0)*1.4)%4;
+  this.tp.forEach((q,k)=>{asO(q.g,ramp(t,asW(Ls[2],kw[k],-.3)+k*.15,asW(Ls[2],kw[k],.1)+k*.15));const on=i===2&&k===ph;q.pu.setAttribute('r',on?10+6*((t*1.4)%1):9);q.pu.setAttribute('opacity',on?1-((t*1.4)%1):.4);});
+  this.F.mouth(.2,i===2&&ph===0?.6:i===2&&ph===1?.9:0);
+  op(this.pC[0],ramp(t,asW(Ls[2],'외부',-.3),asW(Ls[2],'외부',.1)));op(this.pC[1],ramp(t,asW(Ls[2],'원래',-.3),asW(Ls[2],'원래',.1)));}});
+
+/* ═════════ 2-7 중증도별 ═════════ */
+page({id:'as2-7',label:'2-7',title:'중증도별 치료',scenes:[{name:'심도 · 중도 · 경도',pre:.6,post:.8,lines:AS2L['as2-7']}],
+ init(L){const s=SVGROOT(L);const P=[[40,'심도',ASC.red,'발성 · 모음 · 자음+모음 음절<br>짧은 기능어'],[450,'중도',ASC.gold,'단어 · 구'],[860,'경도',ASC.mint,'구 · 문장 · 문단']];
+  this.col=P.map(q=>{const g=sv('g',{opacity:0},s);sv('rect',{x:q[0],y:96,width:380,height:462,rx:18,fill:'rgba(9,18,34,.92)',stroke:q[2],'stroke-width':2.5},g);tx_(g,q[0]+190,134,q[1],{'font-size':28,fill:q[2]});return g;});
+  this.start=P.map(q=>asChip(L,q[0]+20,150,340,'<span style="font-size:14px;color:#9fb0c8">시작 수준</span><br>'+q[3],q[2],18));
+  this.s1=[asChip(L,60,248,340,'👄 잘 보이는 양순음부터',ASC.red,17),asChip(L,60,298,340,'자동구어 활용 (숫자 · 인사말)',ASC.red,17)];
+  this.aac=sv('g',{opacity:0},s);const W=['물','밥','화장실','아파요','네','아니요'];W.forEach((w,k)=>{const x=80+(k%3)*104,y=360+Math.floor(k/3)*58;sv('rect',{x,y,width:96,height:50,rx:8,fill:'#f4efe4',stroke:ASC.mint,'stroke-width':2},this.aac);tx_(this.aac,x+48,y+32,w,{'font-size':17,fill:'#2b2b3a',stroke:'none'});});
+  this.aacC=asChip(L,60,488,340,'+ <b>AAC(보완대체의사소통)</b> 병행',ASC.mint,18);
+  this.s2t=sv('g',{opacity:0},s);tx_(this.s2t,640,240,'대조적 강세 훈련',{'font-size':18,fill:ASC.gold});this.cs=[tx_(this.s2t,585,280,'철수가',{'font-size':24,fill:'#eef3fb'}),tx_(this.s2t,690,280,'갔어요?',{'font-size':24,fill:'#eef3fb'})];
+  this.s2f=sv('g',{opacity:0},s);tx_(this.s2f,640,326,'시각 구성요소 자극법',{'font-size':18,fill:ASC.gold});this.F=asFace(this.s2f,560,404,.32,{hair:'#3b2a22',cloth:'#4f7f6a'});
+  this.cue=sv('rect',{x:630,y:356,width:170,height:22,rx:11,fill:ASC.gold},this.s2f);tx_(this.s2f,715,400,'입 모양 보며 함께',{'font-size':15,fill:'#eef3fb'});tx_(this.s2f,715,422,'→ 단서 줄이기',{'font-size':15,fill:ASC.dim});
+  this.mir=asChip(L,470,488,340,'🪞 거울 보며 연습',ASC.gold,18);
+  this.s3=[asChip(L,880,248,340,'말속도 · 운율',ASC.mint,18),asChip(L,880,298,340,'자기 점검',ASC.mint,18),asChip(L,880,348,340,'대화로 일반화',ASC.mint,18)];
+  this.gap=sv('g',{opacity:0},s);tx_(this.gap,1050,416,'모델과 반응 사이 간격 늘리기',{'font-size':16,fill:ASC.mint});
+  sv('rect',{x:890,y:440,width:60,height:36,rx:8,fill:ASC.blue},this.gap);tx_(this.gap,920,464,'모델',{'font-size':15,fill:'#10203a',stroke:'none'});
+  this.resp=sv('g',{},this.gap);sv('rect',{x:0,y:440,width:60,height:36,rx:8,fill:ASC.pur},this.resp);tx_(this.resp,30,464,'반응',{'font-size':15,fill:'#10203a',stroke:'none'});
+  this.gl=sv('line',{x1:954,y1:458,x2:1000,y2:458,stroke:'#cfd8ea','stroke-width':2,'stroke-dasharray':'5 5'},this.gap);this.gTx=tx_(this.gap,1000,502,'',{'font-size':15,fill:ASC.dim});},
+ draw(t,p){const a=p.scenes[0],Ls=a.L,i=asCur(a,t);
+  this.col.forEach((g,j)=>{asO(g,ramp(t,Ls[j].t0-.3,Ls[j].t0+.2));g.style.filter=i>=0&&i!==j?'brightness(.6)':'';op(this.start[j],ramp(t,Ls[j].t0,Ls[j].t0+.5)*(i>=0&&i!==j?.6:1));});
+  op(this.s1[0],ramp(t,asW(Ls[0],'양순음',-.3),asW(Ls[0],'양순음',.1)));op(this.s1[1],ramp(t,asW(Ls[0],'자동구어',-.3),asW(Ls[0],'자동구어',.1)));const ta=asW(Ls[0],'보완대체',-.3);asO(this.aac,ramp(t,ta,ta+.5));op(this.aacC,ramp(t,ta,ta+.5));
+  const tc=asW(Ls[1],'대조적',-.3);asO(this.s2t,ramp(t,tc,tc+.5));const sw=Math.floor(t/1.2)%2;this.cs.forEach((e,k)=>{e.setAttribute('font-size',k===sw?30:22);e.setAttribute('fill',k===sw?ASC.gold:'#eef3fb');});
+  const tv=asW(Ls[1],'입 모양',-.3);asO(this.s2f,ramp(t,tv,tv+.5));this.F.mouth(.2,Math.sin(t*10)>0?.6:0);this.cue.setAttribute('width',(170*(1-.85*((t-tv)/4%1))).toFixed(1));op(this.mir,ramp(t,asW(Ls[1],'거울',-.3),asW(Ls[1],'거울',.1)));
+  ['말속도','자기 점검','대화로'].forEach((w,k)=>op(this.s3[k],ramp(t,asW(Ls[2],w,-.3),asW(Ls[2],w,.1))));
+  const tg=asW(Ls[2],'모델과',-.3);asO(this.gap,ramp(t,tg,tg+.5));const g=ramp(t,tg+.5,tg+3.5);const rx=1000+150*g;this.resp.setAttribute('transform','translate('+rx.toFixed(1)+' 0)');this.gl.setAttribute('x2',rx.toFixed(1));this.gTx.setAttribute('x',((954+rx)/2).toFixed(1));this.gTx.textContent=g>.1?'간격 ↑':'';}});
+
+/* ═════════ 2-8 아동기 말실행증 ═════════ */
+page({id:'as2-8',label:'2-8',title:'아동기 말실행증',scenes:[{name:'CAS',pre:.6,post:.8,lines:AS2L['as2-8']}],
+ init(L){const s=SVGROOT(L);this.A=sv('g',{},s);
+  asPanel(this.A,40,96,580,464,ASC.blue,'CAS(아동기 말실행증)','start');
+  this.kid=asFace(this.A,170,262,.48,{hair:'#3a2a22',cloth:'#e0a050'});[-1,1].forEach(k=>sv('ellipse',{cx:170+k*23,cy:274,rx:9,ry:6,fill:'#f2a0a0',opacity:.6},this.A));tx_(this.A,170,196,'아동',{'font-size':16,fill:ASC.dim});
+  this.c0=[asChip(L,300,150,300,'언어발달이 끝나기 <b>전</b>',ASC.blue,18),asChip(L,300,204,300,'대부분 <b>원인 불명</b>',ASC.blue,18),asChip(L,300,258,300,'뇌영상: 손상 <b>안 보임</b>',ASC.blue,18)];
+  this.bars=sv('g',{opacity:0},this.A);tx_(this.bars,64,412,'수용언어',{'font-size':19,fill:'#eef3fb','text-anchor':'start'});tx_(this.bars,64,468,'표현언어',{'font-size':19,fill:'#eef3fb','text-anchor':'start'});
+  sv('rect',{x:160,y:394,width:420,height:26,rx:13,fill:'#24324d'},this.bars);sv('rect',{x:160,y:450,width:420,height:26,rx:13,fill:'#24324d'},this.bars);
+  this.bR=sv('rect',{x:160,y:394,width:0,height:26,rx:13,fill:ASC.ok},this.bars);this.bE=sv('rect',{x:160,y:450,width:0,height:26,rx:13,fill:ASC.bad},this.bars);
+  this.sus=asChip(L,64,500,530,'수용 ≈ 정상인데 표현이 매우 낮음 → <b>의심</b>',ASC.gold,18);
+  asPanel(this.A,640,96,600,464,ASC.pur,'특징','start');
+  const F=['모음 · 자음 목록이 매우 제한','모음 오류','비일관적 오류','길수록 오류 ↑','운율 문제'];this.ft=F.map((f,k)=>asChip(L,660+(k%2)*286,140+Math.floor(k/2)*48,276,f,ASC.pur,17));this.ft[4].style.left='660px';
+  this.pm=sv('g',{opacity:0},this.A);tx_(this.pm,660,316,'쉼 표지 (pause marker)',{'font-size':18,fill:ASC.gold,'text-anchor':'start'});tx_(this.pm,1220,316,'부적절한 쉼 8가지',{'font-size':15,fill:ASC.dim,'text-anchor':'end'});
+  const SY=['바','나','나','주','세','요'];let x=670;this.pmk=[];SY.forEach((y,k)=>{sv('rect',{x,y:352,width:58,height:38,rx:8,fill:'#2c3f64'},this.pm);tx_(this.pm,x+29,378,y,{'font-size':20,fill:'#eef3fb'});x+=58;if(k<5){const gw=[38,10,46,30,52][k];if(gw>20){this.pmk.push(sv('path',{d:'M'+(x+gw/2)+' 346 l-7 -12 l14 0Z',fill:ASC.bad},this.pm));}x+=gw;}});
+  tx_(this.pm,660,414,'→ 말소리 지체와 구별',{'font-size':16,fill:ASC.dim,'text-anchor':'start'});
+  this.c2=[asChip(L,660,432,280,'⚠ 언어 · 문해력 문제 위험',ASC.gold,17),asChip(L,950,432,270,'주 치료: <b>PROMPT</b>',ASC.pur,18)];
+  this.B=sv('g',{opacity:0},s);asPanel(this.B,40,96,1200,464,ASC.gold,'아동기 vs 성인기 말실행증','start');
+  const R=[['','아동기 (CAS)','성인기 (AOS)'],['원인','발달성 · 대부분 원인 불명','후천적 뇌손상 (뇌졸중 등)'],['자동말 vs 명제말','차이가 항상 뚜렷하진 않음','명제말이 더 어려움'],['동반','언어장애 · 음운장애','실어증 · 구강실행증 · 마비말장애']];
+  this.rows=R.map((r,k)=>{const y=150+k*96;const g=sv('g',{opacity:k?0:1},this.B);if(k)sv('rect',{x:64,y:y-38,width:1152,height:80,rx:12,fill:'rgba(20,32,54,.9)',stroke:'#3d4d6e','stroke-width':1.5},g);
+   tx_(g,210,y+8,r[0],{'font-size':k?22:20,fill:k?'#eef3fb':ASC.dim});tx_(g,590,y+8,r[1],{'font-size':k?22:24,fill:ASC.blue});tx_(g,980,y+8,r[2],{'font-size':k?22:24,fill:ASC.org});return g;});},
+ draw(t,p){const a=p.scenes[0],Ls=a.L,i=asCur(a,t);const tB=Ls[3].t0-.2;asO(this.A,1-ramp(t,tB-.3,tB));asO(this.B,ramp(t,tB,tB+.5));const ka=1-ramp(t,tB-.3,tB);
+  ['언어발달이','원인을','뇌영상'].forEach((w,k)=>op(this.c0[k],ramp(t,asW(Ls[0],w,-.3),asW(Ls[0],w,.1))*ka));this.kid.mouth(.6,0);
+  const tr=Ls[1].t0-.2;asO(this.bars,ramp(t,tr,tr+.4));this.bR.setAttribute('width',(400*ramp(t,asW(Ls[1],'수용언어',0),asW(Ls[1],'수용언어',1))).toFixed(1));this.bE.setAttribute('width',(110*ramp(t,asW(Ls[1],'표현언어',0),asW(Ls[1],'표현언어',1))).toFixed(1));
+  op(this.sus,ramp(t,asW(Ls[1],'의심',-.3),asW(Ls[1],'의심',.1))*ka);
+  ['모음과 자음','모음 오류','비일관적','길수록','운율'].forEach((w,k)=>op(this.ft[k],ramp(t,asW(Ls[1],w,-.3),asW(Ls[1],w,.1))*ka));
+  const tp=asW(Ls[2],'쉼',-.4);asO(this.pm,ramp(t,tp,tp+.5));this.pmk.forEach((m,k)=>m.setAttribute('opacity',Math.sin(t*4-k)>0?1:.4));
+  op(this.c2[0],ramp(t,asW(Ls[2],'문해력',-.3),asW(Ls[2],'문해력',.1))*ka);op(this.c2[1],ramp(t,asW(Ls[2],'주된',-.3),asW(Ls[2],'주된',.1))*ka);
+  this.rows.forEach((g,k)=>{if(k)asO(g,ramp(t,tB+.4+k*.5,tB+.8+k*.5));});}});
+
+/* ═════════ 2-9 확인 문제 ═════════ */
+const QAS2=[
+ {q:'로젠벡 8단계 연속법의 7단계는?',o:['치료사와 동시에 말하기','글자 카드를 보면서 말하기','치료사의 질문을 듣고 목표어로 대답하기','역할극으로 실제 대화에서 쓰기','치료사가 입 모양만 낼 때 소리 내어 말하기'],a:2,x:'7단계 = 질문을 듣고 목표어로 대답 (8단계 = 역할극)'},
+ {q:'말실행증 치료 초기(습득 단계)의 훈련 조건으로 알맞은 것은?',o:['몰아서 · 같은 맥락 · 한 목표씩(blocked)','나눠서 · 다른 맥락 · 무작위(random)','나눠서 · 같은 맥락 · 무작위','몰아서 · 다른 맥락 · 무작위','처음부터 대화 맥락에서만 연습'],a:0,x:'초기 = massed · constant · blocked / 유지·일반화 = distributed · variable · random'},
+ {q:'말실행증 자극 선택 순서로 옳은 것은?',o:['긴 것 → 짧은 것','연구개음 → 양순음','명제말 → 자동적인 말','자동적인 말 → 명제말','복잡한 조음 → 단순한 조음'],a:3,x:'요일 말하기(자동) → 주말에 한 일 말하기(명제)'},
+ {q:'치료사가 손가락으로 얼굴 · 턱 밑 · 목을 접촉해 조음 정보를 주는 기법과 그 접근은?',o:['MIT · 속도–리듬 제어','로젠벡 8단계 · 조음–운동학적','메트로놈 · 속도–리듬 제어','PROMPT · 체계 간 재조직','최소 대립쌍 · 조음–운동학적'],a:3,x:'PROMPT = 촉각 단서, 치료사가 외부 말운동 프로그래머 역할'},
+ {q:'MIT(멜로디 억양 치료)가 맞지 않는 환자는?',o:['청각적 이해가 양호한 환자','베르니케 영역 광범위 손상 환자','조음이 낮은 비유창 환자','따라말하기가 낮은 환자','동기와 주의력이 좋은 환자'],a:1,x:'베르니케 영역 넓은 손상 · 우반구 손상에는 부적절'},
+ {q:'아동기 말실행증을 의심할 수 있는 신호는?',o:['수용 · 표현언어 모두 정상','뇌영상에서 뚜렷한 손상','자동말과 명제말 차이가 항상 뚜렷함','모음 오류가 전혀 없음','수용언어는 거의 정상인데 표현언어가 매우 낮음'],a:4,x:'수용 ≈ 정상 · 표현 매우 낮음 → 의심, 주 치료는 PROMPT'}];
+page({id:'as2-9',label:'2-9',title:'확인 문제',mute:true,scenes:QAS2.map((q,i)=>({name:'문제 '+(i+1),pre:i===0?0.6:0.4,post:0.6,lines:[{tx:q.q,d:10,nosub:true},{tx:'정답',d:6,nosub:true}]})),
+ init(L){const N='①②③④⑤';this.cards=QAS2.map((q,i)=>hdiv('quiz ov','<div class="qn">문제 '+(i+1)+' / '+QAS2.length+' · 잠깐 멈추고 풀어 보세요</div><div class="qt">'+q.q+'</div>'+q.o.map((o,j)=>'<div class="op">'+N[j]+' '+o+'</div>').join('')+'<div class="ex ov" style="position:relative">정답 '+N[q.a]+' · '+q.x+'</div>',L));},
+ draw(t,p){this.cards.forEach((c,i)=>{const s=p.scenes[i];op(c,win(t,s.t0+(i===0?0.3:0),s.t1+0.1,0.35));const rv=t>=s.L[1].t0;c.querySelectorAll('.op').forEach((e,j)=>e.classList.toggle('ok',rv&&j===QAS2[i].a));op(c.querySelector('.ex'),ramp(t,s.L[1].t0,s.L[1].t0+0.4));});}});
+</script>
+<script>"use strict";
+/* ───────── 시작 ───────── */
+for(const p of PAGES){p.layer=hdiv('page','',$('layers'));p.layer.style.display='none';}
+/* 자막과 겹치지 않도록 일부 페이지만 살짝 축소 (페이지 id는 편마다 고유) */
+const FITMAP={'1-1':0.85,'2-5':0.86,'a2-1':0.95,'r-3':0.9,'s2-2':0.84,'s2-3':0.79,'s2-4':0.84,'s2-5':0.955,'s2-6':0.95};
+for(const p of PAGES){const k=FITMAP[p.id];if(k){p.layer.style.transformOrigin='640px 96px';p.layer.style.transform='scale('+k+')';}}
+let initN=0;function ensureInit(p){const k=Math.max(0,PAGES.indexOf(p));while(initN<=k&&initN<PAGES.length){const q=PAGES[initN++];q.init(q.layer);}}
+ensureInit(PAGES[0]);
+function bgInit(){if(initN>=PAGES.length)return;ensureInit(PAGES[initN]);setTimeout(bgInit,30);}
+buildTimeline();
+const AL=ALL.filter(l=>l.has);
+function aud(l){if(!l.a){l.a=new Audio(l.src);l.a.preload='auto';}return l.a;}
+function prefetch(l,n=2){let i=AL.indexOf(l);for(let k=1;k<=n&&i+k<AL.length;k++)aud(AL[i+k]);}
+if(AL.length){aud(AL[0]);prefetch(AL[0]);}
+
+let rate=1,t=0,playing=false,last=performance.now(),dragging=false,wasPlaying=false,curA=null;
+const fmt=s=>{s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
+const icoPlay='<svg width="24" height="24" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#fff"/></svg>',icoPause='<svg width="24" height="24" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1" fill="#fff"/><rect x="14" y="4" width="4" height="16" rx="1" fill="#fff"/></svg>';
+const icoFull='<path d="M4 9V4h5v2H6v3zm11-5h5v5h-2V6h-3zM4 15h2v3h3v2H4zm14 0h2v5h-5v-2h3z" fill="#fff"/>',icoExit='<path d="M9 4v5H4V7h3V4zm6 0h2v3h3v2h-5zM4 15h5v5H7v-3H4zm11 0h5v2h-3v3h-2z" fill="#fff"/>';
+let SCALE=1,hideT=null;const CTL=$('ctl'),VP=$('vp');
+function subShift(){const vis=!CTL.classList.contains('hide');$('sub').style.bottom=(vis?30+Math.max(0,CTL.offsetHeight-34)/SCALE:30)+'px';}
+function showCtl(){CTL.classList.remove('hide');VP.classList.remove('nocur');clearTimeout(hideT);if(playing&&!dragging&&!overCtl&&$('menu').style.display!=='block')hideT=setTimeout(()=>{CTL.classList.add('hide');VP.classList.add('nocur');subShift();},2600);subShift();}
+VP.addEventListener('pointermove',showCtl);VP.addEventListener('pointerdown',showCtl);
+let overCtl=false;CTL.addEventListener('pointerenter',()=>{overCtl=true;clearTimeout(hideT);CTL.classList.remove('hide');VP.classList.remove('nocur');});CTL.addEventListener('pointerleave',()=>{overCtl=false;showCtl();});
+function stopAudio(){for(const l of ALL)if(l.a&&!l.a.paused)l.a.pause();curA=null;}
+function syncAudio(){if(!playing||dragging){stopAudio();return;}
+ const l=AL.find(l=>t>=l.t0&&t<l.t1);
+ if(l){aud(l);prefetch(l);}
+ if(!l){if(curA)stopAudio();return;}
+ if(curA!==l){stopAudio();curA=l;l.a.playbackRate=rate;l.a.currentTime=Math.max(0,t-l.t0);l.a.play().catch(()=>{});}
+ else if(!l.a.paused&&Math.abs(l.a.currentTime-(t-l.t0))>0.3)l.a.currentTime=Math.max(0,t-l.t0);}
+function ui(){$('fill').style.width=(t/TOTAL*100)+'%';$('knob').style.left=(t/TOTAL*100)+'%';$('time').textContent=fmt(t)+' / '+fmt(TOTAL);
+ const bp=$('bplay'),st=playing?'pause':'play';if(bp.dataset.st!==st){bp.dataset.st=st;bp.innerHTML=playing?icoPause:icoPlay;}op($('bigplay'),playing||t>0.01?0:1);}
+function setPlay(v){if(v&&t>=TOTAL-0.05)t=0;playing=v;last=performance.now();if(!v)stopAudio();else syncAudio();ui();showCtl();}
+function seek(x){t=cl(x,0,TOTAL);stopAudio();frame(t);ui();if(playing)syncAudio();}
+function flash(txt,left){const f=$('flash');f.textContent=txt;f.style.left=left?'80px':'';f.style.right=left?'':'80px';f.style.opacity=1;clearTimeout(flash.h);flash.h=setTimeout(()=>f.style.opacity=0,500);}
+function loop(now){const dt=Math.min(0.5,(now-last)/1000);last=now;
+ if(playing&&!dragging){
+  if(curA&&!curA.a.paused&&curA.a.currentTime>0&&!curA.a.ended)t=curA.t0+curA.a.currentTime;else t+=dt*rate;
+  if(t>=TOTAL){t=TOTAL;playing=false;stopAudio();if(EP.next){const n=$('nextEp');if(n)n.style.display='flex';}}
+  syncAudio();frame(t);ui();}
+ requestAnimationFrame(loop);}
+for(const p of PAGES){for(const s of p.scenes){if(s.t0<=0)continue;const k=hdiv('tick'+(s===p.scenes[0]?' pg':''),'',$('ticks'));k.style.left=(s.t0/TOTAL*100)+'%';k.title=(p.label||p.id)+' '+s.name;}}
+$('menu').innerHTML=PAGES.map((p,i)=>`<div data-i="${i}"><b>${p.label||p.id}</b>${p.title} <span style="color:#7d90ad;font-size:17px">${fmt(p.t0)}</span></div>`).join('');
+$('menu').addEventListener('pointerup',e=>{e.stopPropagation();const d=e.target.closest('[data-i]');if(!d)return;seek(PAGES[+d.dataset.i].t0+0.01);$('menu').style.display='none';});
+$('bmenu').onclick=()=>{const m=$('menu');m.style.display=m.style.display==='block'?'none':'block';showCtl();};
+function toggleFull(){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen().catch(()=>{});}
+$('bfull').onclick=toggleFull;
+document.addEventListener('fullscreenchange',()=>{const ic=document.getElementById('icoFull');if(ic)ic.innerHTML=document.fullscreenElement?icoExit:icoFull;setTimeout(fit,100);});
+$('bplay').onclick=()=>setPlay(!playing);
+$('bback').onclick=()=>{seek(t-10);flash('◀◀ 10초',true);};
+$('bfwd').onclick=()=>{seek(t+10);flash('10초 ▶▶',false);};
+const prog=$('prog');const px=e=>{const r=prog.getBoundingClientRect();return cl((e.clientX-r.left)/r.width)*TOTAL;};
+prog.addEventListener('pointerdown',e=>{dragging=true;CTL.classList.add('drag');wasPlaying=playing;playing=false;prog.setPointerCapture(e.pointerId);seek(px(e));});
+prog.addEventListener('pointermove',e=>{if(dragging)seek(px(e));});
+prog.addEventListener('pointerup',e=>{if(!dragging)return;dragging=false;CTL.classList.remove('drag');seek(px(e));setPlay(wasPlaying);});
+const stage=$('stage');let tapT=0,tapH=null,pd=null,lastPage=null;
+stage.addEventListener('pointerdown',e=>{pd={x:e.clientX,y:e.clientY,yaw:W.ORB.yaw,pitch:W.ORB.pitch,drag:false};});
+stage.addEventListener('pointermove',e=>{if(!pd||+W.cv.style.opacity<0.3)return;const dx=e.clientX-pd.x,dy=e.clientY-pd.y;if(!pd.drag&&Math.hypot(dx,dy)>8)pd.drag=true;
+ if(pd.drag){W.ORB.yaw=pd.yaw-dx*0.008;W.ORB.pitch=cl(pd.pitch+dy*0.006,-0.9,0.9);frame(t);}});
+stage.addEventListener('pointerup',e=>{const wasDrag=pd&&pd.drag;pd=null;if(wasDrag)return;if($('menu').style.display==='block'){$('menu').style.display='none';return;}
+ if(e.pointerType==='mouse'){setPlay(!playing);return;}
+ const now=performance.now();const r=stage.getBoundingClientRect();const left=(e.clientX-r.left)<r.width/2;
+ if(now-tapT<300){clearTimeout(tapH);tapT=0;if(left){seek(t-10);flash('◀◀ 10초',true);}else{seek(t+10);flash('10초 ▶▶',false);}return;}
+ tapT=now;tapH=setTimeout(()=>setPlay(!playing),300);});
+const VOICED=()=>ALL.filter(l=>!l.nosub);
+function nextLine(d){const L=VOICED();if(d>0){const n=L.find(l=>l.t0>t+0.05);if(n)seek(n.t0);}else{const ps=L.filter(l=>l.t0<t-0.8);if(ps.length)seek(ps[ps.length-1].t0);else seek(0);}}
+function setRate(r){rate=Math.round(cl(r,0.5,2)*100)/100;for(const l of ALL)if(l.a)l.a.playbackRate=rate;$('bspd').textContent=rate.toFixed(rate*10%1?2:1)+'×';flash('속도 '+rate+'×',false);}
+const RATES=[0.5,0.75,0.9,1,1.1,1.25,1.5,1.75,2];
+addEventListener('keydown',e=>{const k=e.key,c=e.code;if(e.ctrlKey||e.metaKey||e.altKey)return;
+ if(c==='Space'||k==='k'||k==='K'){e.preventDefault();setPlay(!playing);}
+ else if(e.shiftKey&&c==='ArrowLeft'){nextLine(-1);flash('◀ 이전 대사',true);}
+ else if(e.shiftKey&&c==='ArrowRight'){nextLine(1);flash('다음 대사 ▶',false);}
+ else if(k==='j'||k==='J'||c==='ArrowLeft'){seek(t-10);flash('◀◀ 10초',true);}
+ else if(k==='l'||k==='L'||c==='ArrowRight'){seek(t+10);flash('10초 ▶▶',false);}
+ else if(/^[0-9]$/.test(k)){seek(TOTAL*(+k)/10);}
+ else if(k==='<'||k===','){setRate(RATES[Math.max(0,RATES.findIndex(r=>r>=rate)-1)]);}
+ else if(k==='>'||k==='.'){setRate(RATES[Math.min(RATES.length-1,RATES.findIndex(r=>r>rate))]||2);}
+ else if(k==='r'||k==='R'){seek(0);setPlay(true);}
+ else if(k==='Escape'){if($('menu').style.display==='block')$('menu').style.display='none';else location.href='index.html';}
+ else if(k==='f'||k==='F'){toggleFull();}
+ showCtl();});
+$('bspd').onclick=()=>{const i=RATES.indexOf(rate);setRate(RATES[(i+1)%RATES.length]);};
+$('bhome').onclick=()=>{location.href='index.html';};
+function fit(){const vp=$('vp');const s=Math.min(vp.clientWidth/1280,vp.clientHeight/720);SCALE=s;stage.style.transform=`translate(-50%,-50%) scale(${s})`;W.R.setPixelRatio(Math.min(2,(window.devicePixelRatio||1)*s));W.R.setSize(1280,720,false);frame(t);}
+addEventListener('resize',fit);fit();ui();showCtl();requestAnimationFrame(loop);
+{const h=decodeURIComponent(location.hash.slice(1));const pg=PAGES.find(p=>p.id===h);if(pg)seek(pg.t0+0.01);}
+const _frame=frame;frame=function(tt){const cur=PAGES.find(p=>tt>=p.t0&&tt<p.t1);ensureInit(cur||PAGES[PAGES.length-1]);if(cur!==lastPage){lastPage=cur;W.ORB.yaw=0;W.ORB.pitch=0;}_frame(tt);};
+setTimeout(bgInit,500);
+window.DBG={seek,get TOTAL(){return TOTAL},PAGES,get t(){return t},ALL};
+</script>
+</body>
+</html>
