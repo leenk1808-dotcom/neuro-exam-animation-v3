@@ -234,7 +234,7 @@ const sub_=(p,i,j,k,n)=>{const a=LS(p,i,j),b=LE(p,i,j);return a+(b-a)*k/n;};
 </script>
 <script>"use strict";
 /* 실제 음성 길이(초) */
-Object.assign(DUR,{"rh-1_01":7.36,"rh-1_02":13.76,"rh-1_03":12,"rh-1_04":13.44,"rh-2_01":9.84,"rh-2_02":7.84,"rh-2_03":4.16,"rh-3_01":11.84,"rh-3_02":5.76,"rh-3_03":4.4,"rh-4_01":6.8,"rh-4_02":5.6,"rh-4_03":10.4,"rh-5_01":8.16,"rh-5_02":6.56,"rh-5_03":6.8,"rh-6_01":11.84,"rh-6_02":8.8,"rh-6_03":14.56,"rh-6_04":6.16,"rh-7_01":6.24,"rh-7_02":10.72,"rh-7_03":11.36,"rh-7_04":13.76,"rh-8_01":8.8,"rh-8_02":6.08,"rh-8_03":11.52,"rh-8_04":11.44,"rh-9_01":9.92,"rh-9_02":9.52,"rh-9_03":10.4,"rh-9_04":15.04});
+Object.assign(DUR,{"rh-1_01":7.36,"rh-1_02":13.76,"rh-1_03":12,"rh-1_04":13.44,"rh-2_01":9.84,"rh-2_02":7.84,"rh-2_03":4.16,"rh-3_01":11.84,"rh-3_02":5.76,"rh-3_03":4.4,"rh-4_01":6.8,"rh-4_02":5.6,"rh-4_03":10.4,"rh-5_01":8.16,"rh-5_02":6.56,"rh-5_03":6.8,"rh-6_01":11.84,"rh-6_02":8.8,"rh-6_03":14.56,"rh-6_04":6.16,"rh-7_01":6.24,"rh-7_02":10.72,"rh-7_03":11.36,"rh-7_04":13.76,"rh-8_01":8.8,"rh-8_02":6.08,"rh-8_03":11.52,"rh-8_04":11.44,"rh-9_01":9.92,"rh-9_02":9.52,"rh-9_03":10.4,"rh-9_04":15.04,"rh-2_04":14.56,"rh-2_05":5.92,"rh-3_04":6.72,"rh-3_05":10.16,"rh-4_04":9.68,"rh-4_05":12.16,"rh-4_06":8.48,"rh-4_07":15.6,"rh-5_04":12.16,"rh-6_05":6.8,"rh-6_06":13.52,"rh-8_05":15.68,"rh-8_06":14.08,"rh-9_05":7.28});
 </script>
 <script>"use strict";
 /* ───────── 3D 공용 세계 ───────── */
@@ -839,10 +839,228 @@ const QRH=[
  {q:'"방이 춥네"라는 말에 창문을 닫지 않고 "그렇네요"라고만 답하는 우반구 손상 환자의 문제는?',o:['대면 이름대기 저하','문법 오류','간접 요청 등 비문자적 언어 이해 저하','청각적 이해 전반 저하','조음 오류'],a:2,x:'비문자적 언어(간접 요청 · 속담 · 은유 · 빈정거림)를 글자 그대로 받아들임'},
  {q:'좌측 무시 환자의 발병 초기 환경 재구조화로 알맞은 것은?',o:['중요한 물건을 모두 왼쪽에 둔다','대화 상대가 왼쪽에 앉는다','물건을 무작위로 배치한다','중요한 물건과 대화 상대를 오른쪽에 둔다','환경은 바꾸지 않는다'],a:3,x:'초기 = 오른쪽 중심 / 일상생활로 전이할 때 = 왼쪽 중심'},
  {q:'우반구 손상 환자의 자기 인식과 자기 점검을 높이는 방법은?',o:['문법 문장 따라 쓰기','치료 장면을 녹화해 함께 보며 자기 반응 평가하기','멜로디 억양 치료','로젠벡 8단계 연속법','온도촉각 자극'],a:1,x:'비디오 피드백 → 인식 → 전략 훈련 → 실제 적용 → 일반화'},
- {q:'표적을 지우면서 숫자를 거꾸로 말하게 하는 과제가 훈련하는 것은?',o:['지속 주의','선택 주의','시지각','분리(분할) 주의','정서적 운율'],a:3,x:'두 과제를 동시에 = 분리 주의 / 특성 두 가지 이상 지우기 = 선택 주의'}];
+ {q:'표적을 지우면서 숫자를 거꾸로 말하게 하는 과제가 훈련하는 것은?',o:['지속 주의','선택 주의','시지각','분리(분할) 주의','정서적 운율'],a:3,x:'두 과제를 동시에 = 분리 주의 / 특성 두 가지 이상 지우기 = 선택 주의'},
+ {q:'"당신 어머니의 아버지는 당신의 삼촌인가요?"라고 묻거나, "국이 너무 짜서 소금을 더 넣었다"에서 이상한 점을 찾게 하는 과제가 평가하는 것은?',o:['운율 산출','은유 이해','단단어 이해','화용언어 능력','추상적 사고'],a:4,x:'관계 추론 · 모순 찾기 · 공통점 · 여러 뜻 말하기 = 추상적 사고(력)'},
+ {q:'우반구 손상 환자에게서 결함이 두드러지게 나타나는 과제는?',o:['대면 이름대기','관용어 이해하기','단어 따라말하기','1단계 지시 따르기','간단한 질문에 응답하기'],a:1,x:'언어 형식은 비교적 보존 · 관용어 · 속담 · 은유는 글자 그대로 받아들임'},
+ {q:'문장카드 왼쪽 끝에 색깔 · 무늬를 넣고, 읽을 때마다 "왼쪽을 본다"라고 말하게 하며, 비대칭 그림을 쓰는 활동의 치료 목표는?',o:['시각적 무시 해소','눈맞춤 증진','담화 주제 유지','충동적 반응 억제','관용어 의미 이해'],a:0,x:'왼쪽으로 주의를 끄는 단서 · 자기 단서 → 좌측 무시 치료'}];
 page({id:'rh-10',label:'1-10',title:'확인 문제',mute:true,scenes:QRH.map((q,i)=>({name:'문제 '+(i+1),pre:i===0?0.6:0.4,post:0.6,lines:[{tx:q.q,d:10,nosub:true},{tx:'정답',d:6,nosub:true}]})),
  init(L){const N='①②③④⑤';this.cards=QRH.map((q,i)=>hdiv('quiz ov','<div class="qn">문제 '+(i+1)+' / '+QRH.length+' · 잠깐 멈추고 풀어 보세요</div><div class="qt">'+q.q+'</div>'+q.o.map((o,j)=>'<div class="op">'+N[j]+' '+o+'</div>').join('')+'<div class="ex ov" style="position:relative">정답 '+N[q.a]+' · '+q.x+'</div>',L));},
  draw(t,p){this.cards.forEach((c,i)=>{const s=p.scenes[i];op(c,win(t,s.t0+(i===0?0.3:0),s.t1+0.1,0.35));const rv=t>=s.L[1].t0;c.querySelectorAll('.op').forEach((e,j)=>e.classList.toggle('ok',rv&&j===QRH[i].a));op(c.querySelector('.ex'),ramp(t,s.L[1].t0,s.L[1].t0+0.4));});}});
+
+
+/* ═════════ 보강 (2026-11-23 · 우뇌손상·외상성뇌손상 세미나) ═════════
+   기존 페이지 끝에 장면을 덧붙임. 기존 장면은 그대로, 새 장면이 시작되면 기존 그림은 사라지고 새 그림이 나옴 */
+const RHB={
+"rh-2":["좌측 무시는 지우기 검사, 선 이등분 검사, 쓰기 검사, 그림 따라 그리기로 확인합니다. 왼쪽의 표적을 빠뜨리고, 선의 가운데를 오른쪽으로 치우쳐 표시하며, 그림과 글의 왼쪽을 비워 둡니다.","좌측 무시는 회복이 잘 되는 편이어서, 3개월 후 약 75%가 회복됩니다."],
+"rh-3":["구성장애가 있으면 기하학적 도형을 따라 그리거나 나무 블록으로 3차원 모양을 만들기 어렵습니다.","자신이 어디 있는지 모르는 지리 지남력 장애, 그리고 사람이나 장소의 복사판이 따로 있다고 믿는 재생가능 기억착오가 드물게 나타나기도 합니다."],
+"rh-4a":["주의는 반응을 위한 준비 상태인 각성, 자극에 계속 민감하게 깨어 있는 경계, 자극 쪽으로 주의를 향하는 지향성에서 출발합니다.","그 위에 시간이 지나도 유지하는 지속 주의, 방해 자극 속에서 유지하는 선택 주의, 과제가 바뀌면 옮겨 가는 교대 주의, 둘 이상을 동시에 하는 분할 주의가 있습니다."],
+"rh-4b":["시지각이 떨어지면 낯선 방향이나 왜곡된 형태로 그린 사물, 여러 개가 겹쳐 있는 그림 속 목표를 알아보기 어렵습니다.","'어머니의 아버지는 삼촌인가' 같은 관계 질문, '국이 너무 짜서 소금을 더 넣었다'에서 이상한 점 찾기, 커피·녹차·주스의 공통점, '눈'의 여러 뜻 말하기는 모두 추상적 사고를 평가하는 과제입니다."],
+"rh-5":["운율 면에서는 말이 느리고 음절과 단어 사이 쉼이 로봇처럼 일정하며, 강세가 줄고, 억양이 제한되어 끝을 올리는 질문과 끝을 내리는 주장을 구별하기 어렵습니다."],
+"rh-6":["화용에서는 갑자기 대화를 시작하거나 끝내고, 발언권을 양보하지 않으며, 부적절하게 끼어듭니다.","어휘에서는 하나의 답을 찾는 수렴 과제는 비교적 괜찮지만, 여러 답을 떠올리는 발산 과제는 떨어집니다. 그래서 대면 이름대기나 따라말하기보다 관용어 이해하기에서 결함이 두드러집니다."],
+"rh-8":["문장카드 왼쪽 끝에 색깔이나 무늬 같은 특별한 자극을 넣고, 한 문장씩 읽을 때마다 환자가 스스로 '왼쪽을 본다'라고 말하게 하며, 단일어나 비대칭 그림을 씁니다. 이 활동들의 목표는 시각적 무시 해소입니다.","지속 주의는 경계 훈련처럼 오래 수행하는 과제로, 교대 주의는 두 과제를 섞어 번갈아 하는 과제로 훈련합니다. 선 이등분은 무시 검사이고, 주의 훈련에서는 한 번에 많은 자극을 주지 않습니다."],
+"rh-9":["상대의 기쁨이나 놀람 같은 감정을 이해하지 못하면, 얼굴 표정에 맞는 감정 어휘를 연결하는 활동을 합니다."]};
+
+/* 페이지에 장면 덧붙이기: 기존 그림은 한 컨테이너로 묶어 새 장면 시작 때 사라지게 함 */
+function rhBoost(id,scs,init,draw){const P=PAGES.find(p=>p.id===id);const n0=P.scenes.length;scs.forEach(s=>P.scenes.push(s));const oi=P.init,od=P.draw;
+ P.init=function(L){oi.call(this,L);const old=hdiv('',null,null,'position:absolute;left:0;top:0;width:1280px;height:720px');while(L.firstChild)old.appendChild(L.firstChild);L.appendChild(old);this._bo=old;
+  this._bc=scs.map(()=>hdiv('',null,L,'position:absolute;left:0;top:0;width:1280px;height:720px;opacity:0'));init.call(this,this._bc);};
+ P.draw=function(t,p){od.call(this,t,p);const S=p.scenes.slice(n0);op(this._bo,1-ramp(t,S[0].t0-.2,S[0].t0+.3));
+  this._bc.forEach((c,k)=>{const nx=S[k+1];op(c,ramp(t,S[k].t0-.2,S[k].t0+.3)*(nx?1-ramp(t,nx.t0-.2,nx.t0+.3):1));});draw.call(this,t,S);};}
+const rbG=(s)=>sv('g',{opacity:0},s);
+function rbFlower(par,cx,cy,s,half){const g=sv('g',{transform:'translate('+cx+' '+cy+') scale('+s+')'},par);
+ sv('path',{d:'M0 0 L0 95',stroke:'#4f8a4a','stroke-width':5},g);
+ if(!half)sv('path',{d:'M0 60 Q-30 40 -42 58 Q-26 72 0 66Z',fill:'#6fbf5a'},g);sv('path',{d:'M0 50 Q30 30 42 48 Q26 62 0 56Z',fill:'#6fbf5a'},g);
+ for(let i=0;i<10;i++){const a=i*36;const c=Math.cos(a*Math.PI/180);if(half&&c<0.05)continue;sv('ellipse',{cx:0,cy:-24,rx:10,ry:22,fill:'#f2b8c6',stroke:'#c76b86','stroke-width':2,transform:'rotate('+(a+90)+')'},g);}
+ sv('circle',{cx:0,cy:0,r:12,fill:'#f3c93a',stroke:'#b68a12','stroke-width':2},g);
+ sv('path',{d:half?'M0 95 L34 95 L28 125 L0 125':'M-34 95 L34 95 L28 125 L-28 125Z',fill:'none',stroke:'#8a5a3a','stroke-width':4,'stroke-linejoin':'round'},g);return g;}
+
+/* ── 1-2 + 무시 검사 ── */
+rhBoost('rh-2',[{name:'무시 검사 · 회복',pre:.6,post:.8,lines:RHB['rh-2']}],function(C){const L=C[0],s=SVGROOT(L);
+ const X=[40,345,650,955],T=['지우기 검사','선 이등분 검사','쓰기 검사','그림 따라 그리기'];this.pg=X.map((x,i)=>{const g=rbG(s);asPanel(g,x,96,285,384,ASC.gold,T[i],'start');sv('rect',{x:x+16,y:142,width:253,height:270,rx:6,fill:'#f7f3ea',stroke:'#c9b98f','stroke-width':2},g);return g;});
+ /* 1 지우기 */
+ const g1=this.pg[0];this.cx1=[];const LET='EADRNTSOGM';let n=0;
+ for(let r=0;r<8;r++)for(let c=0;c<7;c++){const x=74+c*34+(r%2)*10,y=166+r*31;const k=(r*7+c*5+r*r)%6;
+  if(k===0||k===3){tx_(g1,x,y+6,'★',{'font-size':15,fill:'#2b2b3a',stroke:'none'});const xm=sv('path',{d:'M'+(x-10)+' '+(y-8)+' L'+(x+10)+' '+(y+10),stroke:'#e64a3a','stroke-width':3.5,'stroke-linecap':'round',opacity:0},g1);if(x>=182)this.cx1.push(xm);}
+  else if(k===1||k===4)tx_(g1,x,y+9,'★',{'font-size':26,fill:'#8b93a6',stroke:'none'});else tx_(g1,x,y+7,LET[(n++)%LET.length],{'font-size':16,fill:'#8b93a6',stroke:'none'});}
+ this.miss1=sv('rect',{x:62,y:150,width:110,height:256,rx:8,fill:'#ff8a7a','fill-opacity':.12,stroke:'#ff6a5a','stroke-width':3,'stroke-dasharray':'8 6',opacity:0},g1);
+ tx_(g1,94+88,432,'표적: 작은 별 ★',{'font-size':15,fill:ASC.dim});
+ /* 2 선 이등분 */
+ const g2=this.pg[1];this.bm=[];[[372,600,190],[400,590,262],[366,548,334]].forEach(q=>{const [a,b,y]=q,m=(a+b)/2;sv('line',{x1:a,y1:y,x2:b,y2:y,stroke:'#2b2b3a','stroke-width':4},g2);
+  const tc=sv('line',{x1:m,y1:y-16,x2:m,y2:y+16,stroke:'#7a8296','stroke-width':2,'stroke-dasharray':'4 3',opacity:0},g2);const pm=sv('line',{x1:m+(b-a)*.2,y1:y-20,x2:m+(b-a)*.2,y2:y+20,stroke:'#e64a3a','stroke-width':4,opacity:0},g2);this.bm.push([pm,tc]);});
+ this.bmL=sv('g',{opacity:0},g2);tx_(this.bmL,487,384,'- - 실제 가운데',{'font-size':14,fill:'#5a6478',stroke:'none'});tx_(this.bmL,487,404,'| 환자 표시',{'font-size':14,fill:'#e64a3a',stroke:'none'});
+ /* 3 쓰기 */
+ const g3=this.pg[2];this.wl=[];for(let i=0;i<7;i++){const y=176+i*32;sv('line',{x1:682,y1:y+8,x2:902,y2:y+8,stroke:'#d9dfe8','stroke-width':1.5},g3);
+  let d='M800 '+y;for(let x=806;x<=896-(i%3)*14;x+=6)d+=' L'+x+' '+(y+(Math.sin(x*.9+i)*4)).toFixed(1);this.wl.push(sv('path',{d,fill:'none',stroke:'#2a3a7a','stroke-width':2.4,'stroke-linecap':'round',opacity:0},g3));}
+ this.miss3=sv('rect',{x:676,y:154,width:112,height:248,rx:8,fill:'#ff8a7a','fill-opacity':.12,stroke:'#ff6a5a','stroke-width':3,'stroke-dasharray':'8 6',opacity:0},g3);
+ /* 4 그림 따라 그리기 */
+ const g4=this.pg[3];tx_(g4,1010,166,'보기',{'font-size':15,fill:'#5a6478',stroke:'none'});rbFlower(g4,1010,220,.62,false);
+ sv('line',{x1:1097,y1:150,x2:1097,y2:404,stroke:'#d9dfe8','stroke-width':2,'stroke-dasharray':'6 5'},g4);
+ tx_(g4,1170,166,'환자가 그린 것',{'font-size':14,fill:'#5a6478',stroke:'none'});this.fc=rbFlower(g4,1182,220,.62,true);this.fc.setAttribute('opacity',0);
+ this.miss4=sv('rect',{x:1118,y:180,width:62,height:200,rx:8,fill:'#ff8a7a','fill-opacity':.12,stroke:'#ff6a5a','stroke-width':3,'stroke-dasharray':'8 6',opacity:0},g4);
+ this.lab=[['왼쪽 표적 빠뜨림',182],['가운데 → 오른쪽 치우침',487],['왼쪽을 비워 둠',792],['왼쪽 절반 빠짐',1097]].map(q=>tx_(s,q[1],462,q[0],{'font-size':18,fill:'#ff9a8a',opacity:0}));
+ this.rec=asChip(L,330,494,620,'좌측 무시 → <b>3개월 후 약 75% 회복</b>',ASC.mint,22);},
+function(t,S){const L0=S[0].L[0],L1=S[0].L[1];
+ ['지우기','선 이등분','쓰기 검사','그림 따라'].forEach((w,i)=>{const ts=asW(L0,w,-.4);asO(this.pg[i],ramp(t,ts,ts+.4));});
+ const tm=asW(L0,'왼쪽의 표적',-.2);this.cx1.forEach((x,i)=>asO(x,ramp(t,tm+i*.12,tm+.1+i*.12)));asO(this.miss1,ramp(t,tm+1.2,tm+1.6));asO(this.lab[0],ramp(t,tm+1.2,tm+1.6));
+ const tb=asW(L0,'선의 가운데',-.2);this.bm.forEach((q,i)=>{asO(q[0],ramp(t,tb+i*.35,tb+.25+i*.35));asO(q[1],ramp(t,tb+1.4,tb+1.8));});asO(this.bmL,ramp(t,tb+1.4,tb+1.8));asO(this.lab[1],ramp(t,tb+1.2,tb+1.6));
+ const tw=asW(L0,'그림과 글',-.3);this.wl.forEach((l,i)=>asO(l,ramp(t,asW(L0,'쓰기 검사',0)+i*.15,asW(L0,'쓰기 검사',.2)+i*.15)));asO(this.miss3,ramp(t,tw,tw+.4));asO(this.lab[2],ramp(t,tw,tw+.4));
+ asO(this.fc,ramp(t,asW(L0,'그림 따라',0),asW(L0,'그림 따라',.4)));asO(this.miss4,ramp(t,tw+.3,tw+.7));asO(this.lab[3],ramp(t,tw+.3,tw+.7));
+ op(this.rec,ramp(t,L1.t0,L1.t0+.4)*(t>asW(L1,'75',-.2)?1:.85));});
+
+/* ── 1-3 + 구성장애 · 지리 지남력 · 재생가능 기억착오 ── */
+function rbCube(par,cx,cy,a,bad){const g=sv('g',{},par);const o=a*.45;const P=(x,y)=>(cx+x)+' '+(cy+y);
+ if(!bad){sv('path',{d:'M'+P(-a/2,-a/2+o*0)+' L'+P(a/2,-a/2)+' L'+P(a/2,a/2)+' L'+P(-a/2,a/2)+'Z',fill:'none',stroke:'#2b2b3a','stroke-width':3},g);
+  sv('path',{d:'M'+P(-a/2+o,-a/2-o)+' L'+P(a/2+o,-a/2-o)+' L'+P(a/2+o,a/2-o)+' M'+P(-a/2,-a/2)+' L'+P(-a/2+o,-a/2-o)+' M'+P(a/2,-a/2)+' L'+P(a/2+o,-a/2-o)+' M'+P(a/2,a/2)+' L'+P(a/2+o,a/2-o),fill:'none',stroke:'#2b2b3a','stroke-width':3},g);}
+ else{sv('path',{d:'M'+P(-a/2,-a/2+6)+' L'+P(a/2-8,-a/2)+' L'+P(a/2+4,a/2-6)+' L'+P(-a/2+10,a/2)+'Z',fill:'none',stroke:'#2b2b3a','stroke-width':3},g);
+  sv('path',{d:'M'+P(-a/2+o-14,-a/2-o+20)+' L'+P(a/2+o-20,-a/2-o-6)+' M'+P(-a/2,-a/2+6)+' L'+P(-a/2+o-18,-a/2-o+18)+' M'+P(a/2+o+6,-a/2-o+30)+' L'+P(a/2+o-4,a/2-o+22),fill:'none',stroke:'#2b2b3a','stroke-width':3},g);}
+ return g;}
+function rbBlock(par,x,y,w,h,rot,col){const g=sv('g',{transform:'translate('+x+' '+y+') rotate('+(rot||0)+')'},par);const d=14;
+ sv('path',{d:'M0 0 L'+d+' '+(-d)+' L'+(w+d)+' '+(-d)+' L'+w+' 0Z',fill:'#e9c28a',stroke:'#8a5a2a','stroke-width':2},g);sv('path',{d:'M'+w+' 0 L'+(w+d)+' '+(-d)+' L'+(w+d)+' '+(h-d)+' L'+w+' '+h+'Z',fill:'#b98a4a',stroke:'#8a5a2a','stroke-width':2},g);
+ sv('rect',{x:0,y:0,width:w,height:h,fill:col||'#d6a865',stroke:'#8a5a2a','stroke-width':2},g);return g;}
+function rbHosp(par,x,y){const g=sv('g',{},par);sv('rect',{x,y,width:120,height:100,fill:'#e8eef7',stroke:'#7f93b3','stroke-width':3},g);sv('path',{d:'M'+(x-8)+' '+y+' L'+(x+60)+' '+(y-26)+' L'+(x+128)+' '+y+'Z',fill:'#9fb0c8'},g);
+ sv('rect',{x:x+50,y:y+64,width:20,height:36,fill:'#5a6f96'},g);sv('path',{d:'M'+(x+60)+' '+(y-20)+' v18 M'+(x+51)+' '+(y-11)+' h18',stroke:'#e64a3a','stroke-width':5},g);
+ for(let i=0;i<2;i++)for(let j=0;j<3;j++)sv('rect',{x:x+12+j*36,y:y+12+i*26,width:24,height:16,fill:'#9cc8ee'},g);return g;}
+rhBoost('rh-3',[{name:'구성장애 · 지리 지남력 · 기억착오',pre:.6,post:.8,lines:RHB['rh-3']}],function(C){const L=C[0],s=SVGROOT(L);
+ asPanel(s,40,96,600,464,ASC.org,'구성장애','start');
+ sv('rect',{x:62,y:142,width:556,height:176,rx:8,fill:'#f7f3ea'},s);tx_(s,170,160,'보기',{'font-size':15,fill:'#5a6478',stroke:'none'});tx_(s,470,160,'환자가 따라 그린 것',{'font-size':15,fill:'#5a6478',stroke:'none'});
+ rbCube(s,160,262,80,false);sv('path',{d:'M262 256 L340 256 M328 246 L342 256 L328 266',stroke:'#7a8296','stroke-width':3,fill:'none'},s);this.cb=rbCube(s,460,262,80,true);asO(this.cb,0);this.cbx=asMark(s,575,190,false,.8);
+ sv('rect',{x:62,y:330,width:556,height:150,rx:8,fill:'#1a2a44',stroke:'#3e4f70','stroke-width':2},s);tx_(s,110,352,'블록 본보기',{'font-size':14,fill:ASC.dim,'text-anchor':'start'});tx_(s,600,352,'환자가 쌓은 것',{'font-size':14,fill:ASC.dim,'text-anchor':'end'});
+ rbBlock(s,150,440,40,32);rbBlock(s,190,440,40,32);rbBlock(s,190,408,40,32);rbBlock(s,230,440,40,32);rbBlock(s,230,408,40,32);rbBlock(s,230,376,40,32);
+ this.bl=sv('g',{opacity:0},s);rbBlock(this.bl,392,432,46,36,-8);rbBlock(this.bl,470,420,46,36,18);rbBlock(this.bl,452,452,46,36,4);rbBlock(this.bl,520,440,46,36,-24);rbBlock(this.bl,420,400,46,36,30);rbBlock(this.bl,540,400,46,36,8);
+ this.blx=asMark(s,592,392,false,.8);
+ this.cl=[asChip(L,62,494,270,'도형 따라 그리기 ✕',ASC.red,18),asChip(L,348,494,270,'블록 3차원 구성 ✕',ASC.red,18)];
+ asPanel(s,660,96,580,226,ASC.blue,'지리 지남력 장애','start');
+ const mp=sv('g',{},s);sv('rect',{x:682,y:140,width:290,height:166,rx:8,fill:'#dfe7d6'},mp);[[682,190,972,190],[682,250,972,250],[760,140,760,306],[880,140,880,306]].forEach(q=>sv('line',{x1:q[0],y1:q[1],x2:q[2],y2:q[3],stroke:'#f7f3ea','stroke-width':12},mp));
+ sv('rect',{x:776,y:200,width:90,height:38,fill:'#a9c49a'},mp);sv('rect',{x:896,y:150,width:60,height:30,fill:'#c9b98f'},mp);
+ this.pin=sv('g',{},mp);sv('path',{d:'M0 0 C-14 -18 -14 -34 0 -34 C14 -34 14 -18 0 0Z',fill:'#e64a3a'},this.pin);sv('circle',{cx:0,cy:-24,r:5,fill:'#fff'},this.pin);
+ this.qm=[tx_(mp,720,176,'?',{'font-size':28,fill:'#e64a3a',opacity:0}),tx_(mp,940,286,'?',{'font-size':28,fill:'#e64a3a',opacity:0})];
+ this.gf=asFace(s,1110,250,.42,{noBody:true,old:true,gray:true,hair:'#b9b4ae',brow:'#8d8781'});
+ this.gb=asBubble(L,990,108,232,'여기가 어디지?','b',110,19);
+ asPanel(s,660,338,580,222,ASC.pur,'재생가능 기억착오','start');
+ this.hs=sv('g',{opacity:0},s);rbHosp(this.hs,688,410);tx_(this.hs,834,468,'=',{'font-size':34,fill:ASC.gold});rbHosp(this.hs,856,410);
+ this.hb=asBubble(L,1000,372,226,'똑같은 병원이<br>하나 더 있어요.','b',30,17);
+ this.hc=asChip(L,1000,486,226,'복사판이 따로 있다고 믿음<br><span style="font-size:14px;color:#9fb0c8">드물게 · 간헐적</span>',ASC.pur,16);},
+function(t,S){const L0=S[0].L[0],L1=S[0].L[1];
+ const tc=asW(L0,'도형',-.2);asO(this.cb,ramp(t,tc,tc+.6));asO(this.cbx,ramp(t,tc+.8,tc+1.1));op(this.cl[0],ramp(t,tc+.8,tc+1.2));
+ const tbk=asW(L0,'나무 블록',-.2);asO(this.bl,ramp(t,tbk,tbk+.5));asO(this.blx,ramp(t,tbk+.8,tbk+1.1));op(this.cl[1],ramp(t,tbk+.8,tbk+1.2));
+ const tg=L1.t0;const u=t-tg;this.pin.setAttribute('transform','translate('+(800+60*Math.sin(u*1.3)).toFixed(1)+' '+(270-30*Math.abs(Math.sin(u*1.7))).toFixed(1)+')');
+ this.qm.forEach((q,i)=>asO(q,ramp(t,tg+.4+i*.3,tg+.7+i*.3)));op(this.gb,ramp(t,tg+.2,tg+.6));this.gf.look(Math.sin(t*1.6)*.8,.2);this.gf.mouth(-.2,t>tg&&t<tg+2?Math.abs(Math.sin(t*8))*.3:0);
+ const th=asW(L1,'복사판',-.3);asO(this.hs,ramp(t,th,th+.5));op(this.hb,ramp(t,th+.4,th+.8));op(this.hc,ramp(t,asW(L1,'재생가능',-.3),asW(L1,'재생가능',.1)));});
+
+/* ── 1-4 + 주의의 구성 · 시지각 · 추상적 사고 ★ ── */
+rhBoost('rh-4',[{name:'주의의 구성',pre:.6,post:.8,lines:RHB['rh-4a']},{name:'시지각 · 추상적 사고 ★',pre:.6,post:.8,lines:RHB['rh-4b']}],function(C){
+ {const L=C[0];this.hd=asChip(L,40,98,820,'<span style="color:#ffe08a">■ 기초</span> 각성 · 경계 · 지향성 → <span style="color:#76c7ff">■ 주의 유형</span> 지속 · 선택 · 교대 · 분할',ASC.ink,19);
+  const K=[['⚡','각성','arousal','반응을 위한 생리적 · 행동적 준비',ASC.gold],['👁','경계','vigilance','자극에 대한 지속적 민감성',ASC.gold],['🧭','지향성','orienting','자극 쪽으로 주의를 향함',ASC.gold],
+   ['⏱','지속 주의','sustained','시간이 지나도 유지',ASC.blue],['🎯','선택 주의','selective','방해 자극 속에서 유지',ASC.blue],['🔀','교대 주의','alternating · 전환','과제가 바뀌면 옮겨 감',ASC.blue],['🤹','분할 주의','divided · 배분','둘 이상을 동시에',ASC.blue]];
+  this.stp=K.map((q,i)=>{const top=378-i*40,x=40+i*172;return asHtmlCard(L,x,top,162,150,q[4],'<div style="font-size:24px;line-height:1">'+q[0]+'</div><div style="font-size:20px;font-weight:800;color:'+q[4]+';margin-top:4px">'+q[1]+'</div><div style="font-size:12px;color:#9fb0c8">'+q[2]+'</div><div style="font-size:12.5px;color:#eef3fb;line-height:1.3;margin-top:3px;word-break:keep-all">'+q[3]+'</div>');});}
+ {const L=C[1],s=SVGROOT(L);asPanel(s,40,96,600,464,ASC.mint,'시지각','start');
+  sv('rect',{x:62,y:140,width:556,height:190,rx:8,fill:'#f7f3ea'},s);
+  const ov=sv('g',{fill:'none',stroke:'#2b2b3a','stroke-width':3,'stroke-linejoin':'round'},s);
+  sv('path',{d:'M170 180 L170 290 Q170 310 190 310 L250 310 Q270 310 270 290 L270 180Z M270 205 Q310 205 310 240 Q310 275 270 275'},ov);
+  this.sc=sv('g',{},ov);sv('circle',{cx:200,cy:282,r:16},this.sc);sv('circle',{cx:250,cy:292,r:16},this.sc);sv('path',{d:'M210 270 L330 170 M240 280 L300 168'},this.sc);
+  sv('circle',{cx:330,cy:262,r:26},ov);sv('path',{d:'M356 262 L470 262 M440 262 L440 286 M458 262 L458 280'},ov);sv('path',{d:'M150 220 L360 220'},ov);
+  tx_(s,520,180,'목표: 가위',{'font-size':17,fill:'#5a6478',stroke:'none'});tx_(s,520,206,'✂',{'font-size':28,fill:'#2b2b3a',stroke:'none'});
+  this.ovx=asMark(s,520,262,false,.9);this.ovq=tx_(s,560,300,'"못 찾겠어요"',{'font-size':15,fill:'#c0261f',stroke:'none',opacity:0});
+  sv('rect',{x:62,y:342,width:270,height:138,rx:8,fill:'#1a2a44',stroke:'#3e4f70','stroke-width':2},s);sv('rect',{x:348,y:342,width:270,height:138,rx:8,fill:'#1a2a44',stroke:'#3e4f70','stroke-width':2},s);
+  tx_(s,197,366,'보통 방향',{'font-size':15,fill:ASC.dim});tx_(s,483,366,'낯선 방향 · 왜곡',{'font-size':15,fill:ASC.dim});
+  tx_(s,197,446,'☕',{'font-size':58,stroke:'none'});this.odd=tx_(s,0,0,'☕',{'font-size':58,stroke:'none',transform:'translate(470 420) rotate(125) scale(1.35 .7)'});
+  this.okm=asMark(s,290,380,true,.7);this.oddx=asMark(s,590,380,false,.7);
+  this.vc=[asChip(L,62,494,270,'낯선 방향 · 왜곡된 형태 ✕',ASC.red,17),asChip(L,348,494,270,'겹친 그림 속 목표 ✕',ASC.red,17)];
+  asPanel(s,660,96,580,464,ASC.gold,'추상적 사고 ★','start');
+  const TK=[['관계 질문','"어머니의 아버지는 삼촌인가요?"'],['모순 찾기','"국이 너무 짜서 소금을 더 넣었다"'],['공통점','커피 · 녹차 · 주스'],['여러 뜻','"눈"이 어떤 의미로 쓰일 수 있나요?']];
+  this.tk=TK.map((q,i)=>asHtmlCard(L,682,142+i*76,536,66,'#c9b98f','<div style="display:flex;gap:12px;align-items:center;height:100%"><div style="font-size:17px;font-weight:800;color:#ffe08a;width:86px;flex:none">'+q[0]+'</div><div style="font-size:18px;color:#eef3fb">'+q[1]+'</div></div>'));
+  this.ab=asChip(L,682,462,536,'→ 모두 <b>추상적 사고(력)</b> 평가 과제 ★',ASC.gold,21);}},
+function(t,S){{const A=S[0];const W=[[0,'각성'],[0,'경계'],[0,'지향성'],[1,'지속 주의'],[1,'선택 주의'],[1,'교대 주의'],[1,'분할 주의']];op(this.hd,ramp(t,A.L[0].t0,A.L[0].t0+.4));
+  const ts=W.map(q=>asW(A.L[q[0]],q[1],-.3));this.stp.forEach((c,i)=>{op(c,ramp(t,ts[i],ts[i]+.4));const on=t>=ts[i]&&(i===6||t<ts[i+1]);c.firstChild.style.boxShadow=on?'0 0 0 3px rgba(255,255,255,.35)':'';c.style.transform='translateY('+(on?-6:0)+'px)';});}
+ {const B=S[1],L0=B.L[0],L1=B.L[1];const tl=asW(L0,'낯선',-.3),tv=asW(L0,'겹쳐',-.3);
+  asO(this.okm,ramp(t,tl,tl+.3));asO(this.oddx,ramp(t,tl+.6,tl+.9));op(this.vc[0],ramp(t,tl+.4,tl+.8));asO(this.ovx,ramp(t,tv+.3,tv+.6));asO(this.ovq,ramp(t,tv+.5,tv+.9));op(this.vc[1],ramp(t,tv+.3,tv+.7));
+  this.sc.setAttribute('stroke',t>tv+1.6?'#2b6ad0':'#2b2b3a');this.sc.setAttribute('stroke-width',t>tv+1.6?4:3);
+  ['관계 질문','이상한 점','공통점','여러 뜻'].forEach((w,i)=>{const a=asW(L1,w,-.6);op(this.tk[i],ramp(t,a,a+.4));});op(this.ab,ramp(t,asW(L1,'추상적',-.3),asW(L1,'추상적',.1)));}});
+
+/* ── 1-5 + 운율 특징 ── */
+rhBoost('rh-5',[{name:'운율: 느림 · 일정한 쉼 · 억양 제한',pre:.6,post:.8,lines:RHB['rh-5']}],function(C){const L=C[0],s=SVGROOT(L);
+ asPanel(s,40,96,1200,272,ASC.blue,'말 속도 · 쉼 · 강세','start');
+ const syl=['오','늘','날','씨','가','정','말','좋','네','요'];const brk=[1,0,0,1,0,0,1,0,0,0];/* 1 = 단어 끝 */
+ tx_(s,120,192,'보통',{'font-size':20,fill:'#76c7ff'});let x=200;this.nr=sv('g',{opacity:0},s);
+ syl.forEach((c,i)=>{const w=[40,34,40,36,30,52,38,40,32,44][i],st=i===5;const h=st?58:[34,30,36,32,28,58,34,38,30,36][i];sv('rect',{x,y:204-h,width:w,height:h,rx:6,fill:st?'#ffe08a':'#4a7ad6'},this.nr);tx_(this.nr,x+w/2,226,c,{'font-size':17,fill:'#eef3fb'});if(st)tx_(this.nr,x+w/2,138,'강세',{'font-size':14,fill:ASC.gold});x+=w+(brk[i]?26:5);});
+ tx_(s,104,292,'환자',{'font-size':20,fill:ASC.pur});tx_(s,152,292,'🤖',{'font-size':26,stroke:'none'});this.pr=sv('g',{opacity:0},s);
+ this.prB=syl.map((c,i)=>{const g=sv('g',{opacity:0},this.pr);const x=200+i*68;sv('rect',{x,y:270,width:40,height:32,rx:6,fill:'#8a6ad6'},g);tx_(g,x+20,326,c,{'font-size':17,fill:'#eef3fb'});if(i<9)sv('path',{d:'M'+(x+44)+' 286 L'+(x+64)+' 286',stroke:'#9fb0c8','stroke-width':2,'stroke-dasharray':'3 3'},g);return g;});
+ this.ch=[asChip(L,900,132,300,'말이 <b>느림</b>',ASC.pur,18),asChip(L,900,186,300,'쉼 간격이 <b>로봇처럼 일정</b>',ASC.pur,18),asChip(L,900,240,300,'<b>강세 ↓</b>',ASC.pur,18)];
+ asPanel(s,40,384,1200,176,ASC.gold,'억양: 질문 vs 주장','start');
+ this.q=sv('g',{opacity:0},s);sv('path',{d:rhPitch(120,420,488,u=>u<.7?6*Math.sin(u*6):6*Math.sin(4.2)+90*(u-.7)*(u-.7)/.09*.35),fill:'none',stroke:ASC.gold,'stroke-width':5,'stroke-linecap':'round'},this.q);
+ ['밥','먹','었','어?'].forEach((c,i)=>tx_(this.q,140+i*84,528,c,{'font-size':22,fill:'#eef3fb'}));tx_(this.q,430,446,'질문 ↗ (끝 올림)',{'font-size':18,fill:ASC.gold,'text-anchor':'end'});
+ this.a=sv('g',{opacity:0},s);sv('path',{d:rhPitch(860,1160,470,u=>u<.6?20+4*Math.sin(u*6):20-60*(u-.6)),fill:'none',stroke:'#ff9a8a','stroke-width':5,'stroke-linecap':'round'},this.a);
+ ['밥','먹','었','어.'].forEach((c,i)=>tx_(this.a,880+i*84,528,c,{'font-size':22,fill:'#eef3fb'}));tx_(this.a,1170,446,'주장 ↘ (끝 내림)',{'font-size':18,fill:'#ff9a8a','text-anchor':'end'});
+ this.pf=asFace(s,640,470,.4,{noBody:true,old:true,gray:true,hair:'#b9b4ae',brow:'#8d8781'});this.pq=tx_(s,690,436,'?',{'font-size':36,fill:'#ff8a7a',opacity:0});
+ this.ic=asChip(L,520,394,240,'억양 제한 → 구별 ✕',ASC.red,17);},
+function(t,S){const L0=S[0].L[0];const ts=asW(L0,'느리고',-.4);asO(this.nr,ramp(t,L0.t0,L0.t0+.4));asO(this.pr,ramp(t,L0.t0+.3,L0.t0+.6));
+ this.prB.forEach((g,i)=>asO(g,ramp(t,ts+i*.28,ts+.15+i*.28)));op(this.ch[0],ramp(t,ts,ts+.4));op(this.ch[1],ramp(t,asW(L0,'로봇',-.3),asW(L0,'로봇',.1)));op(this.ch[2],ramp(t,asW(L0,'강세가',-.3),asW(L0,'강세가',.1)));
+ const tq=asW(L0,'끝을 올리는',-.3),ta=asW(L0,'끝을 내리는',-.3);asO(this.q,ramp(t,tq,tq+.4));asO(this.a,ramp(t,ta,ta+.4));asO(this.pq,ramp(t,ta+.8,ta+1.1));op(this.ic,ramp(t,asW(L0,'구별하기',-.3),asW(L0,'구별하기',.1)));
+ this.pf.look(t<ta?-1:1,.2);this.pf.mouth(0,0);});
+
+/* ── 1-6 + 화용 · 어휘 ★ ── */
+rhBoost('rh-6',[{name:'화용 · 어휘 ★',pre:.6,post:.8,lines:RHB['rh-6']}],function(C){const L=C[0],s=SVGROOT(L);
+ asPanel(s,40,96,1200,208,ASC.mint,'대화 주고받기','start');
+ tx_(s,110,176,'상대',{'font-size':18,fill:'#76c7ff'});tx_(s,110,246,'환자',{'font-size':18,fill:ASC.pur});
+ sv('line',{x1:170,y1:282,x2:1210,y2:282,stroke:'#3e4f70','stroke-width':2},s);tx_(s,1200,274,'시간 →',{'font-size':14,fill:ASC.dim,'text-anchor':'end'});
+ const bar=(x1,x2,y,c,dash)=>sv('rect',{x:x1,y:y-14,width:0,height:28,rx:8,fill:c,'fill-opacity':dash?.25:.9,stroke:dash?c:'none','stroke-dasharray':dash?'5 4':'none','stroke-width':2,'data-w':x2-x1},s);
+ this.b=[bar(180,420,170,'#4a7ad6'),bar(450,560,240,'#8a6ad6'),bar(600,820,170,'#4a7ad6'),bar(700,1060,240,'#8a6ad6'),bar(900,960,170,'#4a7ad6',true)];
+ this.ov=sv('rect',{x:700,y:156,width:120,height:98,fill:'#ff6a5a','fill-opacity':.18,stroke:'#ff6a5a','stroke-width':2,'stroke-dasharray':'6 4',opacity:0},s);
+ this.lb=[['⚡ 갑자기 시작',450,216],['끼어들기',760,146],['발언권 양보 ✕',930,146],['뚝! 갑자기 끝냄',1080,216]].map(q=>tx_(s,q[1],q[2],q[0],{'font-size':16,fill:'#ff9a8a',opacity:0,'text-anchor':q[1]>1000?'start':'middle'}));
+ asPanel(s,40,320,600,240,ASC.blue,'수렴 vs 발산','start');
+ this.cv=sv('g',{opacity:0},s);sv('circle',{cx:130,cy:430,r:34,fill:'#1d3a66',stroke:'#76c7ff','stroke-width':3},this.cv);tx_(this.cv,130,438,'✂',{'font-size':28,stroke:'none'});
+ sv('path',{d:'M168 430 L248 430',stroke:'#76c7ff','stroke-width':3},this.cv);sv('rect',{x:252,y:410,width:70,height:40,rx:8,fill:'#1d4a3a',stroke:ASC.ok,'stroke-width':2},this.cv);tx_(this.cv,287,437,'가위',{'font-size':18,fill:ASC.ok});
+ tx_(this.cv,200,386,'수렴: 답 하나',{'font-size':17,fill:'#76c7ff'});asMark(this.cv,300,500,true,.75).setAttribute('opacity',1);
+ this.dv=sv('g',{opacity:0},s);sv('circle',{cx:420,cy:440,r:30,fill:'#3a1d3a',stroke:'#c58cff','stroke-width':3},this.dv);tx_(this.dv,420,448,'눈',{'font-size':22,fill:'#eef3fb'});
+ [-40,-20,0,20,40].forEach((a,i)=>{const r=a*Math.PI/180,x2=420+110*Math.cos(r),y2=448+92*Math.sin(r);sv('path',{d:'M450 440 L'+(x2+10).toFixed(0)+' '+y2.toFixed(0),stroke:'#c58cff','stroke-width':2,'stroke-dasharray':'5 4'},this.dv);tx_(this.dv,x2+26,y2+6,i===2?'👁':'?',{'font-size':18,fill:'#ff9a8a',stroke:'none'});});
+ tx_(this.dv,470,372,'발산: 답 여러 개',{'font-size':17,fill:'#c58cff'});asMark(this.dv,600,500,false,.75).setAttribute('opacity',1);
+ asPanel(s,660,320,580,240,ASC.gold,'과제별 수행','start');
+ const R=[['대면 이름대기',.9,true],['따라말하기',.93,true],['1단계 지시 따르기',.88,true],['관용어 이해하기',.3,false]];
+ this.rw=R.map((q,i)=>{const y=376+i*44,g=sv('g',{opacity:0},s);tx_(g,850,y+6,q[0],{'font-size':17,fill:q[2]?'#eef3fb':'#ff9a8a','text-anchor':'end'});sv('rect',{x:866,y:y-11,width:300,height:22,rx:6,fill:'#1a2a44'},g);
+  const b=sv('rect',{x:866,y:y-11,width:0,height:22,rx:6,fill:q[2]?'#3fae7e':'#e64a3a'},g);tx_(g,1196,y+7,q[2]?'✓':'✕ ★',{'font-size':17,fill:q[2]?ASC.ok:ASC.gold});g._b=b;g._v=q[1];return g;});},
+function(t,S){const L0=S[0].L[0],L1=S[0].L[1];
+ const tb=[L0.t0,asW(L0,'갑자기 대화',-.2),asW(L0,'끼어듭',-.6),asW(L0,'끼어듭',-.3),asW(L0,'양보하지',-.3)];
+ this.b.forEach((r,i)=>{const w=+r.getAttribute('data-w');r.setAttribute('width',(w*ramp(t,tb[i],tb[i]+(i===3?1.4:.6))).toFixed(1));});
+ asO(this.lb[0],ramp(t,tb[1],tb[1]+.3));asO(this.lb[3],ramp(t,asW(L0,'끝내고',-.1),asW(L0,'끝내고',.3)));asO(this.lb[2],ramp(t,tb[4],tb[4]+.3));asO(this.ov,ramp(t,tb[3]+.3,tb[3]+.6));asO(this.lb[1],ramp(t,tb[3]+.3,tb[3]+.6));
+ asO(this.cv,ramp(t,asW(L1,'수렴',-.3),asW(L1,'수렴',.1)));asO(this.dv,ramp(t,asW(L1,'발산',-.3),asW(L1,'발산',.1)));
+ const tr=[asW(L1,'대면',-.3),asW(L1,'따라말하기',-.3),asW(L1,'따라말하기',.3),asW(L1,'관용어',-.3)];this.rw.forEach((g,i)=>{asO(g,ramp(t,tr[i],tr[i]+.3));g._b.setAttribute('width',(300*g._v*ramp(t,tr[i],tr[i]+.8)).toFixed(1));});});
+
+/* ── 1-8 + 무시 치료 더하기 ★ · 주의 훈련 ── */
+rhBoost('rh-8',[{name:'무시 치료 더하기 ★ · 주의 훈련',pre:.6,post:.8,lines:RHB['rh-8']}],function(C){const L=C[0],s=SVGROOT(L);
+ asPanel(s,40,96,1200,300,ASC.blue,'무시 치료 더하기 ★','start');
+ const card=(y,txt)=>{const g=sv('g',{opacity:0},s);sv('rect',{x:70,y,width:440,height:62,rx:8,fill:'#f7f3ea',stroke:'#c9b98f','stroke-width':2},g);
+  const st=sv('g',{},g);for(let i=0;i<6;i++)sv('rect',{x:70,y:y+i*10.3,width:26,height:10.3,fill:i%2?'#ffd23a':'#e64a3a'},st);g._st=st;tx_(g,300,y+40,txt,{'font-size':23,fill:'#2b2b3a',stroke:'none'});return g;};
+ this.cd=[card(146,'할머니가 시장에 가셨다.'),card(222,'날씨가 아주 맑았다.')];this.cdl=tx_(s,90,312,'← 왼쪽 끝: 색깔 · 무늬',{'font-size':16,fill:'#ffb36b','text-anchor':'start',opacity:0});
+ this.pf=asFace(s,640,272,.45,{noBody:true,old:true,gray:true,hair:'#b9b4ae',brow:'#8d8781'});
+ this.pb=asBubble(L,540,108,200,'왼쪽을 본다!','b',90,20);
+ this.w1=sv('g',{opacity:0},s);sv('rect',{x:790,y:146,width:150,height:96,rx:8,fill:'#f7f3ea',stroke:'#c9b98f','stroke-width':2},this.w1);tx_(this.w1,865,206,'사과',{'font-size':32,fill:'#2b2b3a',stroke:'none'});tx_(this.w1,865,268,'단일어',{'font-size':16,fill:ASC.dim});
+ this.w2=sv('g',{opacity:0},s);sv('rect',{x:964,y:146,width:250,height:150,rx:8,fill:'#dfeefa',stroke:'#c9b98f','stroke-width':2},this.w2);
+ sv('rect',{x:982,y:200,width:22,height:80,fill:'#8a5a3a'},this.w2);sv('circle',{cx:993,cy:190,r:46,fill:'#4f9a4a'},this.w2);sv('rect',{x:1130,y:248,width:50,height:40,fill:'#e7a43a'},this.w2);sv('path',{d:'M1124 248 L1155 222 L1186 248Z',fill:'#c9483c'},this.w2);
+ tx_(this.w2,1089,316,'비대칭 그림 (왼쪽에 큰 자극)',{'font-size':15,fill:ASC.dim});
+ this.goal=asChip(L,330,338,620,'이 활동들의 목표 = <b>시각적 무시 해소</b> ★',ASC.gold,21);
+ asPanel(s,40,412,1200,148,ASC.pur,'주의 훈련','start');
+ this.at=[asChip(L,62,462,560,'지속 주의 → 경계 훈련처럼 <b>오래</b> 수행',ASC.blue,17),asChip(L,658,462,560,'교대 주의 → 두 과제 섞어 <b>번갈아</b>',ASC.mint,17),
+  asChip(L,62,512,560,'선 이등분 = 무시 <b>검사</b> (훈련 과제 ✕)',ASC.red,17),asChip(L,658,512,560,'한 번에 <b>많은 자극</b> ✕',ASC.red,17)];},
+function(t,S){const L0=S[0].L[0],L1=S[0].L[1];const tc=asW(L0,'문장카드',-.3);
+ this.cd.forEach((g,i)=>asO(g,ramp(t,tc+i*.3,tc+.4+i*.3)));const tp=asW(L0,'색깔',-.2);this.cd.forEach(g=>g._st.setAttribute('opacity',t>tp?(.75+.25*Math.sin(t*6)).toFixed(2):'0'));asO(this.cdl,ramp(t,tp,tp+.4));
+ const ts=asW(L0,'왼쪽을 본다',-.6);op(this.pb,ramp(t,ts,ts+.4));this.pf.look(t>ts?-1:0,.4);this.pf.mouth(.4,t>ts&&t<ts+1.4?Math.abs(Math.sin(t*9))*.35:0);
+ const tw=asW(L0,'단일어',-.3);asO(this.w1,ramp(t,tw,tw+.4));asO(this.w2,ramp(t,asW(L0,'비대칭',-.3),asW(L0,'비대칭',.1)));op(this.goal,ramp(t,asW(L0,'목표는',-.3),asW(L0,'목표는',.1)));
+ ['지속 주의','교대 주의','선 이등분','많은 자극'].forEach((w,i)=>{const a=asW(L1,w,-.3);op(this.at[i],ramp(t,a,a+.4));});});
+
+/* ── 1-9 + 정서 이해 치료 ── */
+rhBoost('rh-9',[{name:'정서 이해 치료',pre:.6,post:.8,lines:RHB['rh-9']}],function(C){const L=C[0],s=SVGROOT(L);
+ asPanel(s,40,96,1200,464,ASC.org,'정서 이해 치료 · 얼굴 표정 ↔ 감정 어휘','start');
+ const X=[220,500,780,1060],K=['happy','surprise','sad','angry'];
+ this.fc=K.map((k,i)=>{const g=sv('g',{opacity:0},s);sv('rect',{x:X[i]-85,y:148,width:170,height:190,rx:14,fill:'#f2ece0',stroke:'#c9b98f','stroke-width':3},g);
+  const F=k==='surprise'?asFace(g,X[i],246,.62,{noBody:true,hair:'#4a3428'}):rhEmo(g,X[i],246,.62,k);if(k==='surprise'){F.mouth(0,1.3);F.brow(1.4);F.look(0,-.3);}return g;});
+ const WD=['놀람','화남','기쁨','슬픔'];const MAP=[2,0,3,1];/* 얼굴 i → 낱말 자리 */
+ this.wd=WD.map((w,i)=>asChip(L,X[i]-70,420,140,w,ASC.gold,24));
+ this.ln=MAP.map((j,i)=>{const p=sv('path',{d:'M'+X[i]+' 340 C'+X[i]+' 380 '+X[j]+' 380 '+X[j]+' 418',fill:'none',stroke:ASC.mint,'stroke-width':4,'stroke-linecap':'round'},s);const len=p.getTotalLength?p.getTotalLength()||300:300;p.setAttribute('stroke-dasharray',len);p.setAttribute('stroke-dashoffset',len);p._len=len;return p;});
+ this.mk=MAP.map((j,i)=>{const m=asMark(s,X[j]+76,430,true,.6);return m;});
+ this.ch=asChip(L,160,500,960,'기쁨 · 놀람 같은 감정 이해 ✕ → <b>얼굴 표정에 맞는 감정 어휘 연결하기</b> ★',ASC.org,20);},
+function(t,S){const L0=S[0].L[0];this.fc.forEach((g,i)=>asO(g,ramp(t,L0.t0+i*.2,L0.t0+.4+i*.2)));const tw=asW(L0,'감정 어휘',-1);this.wd.forEach((c,i)=>op(c,ramp(t,tw-.6+i*.15,tw-.2+i*.15)));
+ const tl=asW(L0,'연결',-.6);this.ln.forEach((p,i)=>{const k=ramp(t,tl+i*.45,tl+.5+i*.45);p.setAttribute('stroke-dashoffset',(p._len*(1-k)).toFixed(1));});this.mk.forEach((m,i)=>asO(m,ramp(t,tl+.5+i*.45,tl+.7+i*.45)));
+ op(this.ch,ramp(t,asW(L0,'얼굴 표정',-.3),asW(L0,'얼굴 표정',.1)));});
 </script>
 <script>"use strict";
 /* ───────── 시작 ───────── */
