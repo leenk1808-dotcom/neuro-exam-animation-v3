@@ -234,7 +234,7 @@ const sub_=(p,i,j,k,n)=>{const a=LS(p,i,j),b=LE(p,i,j);return a+(b-a)*k/n;};
 </script>
 <script>"use strict";
 /* 실제 음성 길이(초) */
-Object.assign(DUR,{"tb-1_01":4.96,"tb-1_02":6,"tb-1_03":10.88,"tb-1_04":11.6,"tb-2_01":6.16,"tb-2_02":9.6,"tb-2_03":11.12,"tb-3_01":12.48,"tb-3_02":7.04,"tb-3_03":13.84,"tb-4_01":10.32,"tb-4_02":11.76,"tb-4_03":5.28,"tb-4_04":11.6,"tb-5_01":11.6,"tb-5_02":9.92,"tb-5_03":11.6,"tb-5_04":4.96,"tb-6_01":10.8,"tb-6_02":8.88,"tb-6_03":8,"tb-6_04":12.64,"tb-7_01":7.76,"tb-7_02":15.2,"tb-7_03":7.04,"tb-7_04":9.2,"tb-7_05":11.36,"tb-8_01":15.84,"tb-8_02":14.96,"tb-8_03":9.76,"tb-8_04":15.04,"tb-9_01":9.44,"tb-9_02":5.84,"tb-9_03":10.32,"tb-9_04":14.88,"tb-10_01":12,"tb-10_02":8.16,"tb-10_03":11.36,"tb-11_01":10.72,"tb-11_02":5.84,"tb-11_03":5.36});
+Object.assign(DUR,{"tb-1_01":4.96,"tb-1_02":6,"tb-1_03":10.88,"tb-1_04":11.6,"tb-2_01":6.16,"tb-2_02":9.6,"tb-2_03":11.12,"tb-3_01":12.48,"tb-3_02":7.04,"tb-3_03":13.84,"tb-4_01":13.04,"tb-4_02":21.52,"tb-4_03":5.28,"tb-4_04":11.6,"tb-5_01":11.6,"tb-5_02":9.92,"tb-5_03":11.6,"tb-5_04":4.96,"tb-6_01":10.8,"tb-6_02":8.88,"tb-6_03":8,"tb-6_04":12.64,"tb-7_01":7.76,"tb-7_02":15.2,"tb-7_03":7.04,"tb-7_04":9.2,"tb-7_05":11.36,"tb-8_01":15.84,"tb-8_02":14.96,"tb-8_03":9.76,"tb-8_04":15.04,"tb-9_01":9.44,"tb-9_02":5.84,"tb-9_03":10.32,"tb-9_04":14.88,"tb-10_01":12,"tb-10_02":8.16,"tb-10_03":11.36,"tb-11_01":10.96,"tb-11_02":8.08,"tb-11_03":6.88,"tb-11_04":5.84});
 </script>
 <script>"use strict";
 /* ───────── 3D 공용 세계 ───────── */
@@ -587,14 +587,14 @@ function asHand(par){const g=sv('g',{},par);const H={g};H.comb=sv('g',{opacity:0
 const TBL={"tb-1":["외상성 뇌손상(TBI)은 외부의 물리적 힘으로 생긴 후천성 뇌손상입니다.","두개골이 뚫리는 개방성, 즉 관통 손상은 비교적 국소적인 손상을 남깁니다.","폐쇄성 손상은 두개골은 멀쩡하지만 뇌가 두개골 안에서 앞뒤로 부딪히고 비틀리면서 신경축삭이 손상되는 것으로, 미만성 축삭 손상이라고 합니다.","머리가 고정된 채 맞는 비가속 손상과, 교통사고처럼 머리가 움직이며 다치는 가속·감속 손상이 있고, 특히 전두엽 앞쪽과 측두엽이 취약합니다."],
 "tb-2":["충격 순간 바로 생기는 타박상, 열상, 출혈과 혈종을 일차 손상이라고 합니다.","이후 수분에서 수일에 걸쳐 뇌부종, 두개내압 상승, 수두증, 허혈과 저산소증이 진행되는데, 이것이 이차 손상입니다.","그래서 외상성 뇌손상 환자에게는 인지–의사소통장애, 실어증, 우반구 손상 증후군, 마비말장애, 삼킴장애가 다양하게 섞여 나타날 수 있습니다."],
 "tb-3":["중증도는 글래스고 혼수 척도(GCS)로 봅니다. 눈 뜨기 1~4점, 언어 반응 1~5점, 운동 반응 1~6점을 더해 총점은 3~15점이고, 높을수록 좋습니다.","13~15점은 경도, 9~12점은 중등도, 3~8점은 중증입니다.","의식 소실은 경도가 30분 이내, 중등도가 30분~24시간, 중증이 24시간 이상입니다. 외상 후 기억상실은 각각 1일 이내, 1~7일, 7일 이상입니다."],
-"tb-4":["의식 수준으로 보면 15점은 명료, 13~14점은 기면입니다. 기면은 졸리고 반응이 느리지만 언어치료가 가능한 수준입니다.","8~12점의 혼미는 강한 자극에 반응하고, 4~7점의 반혼수는 통증에 부분적으로 피하거나 신음하며, 3점의 혼수는 강한 자극에도 반응이 없습니다.","사고 이전의 기억을 잃는 것은 역행성, 즉 후향 기억상실입니다.","사고 이후 새 기억을 만들지 못하는 것은 선행성, 즉 전향 기억상실이고, 이것을 외상 후 기억상실(PTA)이라고 합니다. 이 기간이 길수록 중증입니다."],
+"tb-4":["의식 수준으로 보면 15점은 각성, 즉 명료이고, 13~14점은 기면입니다. 기면은 졸려하지만 가벼운 자극에 대화할 수 있어 언어치료가 가능한 수준입니다.","9~12점의 둔감은 큰 소리나 흔드는 것 같은 강한 자극에 반응하고, 6~8점의 혼미는 통각 자극과 지속적인 강한 자극에만 반응하며, 3~5점의 혼수는 반응이 없습니다. 자료에 따라 8~12점을 혼미, 4~7점을 반혼수, 3점을 혼수로 나누기도 합니다.","사고 이전의 기억을 잃는 것은 역행성, 즉 후향 기억상실입니다.","사고 이후 새 기억을 만들지 못하는 것은 선행성, 즉 전향 기억상실이고, 이것을 외상 후 기억상실(PTA)이라고 합니다. 이 기간이 길수록 중증입니다."],
 "tb-5":["회복은 혼수에서 눈은 뜨지만 의미 있는 반응이 없는 시기와 부분 반응 시기, 혼돈·초조·충동 시기를 지나 점차 적절하고 목적 있는 반응으로 나아갑니다.","하지만 모든 환자가 같은 순서와 속도로 회복하지는 않습니다. 노인은 회복이 느리고, 중증은 완전한 독립까지 가지 못하는 경우가 많습니다.","이 회복 단계를 무반응부터 독립까지 나눠 추적하는 것이 란초 로스 아미고스 인지 척도(RLAS)이고, 개정판은 10단계입니다. 단계에 맞춰 치료 목표를 세웁니다.","헷갈리기 쉬운 임상치매평가척도, CDR은 치매의 중증도 척도입니다."],
 "tb-6":["외상성 뇌손상의 핵심은 실어증이나 마비말장애가 뚜렷하지 않아도, 주의, 기억, 실행기능, 처리속도가 떨어져 의사소통이 무너진다는 점입니다.","주의가 떨어지면 오래 집중하거나 여러 자극을 동시에 처리하기 어렵고, 처리속도가 느리면 이해와 반응에 시간이 더 걸립니다.","가장 대표적이고 오래 남는 것은 기억과 학습의 문제로, 작업기억과 새 정보의 학습, 회상이 떨어집니다.","실행기능이 떨어지면 계획, 조직화, 문제해결, 억제, 자기점검, 판단이 어렵습니다. 자기 문제를 잘 모르기도 하고, 후두엽이 손상되면 시야 결함이 올 수 있습니다."],
 "tb-7":["화용에서는 말차례와 주제 유지가 어렵고, 상대와 상황을 고려하지 못해 충동적이고 부적절하게 반응합니다.","담화는 장황하고 핵심이 부족하며 주제에서 벗어납니다. 긴 대화를 이해하기 어렵고, 비유나 간접 표현을 글자 그대로 해석하며, 단어 인출이 늦습니다. 자기 오류를 알아차리지 못하거나 보속을 보이기도 합니다.","작화증은 기억의 빈칸을 사실과 다른 이야기로 무의식적으로 채우는 것으로, 본인은 오류를 모릅니다.","우울, 불안, 감정 폭발, 충동성 같은 정서 문제와 두통, 어지럼, 피로 같은 신체 증상도 함께 올 수 있습니다.","우반구 손상과는 화용, 담화, 추론, 자기점검 문제가 공통이지만, 외상성 뇌손상은 주의, 기억, 실행기능이 광범위하게 떨어진다는 점이 다릅니다."],
 "tb-8":["평가는 GCS, 지시 따르기, 감각 자극 반응으로 의식과 반응부터 확인하고, \"여기가 어디예요?\", \"오늘 며칠이에요?\", \"왜 병원에 왔어요?\" 같은 질문으로 사람, 장소, 시간, 상황의 지남력을 봅니다.","주의는 선택, 지속, 교대, 분할 주의 과제로 봅니다. 기억은 즉각 회상과 지연 회상, 숫자 거꾸로 따라 하기 같은 작업기억, 정해진 시간에 할 일을 기억하는 미래기억, 이야기 기억으로 봅니다.","실행기능은 속담 설명, 범주 분류, 추론, 그림 상황 해결, 단계 순서 배열, 충동 억제, 자기 오류 수정으로 평가합니다.","청각 이해와 대화 관찰을 통한 화용, 읽기와 쓰기, 그리고 말운동, 삼킴, 감각, 정서, 피로까지 살핍니다. 검사 점수뿐 아니라 실제 대화와 일상생활의 기능적 수행을 함께 봅니다."],
 "tb-9":["치료는 증상에 맞춰 목표를 정하고 방법을 고릅니다. 의식과 반응이 떨어져 있으면 감각 자극과 단순 지시로 각성을 높입니다.","주의가 떨어지면 짧은 과제부터 시작해 방해 자극을 줄이고 단계적으로 늘립니다.","기억이 떨어지면 반복 학습, 간격 회상, 그리고 메모장, 기억 노트, 스마트폰 알람, 일정표 같은 외부 기억 보조기구를 씁니다.","실행기능은 단계화 훈련, 자기점검, 문제해결 전략으로 훈련합니다. 청각 이해와 화용은 짧고 명확한 문장, 역할극, 주제 유지 훈련으로, 읽기와 쓰기는 문장 틀을 주는 기능적 과제로 훈련합니다."],
 "tb-10":["최근 기출은 기억 유형에 맞는 치료를 고르는 문제가 많습니다. 즉각 회상과 일상 기억이 떨어졌다면 할 일 목록, 메모, 알람 같은 외부 기억 보조기구를 씁니다.","자기 이름 쓰기, 할 일 목록 만들기, 물건을 보지 않고 설명하기 같은 활동의 목표는 기억력 향상입니다.","일화기억과 의미기억은 떨어졌지만 양치 방법은 설명할 수 있다면 절차기억이 보존된 것입니다. 이때는 서술기억, 즉 외현기억을 치료 목표로 삼습니다."],
-"tb-11":["보상 전략은 환자의 자기인식 수준에 맞춥니다. 장애를 인식하지 못하면 알람이나 보호자처럼 환경과 다른 사람이 대신 조절하는 외부 보상을 씁니다.","문제가 생긴 그 순간에 알아차릴 수 있으면 그때 전략을 쓰는 상황적 보상을 씁니다.","문제를 미리 예측할 수 있으면 스스로 전략을 계획하는 예측적 보상을 씁니다."]};
+"tb-11":["보상 훈련은 환자의 자기인식 수준에 맞춥니다. 장애를 인식하지 못하면 알람이나 보호자처럼 환경과 다른 사람이 대신 조절하는 외부적 보상을 씁니다.","장애는 인식하지만 문제가 생겼는지를 모르면, 정해진 상황마다 전략을 쓰도록 습관을 들이는 상황적 보상을 씁니다.","문제가 생기면 알아차리지만 미리 예측하지는 못하면, 그 순간에 전략을 쓰는 인지적 보상을 씁니다.","문제가 생기기 전에 미리 예측할 수 있으면 스스로 전략을 계획하는 예측 보상을 씁니다."]};
 
 /* ═════════ 외상성 뇌손상 도우미 ═════════ */
 /* 옆에서 본 머리 (얼굴 = 왼쪽). 내부 좌표 = lateralBrain 좌표, (456,262)가 (cx,cy)에 옴 */
@@ -709,14 +709,15 @@ page({id:'tb-3',label:'1-3',title:'GCS(글래스고 혼수 척도) ★',scenes:[
   op(this.pta,ramp(t,asW(Ls[2],'외상 후',-.4),asW(Ls[2],'외상 후',0)));op(this.more,ramp(t,Ls[2].t1-1.2,Ls[2].t1-.8));}});
 
 /* ═════════ 1-4 의식 수준 · 기억상실 방향 ═════════ */
-page({id:'tb-4',label:'1-4',title:'의식 수준 · 기억상실의 방향',scenes:[{name:'명료 → 혼수 · 역행성 / 선행성',pre:.6,post:.8,lines:TBL['tb-4']}],
+page({id:'tb-4',label:'1-4',title:'의식 수준 · 기억상실의 방향',scenes:[{name:'각성 → 혼수 · 역행성 / 선행성',pre:.6,post:.8,lines:TBL['tb-4']}],
  init(L){const s=SVGROOT(L);asPanel(s,40,96,580,464,ASC.mint,'의식 수준','start');
-  const S=[['명료','15점',['정상 반응'],'#2f9e6a',0,.4],['기면','13~14점',['졸림 · 느림'],'#5f9e3a',.55,.1],['혼미','8~12점',['강한 자극에','반응'],'#b08a2b',.8,0],['반혼수','4~7점',['통증에 부분','회피 · 신음'],'#b0562b',1,-.4],['혼수','3점',['반응 없음'],'#8a2b2b',1,-.6]];
+  const S=[['각성(명료)','15점',['깨어 있음','지남력 정상'],'#2f9e6a',0,.4],['기면','13~14점',['졸리나 가벼운','자극에 대화'],'#5f9e3a',.55,.1],['둔감','9~12점',['큰 소리·흔듦','강한 자극 반응'],'#b08a2b',.8,0],['혼미','6~8점',['통각 자극에만','반응'],'#b0562b',1,-.4],['혼수','3~5점',['반응 없음'],'#8a2b2b',1,-.6]];
   this.st=S.map((q,i)=>{const x=60+i*110,top=190+i*62,g=sv('g',{opacity:0},s);sv('rect',{x,y:top,width:104,height:540-top,rx:8,fill:q[3],'fill-opacity':.85,stroke:'#0c1424','stroke-width':2},g);
-   tx_(g,x+52,top+28,q[0],{'font-size':20,fill:'#fff'});tx_(g,x+52,top+52,q[1],{'font-size':16,fill:'#fff6d8'});
-   q[2].forEach((w,k)=>tx_(g,x+52,top+76+k*19,w,{'font-size':14,fill:'#eef3fb'}));
+   tx_(g,x+52,top+28,q[0],{'font-size':q[0].length>3?17:20,fill:'#fff'});tx_(g,x+52,top+52,q[1],{'font-size':16,fill:'#fff6d8'});
+   q[2].forEach((w,k)=>tx_(g,x+52,top+76+k*19,w,{'font-size':13,fill:'#eef3fb'}));
    const F=asFace(g,x+52,top-30,.2,{noBody:true});F.blink(q[4]);F.mouth(q[5],i===3?.6:0);if(i>=3)F.look(0,.5);return g;});
   this.slt=asChip(L,300,130,300,'기면 = <b>언어치료 가능</b> ✓',ASC.ok,18);
+  this.alt=asChip(L,282,118,330,'<b>다른 자료</b> 혼미 8~12 · 반혼수 4~7<br>혼수 3 (각성 15 · 기면 13~14는 같음)',ASC.dim,14);
   asPanel(s,640,96,600,464,ASC.pur,'기억상실의 방향','start');
   sv('path',{d:'M665,330 L1205,330',stroke:'#9fb0c8','stroke-width':4},s);sv('path',{d:'M1218,330 l-16,-10 l0,20Z',fill:'#9fb0c8'},s);tx_(s,1200,358,'시간',{'font-size':15,fill:ASC.dim});
   sv('path',{d:'M940,150 L940,350',stroke:'#ffe08a','stroke-width':3,'stroke-dasharray':'8 6'},s);sv('path',{d:'M948,268 L930,300 L944,300 L934,330 L958,292 L944,292 L956,268Z',fill:'#ffe08a'},s);tx_(s,940,146,'사고',{'font-size':20,fill:'#ffe08a'});
@@ -727,8 +728,8 @@ page({id:'tb-4',label:'1-4',title:'의식 수준 · 기억상실의 방향',scen
   this.nc=asChip(L,956,370,268,'<b>선행성 (전향)</b> = PTA<br>사고 <b>이후</b> 새 기억 ✕',ASC.org,18);
   this.pc=asChip(L,656,470,568,'PTA(외상 후 기억상실) 기간 길수록 → <b>중증</b>',ASC.red,19);},
  draw(t,p){const a=p.scenes[0],Ls=a.L;
-  const tw=[asW(Ls[0],'15점은',-.3),asW(Ls[0],'13~14점',-.3),asW(Ls[1],'혼미',-.4),asW(Ls[1],'반혼수',-.4),asW(Ls[1],'3점의',-.3)];this.st.forEach((g,i)=>asO(g,ramp(t,tw[i],tw[i]+.4)));
-  op(this.slt,ramp(t,asW(Ls[0],'언어치료',-.4),asW(Ls[0],'언어치료',0)));
+  const tw=[asW(Ls[0],'15점은',-.3),asW(Ls[0],'13~14점',-.3),asW(Ls[1],'둔감',-.4),asW(Ls[1],'혼미',-.4),asW(Ls[1],'3~5점',-.3)];this.st.forEach((g,i)=>asO(g,ramp(t,tw[i],tw[i]+.4)));
+  const ta=asW(Ls[1],'자료에',-.3);op(this.slt,ramp(t,asW(Ls[0],'언어치료',-.4),asW(Ls[0],'언어치료',0))*(1-ramp(t,ta-.3,ta)));op(this.alt,ramp(t,ta,ta+.4)*(1-ramp(t,Ls[2].t0+1.5,Ls[2].t0+2)));
   const to=Ls[2].t0,tg=asW(Ls[2],'잃는',-.3);this.old.forEach((g,i)=>{asO(g,ramp(t,to-.3+i*.15,to+i*.15)*(1-.6*ramp(t,tg+i*.25,tg+.4+i*.25)));asO(g._x,ramp(t,tg+i*.25,tg+.4+i*.25));});op(this.oc,ramp(t,asW(Ls[2],'역행성',-.3),asW(Ls[2],'역행성',.1)));
   const tn=Ls[3].t0;this.nw.forEach((g,i)=>{const ti=tn+.3+i*.9,u=t-ti;const fall=ramp(t,ti+.5,ti+.9);asO(g,u<0?0:ramp(t,ti,ti+.25)*(1-.75*fall));g.setAttribute('transform','translate(0 '+(26*fall).toFixed(1)+')');asO(g._x,fall);});
   op(this.nc,ramp(t,asW(Ls[3],'선행성',-.3),asW(Ls[3],'선행성',.1)));op(this.pc,ramp(t,asW(Ls[3],'이 기간',-.4),asW(Ls[3],'이 기간',0)));}});
@@ -861,22 +862,26 @@ page({id:'tb-10',label:'1-10',title:'치료 ② 기억 유형별 치료 ★',sce
   asO(this.goal,ramp(t,ta[2],ta[2]+.4)*(.75+.25*Math.sin(t*4)));}});
 
 /* ═════════ 1-11 치료 ③ 보상 전략 ═════════ */
-page({id:'tb-11',label:'1-11',title:'치료 ③ 보상 전략',scenes:[{name:'외부 → 상황적 → 예측적',pre:.6,post:.8,lines:TBL['tb-11']}],
+page({id:'tb-11',label:'1-11',title:'치료 ③ 보상 훈련',scenes:[{name:'외부적 → 상황적 → 인지적 → 예측',pre:.6,post:.8,lines:TBL['tb-11']}],
  init(L){this.top=asChip(L,40,100,780,'자기인식 수준에 맞춤 → 인식이 높을수록 <b>스스로</b> 조절',ASC.ink,20);
-  const S=[[40,330,230,'① 외부 보상','●○○','장애 인식 ✕ → <b>환경 · 보호자</b>가 대신 조절',ASC.org],[445,240,320,'② 상황적 보상','●●○','문제가 생긴 <b>그 순간</b> 알아차림 → 그때 전략',ASC.blue],[850,150,410,'③ 예측적 보상','●●●','문제를 <b>미리 예측</b> → 스스로 전략 계획',ASC.mint]];
-  this.st=S.map(q=>hdiv('ov','<div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:23px;font-weight:800;color:'+q[6]+'">'+q[3]+'</div><div style="font-size:15px;color:#9fb0c8">자기인식 '+q[4]+'</div></div><div style="font-size:17px;color:#eef3fb;margin-top:8px;line-height:1.4">'+q[5]+'</div>',L,'left:'+q[0]+'px;top:'+q[1]+'px;width:390px;height:'+q[2]+'px;box-sizing:border-box;padding:12px 16px;border:2.5px solid '+q[6]+';border-radius:18px 18px 0 0;background:rgba(12,22,40,.95)'));
-  this.b2=asBubble(L,600,420,215,'다시 말해 주세요.','l',18,19);
+  const S=[[40,330,'① 외부적 보상','●○○○','장애 인식 ✕<br>→ <b>환경 · 보호자</b>가 대신 조절',ASC.org],[345,270,'② 상황적 보상','●●○○','장애는 앎, <b>문제 발생은 모름</b><br>→ 정해진 상황마다 전략',ASC.blue],[650,210,'③ 인지적 보상','●●●○','문제가 생기면 <b>알아차림</b><br>→ 그 순간 전략 (예측 ✕)',ASC.pur],[955,150,'④ 예측 보상','●●●●','문제를 <b>미리 예측</b><br>→ 스스로 전략 계획',ASC.mint]];
+  this.st=S.map(q=>hdiv('ov','<div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:20px;font-weight:800;color:'+q[5]+'">'+q[2]+'</div><div style="font-size:12px;color:#9fb0c8">자기인식 '+q[3]+'</div></div><div style="font-size:15px;color:#eef3fb;margin-top:6px;line-height:1.4">'+q[4]+'</div>',L,'left:'+q[0]+'px;top:'+q[1]+'px;width:290px;height:'+(560-q[1])+'px;box-sizing:border-box;padding:10px 12px;border:2.5px solid '+q[5]+';border-radius:18px 18px 0 0;background:rgba(12,22,40,.95)'));
   const s=SVGROOT(L);
-  this.g1=sv('g',{opacity:0},s);tbAlarm(this.g1,130,490,.85);this.cg=asFace(this.g1,320,492,.27,{noBody:true,hair:'#6a4a3a'});tx_(this.g1,320,546,'보호자',{'font-size':15,fill:ASC.org});tx_(this.g1,225,450,'"약 드실 시간이에요"',{'font-size':15,fill:'#ffe08a'});
-  this.g2=sv('g',{opacity:0},s);this.p2=asFace(this.g2,530,470,.3,{noBody:true,hair:'#1f1a18'});tx_(this.g2,530,530,'환자',{'font-size':15,fill:ASC.pur});tx_(this.g2,700,520,'대화 중 놓쳤을 때',{'font-size':15,fill:ASC.dim});
-  this.g3=sv('g',{opacity:0},s);sv('rect',{x:880,y:300,width:190,height:200,rx:10,fill:'#f7f3ea',stroke:'#c9b98f','stroke-width':3},this.g3);sv('rect',{x:880,y:300,width:190,height:36,rx:10,fill:'#ffe08a'},this.g3);tx_(this.g3,975,325,'회의 전 메모',{'font-size':17,fill:'#3a2a10',stroke:'none'});
-  ['✓ 물어볼 것 3개','✓ 일정 확인','✓ 이름 적기'].forEach((w,i)=>{tx_(this.g3,894,370+i*40,w,{'font-size':16,fill:'#2b2b3a',stroke:'none','text-anchor':'start'});sv('line',{x1:894,y1:380+i*40,x2:1056,y2:380+i*40,stroke:'#c9d1de','stroke-width':1.5},this.g3);});
-  this.p3=asFace(this.g3,1160,420,.32,{noBody:true,hair:'#1f1a18'});tx_(this.g3,1160,482,'환자',{'font-size':15,fill:ASC.pur});},
+  this.g1=sv('g',{opacity:0},s);tbAlarm(this.g1,105,505,.6);this.cg=asFace(this.g1,250,500,.22,{noBody:true,hair:'#6a4a3a'});tx_(this.g1,250,546,'보호자',{'font-size':14,fill:ASC.org});tx_(this.g1,185,455,'"약 드실 시간이에요"',{'font-size':14,fill:'#ffe08a'});
+  this.g2=sv('g',{opacity:0},s);this.p2=asFace(this.g2,415,470,.24,{noBody:true,hair:'#1f1a18'});tx_(this.g2,415,525,'환자',{'font-size':14,fill:ASC.pur});
+  sv('rect',{x:470,y:395,width:140,height:120,rx:8,fill:'#f7f3ea',stroke:'#c9b98f','stroke-width':3},this.g2);sv('rect',{x:470,y:395,width:140,height:28,rx:8,fill:'#9fc4ff'},this.g2);tx_(this.g2,540,415,'대화할 땐 늘',{'font-size':14,fill:'#10203a',stroke:'none'});
+  ['✎ 메모하기','✎ 받아 적기'].forEach((w,i)=>tx_(this.g2,482,452+i*32,w,{'font-size':14,fill:'#2b2b3a',stroke:'none','text-anchor':'start'}));tx_(this.g2,490,545,'정해진 상황 = 같은 전략',{'font-size':13,fill:ASC.dim});
+  this.g3=sv('g',{opacity:0},s);this.p3b=asFace(this.g3,700,470,.26,{noBody:true,hair:'#1f1a18'});tx_(this.g3,700,528,'환자',{'font-size':14,fill:ASC.pur});tx_(this.g3,830,545,'대화 중 놓친 순간',{'font-size':13,fill:ASC.dim});
+  this.b2=asBubble(L,752,395,178,'다시 말해 주세요.','l',16,16);
+  this.g4=sv('g',{opacity:0},s);sv('rect',{x:972,y:300,width:168,height:190,rx:10,fill:'#f7f3ea',stroke:'#c9b98f','stroke-width':3},this.g4);sv('rect',{x:972,y:300,width:168,height:34,rx:10,fill:'#ffe08a'},this.g4);tx_(this.g4,1056,323,'회의 전 메모',{'font-size':16,fill:'#3a2a10',stroke:'none'});
+  ['✓ 물어볼 것 3개','✓ 일정 확인','✓ 이름 적기'].forEach((w,i)=>{tx_(this.g4,984,366+i*38,w,{'font-size':15,fill:'#2b2b3a',stroke:'none','text-anchor':'start'});sv('line',{x1:984,y1:376+i*38,x2:1128,y2:376+i*38,stroke:'#c9d1de','stroke-width':1.5},this.g4);});
+  this.p4=asFace(this.g4,1192,420,.26,{noBody:true,hair:'#1f1a18'});tx_(this.g4,1192,478,'환자',{'font-size':14,fill:ASC.pur});},
  draw(t,p){const a=p.scenes[0],Ls=a.L;op(this.top,ramp(t,Ls[0].t0,Ls[0].t0+.4));const ci=asCur(a,t);
-  const tk=[asW(Ls[0],'장애를',-.3),Ls[1].t0,Ls[2].t0];this.st.forEach((c,i)=>op(c,ramp(t,tk[i],tk[i]+.4)*(ci===i?1:.6)));
-  asO(this.g1,ramp(t,asW(Ls[0],'알람',-.4),asW(Ls[0],'알람',0))*(ci===0?1:.6));this.g1.firstChild&&0;
-  asO(this.g2,ramp(t,tk[1]+.2,tk[1]+.6)*(ci===1?1:.6));op(this.b2,ramp(t,asW(Ls[1],'그 순간',-.2),asW(Ls[1],'그 순간',.2))*(ci===1?1:.6));this.p2.mouth(.4,ci===1&&t>asW(Ls[1],'그 순간',0)?Math.abs(Math.sin(t*8))*.4:0);this.p2.look(1,0);
-  asO(this.g3,ramp(t,tk[2]+.2,tk[2]+.6));this.p3.mouth(1.2,0);this.p3.look(-1,.3);this.cg.mouth(1,t<Ls[1].t0&&t>asW(Ls[0],'알람',0)?Math.abs(Math.sin(t*8))*.4:0);this.cg.look(-1,0);}});
+  const tk=[asW(Ls[0],'장애를',-.3),Ls[1].t0,Ls[2].t0,Ls[3].t0];this.st.forEach((c,i)=>op(c,ramp(t,tk[i],tk[i]+.4)*(ci===i?1:.6)));
+  asO(this.g1,ramp(t,asW(Ls[0],'알람',-.4),asW(Ls[0],'알람',0))*(ci===0?1:.6));
+  asO(this.g2,ramp(t,tk[1]+.3,tk[1]+.7)*(ci===1?1:.6));this.p2.look(1,.3);
+  asO(this.g3,ramp(t,tk[2]+.3,tk[2]+.7)*(ci===2?1:.6));const tb=asW(Ls[2],'그 순간',-.2);op(this.b2,ramp(t,tb,tb+.4)*(ci===2?1:.6));this.p3b.mouth(.4,ci===2&&t>tb?Math.abs(Math.sin(t*8))*.4:0);this.p3b.look(1,0);
+  asO(this.g4,ramp(t,tk[3]+.3,tk[3]+.7));this.p4.mouth(1.2,0);this.p4.look(-1,.3);this.cg.mouth(1,t<Ls[1].t0&&t>asW(Ls[0],'알람',0)?Math.abs(Math.sin(t*8))*.4:0);this.cg.look(-1,0);}});
 
 /* ═════════ 1-12 확인 문제 ═════════ */
 const QTB=[
