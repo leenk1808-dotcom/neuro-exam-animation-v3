@@ -1101,9 +1101,15 @@ ensureInit(PAGES[0]);
 function bgInit(){if(initN>=PAGES.length)return;ensureInit(PAGES[initN]);setTimeout(bgInit,30);}
 buildTimeline();
 const AL=ALL.filter(l=>l.has);
-function aud(l){if(!l.a){l.a=new Audio(l.src);l.a.preload='auto';}return l.a;}
-function prefetch(l,n=2){let i=AL.indexOf(l);for(let k=1;k<=n&&i+k<AL.length;k++)aud(AL[i+k]);}
-if(AL.length){aud(AL[0]);prefetch(AL[0]);}
+/* 음성: 오디오 한 개를 계속 재사용 (휴대폰 재생 제한 대응) + 다음 문장 미리 받기 + 로딩 중에는 화면도 기다림 */
+const srcOf=l=>(typeof AUD!=='undefined'&&AUD[l.src])||l.src;
+const BL={};function pre(l){if(!BL[l.id])BL[l.id]=fetch(srcOf(l)).then(r=>{if(!r.ok)throw 0;return r.blob();}).then(b=>URL.createObjectURL(b)).catch(()=>srcOf(l));return BL[l.id];}
+function prefetch(l,n=3){let i=AL.indexOf(l);for(let k=0;k<=n&&i+k<AL.length;k++)pre(AL[i+k]);}
+const A=new Audio();A.preload='auto';A.setAttribute('playsinline','');try{A.preservesPitch=true;A.webkitPreservesPitch=true;}catch(e){}
+const SILENT='data:'+'audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';
+let unlocked=false,waitA=false,waitT=0;
+function unlockA(){if(unlocked)return;unlocked=true;try{if(!A.src)A.src=SILENT;const p=A.play();if(p&&p.catch)p.then(()=>{if(!curA)A.pause();}).catch(()=>{unlocked=false;});}catch(e){unlocked=false;}}
+if(AL.length)prefetch(AL[0]);
 
 let rate=1,t=0,playing=false,last=performance.now(),dragging=false,wasPlaying=false,curA=null;
 const fmt=s=>{s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
@@ -1114,21 +1120,25 @@ function subShift(){const vis=!CTL.classList.contains('hide');$('sub').style.bot
 function showCtl(){CTL.classList.remove('hide');VP.classList.remove('nocur');clearTimeout(hideT);if(playing&&!dragging&&!overCtl&&$('menu').style.display!=='block')hideT=setTimeout(()=>{CTL.classList.add('hide');VP.classList.add('nocur');subShift();},2600);subShift();}
 VP.addEventListener('pointermove',showCtl);VP.addEventListener('pointerdown',showCtl);
 let overCtl=false;CTL.addEventListener('pointerenter',()=>{overCtl=true;clearTimeout(hideT);CTL.classList.remove('hide');VP.classList.remove('nocur');});CTL.addEventListener('pointerleave',()=>{overCtl=false;showCtl();});
-function stopAudio(){for(const l of ALL)if(l.a&&!l.a.paused)l.a.pause();curA=null;}
+function stopAudio(){if(!A.paused)A.pause();if(curA)delete curA.a;curA=null;waitA=false;}
 function syncAudio(){if(!playing||dragging){stopAudio();return;}
  const l=AL.find(l=>t>=l.t0&&t<l.t1);
- if(l){aud(l);prefetch(l);}
+ if(l)prefetch(l);
  if(!l){if(curA)stopAudio();return;}
- if(curA!==l){stopAudio();curA=l;l.a.playbackRate=rate;l.a.currentTime=Math.max(0,t-l.t0);l.a.play().catch(()=>{});}
- else if(!l.a.paused&&Math.abs(l.a.currentTime-(t-l.t0))>0.3)l.a.currentTime=Math.max(0,t-l.t0);}
+ if(curA!==l){stopAudio();curA=l;l.a=A;waitA=true;waitT=performance.now();const tok=l,off=Math.max(0,t-l.t0);
+  pre(l).then(u=>{if(curA!==tok||!playing)return;
+   const go=()=>{if(curA!==tok||!playing)return;try{A.currentTime=off;}catch(e){}A.playbackRate=rate;
+    const p=A.play();if(p&&p.then)p.then(()=>{if(curA===tok){waitA=false;}}).catch(e=>{if(curA!==tok)return;waitA=false;if(e&&e.name==='NotAllowedError'){unlocked=false;setPlay(false);flash('▶ 눌러서 소리 켜기',false);}});else waitA=false;};
+   if(A.src!==u){A.src=u;A.addEventListener('loadedmetadata',go,{once:true});A.load();}else go();});}}
 function ui(){$('fill').style.width=(t/TOTAL*100)+'%';$('knob').style.left=(t/TOTAL*100)+'%';$('time').textContent=fmt(t)+' / '+fmt(TOTAL);
  const bp=$('bplay'),st=playing?'pause':'play';if(bp.dataset.st!==st){bp.dataset.st=st;bp.innerHTML=playing?icoPause:icoPlay;}op($('bigplay'),playing||t>0.01?0:1);}
-function setPlay(v){if(v&&t>=TOTAL-0.05)t=0;playing=v;last=performance.now();if(!v)stopAudio();else syncAudio();ui();showCtl();}
+function setPlay(v){if(v)unlockA();if(v&&t>=TOTAL-0.05)t=0;playing=v;last=performance.now();if(!v)stopAudio();else syncAudio();ui();showCtl();}
 function seek(x){t=cl(x,0,TOTAL);stopAudio();frame(t);ui();if(playing)syncAudio();}
 function flash(txt,left){const f=$('flash');f.textContent=txt;f.style.left=left?'80px':'';f.style.right=left?'':'80px';f.style.opacity=1;clearTimeout(flash.h);flash.h=setTimeout(()=>f.style.opacity=0,500);}
 function loop(now){const dt=Math.min(0.5,(now-last)/1000);last=now;
  if(playing&&!dragging){
-  if(curA&&!curA.a.paused&&curA.a.currentTime>0&&!curA.a.ended)t=curA.t0+curA.a.currentTime;else t+=dt*rate;
+  if(curA&&waitA&&performance.now()-waitT<6000){/* 음성 로딩 중: 화면도 기다림 */}
+  else if(curA&&!A.paused&&!A.ended&&A.currentTime>0&&A.src!==SILENT)t=curA.t0+A.currentTime;else t+=dt*rate;
   if(t>=TOTAL){t=TOTAL;playing=false;stopAudio();if(EP.next){const n=$('nextEp');if(n)n.style.display='flex';}}
   syncAudio();frame(t);ui();}
  requestAnimationFrame(loop);}
@@ -1157,7 +1167,7 @@ stage.addEventListener('pointerup',e=>{const wasDrag=pd&&pd.drag;pd=null;if(wasD
  tapT=now;tapH=setTimeout(()=>setPlay(!playing),300);});
 const VOICED=()=>ALL.filter(l=>!l.nosub);
 function nextLine(d){const L=VOICED();if(d>0){const n=L.find(l=>l.t0>t+0.05);if(n)seek(n.t0);}else{const ps=L.filter(l=>l.t0<t-0.8);if(ps.length)seek(ps[ps.length-1].t0);else seek(0);}}
-function setRate(r){rate=Math.round(cl(r,0.5,2)*100)/100;for(const l of ALL)if(l.a)l.a.playbackRate=rate;$('bspd').textContent=rate.toFixed(rate*10%1?2:1)+'×';flash('속도 '+rate+'×',false);}
+function setRate(r){rate=Math.round(cl(r,0.5,2)*100)/100;A.playbackRate=rate;$('bspd').textContent=rate.toFixed(rate*10%1?2:1)+'×';flash('속도 '+rate+'×',false);}
 const RATES=[0.5,0.75,0.9,1,1.1,1.25,1.5,1.75,2];
 addEventListener('keydown',e=>{const k=e.key,c=e.code;if(e.ctrlKey||e.metaKey||e.altKey)return;
  if(c==='Space'||k==='k'||k==='K'){e.preventDefault();setPlay(!playing);}
